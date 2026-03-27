@@ -248,6 +248,14 @@ const Dashboard = () => {
     [odds],
   )
 
+   const menuItems = [
+    "Popular",
+    "Universe Line",
+    "Universe Original",
+    "International",
+    "Virtual",
+  ];
+
   const marketIdsEvent = (data: any, oddsData: any, event: string) => {
     console.log(data, oddsData, event, "market Event Data")
     data.map((match: IMatch) => {
@@ -276,8 +284,75 @@ const Dashboard = () => {
       {isMobile ? <GameTabMobile sportId={sportId} sportListState={sportListState} /> : ''}
       <div className='pb-4 mtc-5'>
         {!isMobile ? <Fav /> : ""}
-        {!isMobile ? <GameTab sportId={sportId} sportListState={sportListState} /> : ''}
-        {/**/}
+        {/* {!isMobile ? <GameTab sportId={sportId} sportListState={sportListState} /> : ''} */}
+       
+         
+
+        
+        <div><img className='w-100' src="https://kingexch365.com/api/users/images/slider-default-2025815182455745.jpg"/></div>
+          <GameTab sportId={sportId} sportListState={sportListState} /> 
+
+        <ul
+  className="d-flexx d-none"
+  style={{
+    listStyle: "none",
+    margin: 0,
+    padding: "5px",
+    background: "#0b5d4f",
+    gap: "5px"
+  }}
+>
+  {/* ACTIVE TAB */}
+  <li>
+    <a
+      className="nav-link"
+      style={{
+        background: "#dcdcdc",
+        color: "#000",
+        padding: "6px 16px",
+        borderRadius: "6px",
+        fontWeight: "600",
+        textDecoration: "none",
+        display: "inline-block"
+      }}
+    >
+      Cricket
+    </a>
+  </li>
+
+  {/* NORMAL TAB */}
+  <li>
+    <a
+      className="nav-link"
+      style={{
+        background: "linear-gradient(#2e7d63, #1e5a49)",
+        color: "#fff",
+        padding: "6px 16px",
+        borderRadius: "6px",
+        textDecoration: "none",
+        display: "inline-block"
+      }}
+    >
+      Soccer
+    </a>
+  </li>
+
+  <li>
+    <a
+      className="nav-link"
+      style={{
+        background: "linear-gradient(#2e7d63, #1e5a49)",
+        color: "#fff",
+        padding: "6px 16px",
+        borderRadius: "6px",
+        textDecoration: "none",
+        display: "inline-block"
+      }}
+    >
+      Tennis
+    </a>
+  </li>
+</ul>
         <div className='tab-content'>
           <div className='tab-pane active'>
             <div className='matchlist coupon-card-first'>
@@ -292,7 +367,7 @@ const Dashboard = () => {
               )}
 
 
-              <div className="row mx-0" style={{ marginBottom: "2px" }}>
+              <div className="row mx-0 d-none" style={{ marginBottom: "2px" }}>
                 <CustomLink to={"/casino-list-int/19"} className={isMobile ? "col-6 position-relative " : "col-3 position-relative"} style={{ paddingLeft: "1px", paddingRight: "1px", marginBottom: "2px" }}>
                   <img
                     className="img-fluid"
@@ -324,7 +399,7 @@ const Dashboard = () => {
               </div>
 
               <h2
-                className="newheading"
+                className="newheading d-none"
                 style={{
                   display: "block",
                   width: "100%",
@@ -340,7 +415,7 @@ const Dashboard = () => {
               >
                 <span>Newly Launch</span>
               </h2>
-              <div className="row mx-0 mt-0">
+              <div className="row mx-0 mt-0 d-none">
                 {mayfav?.map((item:any) => (
                   <div
                     key={item.id}
@@ -361,7 +436,7 @@ const Dashboard = () => {
               <h2
                 className="newheading"
                 style={{
-                  display: "block",
+                  display: "none",
                   width: "100%",
                   marginBottom: "2px",
                   fontSize: "16px",
@@ -379,7 +454,32 @@ const Dashboard = () => {
 
 
 
-
+             <div
+      style={{
+        background: "#0b5d4f",
+        display: "flex",
+        overflowX: "auto",
+        whiteSpace: "nowrap"
+      }}
+    >
+      {menuItems.map((item, index) => (
+        <div
+          key={index}
+          style={{
+            padding: "10px 18px",
+            color: item == "Popular" ? "white" : "black",
+            fontSize: "14px",
+            fontWeight: item == "Popular" ? "900" : "900",
+            borderRight: "1px solid rgba(255,255,255,0.2)",
+            cursor: "pointer",
+            background: item === "Vimaan" ? "#00332e" : "transparent",
+            // fontWeight: item === "Vimaan" ? "600" : "400"
+          }}
+        >
+          {item === "Vimaan" ? "✈ " + item : item}
+        </div>
+      ))}
+    </div>
               {location.pathname.includes('in-play') || !isMobile ? (
                 <div className='home-page'>
                   <div className='casino-list mt-2' style={{ marginLeft: !isMobile ? "-6px" : "" }}>
@@ -391,11 +491,13 @@ const Dashboard = () => {
                 ''
               )}
 
+  
+
 
               <h2
                 className="newheading"
                 style={{
-                  display: "block",
+                  display: "none",
                   width: "100%",
                   marginBottom: "2px",
                   fontSize: "16px",
@@ -413,7 +515,7 @@ const Dashboard = () => {
 
 
 
-              <div className="row mx-0 mt-0">
+              <div className="row mx-0 mt-0 d-none">
                 {providersData?.map((item) => (
                   <div
                     key={item.id}

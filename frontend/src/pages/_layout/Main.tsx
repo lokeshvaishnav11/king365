@@ -18,6 +18,7 @@ import { selectInitApp, selectLoader } from '../../redux/actions/common/commonSl
 import { isMobile } from 'react-device-detect'
 import Welcome from '../Rules/welcome'
 import { useWebsocketUser } from '../../context/webSocketUser'
+import MobileFooter from './elements/mobile-footer'
 
 
 
@@ -107,6 +108,7 @@ const Main = () => {
         {isMobile && <Outlet></Outlet>}
       </div>
       <Footer />
+     {isMobile && <MobileFooter />}
       {/* {welcomeState.status ? <Welcome /> : ''} */}
     </div>
   )

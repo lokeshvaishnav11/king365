@@ -1,7 +1,7 @@
 import { isMobile } from 'react-device-detect'
 const subheader = (title: string) => {
   return isMobile ? (
-    <div className='game-heading'>
+    <div className='game-heading text-center'>
       <span className='card-header-title'>{title}</span>
     </div>
   ) : (
@@ -10,8 +10,8 @@ const subheader = (title: string) => {
 }
 const subheaderdesktop = (title: string) => {
   return !isMobile ? (
-    <div className='card-header'>
-      <h4 className='mb-0'>{title}</h4>
+    <div className='card-header text-center'>
+      <h4 className='mb-0 '>{title}</h4>
     </div>
   ) : (
     ''

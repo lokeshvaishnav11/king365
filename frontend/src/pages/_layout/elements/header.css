@@ -1,0 +1,52 @@
+.top-bar {
+  background: #1f7a5a;
+  padding: 8px 10px;
+}
+
+.logo {
+  font-size: 38px;
+  font-weight: bold;
+  color: #ffc107;
+  font-style: italic;
+}
+
+.login-input {
+  height: 30px;
+  border-radius: 4px;
+  border: none;
+  padding: 0 10px;
+  font-size: 13px;
+  width: 160px;
+}
+
+.login-btn {
+  background: #ff2b2b;
+  color: white;
+  border: none;
+  padding: 5px 14px;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 13px;
+  transition: 0.3s;
+}
+
+.login-btn:hover {
+  background: #cc0000;
+}
+
+.search-icon {
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .login-input {
+    width: 110px;
+  }
+
+  .logo {
+    font-size: 26px;
+  }
+}

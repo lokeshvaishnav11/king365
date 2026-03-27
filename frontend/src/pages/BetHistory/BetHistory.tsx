@@ -103,7 +103,7 @@ const BetHistory = () => {
     )
   return (
     <>
-      {mobileSubheader.subheader('Bet History')}
+      {mobileSubheader.subheader('Bets')}
       <div className={!isMobile ? ' mt-1' : 'padding-custom'}>
         <div className=''>
           {mobileSubheader.subheaderdesktop('Bet History')}

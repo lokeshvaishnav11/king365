@@ -148,7 +148,8 @@ const TopHeader = ({ onMenuToggle }: TopHeaderProps) => {
     },[userState])
 
   return (
-    <div className='admin-top-header'>
+    <>
+    <div className='admin-top-header '>
       <div className='top-header-content'>
         <div className='header-left'>
           <CustomLink to={'/'} className='header-logo'>
@@ -419,6 +420,7 @@ const TopHeader = ({ onMenuToggle }: TopHeaderProps) => {
         </div>
       </div>
     </div>
+    </>
   )
 }
 

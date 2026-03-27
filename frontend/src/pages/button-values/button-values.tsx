@@ -57,10 +57,10 @@ const ButtonValues = () => {
 
   return (
     <>
-      {mobileSubheader.subheader('Change Button Values')}
+      {mobileSubheader.subheader('Stake Values')}
       <div className={!isMobile ? 'col-lg-12 mt-1' : 'col-12 padding-custom'}>
         <div className='card'>
-          {mobileSubheader.subheaderdesktop('Change Button Values')}
+          {mobileSubheader.subheaderdesktop('Stake Values')}
           <div className='card-body p10'>
             <div className='row row5 mbc-5'>
               <div className='col-6 col-lg-4'>
@@ -82,7 +82,7 @@ const ButtonValues = () => {
             <div className='row row5 mt-2'>
               <div className='col-12 col-lg-2'>
                 <button className='btn btn-primary' onClick={submitHandler}>
-                  Update
+                  Save
                 </button>
               </div>
             </div>

@@ -25,9 +25,10 @@ const SideBar = () => {
   };
 
   return (
-    <div className="sidebar col-md-2">
+    <>
+    <div className="sidebar col-md-2 d-none">
       <div
-        style={{ display: "grid"  }}
+        style={{ display: "none"  }}
         className="row-deposit-buttons gap-2 w-100"
       >
         <CustomLink className="btn btn-deposit rounded-0 d-flex items-center" to={"/deposit"}>
@@ -113,33 +114,133 @@ const SideBar = () => {
           </li> */}
         </ul>
       </nav>
-      <div
-        data-toggle="collapse"
-        data-target=".sports"
-        className="sidebar-title"
-      >
-        <h5 className="d-inline-block m-b-0">Sports</h5>
-      </div>
-      <nav className="collapse sports show">
-        <ul>
-          {sportListState.sports
-            ?.filter((sport: any) => [4, 1, 2].includes(sport?.sportId))
-            ?.map((sport: ISport) => (
-              <li key={sport._id} className="nav-item">
-                <CustomLink
-                  to={`/match/${sport.sportId}`}
-                  className={`nav-link ${
-                    sportId == sport.sportId ? "router-link-active" : ""
-                  }`}
-                >
-                  <i className="far fa-plus-square me-1"></i>
-                  <span className="new-launch-text">{sport.name}</span>
-                </CustomLink>
-              </li>
-            ))}
-        </ul>
-      </nav>
+     <div
+  data-toggle="collapse"
+  data-target=".sports"
+  className="sidebar-title"
+  style={{
+    background: "linear-gradient(#2c4a7a, #1b2f52)",
+    color: "white",
+    padding: "8px 10px",
+    fontWeight: "600",
+    fontSize: "14px"
+  }}
+>
+  <h5 className="m-0 d-flex justify-content-between align-items-center">
+    <span>Sports</span>
+    <span style={{ fontSize: "18px" }}>⋮</span>
+  </h5>
+</div>
+
+<nav className="collapse sports show">
+  <ul style={{ padding: 0, margin: 0 }}>
+    {sportListState.sports
+      ?.filter((sport: any) => [4, 1, 2].includes(sport?.sportId))
+      ?.map((sport: ISport) => (
+        <li key={sport._id} style={{ listStyle: "none" }}>
+          
+          <CustomLink
+            to={`/match/${sport.sportId}`}
+            className={`d-flex justify-content-between align-items-center`}
+            style={{
+              padding: "10px",
+              background: "#d3d3d3",
+              borderBottom: "1px solid #bcbcbc",
+              textDecoration: "none",
+              color: "#000",
+              fontSize: "14px"
+            }}
+          >
+            {/* LEFT TEXT */}
+            <span>{sport.name}</span>
+
+            {/* RIGHT ICON */}
+            <span
+              style={{
+                border: "1px solid #8bc34a",
+                borderRadius: "4px",
+                padding: "2px 6px",
+                color: "#8bc34a",
+                fontWeight: "bold",
+                fontSize: "12px"
+              }}
+            >
+              ›
+            </span>
+          </CustomLink>
+
+        </li>
+      ))}
+  </ul>
+</nav>
     </div>
+
+        <div className="sidebar col-md-2" style={{  border: "1px solid #ccc" }}>
+
+      {/* HEADER */}
+      <div
+        style={{
+          background: "linear-gradient(#2c4a7a, #1b2f52)",
+          color: "#fff",
+          padding: "8px 10px",
+          fontWeight: "600",
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center"
+        }}
+      >
+        <span>Sports</span>
+        <span style={{ fontSize: "18px" }}>⋮</span>
+      </div>
+
+      {/* LIST */}
+      <div>
+
+        {[
+          "Cricket",
+          "Casino",
+          "Tennis",
+          "Soccer",
+          "Horse Racing",
+          "Greyhound Racing",
+          "Basketball",
+          "Lottery"
+        ].map((item, i) => (
+          <div
+            key={i}
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              padding: "10px",
+              // background: "#d3d3d3",
+              borderBottom: "1px solid #bcbcbc",
+              cursor: "pointer"
+            }}
+          >
+            <span style={{ fontSize: "14px" }}>{item}</span>
+
+            {/* RIGHT ICON */}
+            <span
+              style={{
+                border: "1px solid #8bc34a",
+                borderRadius: "4px",
+                padding: "2px 6px",
+                color: "#8bc34a",
+                fontWeight: "bold",
+                fontSize: "12px"
+              }}
+            >
+              ›
+            </span>
+          </div>
+        ))}
+
+      </div>
+
+    </div>
+
+    </>
   );
 };
 export default SideBar;

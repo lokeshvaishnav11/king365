@@ -26,11 +26,11 @@ const Login = () => {
   const [isDemoLogin, setIsDemoLogin] = React.useState(false) // Track Demo Login
 
 
-  React.useEffect(() => {
-    api.get(`${process.env.REACT_APP_IP_API_URL}`).then((res) => {
-      setLoginForm({ ...loginForm, logs: res.data })
-    })
-  }, [])
+  // React.useEffect(() => {
+  //   api.get(`${process.env.REACT_APP_IP_API_URL}`).then((res) => {
+  //     setLoginForm({ ...loginForm, logs: res.data })
+  //   })
+  // }, [])
 
   React.useEffect(() => {
     if (userState.status === 'done') {
@@ -67,15 +67,17 @@ const Login = () => {
   }
   return (
     <div>
-      <div className='login'>
+      <div className='login' style={{display: "flex",
+          justifyContent: "center",
+          alignItems: "center", fontWeight:"700"}}>
         <div className='loginInner1'>
-          <div className='log-logo m-b-20 text-center'>
+          {/* <div className='log-logo m-b-20 text-center'>
             <img src='/imgs/logo.png' className='logo-login' />
+          </div> */}
+          <div className='featured-box-login featured-box-secundary default' style={{background:"none"}}>
+           <div className='log-logo m-b-20 text-center'>
+            <img src='/imgs/logo.png' className='logo-login' style={{width:"70%"}} />
           </div>
-          <div className='featured-box-login featured-box-secundary default'>
-            <h4 className='text-center'>
-              LOGIN <i className='fas fa-hand-point-down'></i>
-            </h4>
             <form
               onSubmit={(e) => handleSubmit(e)}
               role='form'
@@ -117,23 +119,23 @@ const Login = () => {
                 )}
               </div>
               <div className='form-group text-center mb-0'>
-                <SubmitButton type='submit' className='btn btn-submit btn-login mb-10'>
-                  Login
+                  <SubmitButton type='submit' className='btn btn-submit btn-login mb-10' style={{backgroundImage:"linear-gradient(-180deg, #14805e 0, #184438 100%)", border:"none"}}>
+                    Login
                   {userState.status === 'loading' ? (
                     <i className='ml-2 fas fa-spinner fa-spin'></i>
                   ) : (
-                    <i className='ml-2 fas fa-sign-in-alt'></i>
+                    ""
                   )}
                 </SubmitButton>
-                <SubmitButton type='submit' onClick={() => handleSubmitDemoLogin()} className='btn btn-submit btn-login mb-10'>
+                <SubmitButton type='submit' onClick={() => handleSubmitDemoLogin()} className='btn btn-submit btn-login mb-10' style={{backgroundImage:"linear-gradient(-180deg, #14805e 0, #184438 100%)", border:"none"}}>
                   Login with Demo ID
                   {userState.status === 'loading' ? (
                     <i className='ml-2 fas fa-spinner fa-spin'></i>
                   ) : (
-                    <i className='ml-2 fas fa-sign-in-alt'></i>
+                    ""
                   )}
                 </SubmitButton>
-                <small className='recaptchaTerms'>
+                <small className='recaptchaTerms d-none'>
                   This site is protected by reCAPTCHA and the Google
                   <a
                     target={'_blank'}

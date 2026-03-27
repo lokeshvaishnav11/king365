@@ -581,7 +581,7 @@
     border-radius: 0;
     color: #fff;
     background-color: var(--theme2-bg);
-    border-right: 0px solid var(--theme2-bg) !important;
+    border-right: 1px solid var(--theme2-bg) !important;
     border: 0;
   }
 

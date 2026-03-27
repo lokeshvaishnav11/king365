@@ -11,7 +11,7 @@ const GameTabMobile = (props: any) => {
     setFilter(loca)
   }, [location.pathname])
   return (
-    <div className={'mobile-header mobile-header-2'}>
+    <div className={'mobile-header mobile-header-2 d-none'}>
       <ul role='tablist' className='nav nav-tabs nav-justified w-100'>
         {props.sportListState.sports.map((sport: ISport) => {
           const ttpecass = sport.sportId == 7 || sport.sportId == 4339 ? 'new-launch-text' : ''

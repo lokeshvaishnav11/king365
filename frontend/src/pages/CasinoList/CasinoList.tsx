@@ -21,7 +21,7 @@ const CasinoList = () => {
       className="col-4 col-md-3 px-1"
     >
       <div className="csn_thumb mb-2 mt-2">
-        <CustomLink className='nav-link' style={{background:"#8000FF" , color:"white"}} to={`/casino-list-int/${item.id}`}>
+        <CustomLink className='nav-link' style={{background:"var(--theme2-bg)" , color:"white"}} to={`/casino-list-int/${item.id}`}>
           <span>
            {item.title}
             </span>
