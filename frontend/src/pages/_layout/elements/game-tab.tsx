@@ -1,6 +1,81 @@
+// import React from 'react'
+
+// const GameTabs = (props: any) => {
+
+//   const menuItems = [
+//     "Vimaan",
+//     "Cricket",
+//     "Tennis",
+//     "Soccer",
+//     "Horse Racing",
+//     "Greyhound Racing",
+//     "Basketball",
+//     "Lottery",
+//     "Live Casino",
+//     "Tips & Previews"
+//   ];
+
+//   // ✅ Icons mapping
+//   const icons: any = {
+//      "Vimaan": "fas fa-plane",
+//     "Cricket": "fas fa-baseball-ball",
+//     "Tennis": "fas fa-table-tennis",
+//     "Soccer": "fas fa-futbol",
+//     "Horse Racing": "fas fa-horse",
+//     "Greyhound Racing": "fas fa-dog",
+//     "Basketball": "fas fa-basketball-ball",
+//     "Lottery": "fas fa-ticket-alt",
+//     "Live Casino": "fas fa-dice",
+//     "Tips & Previews": "fas fa-lightbulb"
+//   };
+
+//   return (
+//     <div className='horizontal-scorller'>
+//       <div
+//         style={{
+//           background: "#0b5d4f",
+//           display: "flex",
+//           overflowX: "auto",
+//           whiteSpace: "nowrap"
+//         }}
+//       >
+//         {menuItems.map((item, index) => (
+//           <div
+//             key={index}
+//             style={{
+//               padding: "10px 18px",
+//               color: "white",
+//               fontSize: "14px",
+//               // borderRight: "1px solid rgba(255,255,255,0.2)",
+//               cursor: "pointer",
+//               background: item === "Vimaan" ? "#000000" : "transparent",
+//               fontWeight: item === "Vimaan" ? "600" : "400",
+//               display: "flex",
+//               alignItems: "center",
+//               gap: "6px"
+//             }}
+//           >
+//             {/* ✅ Icon */}
+//             <i className={icons[item]}></i>
+
+//             {/* Text */}
+//             {item}
+//           </div>
+//         ))}
+//       </div>
+//     </div>
+//   )
+// }
+
+// export default React.memo(GameTabs)
+
+
 import React from 'react'
+import './header.css' // 👈 CSS alag file me daalo
 
 const GameTabs = (props: any) => {
+
+    const [showSearch, setShowSearch] = React.useState(false)
 
   const menuItems = [
     "Vimaan",
@@ -15,9 +90,7 @@ const GameTabs = (props: any) => {
     "Tips & Previews"
   ];
 
-  // ✅ Icons mapping
   const icons: any = {
-     "Vimaan": "fas fa-plane",
     "Cricket": "fas fa-baseball-ball",
     "Tennis": "fas fa-table-tennis",
     "Soccer": "fas fa-futbol",
@@ -30,39 +103,66 @@ const GameTabs = (props: any) => {
   };
 
   return (
-    <div className='horizontal-scorller'>
+    <div style={{ display: "flex", alignItems: "center", background: "#0b5d4f" }}>
+
+      {/* LEFT SIDE - SCROLL MENU */}
       <div
         style={{
-          background: "#0b5d4f",
           display: "flex",
           overflowX: "auto",
-          whiteSpace: "nowrap"
+          whiteSpace: "nowrap",
+          flex: 1
         }}
       >
+
         {menuItems.map((item, index) => (
           <div
             key={index}
+            className={item === "Vimaan" ? "vimaan-item" : ""}
             style={{
               padding: "10px 18px",
-              color: "white",
               fontSize: "14px",
-              // borderRight: "1px solid rgba(255,255,255,0.2)",
               cursor: "pointer",
-              background: item === "Vimaan" ? "#000000" : "transparent",
-              fontWeight: item === "Vimaan" ? "600" : "400",
               display: "flex",
               alignItems: "center",
               gap: "6px"
             }}
           >
-            {/* ✅ Icon */}
-            <i className={icons[item]}></i>
+            {/* ✅ Vimaan me image */}
+            {item === "Vimaan" ? (
+              <img
+                src="/imgs/viman.png" // 👈 apni image path daalo
+                alt="vimaan"
+                style={{ width: "18px", height: "18px" }}
+                className='vimaan-text'
+              />
+            ) : (
+              <i className={icons[item]}></i>
+            )}
 
-            {/* Text */}
-            {item}
+             {/* 🔍 Search Input */}
+       
+
+            <span className={item === "Vimaan" ? "vimaan-text" : ""}>
+              {item}
+            </span>
           </div>
         ))}
       </div>
+
+       {showSearch && (
+          <input
+            type="text"
+            placeholder="Search games..."
+            className="search-input"
+          />
+        )}
+
+      {/* RIGHT SIDE - SEARCH ICON */}
+      <div  onClick={() => setShowSearch(!showSearch)} style={{ padding: "0 15px", color: "white", cursor: "pointer" }}>
+        <i className="fas fa-search"></i>
+      </div>
+
     </div>
   )
 }

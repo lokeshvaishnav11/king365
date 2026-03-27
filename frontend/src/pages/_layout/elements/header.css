@@ -50,3 +50,29 @@
     font-size: 26px;
   }
 }
+/* 🔥 blinking + zoom animation */
+.vimaan-text {
+  animation: blinkZoom 1s infinite;
+  font-weight: bold;
+}
+
+/* animation */
+@keyframes blinkZoom {
+  0% {
+    color: red;
+    transform: scale(1);
+  }
+  50% {
+    color: yellow;
+    transform: scale(1.2);
+  }
+  100% {
+    color: red;
+    transform: scale(1);
+  }
+}
+
+/* optional smooth */
+.vimaan-item {
+  transition: all 0.3s ease;
+}

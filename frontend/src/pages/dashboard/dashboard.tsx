@@ -472,7 +472,7 @@ const Dashboard = () => {
             fontWeight: item == "Popular" ? "900" : "900",
             borderRight: "1px solid rgba(255,255,255,0.2)",
             cursor: "pointer",
-            background: item === "Vimaan" ? "#00332e" : "transparent",
+            background: item === "Vimaan" ? "#08342f" : "transparent",
             // fontWeight: item === "Vimaan" ? "600" : "400"
           }}
         >
