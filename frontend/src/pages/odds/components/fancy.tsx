@@ -10,6 +10,7 @@ import { selectFancyType, setFancyType } from '../../../redux/actions/bet/betSli
 import { store } from '../../../redux/store'
 import { setRules } from '../../../redux/actions/common/commonSlice'
 import sportsService from '../../../services/sports.service'
+import { colors } from '@mui/material'
 
 type FancyBallTypes = {
   blank: LFancy[]
@@ -217,10 +218,10 @@ class Fancy extends React.Component<
   fancyMenu = (fancyType: string) => {
     const menus = [
       { type: 'session', label: 'Fancy', width: isMobile ? '19%' : '11%' },
-      // { type: 'fancy1', label: 'Fancy1', width: isMobile ? '19%' : '11%' },
-      // { type: 'meter', label: 'Meter', width: isMobile ? '19%' : '10%' },
-      // { type: 'khado', label: 'Khado', width: isMobile ? '19%' : '10%' },
-      // { type: 'odd/even', label: 'Odd/Even', width: isMobile ? '24%' : '11%' },
+      { type: 'fancy1', label: 'Fancy1', width: isMobile ? '19%' : '11%' },
+      { type: 'meter', label: 'Meter', width: isMobile ? '19%' : '10%' },
+      { type: 'khado', label: 'Khado', width: isMobile ? '19%' : '10%' },
+      { type: 'odd/even', label: 'Odd/Even', width: isMobile ? '24%' : '11%' },
       // { type: 'wkt', label: 'Wicket', width: isMobile ? '24%' : '10%' },
       // { type: 'Four', label: 'Four', width: isMobile ? '20%' : '10%' },
       // { type: 'Sixes', label: 'Six', width: isMobile ? '20%' : '11%' },
@@ -234,16 +235,19 @@ class Fancy extends React.Component<
       <li
         key={menu.type}
         onClick={(e) => this.onFancyType(menu.type)}
-        style={{ width: `${menu.width}` }}
-        className='nav-item d-none'
+        style={{ width: `${menu.width}`, backgroundColor:"rgba(255, 255, 255, .5)",}}
+        className='nav-item'
+        
+        
       >
         <a
           href='#'
           onClick={(e) => e.preventDefault()}
           role='tab'
-          className={`nav-link ${fancyType === menu.type ? 'active' : ''}`}
+          className={`nav-link ${fancyType === menu.type ? 'activev' : ''}`}
+          style={{borderRadius:fancyType === menu.type ? '4px' : '0', padding:"4px", border:fancyType === menu.type ? '1px solid #ccc' : 'none',  backgroundColor: fancyType === menu.type ? '#ffffff' : 'transparent', color:  'black' }}
         >
-          <span style={{ textTransform: 'uppercase' }}>{menu.label}</span>
+          <span style={{ textTransform: 'capitalize', }}>{menu.label}</span>
         </a>
       </li>
     ))
@@ -252,8 +256,8 @@ class Fancy extends React.Component<
   fancyheader = (title: string) => {
     return (
       <div className='table-header'>
-        <div className={`float-left ${isMobile ? 'bg-theme text-white' : ''} country-name box-6`}>
-          {isMobile ? title : ''}
+        <div className={`float-left ${isMobile ? 'bg-them text-white' : ''} country-name box-6`}>
+          {/* {isMobile ? title : ''} */}
         </div>
         <div className={`${isMobile ? 'box-2' : 'box-1'} float-left lay text-center`}>
           <b>No</b>
@@ -272,7 +276,7 @@ class Fancy extends React.Component<
 
     return (
       <>
-        <ul role='tablist' className='nav nav-tabs fancy-group' aria-label='Tabs'>
+        <ul role='tablist' className='nav nav-tabs fancy-group px-4 py-1' aria-label='Tabs' style={{background:"linear-gradient(180deg, #0a92a5 15%, #076875 100%)"}}>
           {this.fancyMenu(fancyType)}
         </ul>
         <div

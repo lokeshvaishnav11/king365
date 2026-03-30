@@ -87,6 +87,58 @@ body {
   margin-top: 40px;
 }
 
+
+.game-bookmakers {
+    font-weight: 700;
+    padding: 0 7px 0 2px;
+    background: linear-gradient(-180deg,#315195,#14213d);
+    color: #fff;
+    font-style: italic;
+    border-radius: 4px;
+    letter-spacing: 0px;
+    font-size: 12px;
+    margin-left: .22rem!important
+}
+
+@media only screen and (max-device-width: 990px) {
+    .game-bookmakers {
+        font-size:4vw;
+        position: relative
+    }
+}
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 990px) {
+    .game-bookmakers {
+        font-size:2vw
+    }
+}
+
+
+.game-fancy {
+    font-weight: 700;
+    padding: 0 7px 0 2px;
+    background: linear-gradient(180deg, #0a92a5 15%, #076875 100%);
+    color: #fff;
+    font-style: italic;
+    border-radius: 4px;
+    letter-spacing: 0px;
+    font-size: 12px;
+    margin-left: .22rem!important
+}
+
+@media only screen and (max-device-width: 990px) {
+    .game-fancy {
+        font-size:4vw;
+        position: relative
+    }
+}
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 990px) {
+    .game-fancy {
+        font-size:2vw
+    }
+}
+
 .modal-header {
   padding: 10px;
   background: var(--theme1-bg);
@@ -161,6 +213,7 @@ p {
   color: #ff0000;
   font-family: Arial, Verdana, Helvetica, sans-serif;
 }
+
 
 .bookmaker-market .suspended:after {
   width: 60%;

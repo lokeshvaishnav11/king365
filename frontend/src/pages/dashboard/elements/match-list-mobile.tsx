@@ -30,40 +30,38 @@ const MatchListMobile = (props: any) => {
                           onClick={() => props.currentMatch(match)}
                           className='text-edark'
                           href={undefined}
+                          style={{color:"#2789ce",
+                            fontWeight:"700"
+                          }}
                         >
                           {match.name}
                         </a>
                         <p className='tx-666 tx-12' style={{ marginTop: '3px' }}>
-                          {moment(match.matchDateTime).format(dateFormat)}
+                         <i className='fa-regular fa-clock' style={{color:"#008000"}} /> {moment(match.matchDateTime).format(dateFormat)}
                         </p>
                       </div>
                     </td>
                     <td colSpan={2}>
-                      <div className='game-icons' style={{ paddingRight: '0px' }}>
-                        {new Date(match.matchDateTime).getTime() < new Date().getTime() && (
+                      <div className='game-icons' style={{ paddingRight: '0px' , gap:"8px" }}>
+                        {/* {new Date(match.matchDateTime).getTime() < new Date().getTime() && (
                           <span className='game-icon'>
                             <i className='fas fa-circle v-m icon-circle tx-green' />
                           </span>
-                        )}
-                        <span className='game-icon'>
+                        )} */}
+                        {/* <span className='game-icon'>
                           <i className='fas fa-tv v-m icon-tv' />
-                        </span>
+                        </span> */}
                         {match.isFancy && (
-                          <span className='game-icon'>
-                            <img
-                              src='https://dzm0kbaskt4pv.cloudfront.net/v2/static/front/img/icons/ic_fancy.png'
-                              className='fancy-icon'
-                            />
+                          <span className='game-fancy me-1'>
+                           F
                           </span>
                         )}
                         {match.isBookMaker && (
-                          <span className='game-icon'>
-                            <img
-                              src='https://dzm0kbaskt4pv.cloudfront.net/v2/static/front/img/icons/ic_bm.png'
-                              className='bookmaker-icon'
-                            />
+                          <span className='game-bookmakers me-lg-1'>
+                            BM
                           </span>
                         )}
+                        <svg  xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25"><path _ngcontent-ng-c261849108="" fill="#7e97a7" d="M12.5 25C5.596 25 0 19.404 0 12.5S5.596 0 12.5 0 25 5.596 25 12.5 19.404 25 12.5 25zm0-1C18.85 24 24 18.85 24 12.5S18.85 1 12.5 1 1 6.15 1 12.5 6.15 24 12.5 24zm5.09-12.078c1.606.516 2.41 1.13 2.41 2.19 0 .373-.067.616-.2.73-.135.115-.403.173-.804.173H13.57l-.81 7.988h-.536l-.795-7.988H6.003c-.4 0-.67-.065-.803-.194-.133-.128-.2-.364-.2-.708 0-1.06.804-1.674 2.41-2.19.09 0 .18-.03.27-.086.49-.172.802-.444.936-.816L9.82 5.95v-.216c0-.23-.222-.415-.668-.558l-.067-.043h-.067c-.536-.143-.804-.387-.804-.73 0-.402.09-.652.268-.753.18-.1.49-.15.938-.15h6.16c.447 0 .76.05.938.15.178.1.268.35.268.752 0 .344-.268.588-.804.73h-.067l-.067.044c-.446.143-.67.33-.67.558v.215l1.206 5.07c.134.372.446.644.937.816.09.057.18.086.27.086z"></path></svg>
                         {match.isT10 && (
                           <span className='game-icon'>
                             <img
@@ -76,12 +74,12 @@ const MatchListMobile = (props: any) => {
                       </div>
                     </td>
                   </tr>
-                  <tr className='min-h-10 '>
+                  {/* <tr className='min-h-10 '>
                     <td className='ln10' colSpan={6}>
                       &nbsp;
                     </td>
-                  </tr>
-                  <tr>
+                  </tr> */}
+                  {/* <tr>
                     <td colSpan={2} className='text-center p5 fw-600 tx-12'>
                       1
                     </td>
@@ -91,8 +89,8 @@ const MatchListMobile = (props: any) => {
                     <td colSpan={2} className='text-center p5 fw-600 tx-12'>
                       2
                     </td>
-                  </tr>
-                  <tr>{props.memoOdds(marketId)}</tr>
+                  </tr> */}
+                  {/* <tr>{props.memoOdds(marketId)}</tr> */}
                   <tr className='min-h-10 border-bottom'>
                     <td className='ln10' colSpan={6}>
                       &nbsp;
