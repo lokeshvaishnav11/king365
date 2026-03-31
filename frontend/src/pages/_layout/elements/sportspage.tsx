@@ -6,7 +6,7 @@ import mobileSubheader from "./mobile-subheader";
 import { CustomLink } from "./custom-link";
 
 const SportsList = () => {
-  const items = ["Soccer", "Horse Racing", "Politics"];
+  const items = ["Cricket", "Tennis", "Soccer"];
 
 
     const sportsList = useAppSelector(selectSportList)
@@ -70,8 +70,8 @@ const SportsList = () => {
 
     {mobileSubheader.subheader('All Sports')}
     <div className="bg-light">
-      {sportsList?.sports?.map((item: any, i: number) => (
-        <div
+      {sportsList?.sports?.filter((sport: any) => items.includes(sport.name)).map((item: any, i: number) => (
+        <CustomLink to={`/match/${item.sportId}/in-play`}
           key={i}
           className="d-flex justify-content-between align-items-center px-3 py-2 border-bottom"
           style={{ cursor: "pointer" }}
@@ -100,7 +100,7 @@ const SportsList = () => {
           >
             <i className="fas fa-chevron-right text-dark"></i>
           </div>
-        </div>
+        </CustomLink>
       ))}
     </div>
     </>

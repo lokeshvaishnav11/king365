@@ -24,7 +24,7 @@
 html,
 body {
   height: 100%;
-  font-family: "Roboto Condensed", sans-serif;
+  font-family: Tahoma , Helvetica, sans-serif;
   /*font-family: Arial, Verdana, Helvetica, sans-serif;*/
   color: var(--site-color);
   font-size: 16px;

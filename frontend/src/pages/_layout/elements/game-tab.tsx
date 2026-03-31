@@ -72,22 +72,20 @@
 
 import React from 'react'
 import './header.css' // 👈 CSS alag file me daalo
+import { link } from 'fs';
+import { CustomLink } from './custom-link';
 
 const GameTabs = (props: any) => {
 
     const [showSearch, setShowSearch] = React.useState(false)
 
   const menuItems = [
-    "Vimaan",
-    "Cricket",
-    "Tennis",
-    "Soccer",
-    "Horse Racing",
-    "Greyhound Racing",
-    "Basketball",
-    "Lottery",
-    "Live Casino",
-    "Tips & Previews"
+   {title: "Vimaan", link:"/casino-list-int/6"},
+  { title: "Cricket", link:"/match/4/in-play" },
+    {title: "Tennis", link:"/match/2/in-play"},
+    {title: "Soccer", link:"/match/1/in-play"},
+    {title: "Live Casino", link:"/casino-games"},
+    {title: "Tips & Previews", link:"#"}
   ];
 
   const icons: any = {
@@ -116,20 +114,22 @@ const GameTabs = (props: any) => {
       >
 
         {menuItems.map((item, index) => (
-          <div
+          <CustomLink to={item.link}
             key={index}
-            className={item === "Vimaan" ? "vimaan-item" : ""}
+            className={item.title === "Vimaan" ? "vimaan-item" : ""}
             style={{
               padding: "10px 18px",
               fontSize: "14px",
               cursor: "pointer",
               display: "flex",
               alignItems: "center",
-              gap: "6px"
+              gap: "6px",
+              color: "black",
+              fontWeight:"700"
             }}
           >
             {/* ✅ Vimaan me image */}
-            {item === "Vimaan" ? (
+            {item.title === "Vimaan" ? (
               <img
                 src="/imgs/viman.png" // 👈 apni image path daalo
                 alt="vimaan"
@@ -137,16 +137,16 @@ const GameTabs = (props: any) => {
                 className='vimaan-text'
               />
             ) : (
-              <i className={icons[item]}></i>
+              <i className={icons[item.title]}></i>
             )}
 
              {/* 🔍 Search Input */}
        
 
-            <span className={item === "Vimaan" ? "vimaan-text" : ""}>
-              {item}
+            <span className={item.title === "Vimaan" ? "vimaan-text" : ""}>
+              {item.title}
             </span>
-          </div>
+          </CustomLink>
         ))}
       </div>
 

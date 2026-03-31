@@ -68,7 +68,7 @@ const Footer = () => {
         © Copyright 2026. All Rights Reserved. Powered by BETBHAI365
       </p>
     </div> */}
-    </div><div className="container mt-3">
+    </div><div className="container mt-3 pb-4">
 
         {/* TOP LINKS */}
         <div className="text-center mb-2">

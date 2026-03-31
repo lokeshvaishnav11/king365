@@ -23,7 +23,7 @@ const MobileFooter = () => {
           bottom: 0,
           left: 0,
           width: "100%",
-          background: "linear-gradient(180deg, #2c5364, #203a43)",
+          background: "linear-gradient(180deg, #1B2E39, #1B2E39)",
           height: "65px",
           zIndex: 999,
           borderTop: "1px solid rgba(255,255,255,0.1)"
@@ -34,18 +34,43 @@ const MobileFooter = () => {
                 to={item.link}
             key={i}
             className="d-flex flex-column align-items-center justify-content-center"
-            style={{
-              color: "white",
-              fontSize: "12px",
-              cursor: "pointer",
-              flex: 1
-            }}
+           style={
+  item.name === "Sports"
+    ? {
+        color: "white",
+        fontSize: "12px",
+        cursor: "pointer",
+        flex: 1,
+        padding: "28px 14px",
+        borderRadius: "54px 54px 0px 0px",
+        background: "#1D303C",
+      }
+    : {
+        color: "white",
+        fontSize: "12px",
+        cursor: "pointer",
+        flex: 1,
+      }
+}
           >
-            <i
-              className={item.icon}
-              style={{ fontSize: "18px", marginBottom: "2px" }}
-            ></i>
-            <span>{item.name}</span>
+            {/* ✅ Casino Image */}
+            {item.name === "Casino" ? (
+              <img
+                src="/imgs/casino.gif" // 👈 apni image path
+                alt="casino"
+                style={{
+                  width: "30px",
+                  height: "30px",
+                  marginBottom: "2px",
+                }}
+              />
+            ) : (
+              <i
+                className={item.icon}
+                style={{ fontSize: "28px", marginBottom: "2px" }}
+              ></i>
+            )}
+            <span style={{fontSize:"13px"}}>{item.name}</span>
           </CustomLink>
         ))}
       </div>

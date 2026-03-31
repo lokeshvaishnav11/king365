@@ -172,6 +172,7 @@ class MatchOdds extends React.PureComponent<
                   {/* <span className='float-right m-r-10'>
                     Maximum Bet <span>{this.offplaylimit(market)}</span>
                   </span> */}
+                  <span className='text-dark ml-1'><span className='bg-warning rounded px-1' style={{paddingBottom:"3px" }}><i style={{fontSize:"x-small"}} className='fa fa-circle'/></span> Cash out</span>
                 </div>
                 <div className='table-header'>
                   <div className={`float-left country-name ${classforheadingfirst} min-max`} style={{borderTop:"1px solid #7e97a7"}}>
@@ -180,8 +181,8 @@ class MatchOdds extends React.PureComponent<
                   {(!isMobile && market.oddsType != OddsType.BM) ||
                     market.oddsType == OddsType.BM ? (
                     <>
-                      <div style={{borderColor:"#7e97a7"}} className='box-1 float-left' />
-                      <div style={{borderColor:"#7e97a7"}} className='box-1 float-left' />
+                      <div className='box-1 float-left' style={{borderRight:"none", borderTop:"1px solid #7e97a7"}}  />
+                      <div  className='box-1 float-left' style={{borderRight:"none",borderLeft:"none" ,borderTop:"1px solid #7e97a7"}} />
                     </>
                   ) : (
                     ''
@@ -193,6 +194,10 @@ class MatchOdds extends React.PureComponent<
                   <div className={`lay ${classforheading} float-left text-center`} style={{borderColor:"#7e97a7"}} >
                     <b>LAY</b>
                   </div>
+                   <>
+                      <div className='box-1 float-left' style={{borderRight:"none", borderTop:"1px solid #7e97a7"}}  />
+                      <div  className='box-1 float-left' style={{borderRight:"none",borderLeft:"none" ,borderTop:"1px solid #7e97a7"}} />
+                    </>
                   {!isMobile ? (
                     <>
                       <div className='box-1 float-left' style={{borderColor:"#7e97a7"}} />

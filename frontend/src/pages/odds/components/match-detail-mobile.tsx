@@ -22,6 +22,8 @@ const MatchDetailWrapper = (props: any) => {
   //   }
   // }, [])
 
+  console.log("match detail wrapper rendered",props.currentMatch)
+
   return (
     <>
       <div className='prelative'>
@@ -36,13 +38,13 @@ const MatchDetailWrapper = (props: any) => {
             </div> */}
 
              <div className='game-heading clsforellipse text-center'>
-              <span className='card-header-title giveMeEllipsis' style={{fontSize:"17px", textTransform:"capitalize", fontWeight:"bolder"}}>Cricket</span>
+              <span className='card-header-title giveMeEllipsis' style={{fontSize:"17px", textTransform:"capitalize", fontWeight:"bolder"}}>{props.currentMatch?.sportId == "4" ? "Cricket" : props.currentMatch?.sportId == "2" ? "Tennis" : props.currentMatch?.sportId == "1" ? "Soccer" : "Sports"}</span>
             </div> 
 
             <div className="position-relative w-100">
 
   <img
-    src="/imgs/gamebg.jpg"
+    src={props.currentMatch?.sportId == "4" ? "/imgs/cricketbg.jpg" : props.currentMatch?.sportId == "2" ? "/imgs/tennisbg.jpg" : props.currentMatch?.sportId == "1" ? "/imgs/soccerbg.jpg" : "/imgs/cricketbg.jpg"}
     className="w-100"
     style={{ display: "block" }}
   />
