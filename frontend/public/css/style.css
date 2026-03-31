@@ -139,6 +139,26 @@ body {
     }
 }
 
+.bet-started-anim {
+  animation: betZoom 1s infinite;
+  font-weight: 700;
+}
+
+@keyframes betZoom {
+  0% {
+    transform: scale(1);
+    color: #ffffff;
+  }
+  50% {
+    transform: scale(1.2);
+    color: #adff2f; /* yaha color change hoga */
+  }
+  100% {
+    transform: scale(1);
+    color: #ffffff;
+  }
+}
+
 .modal-header {
   padding: 10px;
   background: var(--theme1-bg);
@@ -2531,20 +2551,20 @@ footer {
 
 .lay,
 .lay-color {
-  background-color: #f9c9d4 !important;
+  background-color: #faa9ba !important;
 }
 
 .back,
 .back-color {
-  background-color: #a7d8fd;
+  background-color: #72bbef;
 }
 
 .layx {
-  background-color: #f9c9d4 !important;
+  background-color: #faa9ba !important;
 }
 
 .backx {
-  background-color: #a7d8fd !important;
+  background-color: #72bbef !important;
 }
 
 .game-heading .card-header-title {
@@ -3389,7 +3409,7 @@ marquee.casino-remark {
   display: flex;
   display: -ms-flex;
   display: -webkit-flex;
-  border-bottom: 1px solid #fff;
+  border-bottom: 1px solid #7e97a7;
 }
 
 .table-row {
@@ -3401,7 +3421,7 @@ marquee.casino-remark {
 }
 
 .fancy-market .fancy-tripple {
-  border-bottom: 1px solid #fff;
+  border-bottom: 1px solid #7e97a7;
 }
 
 .fancy-market .fancy-tripple.suspended::after {
@@ -3409,7 +3429,7 @@ marquee.casino-remark {
 }
 
 .fancy-market .fancy-tripple .table-row > div:not(:first-child) {
-  border-bottom: 1px solid #fff;
+  border-bottom: 1px solid #7e97a7;
 }
 
 .fancy-market .fancy-tripple .table-row:last-child > div {
@@ -3419,7 +3439,7 @@ marquee.casino-remark {
 .table-header > div,
 .table-row > div {
   padding: 5px 0;
-  border: 1px solid #fff;
+  border: 1px solid #7e97a7;
   border-right: 0;
   border-bottom: 0;
   border-top: 0;
@@ -3437,7 +3457,7 @@ marquee.casino-remark {
 
 .table-header > div:last-child,
 .table-row > div:last-child {
-  border-right: 1px solid #fff;
+  border-right: 1px solid #7e97a7;
   padding-right: 5px;
 }
 
@@ -3481,9 +3501,9 @@ marquee.casino-remark {
 
 .fancy-min-max,
 .table-remark {
-  border-left: 1px solid #dee2e6;
-  border-right: 1px solid #dee2e6;
-  border-bottom: 1px solid #dee2e6;
+  border-left: 1px solid #7e97a7;
+  border-right: 1px solid #7e97a7;
+  border-bottom: 1px solid #7e97a7;
   padding-right: 5px;
   padding-top: 2px;
   padding-bottom: 2px;

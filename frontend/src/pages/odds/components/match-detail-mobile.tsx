@@ -25,14 +25,69 @@ const MatchDetailWrapper = (props: any) => {
   return (
     <>
       <div className='prelative'>
-        <Tabs>
-          <Tab eventKey='home' title='ODDS'>
-            <div className='game-heading clsforellipse'>
+      
+        <div>
+          <div>
+            {/* <div className='game-heading clsforellipse'>
               <span className='card-header-title giveMeEllipsis'>{props.currentMatch?.name}</span>
               <span className='float-right card-header-date'>
                 {moment(props.currentMatch?.matchDateTime).format('MM/DD/YYYY  h:mm a')}
               </span>
-            </div>
+            </div> */}
+
+             <div className='game-heading clsforellipse text-center'>
+              <span className='card-header-title giveMeEllipsis' style={{fontSize:"17px", textTransform:"capitalize", fontWeight:"bolder"}}>Cricket</span>
+            </div> 
+
+            <div className="position-relative w-100">
+
+  <img
+    src="/imgs/gamebg.jpg"
+    className="w-100"
+    style={{ display: "block" }}
+  />
+
+  {/* TOP ROW */}
+  <div
+    className="d-flex justify-content-between w-100 px-4"
+    style={{
+      position: "absolute",
+      top: "12px",
+      color: "#fff",
+      fontWeight: "bold"
+    }}
+  >
+    <span style={{fontSize: "14px",
+    fontWeight: "700",
+    textShadow: "#FC0 1px 0 10px"}}>OPEN</span>
+
+    <span style={{fontSize: "14px",
+    fontWeight: "700",
+    textShadow: "#FC0 1px 0 10px"}}>
+    Game Time  {props.currentMatch?.matchDateTime
+        ? moment(props.currentMatch.matchDateTime).format("MM/DD/YYYY h:mm a")
+        : ""}
+    </span>
+  </div>
+
+  {/* BOTTOM CENTER */}
+  <div
+    className="w-100 text-center bet-started-anim"
+    style={{
+      position: "absolute",
+      bottom: "5px",
+      left: "0",
+      color: "#fff",
+      fontWeight: "bold"
+    }}
+  >
+   <span style={{fontSize: "14px",
+    fontWeight: "700",
+    textShadow: "#FC0 1px 0 10px"}}> Bet Started</span>
+  </div>
+
+</div>
+
             {props.scoreBoard()}
             {tavstatus && props.otherTv()}
             {props.t10Tv(250)}
@@ -51,8 +106,8 @@ const MatchDetailWrapper = (props: any) => {
               </Fragment>
             )}
             {props.marketDataList.stake && <PlaceBetBox stake={props.marketDataList.stake} />}
-          </Tab>
-          <Tab eventKey='profile' title={`PLACED BET (${betCount})`}>
+          </div>
+          {/* <Tab eventKey='profile' title={`PLACED BET (${betCount})`}>
             <div className='card m-b-10 my-bet'>
               <div className='card-header'>
                 <h6 className='card-title d-inline-block'>My Bet</h6>
@@ -61,9 +116,9 @@ const MatchDetailWrapper = (props: any) => {
                 <MyBetComponent />
               </div>
             </div>
-          </Tab>
-        </Tabs>
-        <div className='csmobileround' style={{ top: '16px' }}>
+          </Tab> */}
+        </div>
+        <div className='csmobileround' style={{ top: '14px' }}>
           <span onClick={() => settvstatus(tavstatus ? false : true)}>
             <i className='fa fa-tv'></i>{' '}
           </span>

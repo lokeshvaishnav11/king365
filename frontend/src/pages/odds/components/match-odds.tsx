@@ -151,7 +151,8 @@ class MatchOdds extends React.PureComponent<
             if (!setVisibleMarketStatus) return null
             return (
               <div key={market._id}>
-                <div className='market-title mt-1'>
+                <div className='market-title mt-1' style={{background:"none", padding:"8px 0px"}}>
+                 <span className='bg-theme px-2 py-1' style={{borderTopRightRadius:"10px" , gap:"2px"}}>
                   {market.marketName}
                   <a
                     href='#Bookmaker-market'
@@ -162,40 +163,40 @@ class MatchOdds extends React.PureComponent<
                         type: market.oddsType === OddsType.BM ? 'Bookmaker' : market.oddsType,
                       })
                     }}
-                    className='m-r-5 game-rules-icon'
+                    className='m-l-5 game-rules-icon'
                   >
                     <span>
-                      <i className='fa fa-info-circle float-right' />
+                      <i className='fa fa-info-circle float-righ' />
                     </span>
-                  </a>
-                  <span className='float-right m-r-10'>
+                  </a> </span>
+                  {/* <span className='float-right m-r-10'>
                     Maximum Bet <span>{this.offplaylimit(market)}</span>
-                  </span>
+                  </span> */}
                 </div>
                 <div className='table-header'>
-                  <div className={`float-left country-name ${classforheadingfirst} min-max`}>
-                    <b />
+                  <div className={`float-left country-name ${classforheadingfirst} min-max`} style={{borderTop:"1px solid #7e97a7"}}>
+               <div className='text-center py-1' style={{background:"#bed5d8", borderRadius:"2px"}}><div>Min/Max 100-1000</div></div>
                   </div>
                   {(!isMobile && market.oddsType != OddsType.BM) ||
                     market.oddsType == OddsType.BM ? (
                     <>
-                      <div className='box-1 float-left' />
-                      <div className='box-1 float-left' />
+                      <div style={{borderColor:"#7e97a7"}} className='box-1 float-left' />
+                      <div style={{borderColor:"#7e97a7"}} className='box-1 float-left' />
                     </>
                   ) : (
                     ''
                   )}
 
-                  <div className={`back ${classforheading} float-left text-center`}>
+                  <div className={`back ${classforheading} float-left text-center`} style={{borderColor:"#7e97a7"}}>
                     <b>BACK</b>
                   </div>
-                  <div className={`lay ${classforheading} float-left text-center`}>
+                  <div className={`lay ${classforheading} float-left text-center`} style={{borderColor:"#7e97a7"}} >
                     <b>LAY</b>
                   </div>
                   {!isMobile ? (
                     <>
-                      <div className='box-1 float-left' />
-                      <div className='box-1 float-left' />
+                      <div className='box-1 float-left' style={{borderColor:"#7e97a7"}} />
+                      <div className='box-1 float-left' style={{borderColor:"#7e97a7"}} />
                     </>
                   ) : (
                     ''
@@ -216,7 +217,7 @@ class MatchOdds extends React.PureComponent<
                             className={`table-row ${runner.status === 'SUSPENDED' ? 'suspended' : ''
                               }`}
                           >
-                            <div className={` country-name ${classforheadingfirst}`}>
+                            <div className={` country-name ${classforheadingfirst}`} style={{borderColor:"#7e97a7"}}>
                               <span className='team-name'>
                                 <b>{runner.runnerName}</b>
                               </span>

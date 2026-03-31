@@ -1,18 +1,18 @@
 const Footer = () => {
   return (
-    <div>
+    <><div className="d-none">
       <section className="footer">
         <div className="footer-top">
           <div className="footer-links">
             <nav className="navbar navbar-expand-sm">
               <ul className="navbar-nav">
-                 <li className="nav-item">
+                <li className="nav-item">
                   <a className="nav-link" href="/responsible-gaming">
                     {" "}
                     Privacy Policy{" "}
                   </a>
                 </li>
-                 <li className="nav-item">
+                <li className="nav-item">
                   <a className="nav-link" href="/responsible-gaming">
                     {" "}
                     Rules and Regulation{" "}
@@ -63,12 +63,45 @@ const Footer = () => {
         </div>
       </div>
       {/* <div className="footer-text">
-        <p></p>
-        <p className="text-center">
-          © Copyright 2026. All Rights Reserved. Powered by BETBHAI365
-        </p>
-      </div> */}
-    </div>
+      <p></p>
+      <p className="text-center">
+        © Copyright 2026. All Rights Reserved. Powered by BETBHAI365
+      </p>
+    </div> */}
+    </div><div className="container mt-3">
+
+        {/* TOP LINKS */}
+        <div className="text-center mb-2">
+          <a href="#" className="mx-2 text-decoration-none text-dark">Privacy Policy</a>
+
+          <span className="mx-2 text-muted">|</span>
+
+          <a href="#" className="mx-2 text-decoration-none text-dark">KYC</a>
+
+          <span className="mx-2 text-muted">|</span>
+
+          <a href="#" className="mx-2 text-decoration-none text-dark">Terms & Conditions</a>
+        </div>
+
+        {/* SECOND ROW LINKS */}
+        <div className="text-center mb-3">
+          <a href="#" className="mx-3 text-decoration-none text-dark">Rules & Regulation</a>
+
+            <span className="mx-2 text-muted">|</span>
+
+          <a href="#" className="mx-3 text-decoration-none text-dark">Responsible Gaming</a>
+        </div>
+
+        {/* IMAGE SECTION */}
+        <div className="text-center">
+          <img
+            src="/imgs/foot.png" // 👈 apni image path daal
+            alt="info"
+            className="img-fluid"
+            style={{ maxWidth: "200px" }} />
+        </div>
+
+      </div></>
   );
 };
 export default Footer;
