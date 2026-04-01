@@ -101,6 +101,7 @@ const MatchDetailWrapper = (props: any) => {
               </div>
             </div>
             <br />
+            
             {props.fancies && props.currentMatch && props.currentMatch.sportId == '4' && !String(props?.currentMatch?.matchId).startsWith('1313') && (
               <Fragment>
                 {/* @ts-expect-error */}

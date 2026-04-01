@@ -2,8 +2,8 @@ import { CustomLink } from "./custom-link";
 
 const MobileFooter = () => {
      const menu = [
-    { name: "Home", icon: "fas fa-home" , link:"/"},
-    { name: "In-Play", icon: "fas fa-stopwatch" , link:"match/4/in-play"},
+    { name: "Home", icon: "fas fa-home" , link:"/match/4/in-play"},
+    { name: "In-Play", icon: "fas fa-stopwatch" , link:"/"},
     { name: "Sports", icon: "fas fa-trophy" , link:"/sports"},
     { name: "Casino", icon: "fas fa-dice" , link:"/casino-games"},
     { name: "Account", icon: "fas fa-user" , link:"/account"},

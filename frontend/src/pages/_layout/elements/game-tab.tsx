@@ -72,12 +72,15 @@
 
 import React from 'react'
 import './header.css' // 👈 CSS alag file me daalo
-import { link } from 'fs';
+
 import { CustomLink } from './custom-link';
+import { useLocation } from 'react-router-dom';
 
 const GameTabs = (props: any) => {
-
+const location = useLocation();
     const [showSearch, setShowSearch] = React.useState(false)
+
+    
 
   const menuItems = [
    {title: "Vimaan", link:"/casino-list-int/6"},
@@ -99,6 +102,18 @@ const GameTabs = (props: any) => {
     "Live Casino": "fas fa-dice",
     "Tips & Previews": "fas fa-lightbulb"
   };
+
+  const isActive = (item: any) => {
+  const path = location.pathname;
+
+  if (path === "/" && item.title === "Cricket") return true;
+
+  if (path.includes("/4") && item.title === "Cricket") return true;
+  if (path.includes("/1") && item.title === "Soccer") return true;
+  if (path.includes("/2") && item.title === "Tennis") return true;
+
+  return false;
+};
 
   return (
     <div style={{ display: "flex", alignItems: "center", background: "#0b5d4f" }}>
@@ -124,8 +139,8 @@ const GameTabs = (props: any) => {
               display: "flex",
               alignItems: "center",
               gap: "6px",
-              color: "black",
-              fontWeight:"700"
+              fontWeight:"700",
+              color: isActive(item) ? "white" : "#000000",
             }}
           >
             {/* ✅ Vimaan me image */}
@@ -137,7 +152,7 @@ const GameTabs = (props: any) => {
                 className='vimaan-text'
               />
             ) : (
-              <i className={icons[item.title]}></i>
+              <i className={icons[item.title]}   style={{ color: isActive(item) ? "white" : "#000000" }}></i>
             )}
 
              {/* 🔍 Search Input */}
