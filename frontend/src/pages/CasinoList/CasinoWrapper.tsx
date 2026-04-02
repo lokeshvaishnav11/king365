@@ -573,7 +573,7 @@ const CasinoWrapper = (props: any) => {
                 >
                   
                   {liveMatchData && gameCode && (
-                    <iframe
+                    <img
                       title="stream"
                       width="100%"
                       height={isMobile ? "220" : "420"}
@@ -582,9 +582,10 @@ const CasinoWrapper = (props: any) => {
                       // src={`https://mac88-casino-stream.scoreswift.xyz/stream?stream_id=${gameId}`}
 
                       // src={`https://sfront.starrexch.me/casino-tv?id=${gameCode}`}
-                      src={`https://sfront.starrexch.me/casino-tv?id=${mappedCode}`}
+                      // src={`https://sfront.starrexch.me/casino-tv?id=${mappedCode}`}
+                         src="/imgs/casinoloader.gif"
 
-                    ></iframe>
+                    />
                   )}
                   {/* <iframe src='https://diamond.igtechgaming.com/freecasino/tvop?id=lucky7' width="100%"></iframe> */}
                   {casinoMatchData && (
@@ -693,11 +694,11 @@ const CasinoWrapper = (props: any) => {
                       padding: "0px",
                       position: "relative",
                       minHeight: "250",
-                      // background: '#000',
+                      background: '#000',
                     }}
                   >
                     {liveMatchData && gameCode && (
-                      <iframe
+                      <img
                         title="stream"
                         width="100%"
                         height={isMobile ? "250" : "420"}
@@ -707,11 +708,10 @@ const CasinoWrapper = (props: any) => {
 
                         // src={`https://sfront.starrexch.me/casino-tv?id=${gameCode}`}
 
-                        src={`https://sfront.starrexch.me/casino-tv?id=${mappedCode}`}
+                        // src={`https://sfront.starrexch.me/casino-tv?id=${mappedCode}`}
+                        src="/imgs/casinoloader.gif"
 
-                        sandbox="allow-same-origin allow-scripts allow-popups allow-forms"
-                        seamless
-                      ></iframe>
+                      />
                     )}
 
                     {/* <iframe src='https://diamond.igtechgaming.com/freecasino/tvop?id=lucky7' width="100%"></iframe> */}
@@ -763,14 +763,14 @@ const CasinoWrapper = (props: any) => {
               {marketDataList.stake && (
                 <PlaceBetBox stake={marketDataList.stake} />
               )}
-              <LastResults lastResult={casinoMatchData} gameId={gameCode} />
+              {/* <LastResults lastResult={casinoMatchData} gameId={gameCode} /> */}
               {gameCode == "poker" && <OnedaypokerRules />}
               {gameCode == "teen8" && <Openteenpatti />}
               {gameCode == "fivewicket" && <Cricketv />}
               {gameCode == "teen20" && <T20 />}
               {gameCode == "Superover" && <SoRules />}
             </Tab>
-            <Tab eventKey="profile" title={`PLACED BET (${betCount})`}>
+            <Tab eventKey="profile" title={""}>
               <div className="card m-b-10 my-bet">
                 <div className="card-header">
                   <h6 className="card-title d-inline-block">My Bet</h6>

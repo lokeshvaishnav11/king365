@@ -1,9 +1,15 @@
 [
   {
     "id": "dt1",
-    "gameCode": "dt6",
-    "matchId": "28",
+    "gameCode": "dt20",
+    "matchId": "25",
     "title": "Dargon Tiger One Day",
     "image": "https://cdn.dreamdelhi.com/mac88/dt_mac88.webp"
+  },
+  {
+    "gameCode": "teen",
+    "matchId": "1",
+    "title": "Teen Patti One Day",
+    "image": "https://cdn.dreamdelhi.com/mac88/tp1d.webp"
   }
 ]
