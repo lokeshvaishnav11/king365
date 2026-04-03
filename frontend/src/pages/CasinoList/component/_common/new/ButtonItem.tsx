@@ -50,10 +50,10 @@ const ButtonItem = (props: any) => {
     return <>
         <div className='row m-b-10'>
             <div className='col-12 text-center'>
-                <b>{ItemMarket?.b1 || 0.00}</b>
+                <b>{title}</b>
             </div>
         </div>
-        <button className={`text-uppercase btn-theme ${suspend}`} onClick={() => onBet(true, ItemMarket)}><b >{title}</b></button>
+        <button className={`text-uppercase btn-theme ${suspend}`} onClick={() => onBet(true, ItemMarket)}><b >{ItemMarket?.b1 || 0.00}</b></button>
     </>
 }
 export default React.memo(ButtonItem)

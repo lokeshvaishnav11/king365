@@ -255,7 +255,7 @@
 // export default DragonTigerA;
 
 
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { isMobile } from 'react-device-detect'
 import CasinoPnl from './casinoPnl'
 import ButtonItem from './_common/new/ButtonItem'
@@ -331,16 +331,20 @@ const DragonTigerA = (props: any) => {
     )
   }
 
+  const [showMinmax, setShowMinmax] = React.useState(false);
+
   return (
     <div>
+    <div className="d-flex justify-content-between p-2 bg-theme text-white rounded"><span>WINNER</span><div>{showMinmax &&<span className='bg-dark rounded px-1'>Min/Max: 100 - 100000 </span>} <i  onClick={() => setShowMinmax(!showMinmax)} className="fa fa-info-circle" aria-hidden="true"></i></div> </div>
+
       <div className='d-t-box m-b-10 buttonsuspended'>
-        <div className='row row6'>
-          {buttonLayout('col-lg-3 col-4', [0, 1, 2])}
+        <div className='row row6 justify-content-center'>
+          {buttonLayout('col-lg-3 col-6', [0, 2, 1])}
           {buttonLayout('col-lg-3 col-12', [3])}
-          <Minmax min={liveMatchData.min} max={liveMatchData.max} />
+          {/* <Minmax min={liveMatchData.min} max={liveMatchData.max} /> */}
         </div>
       </div>
-      {isMobile ? <div className="home_mobile">
+      {isMobile ? <div className="home_mobile d-none">
         <div className="mobile-header-for-casino">
           <ul className="nav nav-tabs">
             <li className="nav-item"><a onClick={() => setActiveTab('dragon')} data-toggle="tab" href="#dragon" className={activeTab === 'dragon' ? "nav-link active" : "nav-link"}>Dragon</a></li>
@@ -348,7 +352,7 @@ const DragonTigerA = (props: any) => {
           </ul>
         </div>
       </div> : ""}
-      <div className='row row5'>
+      <div className='row row5 d-none'>
         {isMobile && activeTab === "dragon" || !isMobile ? <div className='col-lg-6 col-12'>
           <div className='d-t-box m-b-10 buttonsuspended'>
             <div className='row row6'>
@@ -363,7 +367,7 @@ const DragonTigerA = (props: any) => {
           </div>
         </div> : ""}
         {isMobile && activeTab === "tiger" || !isMobile ?
-          <div className='col-lg-6 col-12'>
+          <div className='col-lg-6 col-12 '>
             <div className='d-t-box m-b-10 buttonsuspended'>
               <div className='row '>
                 <div className='col-12'>
@@ -379,7 +383,7 @@ const DragonTigerA = (props: any) => {
 
           </div> : ""}
       </div>
-      <div className='row row5'>
+      <div className='row row5 d-none'>
         {isMobile && activeTab === "dragon" || !isMobile ? <div className='col-lg-6 col-12'>
           <div className='d-t-box m-b-10 buttonsuspended'>
             <div className='row'>
