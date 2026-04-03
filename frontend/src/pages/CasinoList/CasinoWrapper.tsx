@@ -125,13 +125,13 @@ const CasinoWrapper = (props: any) => {
     /// const ref = useRef();
     casinoService.getLiveCasinoData(gameCode).then((res) => {
       // console.log(res,"responseis here")
-      const fullMarketData = res?.data?.data;
-      console.log(res?.data,"fullMarketData")
+      const fullMarketData = res?.data?.data.data;
+      console.log(res?.data,"fullMarketData",fullMarketData)
       if (casinoMatchData?.match_id != fullMarketData?.match_id) {
         // dispatch(betPopup({ isOpen: false, betData: { ...betValues.betData, stack: 0, pnl: 0 } }))
         dispatch(setBookMarketList({}));
         setLiveMatchData(fullMarketData);
-        dispatch(setCasinoCurrentMatch(res?.data));
+        dispatch(setCasinoCurrentMatch(res?.data.data.data));
       }
       setCasinoMatchData(fullMarketData);
       const liveMarket = fullMarketData?.event_data;
@@ -545,7 +545,7 @@ const CasinoWrapper = (props: any) => {
                     RULES
                   </span>
                   <span className="float-right">
-                    Round ID: {casinoMatchData?.match_id} | Min:{" "}
+                    Round Id:{casinoMatchData?.event_data?.match_id} | Min:{" "}
                     {casinoMatchData?.min} | Max: {casinoMatchData?.max}
                   </span>
                 </h6>
@@ -592,7 +592,7 @@ const CasinoWrapper = (props: any) => {
                     <CasinoTimer lastOdds={casinoMatchData} />
                   )}
                   {casinoMatchData && (
-                    <CasinoTitle lastResult={casinoMatchData} />
+             <CasinoTitle lastResult={casinoMatchData} />
                   )}
                   {(gameCode == "poker" && casinoMatchData?.desc != "") ||
                   (gameCode == "onedaypoker20" && casinoMatchData?.desc != "")
@@ -789,7 +789,7 @@ const CasinoWrapper = (props: any) => {
             >
               RULES
             </span>
-            <span>Round ID: {casinoMatchData?.match_id}</span>
+            <span>Round ID: {casinoMatchData?.event_data?.match_id}</span>
           </div>
         </div>
       )}

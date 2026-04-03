@@ -3,6 +3,7 @@ import MatchController from "../controllers/api/MatchController";
 import OddsController from "../controllers/api/OddsController";
 import CasinoController from "../controllers/api/CasinoController";
 import CustomBMController from "../controllers/api/CustomBMController";
+import CustomDt20Controller from "../controllers/api/CustomDt20Controller";
 
 const router = Router();
 router.post("/save-match", MatchController.addMatchAndMarket);
@@ -33,5 +34,12 @@ router.get(
 );
 
 router.post("/save-custom-bm", CustomBMController.saveBM);
+
+// Custom DT20 Game Routes
+const customDt20Controller = CustomDt20Controller.getInstance();
+router.get("/custom-dt20/state", customDt20Controller.getGameState);
+router.get("/custom-dt20/history", customDt20Controller.getHistory);
+router.post("/custom-dt20/new-round", customDt20Controller.triggerNewRound);
+router.post("/custom-dt20/toggle", customDt20Controller.toggleGame);
 
 export default router;

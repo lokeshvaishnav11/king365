@@ -10,6 +10,7 @@ import OddSocket from "./sockets/OddSocket";
 import { SuperNodeSocket } from "./sockets/super-node";
 import { initCasinoSocket } from "./sockets/casino-node";
 import { redisReplica } from "./database/redis";
+import CustomDt20Controller from "./controllers/api/CustomDt20Controller";
 const requestIp = require("request-ip");
 
 class App {   
@@ -52,6 +53,11 @@ class App {
     this.app.use(express.urlencoded({ extended: true }));
 
     this.app.use("/api/", router);
+
+    // Initialize Custom DT20 Game System
+    const customDt20Controller = CustomDt20Controller.getInstance();
+    customDt20Controller.initGame();
+    console.log("🎮 Custom DT20 Casino Game initialized!");
 
     const io = Websocket.getInstance(this.server);
     io.on("connection", (socket: Socket) => {

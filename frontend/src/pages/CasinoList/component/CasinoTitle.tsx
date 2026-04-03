@@ -19,7 +19,7 @@ const breakPoints: any = [
 const CasinoTitle = (props: any) => {
   const { lastResult, gameId } = props
 
-  console.log(lastResult,"in opent p")
+  console.log(lastResult,"in opent p",lastResult.gameName)
 
   console.log(lastResult,"lastresult")
   const refAndarBahar2 = useRef(null)
@@ -271,17 +271,19 @@ const CasinoTitle = (props: any) => {
 
   const dt20 = () => {
     // card string ko array me split karo
-    const cards = lastResult.card?.split(",") || [];
+    const cards = lastResult?.card?.split(",") || [];
   
     return (
       <div className="video-overlay">
         <div className="imgspace d-flex">
+       
           {cards.map((card:any, i:any) => (
             <img
               key={i}
               alt=""
               src={`/imgs/casino/cards/${card === "1" ? "patti_back" : card}.png`}
             />
+          
           ))}
         </div>
       </div>
@@ -1222,7 +1224,7 @@ const CasinoTitle = (props: any) => {
             lastResult.slug == 'AAA' ||
             lastResult.slug == 'ddb') &&
             lucky7B()}
-          {(lastResult.slug == 'dt20' ||
+          {(lastResult?.gameName == 'dt20' ||
             lastResult.slug == 'dt202' ||
             lastResult.slug == 'dragontiger1Day') &&
             dt20()}
@@ -1234,6 +1236,7 @@ const CasinoTitle = (props: any) => {
 
 {(lastResult.slug == 'onedaypoker20') &&
             onepoker20()}
+                    {/* {lastResult?.gtype == 'dt20'  && dt20()} */}
 
           {lastResult.slug == 'teen' && lastResult?.match_id > 0 && onedayteen()}
           {((!isMobile && lastResult.slug == 'dtl20') || lastResult.slug == 'war') &&
