@@ -247,7 +247,7 @@ export class BetController extends ApiController {
       }
     }
   }
-  placebet = async (req: Request, res: Response): Promise<Response> => {
+  placebetold = async (req: Request, res: Response): Promise<Response> => {
     try {
       const betData = req.body
       if (betData.stack != undefined) {
@@ -270,7 +270,7 @@ export class BetController extends ApiController {
       return this.fail(res, e.stack)
     }
   }
-  placebetold = async (req: Request, res: Response): Promise<Response> => {
+  placebet = async (req: Request, res: Response): Promise<Response> => {
     try {
       const betData = req.body
       if (betData.stack != undefined) {
@@ -336,9 +336,9 @@ export class BetController extends ApiController {
           ///return this.fail(res, 'Bet is not acceptable.')
         }
 
-        if (!userInfo || (userInfo && !userInfo.betLock)) {
-          return this.fail(res, 'Bet is not acceptable.Please contact upline')
-        }
+        // if (!userInfo || (userInfo && !userInfo.betLock)) {
+        //   return this.fail(res, 'Bet is not acceptable.Please contact upline')
+        // }
 
         if (
           (betLock && betLock.betFair && market_name == 'Match Odds') ||

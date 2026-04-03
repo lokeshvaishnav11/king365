@@ -545,7 +545,7 @@ const CasinoWrapper = (props: any) => {
                     RULES
                   </span>
                   <span className="float-right">
-                    Round Id:{casinoMatchData?.event_data?.match_id} | Min:{" "}
+                    Round Id:{casinoMatchData?.match_id} | Min:{" "}
                     {casinoMatchData?.min} | Max: {casinoMatchData?.max}
                   </span>
                 </h6>
@@ -789,7 +789,7 @@ const CasinoWrapper = (props: any) => {
             >
               RULES
             </span>
-            <span>Round ID: {casinoMatchData?.event_data?.match_id}</span>
+            <span>Round ID: {casinoMatchData?.match_id}</span>
           </div>
         </div>
       )}

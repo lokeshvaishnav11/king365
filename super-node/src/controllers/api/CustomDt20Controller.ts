@@ -280,7 +280,7 @@ export default class CustomDt20Controller extends ApiController {
   private saveRoundToRedis = async (round: IGameRound) => {
   try {
     const event_data = {
-      match_id: round.roundId.toString(),
+      match_id: '25',
       title: "20-20 Dragon Tiger",
       autotime: "0",
       remark: " ",
@@ -299,7 +299,7 @@ export default class CustomDt20Controller extends ApiController {
       lt: this.currentLT,
       grp: 5,
 
-      mid: round.roundId,
+      mid: round.roundId.toString(),
 
       tv: "https://stream-s-43.xink.site/casino-stream?id=dt20",
 
@@ -376,7 +376,7 @@ export default class CustomDt20Controller extends ApiController {
 
       data: {
         gameName: "dt20",
-
+       match_id:round.roundId.toString(),
         event_data,
 
         // 👇 ye fields bhi upar duplicate honi chahiye (same API jaisa)

@@ -264,6 +264,7 @@ import CardItem from './_common/new/CardItem'
 
 const DragonTigerA = (props: any) => {
   const { lastOdds, liveMatchData } = props
+  console.log(lastOdds,liveMatchData,"FGHJKL")
   const drgonCard: any = [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
   const tigerCard: any = [25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37];
   const [activeTab, setActiveTab] = useState("dragon")
@@ -287,7 +288,7 @@ const DragonTigerA = (props: any) => {
                 <CardItem selectionid={market.SelectionId} title={runName} lastOdds={lastOdds} liveMatchData={liveMatchData} />
                 <div>
                   <div className='m-t-5'>
-                    <CasinoPnl sectionId={market.SelectionId} matchId={liveMatchData.match_id} />
+                    <CasinoPnl sectionId={market.SelectionId} matchId={liveMatchData.data.match_id} />
                   </div>
                 </div>
               </div>
@@ -299,7 +300,7 @@ const DragonTigerA = (props: any) => {
     )
   }
   const buttonLayout = (classData: string, marketIndex: any) => {
-    const finalMarketList = liveMatchData?.data?.defaultMarkets?.filter((ItemN: any, index: number) => marketIndex.indexOf(index) > -1) || []
+    const finalMarketList = liveMatchData?.defaultMarkets?.filter((ItemN: any, index: number) => marketIndex.indexOf(index) > -1) || []
     return (
       finalMarketList.map((Item: any, key: number) => {
         const market = Item?.Runners?.[0] || {}
