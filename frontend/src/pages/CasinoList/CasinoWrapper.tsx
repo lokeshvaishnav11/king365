@@ -65,6 +65,7 @@ import Worli from "./component/worli";
 import { selectUserData } from "../../redux/actions/login/loginSlice";
 import { useWebsocketUser } from "../../context/webSocketUser";
 import axios from "axios";
+import TeenpattiJoker from "./component/jokerTeen";
 // import datajson from './Casinojson'
 
 // const isMobile = true;
@@ -303,6 +304,10 @@ const CasinoWrapper = (props: any) => {
       case "teen":
         return (
           <OneDayTeen lastOdds={updateOdds} liveMatchData={liveMatchData} />
+        );
+        case "joker120":
+        return (
+          <TeenpattiJoker lastOdds={updateOdds} liveMatchData={liveMatchData} />
         );
       case "baccarat":
       case "baccarat2":

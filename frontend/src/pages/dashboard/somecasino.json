@@ -11,5 +11,11 @@
     "matchId": "1",
     "title": "Teen Patti One Day",
     "image": "https://cdn.dreamdelhi.com/mac88/tp1d.webp"
+  },
+  {
+    "gameCode": "joker120",
+    "matchId": "2",
+    "title": "Joker Teen Patti",
+    "image": "https://cdn.mac88.com/macexcite/JTP1D.webp"
   }
 ]
