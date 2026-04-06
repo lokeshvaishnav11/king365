@@ -121,7 +121,7 @@
 //     let time = 20;
 
 //     while (time > 0) {
-//       await redis.set("2020", JSON.stringify({
+//       await redis.set("teen20", JSON.stringify({
 //         autotime: time,
 //         status: "running"
 //       }));
@@ -129,7 +129,7 @@
 //       time--;
 //     }
 
-//     await redis.set("2020", JSON.stringify({
+//     await redis.set("teen20", JSON.stringify({
 //       autotime: 0,
 //       status: "suspend"
 //     }));
@@ -152,11 +152,11 @@
 //     for (let key of Object.keys(cards)) {
 //       await delay(1000);
 //       data[key] = cards[key];
-//       await redis.set("2020", JSON.stringify(data));
+//       await redis.set("teen20", JSON.stringify(data));
 //     }
 
 //     data.status = "result";
-//     await redis.set("2020", JSON.stringify(data));
+//     await redis.set("teen20", JSON.stringify(data));
 
 //     await delay(3000);
 //   }
@@ -171,7 +171,7 @@
 //     let time = 20;
 
 //     while (time > 0) {
-//       await redis.set("joker", JSON.stringify({
+//       await redis.set("joker120", JSON.stringify({
 //         autotime: time,
 //         status: "running"
 //       }));
@@ -179,7 +179,7 @@
 //       time--;
 //     }
 
-//     await redis.set("joker", JSON.stringify({
+//     await redis.set("joker120", JSON.stringify({
 //       autotime: 0,
 //       status: "suspend"
 //     }));
@@ -202,11 +202,11 @@
 //     for (let key of Object.keys(cards)) {
 //       await delay(1000);
 //       data[key] = cards[key];
-//       await redis.set("joker", JSON.stringify(data));
+//       await redis.set("joker120", JSON.stringify(data));
 //     }
 
 //     data.status = "result";
-//     await redis.set("joker", JSON.stringify(data));
+//     await redis.set("joker120", JSON.stringify(data));
 
 //     await delay(3000);
 //   }
@@ -218,7 +218,7 @@
 //     const { name } = req.params;
 
 //     // allowed games
-//     const validGames = ["dt20", "2020", "joker"];
+//     const validGames = ["dt20", "teen20", "joker120"];
 
 //     if (!validGames.includes(name)) {
 //       return res.status(400).json({
@@ -269,8 +269,11 @@
 const express = require("express");
 const Redis = require("ioredis");
 const mongoose = require("mongoose");
+const cors = require("cors");   // 👈 add this
+
 
 const app = express();
+app.use(cors());
 app.use(express.json());
 
 //////////////////////////////////////////////////////
@@ -308,7 +311,7 @@ const getRoundId = () => {
 // 🎴 Random Card
 const getRandomCard = () => {
   const cards = ["A","2","3","4","5","6","7","8","9","10","J","Q","K"];
-  const suits = ["H","D","C","S"];
+  const suits = ["HH","DD","CC","SS"];
   return cards[Math.floor(Math.random()*cards.length)] + suits[Math.floor(Math.random()*suits.length)];
 };
 
@@ -369,7 +372,7 @@ const start2020 = async () => {
     const roundId = getRoundId();
 
     while (time > 0) {
-      await redis.set("2020", JSON.stringify({
+      await redis.set("teen20", JSON.stringify({
         roundId,
         autotime: time,
         status: "running"
@@ -378,7 +381,7 @@ const start2020 = async () => {
       time--;
     }
 
-    await redis.set("2020", JSON.stringify({
+    await redis.set("teen20", JSON.stringify({
       roundId,
       autotime: 0,
       status: "suspend"
@@ -402,11 +405,11 @@ const start2020 = async () => {
     for (let key of Object.keys(cards)) {
       await delay(1000);
       data[key] = cards[key];
-      await redis.set("2020", JSON.stringify(data));
+      await redis.set("teen20", JSON.stringify(data));
     }
 
     data.status = "result";
-    await redis.set("2020", JSON.stringify(data));
+    await redis.set("teen20", JSON.stringify(data));
 
     await delay(3000);
   }
@@ -422,7 +425,7 @@ const startJoker = async () => {
     const roundId = getRoundId();
 
     while (time > 0) {
-      await redis.set("joker", JSON.stringify({
+      await redis.set("joker120", JSON.stringify({
         roundId,
         autotime: time,
         status: "running"
@@ -431,7 +434,7 @@ const startJoker = async () => {
       time--;
     }
 
-    await redis.set("joker", JSON.stringify({
+    await redis.set("joker120", JSON.stringify({
       roundId,
       autotime: 0,
       status: "suspend"
@@ -456,11 +459,11 @@ const startJoker = async () => {
     for (let key of Object.keys(cards)) {
       await delay(1000);
       data[key] = cards[key];
-      await redis.set("joker", JSON.stringify(data));
+      await redis.set("joker120", JSON.stringify(data));
     }
 
     data.status = "result";
-    await redis.set("joker", JSON.stringify(data));
+    await redis.set("joker120", JSON.stringify(data));
 
     await delay(3000);
   }
@@ -474,7 +477,7 @@ app.get("/data/:name", async (req, res) => {
   try {
     const { name } = req.params;
 
-    const validGames = ["dt20", "2020", "joker"];
+    const validGames = ["dt20", "teen20", "joker120"];
 
     if (!validGames.includes(name)) {
       return res.status(400).json({

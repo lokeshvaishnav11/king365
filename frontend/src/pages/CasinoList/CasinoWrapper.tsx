@@ -92,6 +92,36 @@ const CasinoWrapper = (props: any) => {
 
   const [checkRoundIdChange, setCheckRoundIdChange] = useState("");
 
+const [defaultNewData, setDefaultNewData] = useState<any>('')
+
+  React.useEffect(() => {
+  const fetchData = async () => {
+    try {
+      const res = await axios.get(`http://localhost:3030/data/${gameCode}`);
+      console.log(res.data, `${gameCode} DATA`);
+      setDefaultNewData(res.data.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  // first call immediately
+  fetchData();
+
+  // then repeat every 900ms
+  const interval = setInterval(fetchData, 900);
+
+  // cleanup (VERY IMPORTANT)
+  return () => clearInterval(interval);
+
+}, []);
+
+console.log(defaultNewData,"default new data")
+
+
+
+
+
   let interValCasino: any = null;
   ///const [interVal, setIntervalObj] = React.useState<any>(null)
   const betCount = useAppSelector(selectBetCount);
@@ -288,7 +318,7 @@ const CasinoWrapper = (props: any) => {
       case "dt20":
       case "dt202":
         return (
-          <DragonTigerA lastOdds={updateOdds} liveMatchData={liveMatchData} />
+          <DragonTigerA lastOdds={updateOdds} liveMatchData={liveMatchData} defaultNewData={defaultNewData} />
         );
       case "AAA":
         return (
@@ -307,7 +337,7 @@ const CasinoWrapper = (props: any) => {
         );
         case "joker120":
         return (
-          <TeenpattiJoker lastOdds={updateOdds} liveMatchData={liveMatchData} />
+          <TeenpattiJoker lastOdds={updateOdds} liveMatchData={liveMatchData} defaultNewData={defaultNewData} />
         );
       case "baccarat":
       case "baccarat2":
@@ -594,10 +624,10 @@ const CasinoWrapper = (props: any) => {
                   )}
                   {/* <iframe src='https://diamond.igtechgaming.com/freecasino/tvop?id=lucky7' width="100%"></iframe> */}
                   {casinoMatchData && (
-                    <CasinoTimer lastOdds={casinoMatchData} />
+                    <CasinoTimer lastOdds={defaultNewData}  />
                   )}
                   {casinoMatchData && (
-             <CasinoTitle lastResult={casinoMatchData} />
+             <CasinoTitle lastResult={defaultNewData}  />
                   )}
                   {(gameCode == "poker" && casinoMatchData?.desc != "") ||
                   (gameCode == "onedaypoker20" && casinoMatchData?.desc != "")
@@ -721,10 +751,10 @@ const CasinoWrapper = (props: any) => {
 
                     {/* <iframe src='https://diamond.igtechgaming.com/freecasino/tvop?id=lucky7' width="100%"></iframe> */}
                     {casinoMatchData && (
-                      <CasinoTimer lastOdds={casinoMatchData} />
+                      <CasinoTimer lastOdds={defaultNewData} />
                     )}
                     {casinoMatchData && (
-                      <CasinoTitle lastResult={casinoMatchData} />
+                      <CasinoTitle lastResult={defaultNewData}  />
                     )}
                     {casinoMatchData && casinoMatchData?.scoreCard ? (
                       <Score scoreData={casinoMatchData?.scoreCard} />

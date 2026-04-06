@@ -7,6 +7,7 @@ import { isMobile } from 'react-device-detect'
 
 import PropTypes from 'prop-types'
 import Carousel from 'react-elastic-carousel'
+import { useParams } from 'react-router-dom'
 // import img from "/imgs/casino/cards/AHH.png"
 
 const breakPoints: any = [
@@ -17,8 +18,12 @@ const breakPoints: any = [
 ]
 
 const CasinoTitle = (props: any) => {
-  const { lastResult, gameId } = props
+  const { lastResult, gameId  } = props
 
+  const {gameCode} = useParams()
+  console.log(gameCode,"gammecodede")
+
+  console.log(lastResult,"last result in casino title")
   console.log(lastResult,"in opent p",lastResult.gameName)
 
   console.log(lastResult,"lastresult")
@@ -269,26 +274,47 @@ const CasinoTitle = (props: any) => {
     )
   }
 
-  const dt20 = () => {
-    // card string ko array me split karo
-    const cards = lastResult?.card?.split(",") || [];
+  // const dt20 = () => {
+  //   // card string ko array me split karo
+  //   const cards = lastResult?.card?.split(",") || [];
   
-    return (
-      <div className="video-overlay">
-        <div className="imgspace d-flex">
+  //   return (
+  //     <div className="video-overlay">
+  //       <div className="imgspace d-flex">
        
-          {cards.map((card:any, i:any) => (
-            <img
-              key={i}
-              alt=""
-              src={`/imgs/casino/cards/${card === "1" ? "patti_back" : card}.png`}
-            />
+  //         {cards.map((card:any, i:any) => (
+  //           <img
+  //             key={i}
+  //             alt=""
+  //             src={`/imgs/casino/cards/${card === "1" ? "patti_back" : card}.png`}
+  //           />
           
-          ))}
-        </div>
+  //         ))}
+  //       </div>
+  //     </div>
+  //   );
+  // };
+
+  const dt20 = () => {
+    console.log(lastResult,"last result in dt20")
+  const cards = lastResult
+    ? [lastResult.C1, lastResult.C2]
+    : []; // Default cards if lastResult is not available
+
+  return (
+    <div className="video-overlay">
+      <div className="imgspace d-flex">
+        {cards.map((card, i) => (
+          <img
+            key={i}
+            alt=""
+            src={`/imgs/casino/cards/${card ? card : "patti_back"}.png`}
+          />
+        ))}
       </div>
-    );
-  };
+    </div>
+  );
+};
 
   const poker = () => {
     const cards = lastResult?.card?.split(",") || []; 
@@ -697,51 +723,102 @@ const CasinoTitle = (props: any) => {
   //   )
   // }
 
+  // const teen20 = () => {
+  //   // Split string into array
+  //   const cards = lastResult.card?.split(",") || [];
+  
+  //   return (
+  //     <div className="video-overlay">
+  //       <div className="videoCards">
+  //         <div className="">
+  //           {/* Player A */}
+  //           <div className="mr-20">
+  //             <p className="m-b-0 text-white">
+  //               <b><span>Player A</span></b>
+  //             </p>
+  //             <div className="imgspace d-flex">
+  //               {cards?.slice(0, 3).map((card:any, i:any) => (
+  //                 <img
+  //                   key={i}
+  //                   alt=""
+  //                   src={`/imgs/casino/cards/${card === "1" ? "patti_back" : card}.png`}
+  //                 />
+  //               ))}
+  //             </div>
+  //           </div>
+  
+  //           {/* Player B */}
+  //           <div className="mr-20">
+  //             <p className="m-b-0 text-white">
+  //               <b><span>Player B</span></b>
+  //             </p>
+  //             <div className="imgspace d-flex">
+  //               {cards.slice(3, 6).map((card:any, i:any) => (
+  //                 <img
+  //                   key={i}
+  //                   alt=""
+  //                   src={`/imgs/casino/cards/${card === "1" ? "patti_back" : card}.png`}
+  //                 />
+  //               ))}
+  //             </div>
+  //           </div>
+  //         </div>
+  //       </div>
+  //     </div>
+  //   );
+  // };
+  
+
   const teen20 = () => {
-    // Split string into array
-    const cards = lastResult.card?.split(",") || [];
-  
-    return (
-      <div className="video-overlay">
-        <div className="videoCards">
-          <div className="">
-            {/* Player A */}
-            <div className="mr-20">
-              <p className="m-b-0 text-white">
-                <b><span>Player A</span></b>
-              </p>
-              <div className="imgspace d-flex">
-                {cards?.slice(0, 3).map((card:any, i:any) => (
-                  <img
-                    key={i}
-                    alt=""
-                    src={`/imgs/casino/cards/${card === "1" ? "patti_back" : card}.png`}
-                  />
-                ))}
-              </div>
-            </div>
-  
-            {/* Player B */}
-            <div className="mr-20">
-              <p className="m-b-0 text-white">
-                <b><span>Player B</span></b>
-              </p>
-              <div className="imgspace d-flex">
-                {cards.slice(3, 6).map((card:any, i:any) => (
-                  <img
-                    key={i}
-                    alt=""
-                    src={`/imgs/casino/cards/${card === "1" ? "patti_back" : card}.png`}
-                  />
-                ))}
-              </div>
+  const cards = lastResult
+    ? Object.keys(lastResult)
+        .filter(key => key.startsWith("C"))
+        .sort() // ensure C1 → C6 order
+        .map(key => lastResult[key])
+    : [];
+
+  return (
+    <div className="video-overlay">
+      <div className="videoCards">
+        <div>
+
+          {/* Player A */}
+          <div className="mr-20">
+            <p className="m-b-0 text-white">
+              <b><span>Player A</span></b>
+            </p>
+            <div className="imgspace d-flex">
+              {cards.slice(0, 3).map((card, i) => (
+                <img
+                  key={i}
+                  alt=""
+                  src={`/imgs/casino/cards/${card === "1" ? "patti_back" : card}.png`}
+                />
+              ))}
             </div>
           </div>
+
+          {/* Player B */}
+          <div className="mr-20">
+            <p className="m-b-0 text-white">
+              <b><span>Player B</span></b>
+            </p>
+            <div className="imgspace d-flex">
+              {cards.slice(3, 6).map((card, i) => (
+                <img
+                  key={i}
+                  alt=""
+                  src={`/imgs/casino/cards/${card === "1" ? "patti_back" : card}.png`}
+                />
+              ))}
+            </div>
+          </div>
+
         </div>
       </div>
-    );
-  };
-  
+    </div>
+  );
+};
 
   const poker6player = () => {
     return (
@@ -1034,15 +1111,15 @@ const CasinoTitle = (props: any) => {
               <div className='imgspace d-flex'>
                 <img
                   alt=''
-                  src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${lastResult.C1}.jpg`}
+                  src={`/imgs/casino/cards/${lastResult.C1 ? lastResult.C1 :"patti_back" }.png`}
                 />
                 <img
                   alt=''
-                  src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${lastResult.C3}.jpg`}
+                  src={`/imgs/casino/cards/${lastResult.C3 ? lastResult.C3 :"patti_back" }.png`}
                 />
                 <img
                   alt=''
-                  src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${lastResult.C5}.jpg`}
+                  src={`/imgs/casino/cards/${lastResult.C5 ? lastResult.C5 :"patti_back" }.png`}
                 />
               </div>
             </div>
@@ -1055,15 +1132,15 @@ const CasinoTitle = (props: any) => {
               <div className='imgspace d-flex'>
                 <img
                   alt=''
-                  src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${lastResult.C2}.jpg`}
+                  src={`/imgs/casino/cards/${lastResult.C2 ? lastResult.C2 :"patti_back" }.png`}
                 />
                 <img
                   alt=''
-                  src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${lastResult.C4}.jpg`}
+                  src={`/imgs/casino/cards/${lastResult.C4 ? lastResult.C4 :"patti_back" }.png`}
                 />
                 <img
                   alt=''
-                  src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${lastResult.C6}.jpg`}
+                  src={`/imgs/casino/cards/${lastResult.C6 ? lastResult.C6 :"patti_back" }.png`}
                 />
               </div>
             </div>
@@ -1328,7 +1405,7 @@ const CasinoTitle = (props: any) => {
   console.log(lastResult.slug,"sllug here ")
   return (
     <div>
-      {lastResult && (lastResult.match_id || lastResult.id) && (
+      {lastResult && (
         <div className='video-overlaybox'>
           {lastResult.slug == 'queen' ||
           lastResult.slug == 'card32' ||
@@ -1356,10 +1433,7 @@ const CasinoTitle = (props: any) => {
             lastResult.slug == 'AAA' ||
             lastResult.slug == 'ddb') &&
             lucky7B()}
-          {(lastResult?.gameName == 'dt20' ||
-            lastResult.slug == 'dt202' ||
-            lastResult.slug == 'dragontiger1Day') &&
-            dt20()}
+          {(gameCode == 'dt20' && dt20())}
             {(
             lastResult.slug == 'dragontiger1Day') &&
             dt201day()}
@@ -1375,7 +1449,7 @@ const CasinoTitle = (props: any) => {
             dtl20()}
 
           {lastResult.slug == 'teen8' && opentp()}
-          {lastResult.slug == 'teen20' && teen20()}
+          {gameCode == 'teen20' && teen20()}
           {lastResult.slug == 'poker6' && poker6player()}
           {lastResult.slug == 'testtp' && testtp()}
           {(lastResult.slug == 'Cards3J' ||
@@ -1388,8 +1462,8 @@ const CasinoTitle = (props: any) => {
           {lastResult.slug == 'warcasino' && warcasino()}
           {lastResult.slug == 'Andarbahar' && andarbahar()}
           {lastResult.slug == 'Andarbahar2' && andarbahar2()}
-          {lastResult.slug == 'joker120' && unlimitedJokerone()}
-          {lastResult.slug == 'joker20' && teenpattiJoker()}
+          {gameCode == 'joker120' && unlimitedJokerone()}
+          {gameCode == 'joker20' && teenpattiJoker()}
 
 
           {/* {gameId !== 'baccarat2' && gameId !== 'baccarat' ? (

@@ -263,8 +263,8 @@ import Minmax from './_common/minmax'
 import CardItem from './_common/new/CardItem'
 
 const DragonTigerA = (props: any) => {
-  const { lastOdds, liveMatchData } = props
-  console.log(lastOdds,liveMatchData,"FGHJKL")
+  const { lastOdds, liveMatchData , defaultNewData} = props
+  console.log(lastOdds,liveMatchData, defaultNewData, "FGHJKL")
   const drgonCard: any = [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
   const tigerCard: any = [25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37];
   const [activeTab, setActiveTab] = useState("dragon")
@@ -300,7 +300,12 @@ const DragonTigerA = (props: any) => {
     )
   }
   const buttonLayout = (classData: string, marketIndex: any) => {
-    const finalMarketList = liveMatchData?.defaultMarkets?.filter((ItemN: any, index: number) => marketIndex.indexOf(index) > -1) || []
+    const finalMarketListold = liveMatchData?.defaultMarkets?.filter((ItemN: any, index: number) => marketIndex.indexOf(index) > -1) || []
+
+    const defaultfinalMarketList = [{Runners:[{SelectionId:0, RunnerName:"Dragon"}]},{Runners:[{SelectionId:0, RunnerName:"Tiger"}]},{Runners:[{SelectionId:0, RunnerName:"Tie"}]}]
+    const finalMarketList = defaultfinalMarketList.map((item: any, index: number) => {
+      return finalMarketListold[index] || item
+    })
     return (
       finalMarketList.map((Item: any, key: number) => {
         const market = Item?.Runners?.[0] || {}
@@ -308,13 +313,22 @@ const DragonTigerA = (props: any) => {
         title = market.RunnerName == 'Dragon Black' ? <span className="card-icon"> <span className={"card-black"}>{"]}"}</span> </span> : title;
         title = market.RunnerName == 'Tiger Black' ? <span className="card-icon"> <span className={"card-black"}>{"]}"}</span> </span> : title;
         title = market.RunnerName == 'Tiger Red' ? <span className="card-icon"> <span className={"card-red"}>{"[{"}</span> </span> : title;
+
+        let oddVal = 0;
+        if(market.RunnerName == "Dragon"){
+          oddVal = 2
+        } else if(market.RunnerName == "Tiger"){
+          oddVal = 2
+        } else if(market.RunnerName == "Tie"){
+          oddVal = 11
+        }
         return (
           <>
             {' '}
             <div key={key} className={`${classData} text-center`}>
               <div className='row m-t-10'>
                 <div className='col-12 text-center'>
-                  <ButtonItem selectionid={market.SelectionId} title={title} lastOdds={lastOdds} liveMatchData={liveMatchData} />
+                  <ButtonItem selectionid={market.SelectionId} title={title} odd={oddVal} lastOdds={lastOdds} liveMatchData={liveMatchData} defaultNewData={defaultNewData} />
                 </div>
               </div>
               <div className='row'>
@@ -340,7 +354,7 @@ const DragonTigerA = (props: any) => {
       <div className='d-t-box m-b-10 buttonsuspended'>
         <div className='row row6 justify-content-center'>
           {buttonLayout('col-lg-3 col-6', [0, 2, 1])}
-          {buttonLayout('col-lg-3 col-12', [3])}
+          {/* {buttonLayout('col-lg-3 col-12', [3])} */}
           {/* <Minmax min={liveMatchData.min} max={liveMatchData.max} /> */}
         </div>
       </div>

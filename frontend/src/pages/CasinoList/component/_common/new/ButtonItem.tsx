@@ -7,7 +7,7 @@ import { useAppDispatch, useAppSelector } from "../../../../../redux/hooks";
 import authService from "../../../../../services/auth.service";
 
 const ButtonItem = (props: any) => {
-    const { selectionid, title, lastOdds, liveMatchData } = props;
+    const { selectionid, title, lastOdds, liveMatchData ,defaultNewData , odd } = props;
     const dispatch = useAppDispatch()
     const userState = useAppSelector(selectUserData)
 
@@ -46,14 +46,15 @@ const ButtonItem = (props: any) => {
     }
     
     const ItemMarket: any = lastOdds?.[selectionid] || {}
-    const suspend = !ItemMarket.gstatus || ItemMarket.gstatus == 0 || ItemMarket.gstatus == "SUSPENDED" || ItemMarket.gstatus == "CLOSED" ? 'suspended' : '';
+    // const suspend = !ItemMarket.gstatus || ItemMarket.gstatus == 0 || ItemMarket.gstatus == "SUSPENDED" || ItemMarket.gstatus == "CLOSED" ? 'suspended' : '';
+    const suspend = defaultNewData.status == "result" ? "suspended" : '';
     return <>
         <div className='row m-b-10'>
             <div className='col-12 text-center'>
                 <b>{title}</b>
             </div>
         </div>
-        <button className={`text-uppercase btn-theme ${suspend}`} onClick={() => onBet(true, ItemMarket)}><b >{ItemMarket?.b1 || 0.00}</b></button>
+        <button className={`text-uppercase btn-theme ${suspend}`} onClick={() => onBet(true, ItemMarket)}><b >{odd}</b></button>
     </>
 }
 export default React.memo(ButtonItem)

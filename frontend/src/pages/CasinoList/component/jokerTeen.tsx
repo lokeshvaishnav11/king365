@@ -14,7 +14,7 @@ import BackButtonPnl from './_common/new/BackButtonPnl';
 import { useParams } from 'react-router-dom'
 
 const  TeenpattiJoker = (props: any) => {
-  const { lastOdds, liveMatchData } = props
+  const { lastOdds, liveMatchData ,defaultNewData } = props
 
   const liveMatchDataDefault = {
     defaultMarkets: [
@@ -68,9 +68,11 @@ const  TeenpattiJoker = (props: any) => {
   }
   const laybacklayout = () => {
     const clsnamehead = 'box-4'
-    return (liveMatchData?.defaultMarkets?.[0]?.Runners.map((ItemNew: any, key: number) => {
+    return (liveMatchDataDefault?.defaultMarkets?.[0]?.Runners.map((ItemNew: any, key: number) => {
       const ItemMarket: any = lastOdds?.[ItemNew.SelectionId] || {}
-      const clsstatus = !ItemMarket.gstatus || ItemMarket.gstatus === 'SUSPENDED' || ItemMarket.gstatus === 'CLOSED' ? 'suspended' : ''
+    //   const clsstatus = !ItemMarket.gstatus || ItemMarket.gstatus === 'SUSPENDED' || ItemMarket.gstatus === 'CLOSED' ? 'suspended' : ''
+          const clsstatus = defaultNewData.status == "result" ? "suspended" : '';
+
       return (
         (
           <tr key={key} className={`${clsstatus}`}>
@@ -164,7 +166,7 @@ const  TeenpattiJoker = (props: any) => {
             </>
           })}
         </div> */}
-        <div className='col-lg-8 m-b-10 main-market  bg-gray' style={{ padding: '0px' }}>
+        <div className='col-lg-8 m-b-10 main-market d-none  bg-gray' style={{ padding: '0px' }}>
           <table className='table coupon-table table table-bordered suspendwidth'>
             <thead style={{ borderBottom: "10px" }}>
               <tr>
