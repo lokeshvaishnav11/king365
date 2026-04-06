@@ -50,8 +50,8 @@ const TeenPatti20 = (props: any) => {
     }
 }
   const laybacklayout = () => {
-    const clsnamehead = 'box-4'
-    const clsnamename = 'box-2'
+    const clsnamehead = ''
+    const clsnamename = ''
     const heightdata = ''
     return ([0, 1 ,2,3,4,5,,6,7,8,9,10,11].map((ItemIndex: any, key: number) => {
       const ItemNew = liveMatchData?.defaultMarkets?.[ItemIndex].Runners?.[0] || {}
@@ -64,49 +64,59 @@ const TeenPatti20 = (props: any) => {
         !ItemOther.gstatus || ItemOther.gstatus === 'SUSPENDED' || ItemOther.gstatus === 'CLOSED' || ItemOther.gstatus === '0' ? 'suspended' : ''
       return (
         (
-          <tr key={key} className={` ${heightdata}`}>
-            <td className={clsnamehead} style={{paddingLeft:"10px"}}>
-              <b>{ItemNew.RunnerName}</b>
-            </td>
-            <td className={`back teen-section ${clsstatus} ${clsnamename}`}>
-              <button className='back' onClick={() => onBet(true, Item)}>
+          <div key={key} className={` ${heightdata} d-flex align-items-center flex-column `} style={{border:"none"}} >
+            
+            <span className={clsnamehead} style={{paddingLeft:"10px", border:"none"}} >
+              {/* <b>{ItemNew.RunnerName}</b> */}
+              <b style={{border:"none"}}>{"Player A"}</b>
+
+            </span>
+            <div className={`back teen-section  ${clsnamename}`} style={{borderRadius:"5px", boxShadow:"0 2px 7px 1px #67828be6", width:"100", marginBottom:"5px"
+                
+            }}>
+              <button className='back' onClick={() => onBet(true, Item)} >
                 <span className='odd'>{Item.rate}</span>{' '}
                 <CasinoPnl sectionId={ItemNew.SelectionId} matchId={liveMatchData?.match_id} classData={'text-center'} />
               </button>
-            </td>
-            <td className={`back teen-section box-4 ${clsstatus2}`}>
+            </div>
+            {/* <td className={`back teen-section box-4 ${clsstatus2}`}>
               <button className='back' onClick={() => onBet(true, ItemOther)}>
                 <span className='odd'>
                   <b>{otherMarket.RunnerName}</b>
                 </span>{' '}
                 <CasinoPnl sectionId={otherMarket.SelectionId} matchId={liveMatchData?.match_id} classData={'text-center'} />
               </button>
-            </td>
-          </tr>
+            </td> */}
+          </div>
         )
       )
     })
     )
   }
+      const [showMinmax, setShowMinmax] = React.useState(false);
+  
   return (
     <div className='container '>
       <div className='row casino-32A '>
         <div className='col-lg-12 m-b-10 main-market  bg-gray' style={{ padding: '0px' }}>
           <div className='live-poker'>
-            <table className='table coupon-table table table-bordered suspendwidth'>
-              <thead style={{borderBottom:"0px"}}>
-                <tr>
-                  <th className={'box-4'} style={{ paddingLeft: "10px" }}>
+            <div className='table coupon-table table table-bordered suspendwidth' >
+              <div style={{borderBottom:"0px"}}>
+                <div>
+                  {/* <th className={'box-4'} style={{ paddingLeft: "10px" }}>
                     <Limitinfo nameString={'lbmarket'} min={100} max={50000} />
-                  </th>
-                  <th className={`back ${"box-2"}`}>BACK</th>
-                  <th className={`back ${"box-4"}`}></th>
-                </tr>
-              </thead>
-              <tbody>
-                {laybacklayout()}
-              </tbody>
-            </table>
+                  </th> */}
+                  {/* <th className={`back ${"box-2"}`}>Back</th> */}
+                  {/* <th className={`back ${"box-4"}`}></th> */}
+                </div>
+              </div>
+                          <div className="d-flex justify-content-between p-2 mb-2 bg-theme text-white rounded"><span>WINNER</span><div>{showMinmax &&<span className='bg-dark rounded px-1'>Min/Max: 100 - 100000 </span>} <i  onClick={() => setShowMinmax(!showMinmax)} className="fa fa-info-circle" aria-hidden="true"></i></div> </div>
+
+             <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "10px" }}>
+              
+  {laybacklayout()}
+</div>
+            </div>
           </div>
         </div>
 
