@@ -10,7 +10,7 @@ import CasinoPnl from './casinoPnl';
 import Limitinfo from './_common/limitinfo';
 
 const TeenPatti20 = (props: any) => {
-  const { lastOdds, liveMatchData } = props
+  const { lastOdds, liveMatchData, defaultNewData } = props
   const dispatch = useAppDispatch()
   const userState = useAppSelector(selectUserData)
   const getCurrentMatch = useAppSelector(selectCasinoCurrentMatch)
@@ -19,31 +19,31 @@ const TeenPatti20 = (props: any) => {
   const onBet = (isBack = false, item: any) => {
     const ipAddress = authService.getIpAddress()
     if (userState.user.role === RoleType.user) {
-        const oddsVal = parseFloat(isBack ? item.rate : item.rate);
-        if (oddsVal <= 0) return
-        if (item.gstatus == 'False') return
+        // const oddsVal = parseFloat(isBack ? item.rate : item.rate);
+        // if (oddsVal <= 0) return
+        if (defaultNewData.status == 'result') return
         dispatch(
             betPopup({
                 isOpen: true,
                 betData: {
                     isBack,
-                    odds: oddsVal,
+                    odds: 1.98,
                     volume: 100,
-                    marketId: item.mid,
-                    marketName: item.MarketName,
-                    matchId: liveMatchData?.event_data?.match_id || 0,
-                    selectionName: item.nation || item.runnerName || item.RunnerName, 
-                    selectionId: parseInt(item.sid),
+                    marketId: defaultNewData.roundId,
+                    marketName: "Teen20",
+                    matchId: defaultNewData?.roundId || 0,
+                    selectionName: "Player A", 
+                    selectionId: parseInt(defaultNewData.roundId),
                     pnl: 0,
                     stack: 0,
                     currentMarketOdds: isBack ? item.b1 : item.l1,
-                    eventId: item.mid,
+                    eventId: defaultNewData.roundId,
                     exposure: -0,
                     ipAddress: ipAddress,
                     type: IBetType.Match,
-                    matchName: liveMatchData.title,
+                    matchName: "Teen 20 20",
                     betOn: IBetOn.CASINO,
-                    gtype: liveMatchData.slug,
+                    gtype: "teen20",
                 },
             }),
         )
@@ -56,15 +56,14 @@ const TeenPatti20 = (props: any) => {
     return ([0, 1 ,2,3,4,5,,6,7,8,9,10,11].map((ItemIndex: any, key: number) => {
       const ItemNew = liveMatchData?.defaultMarkets?.[ItemIndex].Runners?.[0] || {}
       const Item: any = lastOdds?.[ItemNew.SelectionId] || {}
-      const clsstatus =
-        !Item.gstatus || Item.gstatus === 'SUSPENDED' || Item.gstatus === 'CLOSED' || Item.gstatus === '0' ? 'suspended' : ''
+      const clsstatus = defaultNewData.status == "result" ? "suspended" : '';
       const otherMarket = liveMatchData?.defaultMarkets?.[key + 2]?.Runners[0] || {}
       const ItemOther: any = lastOdds?.[otherMarket.SelectionId] || {}
-      const clsstatus2 =
-        !ItemOther.gstatus || ItemOther.gstatus === 'SUSPENDED' || ItemOther.gstatus === 'CLOSED' || ItemOther.gstatus === '0' ? 'suspended' : ''
+
+        const clsstatus2 = defaultNewData.status == "result" ? "suspended" : '';
       return (
         (
-          <div key={key} className={` ${heightdata} d-flex align-items-center flex-column `} style={{border:"none"}} >
+          <div key={key} className={` ${heightdata} d-flex align-items-center flex-column ${clsstatus2} `} style={{border:"none"}} >
             
             <span className={clsnamehead} style={{paddingLeft:"10px", border:"none"}} >
               {/* <b>{ItemNew.RunnerName}</b> */}
@@ -74,8 +73,8 @@ const TeenPatti20 = (props: any) => {
             <div className={`back teen-section  ${clsnamename}`} style={{borderRadius:"5px", boxShadow:"0 2px 7px 1px #67828be6", width:"100", marginBottom:"5px"
                 
             }}>
-              <button className='back' onClick={() => onBet(true, Item)} >
-                <span className='odd'>{Item.rate}</span>{' '}
+              <button className='back' onClick={() => onBet(true, 1.98)} >
+                <span className='odd'>{1.98}</span>{' '}
                 <CasinoPnl sectionId={ItemNew.SelectionId} matchId={liveMatchData?.match_id} classData={'text-center'} />
               </button>
             </div>

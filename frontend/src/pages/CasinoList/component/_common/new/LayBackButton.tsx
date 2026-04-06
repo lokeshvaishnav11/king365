@@ -8,58 +8,59 @@ import authService from "../../../../../services/auth.service";
 import { nFormatter } from "../../../../../utils/helper";
 
 const LayButton = (props: any) => {
-    const { selectionid, lastOdds, liveMatchData, clsnamename } = props;
+    const { selectionid, lastOdds, liveMatchData, clsnamename , defaultNewData } = props;
     const dispatch = useAppDispatch()
     const userState = useAppSelector(selectUserData)
     const onBet = (isBack = false, item: any) => {
+      console.log(item,"chdckek")
         const ipAddress = authService.getIpAddress()
         if (userState.user.role === RoleType.user) {
             const oddsVal = parseFloat(isBack ? item.b1 : item.l1);
             if (oddsVal <= 0) return
-            if (!item.gstatus || item.gstatus == 'SUSPENDED') return
+            if (!defaultNewData.status || defaultNewData.status == 'dealing') return
             dispatch(
                 betPopup({
                     isOpen: true,
                     betData: {
                         isBack,
-                        odds: oddsVal,
+                        odds: 1.98,
                         volume: isBack ? (item.bs1>1000000 ? 1 : item.bs1) : (item.ls1>1000000 ? 1 : item.ls1),
-                        marketId: item?.mid || item?.marketId,
-                        marketName: item.MarketName,
-                        matchId: liveMatchData?.event_data?.match_id || 0,
-                        selectionName: item.runnerName || item.RunnerName,
-                        selectionId: item?.sid ? parseInt(item?.sid) : item?.sectionId,
+                        marketId: defaultNewData?.roundId,
+                        marketName: "Joker120",
+                        matchId:  defaultNewData?.roundId || 0,
+                        selectionName: "PlayerA",
+                        selectionId: 1,
                         pnl: 0,
                         stack: 0,
                         currentMarketOdds: isBack ? item.b1 : item.l1,
-                        eventId: item?.mid || item?.marketId,
+                        eventId: defaultNewData.roundId,
                         exposure: -0,
                         ipAddress: ipAddress,
                         type: IBetType.Match,
-                        matchName: liveMatchData.title,
+                        matchName: "Joker120",
                         betOn: IBetOn.CASINO,
-                        gtype: liveMatchData.slug,
+                        gtype: "joker120",
                     },
                 }),
             )
         }
     }
-    const ItemMarket: any = lastOdds?.[selectionid] || {}
+    const ItemMarket: any = "1.98" 
     return <>
-     <td className={`back teen-section ${clsnamename}`}>
+     <td className={`back teen-section box-1 ${clsnamename}`}>
               <button className='back' onClick={() => onBet(true, ItemMarket)}>
-                <span className='odd'>{ItemMarket.b1}</span>{' '}
-                <span className='fw-12 laysize' style={{display:"block"}}>{nFormatter(ItemMarket.bs1, 2)}</span>
+                <span className='odd'>{"1.98"}</span>{' '}
+                {/* <span className='fw-12 laysize' style={{display:"block"}}>{nFormatter(ItemMarket.bs1, 2)}</span> */}
               </button>
             </td>
-            <td className={`lay teen-section ${clsnamename}`}>
+            {/* <td className={`lay teen-section ${clsnamename}`}>
               <button className='lay' onClick={() => onBet(false, ItemMarket)}>
                 <span className='odd'>
                   <b>{ItemMarket.l1}</b>
                 </span>
                 <span className='fw-12 laysize' style={{display:"block"}}>{nFormatter(ItemMarket.ls1, 2)}</span>
               </button>
-            </td>
+            </td> */}
     </>
 }
 export default React.memo(LayButton)

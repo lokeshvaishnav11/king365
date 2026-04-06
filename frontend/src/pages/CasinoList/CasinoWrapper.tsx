@@ -93,13 +93,15 @@ const CasinoWrapper = (props: any) => {
   const [checkRoundIdChange, setCheckRoundIdChange] = useState("");
 
 const [defaultNewData, setDefaultNewData] = useState<any>('')
+const [ history, setHistory] = useState<any>([])
 
   React.useEffect(() => {
   const fetchData = async () => {
     try {
-      const res = await axios.get(`http://localhost:3030/data/${gameCode}`);
+      const res = await axios.get(`https://reddysocket.chausar.com/data/${gameCode}`);
       console.log(res.data, `${gameCode} DATA`);
       setDefaultNewData(res.data.data);
+      setHistory(res.data.history)
     } catch (err) {
       console.log(err);
     }
@@ -114,7 +116,7 @@ const [defaultNewData, setDefaultNewData] = useState<any>('')
   // cleanup (VERY IMPORTANT)
   return () => clearInterval(interval);
 
-}, []);
+}, [gameCode]);
 
 console.log(defaultNewData,"default new data")
 
@@ -235,13 +237,57 @@ console.log(defaultNewData,"default new data")
 
   React.useEffect(() => {
     if (!interValCasino && gameCode)
-      interValCasino = setInterval(getMatchLiveInfoInterval, 900);
+      interValCasino = setInterval(getMatchLiveInfoInterval, 9000000);
     return () => {
       clearInterval(interValCasino);
     };
   }, [gameCode, casinoMatchData]);
 
   // gameCode, casinoMatchData
+
+  const lastResultHistoryView = () => {
+  return (
+    <div>
+      <p className="text-white">Last Result</p>
+
+      <div className="d-flex flex-wrap">
+       <div className="d-flex flex-wrap">
+  {history?.map((item:any, index:any) => {
+
+    // winner ka first letter nikaalna
+    let label = "";
+    if (item.winner === "dragon") label = "D";
+    else if (item.winner === "tiger") label = "T";
+    else if (item.winner === "Player A") label = "A";
+    else if (item.winner === "Player B") label = "B";
+    else label = "?";
+
+    return (
+      <div
+        key={index}
+        className="d-flex align-items-center justify-content-center mr-10 mb-10"
+        style={{
+          width: "35px",
+          height: "35px",
+          borderRadius: "50%",
+          backgroundColor:
+            label === "D" ? "red" :
+            label === "T" ? "orange" :
+            label === "A" ? "green" :
+            label === "B" ? "blue" : "gray",
+          color: "#fff",
+          fontWeight: "bold"
+        }}
+      >
+        {label}
+      </div>
+    );
+  })}
+</div>
+      </div>
+    </div>
+  );
+};
 
   React.useEffect(() => {
     if (gameCode) getMatchLiveInfo();
@@ -408,7 +454,7 @@ console.log(defaultNewData,"default new data")
         );
       case "teen20":
         return (
-          <TeenPatti20 lastOdds={updateOdds} liveMatchData={liveMatchData} />
+          <TeenPatti20 lastOdds={updateOdds} liveMatchData={liveMatchData} defaultNewData={defaultNewData} />
         );
       case "worlimatka":
         return <Worli lastOdds={updateOdds} liveMatchData={liveMatchData} />;
@@ -580,7 +626,7 @@ console.log(defaultNewData,"default new data")
                     RULES
                   </span>
                   <span className="float-right">
-                    Round Id:{casinoMatchData?.match_id} | Min:{" "}
+                    Round Id:{defaultNewData?.roundId} | Min:{" "}
                     {casinoMatchData?.min} | Max: {casinoMatchData?.max}
                   </span>
                 </h6>
@@ -824,10 +870,13 @@ console.log(defaultNewData,"default new data")
             >
               RULES
             </span>
-            <span>Round ID: {casinoMatchData?.match_id}</span>
+            <span>Round ID: {defaultNewData?.roundId}</span>
           </div>
         </div>
       )}
+     <div style={{ maxHeight: "120px", overflowY: "auto" }}>
+  {lastResultHistoryView()}
+</div>
       {rulesModel ? (
         <CasinoRulesDetail
           title={casinoMatchData.title}

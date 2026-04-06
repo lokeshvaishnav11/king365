@@ -12,40 +12,41 @@ const ButtonItem = (props: any) => {
     const userState = useAppSelector(selectUserData)
 
     const onBet = (isBack = false, item: any) => {
+        console.log("sdfgsdf", item);
         const ipAddress = authService.getIpAddress()
         if (userState.user.role === RoleType.user) {
             const oddsVal = parseFloat(isBack ? item.b1 : item.l1);
             if (oddsVal <= 0) return
-            if (!item.gstatus || item.gstatus == 'SUSPENDED' || item.gstatus=='0') return
+            if (!defaultNewData.status || defaultNewData.status == 'result' || defaultNewData.status=='0') return
             dispatch(
                 betPopup({
                     isOpen: true,
                     betData: {
                         isBack,
-                        odds: oddsVal,
+                        odds: odd,
                         volume: isBack ? item.bs1 : item.ls1,
-                        marketId: liveMatchData?.match_id,
-                        marketName: item.MarketName,
-                        matchId: liveMatchData?.data?.match_id ,
-                        selectionName: item.runnerName,
-                        selectionId: item.sid,
+                        marketId: defaultNewData?.roundId,
+                        marketName: "Dragon Tiger",
+                        matchId: defaultNewData?.roundId ,
+                        selectionName: title,
+                        selectionId: selectionid,
                         pnl: 0,
                         stack: 0,
                         currentMarketOdds: isBack ? item.b1 : item.l1,
-                        eventId: item.mid,
+                        eventId: defaultNewData?.roundId,
                         exposure: -0,
                         ipAddress: ipAddress,
                         type: IBetType.Match,
-                        matchName: liveMatchData.title,
+                        matchName: "Dragon Tiger",
                         betOn: IBetOn.CASINO,
-                        gtype: liveMatchData.gameName,
+                        gtype: "dt20",
                     },
                 }),
             )
         }
     }
     
-    const ItemMarket: any = lastOdds?.[selectionid] || {}
+    const ItemMarket: any = odd || {}
     // const suspend = !ItemMarket.gstatus || ItemMarket.gstatus == 0 || ItemMarket.gstatus == "SUSPENDED" || ItemMarket.gstatus == "CLOSED" ? 'suspended' : '';
     const suspend = defaultNewData.status == "result" ? "suspended" : '';
     return <>

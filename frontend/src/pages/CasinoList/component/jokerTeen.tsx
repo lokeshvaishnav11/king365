@@ -71,7 +71,7 @@ const  TeenpattiJoker = (props: any) => {
     return (liveMatchDataDefault?.defaultMarkets?.[0]?.Runners.map((ItemNew: any, key: number) => {
       const ItemMarket: any = lastOdds?.[ItemNew.SelectionId] || {}
     //   const clsstatus = !ItemMarket.gstatus || ItemMarket.gstatus === 'SUSPENDED' || ItemMarket.gstatus === 'CLOSED' ? 'suspended' : ''
-          const clsstatus = defaultNewData.status == "result" ? "suspended" : '';
+          const clsstatus = defaultNewData.status == "dealing" ? "suspended" : '';
 
       return (
         (
@@ -80,7 +80,7 @@ const  TeenpattiJoker = (props: any) => {
               <b>{ItemNew.RunnerName}</b>
               {/* <CasinoPnl sectionId={ItemNew.SelectionId} matchId={liveMatchData?.match_id} /> */}
             </td>
-            <LayBackButton selectionid={ItemNew.SelectionId} lastOdds={lastOdds} liveMatchData={liveMatchData} clsnamename={''} />
+            <LayBackButton selectionid={ItemNew.SelectionId} lastOdds={lastOdds} liveMatchData={liveMatchData} clsnamename={''} defaultNewData={defaultNewData} />
           </tr>
         )
       )
@@ -144,11 +144,11 @@ const  TeenpattiJoker = (props: any) => {
             <table className='table coupon-table table table-bordered'>
               <thead style={{ borderBottom: "0px" }}>
                 <tr>
-                  <th className={"box-4"} style={{ paddingLeft: "10px" }}>
+                  <th className={"box-3"} style={{ paddingLeft: "10px" }}>
                     {/* <Limitinfo nameString={'lbmarket'} min={100} max={50000} /> */}
                   </th>
-                  <th className={`back ${"box-3"}`}>BACK</th>
-                  <th className={`lay-color ${"box-3"}`}>LAY</th>
+                  <th className={`back ${"box-2"}`}>BACK</th>
+                  {/* <th className={`lay-color ${"box-3"}`}>LAY</th> */}
                 </tr>
               </thead>
               <tbody>

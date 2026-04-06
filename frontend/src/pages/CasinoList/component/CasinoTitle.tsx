@@ -1097,7 +1097,7 @@ const CasinoTitle = (props: any) => {
             <div className='imgspace'>
               <img
                 alt=''
-                src={`https://g1ver.sprintstaticdata.com/v80/static/front/img/joker1/14.png`}
+                 src={`/imgs/casino/cards/${lastResult.C1 ? lastResult.C1 :"patti_back" }.png`}
               />
             </div>
           </div>
@@ -1106,27 +1106,6 @@ const CasinoTitle = (props: any) => {
               <p className='m-b-0 text-white'>
                 <b>
                   <span className=''>Player A</span>
-                </b>
-              </p>
-              <div className='imgspace d-flex'>
-                <img
-                  alt=''
-                  src={`/imgs/casino/cards/${lastResult.C1 ? lastResult.C1 :"patti_back" }.png`}
-                />
-                <img
-                  alt=''
-                  src={`/imgs/casino/cards/${lastResult.C3 ? lastResult.C3 :"patti_back" }.png`}
-                />
-                <img
-                  alt=''
-                  src={`/imgs/casino/cards/${lastResult.C5 ? lastResult.C5 :"patti_back" }.png`}
-                />
-              </div>
-            </div>
-            <div className='mr-20'>
-              <p className='m-b-0 text-white'>
-                <b>
-                  <span className=''>Player B</span>
                 </b>
               </p>
               <div className='imgspace d-flex'>
@@ -1141,6 +1120,27 @@ const CasinoTitle = (props: any) => {
                 <img
                   alt=''
                   src={`/imgs/casino/cards/${lastResult.C6 ? lastResult.C6 :"patti_back" }.png`}
+                />
+              </div>
+            </div>
+            <div className='mr-20'>
+              <p className='m-b-0 text-white'>
+                <b>
+                  <span className=''>Player B</span>
+                </b>
+              </p>
+              <div className='imgspace d-flex'>
+                <img
+                  alt=''
+                  src={`/imgs/casino/cards/${lastResult.C3 ? lastResult.C3 :"patti_back" }.png`}
+                />
+                <img
+                  alt=''
+                  src={`/imgs/casino/cards/${lastResult.C5 ? lastResult.C5 :"patti_back" }.png`}
+                />
+                <img
+                  alt=''
+                  src={`/imgs/casino/cards/${lastResult.C7 ? lastResult.C7 :"patti_back" }.png`}
                 />
               </div>
             </div>
