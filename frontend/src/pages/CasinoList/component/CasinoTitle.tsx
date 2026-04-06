@@ -1006,7 +1006,139 @@ const CasinoTitle = (props: any) => {
       )
     )
   }
-  
+
+  const unlimitedJokerone = () => {
+    return (
+      <div className='video-overlay'>
+        <div className='videoCards'>
+          <div className='mr-20'>
+            <p className='m-b-0 text-white'>
+              <b>
+                <span className='' style={{ color: '#ef910f' }}>Joker</span>
+              </b>
+            </p>
+            <div className='imgspace'>
+              <img
+                alt=''
+                src={`https://g1ver.sprintstaticdata.com/v80/static/front/img/joker1/14.png`}
+              />
+            </div>
+          </div>
+          <div>
+            <div className='mr-20'>
+              <p className='m-b-0 text-white'>
+                <b>
+                  <span className=''>Player A</span>
+                </b>
+              </p>
+              <div className='imgspace d-flex'>
+                <img
+                  alt=''
+                  src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${lastResult.C1}.jpg`}
+                />
+                <img
+                  alt=''
+                  src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${lastResult.C3}.jpg`}
+                />
+                <img
+                  alt=''
+                  src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${lastResult.C5}.jpg`}
+                />
+              </div>
+            </div>
+            <div className='mr-20'>
+              <p className='m-b-0 text-white'>
+                <b>
+                  <span className=''>Player B</span>
+                </b>
+              </p>
+              <div className='imgspace d-flex'>
+                <img
+                  alt=''
+                  src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${lastResult.C2}.jpg`}
+                />
+                <img
+                  alt=''
+                  src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${lastResult.C4}.jpg`}
+                />
+                <img
+                  alt=''
+                  src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${lastResult.C6}.jpg`}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+
+  const teenpattiJoker = () => {
+    return (
+      <div className='video-overlay'>
+        <div className='videoCards'>
+          <div className='mr-20'>
+            <p className='m-b-0 text-white'>
+              <b>
+                <span className='' style={{ color: '#ef910f' }}>Joker</span>
+              </b>
+            </p>
+            <div className='imgspace'>
+              <img
+                alt=''
+                src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${lastResult.C1}.jpg`}
+              />
+            </div>
+          </div>
+          <div>
+            <div className='mr-20'>
+              <p className='m-b-0 text-white'>
+                <b>
+                  <span className=''>Player A</span>
+                </b>
+              </p>
+              <div className='imgspace d-flex'>
+                <img
+                  alt=''
+                  src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${lastResult.C2}.jpg`}
+                />
+                <img
+                  alt=''
+                  src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${lastResult.C4}.jpg`}
+                />
+                <img
+                  alt=''
+                  src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${lastResult.C6}.jpg`}
+                />
+              </div>
+            </div>
+            <div className='mr-20'>
+              <p className='m-b-0 text-white'>
+                <b>
+                  <span className=''>Player B</span>
+                </b>
+              </p>
+              <div className='imgspace d-flex'>
+                <img
+                  alt=''
+                  src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${lastResult.C3}.jpg`}
+                />
+                <img
+                  alt=''
+                  src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${lastResult.C5}.jpg`}
+                />
+                <img
+                  alt=''
+                  src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${lastResult.C7}.jpg`}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  }
 
   const andarbahar = () => {
     const andarData = lastResult?.t3?.[0]?.aall?.split(',') || []
@@ -1256,6 +1388,9 @@ const CasinoTitle = (props: any) => {
           {lastResult.slug == 'warcasino' && warcasino()}
           {lastResult.slug == 'Andarbahar' && andarbahar()}
           {lastResult.slug == 'Andarbahar2' && andarbahar2()}
+          {lastResult.slug == 'joker120' && unlimitedJokerone()}
+          {lastResult.slug == 'joker20' && teenpattiJoker()}
+
 
           {/* {gameId !== 'baccarat2' && gameId !== 'baccarat' ? (
           <div className='video-overlay'>
