@@ -247,11 +247,11 @@ console.log(defaultNewData,"default new data")
 
   const lastResultHistoryView = () => {
   return (
-    <div>
-      <p className="text-white">Last Result</p>
+    <div className="d-flex flex-nowrap align-items-center py-2 px-1" style={{gap:"5px"}}>
+      <p className="text-white text-nowrap ">Last Result</p>
 
-      <div className="d-flex flex-wrap">
-       <div className="d-flex flex-wrap">
+      <div className="d-flex flex-nowrap">
+       <div className="d-flex flex-nowrap">
   {history?.map((item:any, index:any) => {
 
     // winner ka first letter nikaalna
@@ -265,7 +265,7 @@ console.log(defaultNewData,"default new data")
     return (
       <div
         key={index}
-        className="d-flex align-items-center justify-content-center mr-10 mb-10"
+        className="d-flex align-items-center justify-content-center mr-10 "
         style={{
           width: "35px",
           height: "35px",
@@ -848,7 +848,7 @@ console.log(defaultNewData,"default new data")
               {gameCode == "poker" && <OnedaypokerRules />}
               {gameCode == "teen8" && <Openteenpatti />}
               {gameCode == "fivewicket" && <Cricketv />}
-              {gameCode == "teen20" && <T20 />}
+              {/* {gameCode == "teen20" && <T20 />} */}
               {gameCode == "Superover" && <SoRules />}
             </Tab>
             <Tab eventKey="profile" title={""}>
@@ -874,8 +874,8 @@ console.log(defaultNewData,"default new data")
           </div>
         </div>
       )}
-     <div style={{ maxHeight: "120px", overflowY: "auto" }}>
-  {lastResultHistoryView()}
+     <div style={{ overflowY: "auto", background:"black" }}>
+{lastResultHistoryView()}
 </div>
       {rulesModel ? (
         <CasinoRulesDetail
