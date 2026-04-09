@@ -16,42 +16,42 @@ const TeenPatti20 = (props: any) => {
   const getCurrentMatch = useAppSelector(selectCasinoCurrentMatch)
   const [updateOdds, setUpdateOdds] = useState<any>(undefined)
 
-   const clsstatus2 = defaultNewData.status == "result" ? "suspendedteen" : '';
+  const clsstatus2 = defaultNewData.status == "result" || defaultNewData.status == "dealing" ? "suspendedteen" : '';
 
   const onBet = (isBack = false, item: any) => {
-    console.log(item,"chchhc")
+    console.log(item, "chchhc")
     const ipAddress = authService.getIpAddress()
     if (userState.user.role === RoleType.user) {
-        // const oddsVal = parseFloat(isBack ? item.rate : item.rate);
-        // if (oddsVal <= 0) return
-        if (defaultNewData.status == 'result') return
-        dispatch(
-            betPopup({
-                isOpen: true,
-                betData: {
-                    isBack,
-                    odds: item.aValue,
-                    volume: 100,
-                    marketId: defaultNewData.roundId,
-                    marketName: "Teen20",
-                    matchId: defaultNewData?.roundId || 0,
-                    selectionName: item.title, 
-                    selectionId: parseInt(defaultNewData.roundId),
-                    pnl: 0,
-                    stack: 0,
-                    currentMarketOdds: isBack ? item.b1 : item.l1,
-                    eventId: defaultNewData.roundId,
-                    exposure: -0,
-                    ipAddress: ipAddress,
-                    type: IBetType.Match,
-                    matchName: "Teen 20 20",
-                    betOn: IBetOn.CASINO,
-                    gtype: "teen20",
-                },
-            }),
-        )
+      // const oddsVal = parseFloat(isBack ? item.rate : item.rate);
+      // if (oddsVal <= 0) return
+      if (defaultNewData.status == 'result') return
+      dispatch(
+        betPopup({
+          isOpen: true,
+          betData: {
+            isBack,
+            odds: item.aValue,
+            volume: 100,
+            marketId: defaultNewData.roundId,
+            marketName: "Teen20",
+            matchId: defaultNewData?.roundId || 0,
+            selectionName: item.title,
+            selectionId: parseInt(defaultNewData.roundId),
+            pnl: 0,
+            stack: 0,
+            currentMarketOdds: isBack ? item.b1 : item.l1,
+            eventId: defaultNewData.roundId,
+            exposure: -0,
+            ipAddress: ipAddress,
+            type: IBetType.Match,
+            matchName: "Teen 20 20",
+            betOn: IBetOn.CASINO,
+            gtype: "teen20",
+          },
+        }),
+      )
     }
-}
+  }
   const laybacklayout = () => {
     const clsnamehead = ''
     const clsnamename = ''
@@ -63,18 +63,18 @@ const TeenPatti20 = (props: any) => {
       const otherMarket = liveMatchData?.defaultMarkets?.[key + 2]?.Runners[0] || {}
       const ItemOther: any = lastOdds?.[otherMarket.SelectionId] || {}
 
-        const clsstatus2 = defaultNewData.status == "result" ? "suspended" : '';
       return (
         (
-          <div key={key} className={` ${heightdata} d-flex align-items-center flex-column ${clsstatus2} `} style={{border:"none"}} >
-            
-            <span className={clsnamehead} style={{paddingLeft:"10px", border:"none"}} >
+          <div key={key} className={` ${heightdata} d-flex align-items-center flex-column ${clsstatus2} `} style={{ border: "none" }} >
+
+            <span className={clsnamehead} style={{ paddingLeft: "10px", border: "none" }} >
               {/* <b>{ItemNew.RunnerName}</b> */}
-              <b style={{border:"none"}}>{"Player A"}</b>
+              <b style={{ border: "none" }}>{"Player A"}</b>
 
             </span>
-            <div className={`back teen-section  ${clsnamename}`} style={{borderRadius:"5px", boxShadow:"0 2px 7px 1px #67828be6", width:"100", marginBottom:"5px"
-                
+            <div className={`back teen-section  ${clsnamename}`} style={{
+              borderRadius: "5px", boxShadow: "0 2px 7px 1px #67828be6", width: "100", marginBottom: "5px"
+
             }}>
               <button className='back' onClick={() => onBet(true, 1.98)} >
                 <span className='odd'>{1.98}</span>{' '}
@@ -95,46 +95,46 @@ const TeenPatti20 = (props: any) => {
     })
     )
   }
-      const [showMinmax, setShowMinmax] = React.useState(false);
+  const [showMinmax, setShowMinmax] = React.useState(false);
 
 
-      const gameData = [
-  {
-    title: "WINNER",
-    playerA: "PLAYER A",
-    playerB: "PLAYER B",
-    aValue: 1.98,
-    bValue: 1.98,
-    aAmount: 1917956,
-    bAmount: 2091970
-  },
-  {
-    title: "FLUSH",
-    playerA: "PLAYER A (FLUSH)",
-    playerB: "PLAYER B (FLUSH)",
-    aValue: 8,
-    bValue: 8,
-    aAmount: 500000,
-    bAmount: 500000
-  },
-  {
-    title: "STRAIGHT (ROW)",
-    playerA: "PLAYER A (STRAIGHT)",
-    playerB: "PLAYER B (STRAIGHT)",
-    aValue: 14,
-    bValue: 14,
-    aAmount: 300000,
-    bAmount: 300000
-  }
-];
-  
+  const gameData = [
+    {
+      title: "WINNER",
+      playerA: "PLAYER A",
+      playerB: "PLAYER B",
+      aValue: 1.98,
+      bValue: 1.98,
+      aAmount: 1917956,
+      bAmount: 2091970
+    },
+    {
+      title: "FLUSH",
+      playerA: "PLAYER A (FLUSH)",
+      playerB: "PLAYER B (FLUSH)",
+      aValue: 8,
+      bValue: 8,
+      aAmount: 500000,
+      bAmount: 500000
+    },
+    {
+      title: "STRAIGHT (ROW)",
+      playerA: "PLAYER A (STRAIGHT)",
+      playerB: "PLAYER B (STRAIGHT)",
+      aValue: 14,
+      bValue: 14,
+      aAmount: 300000,
+      bAmount: 300000
+    }
+  ];
+
   return (
     <div className=' '>
       <div className='row casino-32A d-none '>
         <div className='col-lg-12 m-b-10 main-market  bg-gray' style={{ padding: '0px' }}>
           <div className='live-poker'>
             <div className='table coupon-table table table-bordered suspendwidth' >
-              <div style={{borderBottom:"0px"}}>
+              <div style={{ borderBottom: "0px" }}>
                 <div>
                   {/* <th className={'box-4'} style={{ paddingLeft: "10px" }}>
                     <Limitinfo nameString={'lbmarket'} min={100} max={50000} />
@@ -143,12 +143,12 @@ const TeenPatti20 = (props: any) => {
                   {/* <th className={`back ${"box-4"}`}></th> */}
                 </div>
               </div>
-                          <div className="d-flex justify-content-between p-2 mb-2 bg-theme text-white rounded"><span>WINNER</span><div>{showMinmax &&<span className='bg-dark rounded px-1'>Min/Max: 100 - 100000 </span>} <i  onClick={() => setShowMinmax(!showMinmax)} className="fa fa-info-circle" aria-hidden="true"></i></div> </div>
+              <div className="d-flex justify-content-between p-2 mb-2 bg-theme text-white rounded"><span>WINNER</span><div>{showMinmax && <span className='bg-dark rounded px-1'>Min/Max: 100 - 100000 </span>} <i onClick={() => setShowMinmax(!showMinmax)} className="fa fa-info-circle" aria-hidden="true"></i></div> </div>
 
-             <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "10px" }}>
-              
-  {laybacklayout()}
-</div>
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "10px" }}>
+
+                {/* {laybacklayout()} */}
+              </div>
             </div>
           </div>
         </div>
@@ -158,70 +158,80 @@ const TeenPatti20 = (props: any) => {
 
 
 
-       <div className={` mt-2`}>
+      <div className={` mt-2`}>
+        {gameData?.map((item, index) => (
+          <div key={index} className="mb-3 relative">
 
-  {gameData?.map((item, index) => (
-    <div key={index} className="mb-3">
-
-      {/* Header */}
-  
-
-                                <div className="d-flex  justify-content-between p-2  bg-theme text-white rounded"><span>{item.title}</span><div>{showMinmax &&<span className='bg-dark rounded px-1'>Min/Max: 100 - 100000 </span>} <i  onClick={() => setShowMinmax(!showMinmax)} className="fa fa-info-circle" aria-hidden="true"></i></div> </div>
-
-
-      {/* Body */}
-      <div
-        className="row text-center py-1"
-        style={{ background: "linear-gradient(90deg,rgb(153 199 241) 0%,rgb(138 189 216 / 50%) 49%,rgb(146 198 246) 100%)", borderRadius: "0 0 6px 6px" }}
-      >
-
-        {/* Player A */}
-        <div className="col-6 mb-10 ">
-          <h6 className="fw-bold">{item.playerA}</h6>
-
-          <button
-            className={`btn w-75 ${clsstatus2} `}
-            style={{
-              background: "#6fa8dc",
-              borderRadius: "10px",
-              boxShadow: "0 4px 10px rgba(0,0,0,0.3)",
-              fontSize:"12px"
-            }}
-            onClick={() => onBet(true, item)}
-          >
-            <div style={{ fontSize: "12px", fontWeight: "bold" }}>
-              {item.aValue}
+            <div className="d-flex  justify-content-between p-2  bg-theme text-white rounded"><span>{item.title}</span><div>{showMinmax && <span className='bg-dark rounded px-1'>Min/Max: 100 - 100000 </span>} <i onClick={() => setShowMinmax(!showMinmax)} className="fa fa-info-circle" aria-hidden="true"></i></div> 
             </div>
-            <div>{item.aAmount}</div>
-          </button>
-        </div>
+            {/* Body */}
+{clsstatus2 && <div style={{    
+  left: "35%",
+position:"absolute",
+    textAlign: "center",
+    alignItems: "center",
+    display: "flex",
+    top: index==0?"17%":index==1?"47%":"77%",
+    zIndex: 99999,
+    color: "#ca1010",
+    opacity:"0.5",
+    fontWeight:"700",
+    fontSize: "25px"}}>SUSPENDED</div>}
+            
+            <div
+              className="row text-center"
+              style={{ background: "linear-gradient(90deg,rgb(153 199 241) 0%,rgb(138 189 216 / 50%) 49%,rgb(146 198 246) 100%)", borderRadius: "0 0 6px 6px" }}
+            >
 
-        {/* Player B */}
-        <div className="col-6 mb-10">
-          <h6 className="fw-bold">{item.playerB}</h6>
+              {/* Player A */}
+              <div className="col-6 pb-2">
+                <h6 className="fw-bold">{item.playerA}</h6>
 
-          <button
-            className={`btn w-75 ${clsstatus2} `}
-            style={{
-              background: "#6fa8dc",
-              borderRadius: "10px",
-              boxShadow: "0 4px 10px rgba(0,0,0,0.3)",
-              fontSize:"12px"
-            }}
-            onClick={() => onBet(true, item)}
-          >
-            <div style={{ fontSize: "12px", fontWeight: "bold" }}>
-              {item.bValue}
+                <button
+                  className={`btn w-75 ${clsstatus2} `}
+                  style={{
+                    background: "#6fa8dc",
+                    borderRadius: "10px",
+                    boxShadow: "0 4px 10px rgba(0,0,0,0.3)",
+                    fontSize: "12px"
+                  }}
+                  onClick={() => onBet(true, item)}
+                >
+                  <div style={{ fontSize: "12px", fontWeight: "bold" }}>
+                    {item.aValue}
+                  </div>
+                  <div>{item.aAmount}</div>
+                </button>
+              </div>
+
+              {/* Player B */}
+              <div className="col-6 pb-2">
+                <h6 className="fw-bold">{item.playerB}</h6>
+
+                <button
+                  className={`btn w-75 ${clsstatus2} `}
+                  style={{
+                    background: "#6fa8dc",
+                    borderRadius: "10px",
+                    boxShadow: "0 4px 10px rgba(0,0,0,0.3)",
+                    fontSize: "12px"
+                  }}
+                  onClick={() => onBet(true, item)}
+                >
+                  <div style={{ fontSize: "12px", fontWeight: "bold" }}>
+                    {item.bValue}
+                  </div>
+                  <div>{item.bAmount}</div>
+                </button>
+              </div>
+
+
+
             </div>
-            <div>{item.bAmount}</div>
-          </button>
-        </div>
+          </div>
+        ))}
 
       </div>
-    </div>
-  ))}
-
-</div>
 
 
     </div>

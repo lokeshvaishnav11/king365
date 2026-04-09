@@ -581,7 +581,7 @@ const Dashboard = () => {
                 ))}
               </div>
 
-              <div className="row mx-0 mt-0">
+              <div className="row mx-0 mt-2">
                 {somecasino?.map((item) => (
                   <div key={item.id} className="col-4 col-md-3 px-1">
                     <div className="csn_thumb mb-2">

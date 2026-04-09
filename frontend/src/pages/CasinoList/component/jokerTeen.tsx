@@ -67,7 +67,7 @@ const  TeenpattiJoker = (props: any) => {
     }
   }
   const laybacklayout = () => {
-    const clsnamehead = 'box-4'
+    const clsnamehead = 'box-4gh text-center'
     return (liveMatchDataDefault?.defaultMarkets?.[0]?.Runners.map((ItemNew: any, key: number) => {
       const ItemMarket: any = lastOdds?.[ItemNew.SelectionId] || {}
     //   const clsstatus = !ItemMarket.gstatus || ItemMarket.gstatus === 'SUSPENDED' || ItemMarket.gstatus === 'CLOSED' ? 'suspended' : ''
@@ -75,67 +75,25 @@ const  TeenpattiJoker = (props: any) => {
 
       return (
         (
-          <tr key={key} className={`${clsstatus}`}>
+          <tr key={key} className={`${clsstatus} suspendedd `}>
             <td className={clsnamehead} style={{ paddingLeft: "10px" }}>
-              <b>{ItemNew.RunnerName}</b>
+              <b className='text-center' >{ItemNew.RunnerName}</b>
               {/* <CasinoPnl sectionId={ItemNew.SelectionId} matchId={liveMatchData?.match_id} /> */}
             </td>
             <LayBackButton selectionid={ItemNew.SelectionId} lastOdds={lastOdds} liveMatchData={liveMatchData} clsnamename={''} defaultNewData={defaultNewData} />
+  
+
           </tr>
         )
       )
     })
     )
   }
-  const oddeven = () => {
-    return (['Joker'].map((ItemNew: any, key: number) => {
-      const market1 = liveMatchData?.defaultMarkets?.filter((ItemEven: any) => ItemEven.MarketName == `${ItemNew} Even`)?.[0]?.Runners?.[0] || {}
-      const market2 = liveMatchData?.defaultMarkets?.filter((ItemEven: any) => ItemEven.MarketName == `${ItemNew} Odd`)?.[0]?.Runners?.[0] || {}
-      const market3 = liveMatchData?.defaultMarkets?.filter((ItemEven: any) => ItemEven.MarketName == `${ItemNew} Red`)?.[0]?.Runners?.[0] || {}
-      const market4 = liveMatchData?.defaultMarkets?.filter((ItemEven: any) => ItemEven.MarketName == `${ItemNew} Black`)?.[0]?.Runners?.[0] || {}
 
-      return <tr key={key}>
-        <td className='box-2' style={{ paddingLeft: "10px"}}><b>{ItemNew}</b></td>
-        <BackButtonPnl key={key} selectionid={market1.SelectionId} lastOdds={lastOdds} liveMatchData={liveMatchData} clsnamename={'back twentypoker teen-section'} />
-        <BackButtonPnl key={key + 2} selectionid={market2.SelectionId} lastOdds={lastOdds} liveMatchData={liveMatchData} clsnamename={'back twentypoker teen-section'} />
-        <BackButtonPnl key={key} selectionid={market3.SelectionId} lastOdds={lastOdds} liveMatchData={liveMatchData} clsnamename={'back twentypoker teen-section'} />
-        <BackButtonPnl key={key + 2} selectionid={market4.SelectionId} lastOdds={lastOdds} liveMatchData={liveMatchData} clsnamename={'back twentypoker teen-section'} />
-
-      </tr>
-    }))
-  }
-
-  const redblack = () => {
-    return (['Joker'].map((ItemNew: any, key: number) => {
-      const market1 = liveMatchData?.defaultMarkets?.filter((ItemEven: any) => ItemEven.MarketName == `${ItemNew} Red`)?.[0]?.Runners?.[0] || {}
-      const market2 = liveMatchData?.defaultMarkets?.filter((ItemEven: any) => ItemEven.MarketName == `${ItemNew} Black`)?.[0]?.Runners?.[0] || {}
-
-      return <tr key={key}>
-        <td className='box-4' style={{ paddingLeft: "10px"}}>{ItemNew}</td>
-        <BackButtonPnl key={key} selectionid={market1.SelectionId} lastOdds={lastOdds} liveMatchData={liveMatchData} clsnamename={'back twentypoker teen-section'} />
-        <BackButtonPnl key={key + 2} selectionid={market2.SelectionId} lastOdds={lastOdds} liveMatchData={liveMatchData} clsnamename={'back twentypoker teen-section'} />
-      </tr>
-    }))
-  }
-  const carditem = () => {
-    return (['Joker'].map((ItemNew: any, key: number) => {
-      const market1 = liveMatchData?.defaultMarkets?.filter((ItemEven: any) => ItemEven.MarketName == `${ItemNew} Spade`)?.[0]?.Runners?.[0] || {}
-      const market2 = liveMatchData?.defaultMarkets?.filter((ItemEven: any) => ItemEven.MarketName == `${ItemNew} Heart`)?.[0]?.Runners?.[0] || {}
-      const market3 = liveMatchData?.defaultMarkets?.filter((ItemEven: any) => ItemEven.MarketName == `${ItemNew} Diamond`)?.[0]?.Runners?.[0] || {}
-      const market4 = liveMatchData?.defaultMarkets?.filter((ItemEven: any) => ItemEven.MarketName == `${ItemNew} Club`)?.[0]?.Runners?.[0] || {}
-      return <tr key={key}>
-        <td className='box-2' style={{ paddingLeft: "10px"}}><b>{ItemNew}</b></td>
-        <BackButtonPnl key={key} selectionid={market1.SelectionId} lastOdds={lastOdds} liveMatchData={liveMatchData} clsnamename={'back twentypoker teen-section'} />
-        <BackButtonPnl key={key + 4} selectionid={market2.SelectionId} lastOdds={lastOdds} liveMatchData={liveMatchData} clsnamename={'back twentypoker teen-section'} />
-        <BackButtonPnl key={key + 8} selectionid={market3.SelectionId} lastOdds={lastOdds} liveMatchData={liveMatchData} clsnamename={'back twentypoker teen-section'} />
-        <BackButtonPnl key={key + 12} selectionid={market4.SelectionId} lastOdds={lastOdds} liveMatchData={liveMatchData} clsnamename={'back twentypoker teen-section'} />
-      </tr>
-    }))
-  }
     const [showMinmax, setShowMinmax] = React.useState(false);
   
   return (
-    <div className='container ' id={`${getCurrentMatch?.slug}`} style={{ marginTop: "-10px" }}>
+    <div className='' id={`${getCurrentMatch?.slug}`} style={{ marginTop: "-10px" }}>
             <div className="d-flex justify-content-between p-2 bg-theme text-white rounded"><span>WINNER</span><div>{showMinmax &&<span className='bg-dark rounded px-1'>Min/Max: 100 - 100000 </span>} <i  onClick={() => setShowMinmax(!showMinmax)} className="fa fa-info-circle" aria-hidden="true"></i></div> </div>
 
       <div className='row '>
@@ -143,61 +101,32 @@ const  TeenpattiJoker = (props: any) => {
           <div className='live-poker'>
             <table className='table coupon-table table table-bordered'>
               <thead style={{ borderBottom: "0px" }}>
-                <tr>
-                  <th className={"box-3"} style={{ paddingLeft: "10px" }}>
-                    {/* <Limitinfo nameString={'lbmarket'} min={100} max={50000} /> */}
-                  </th>
-                  <th className={`back ${"box-2"}`}>BACK</th>
-                  {/* <th className={`lay-color ${"box-3"}`}>LAY</th> */}
-                </tr>
               </thead>
               <tbody>
                 {laybacklayout()}
               </tbody>
+              {defaultNewData.status == "dealing" && <div style={{   
+                position: "absolute",
+    textAlign: "center",
+    alignItems: "center",
+    top: "1%",
+    zIndex: "99999",
+    color: "rgb(202, 16, 16)",
+    opacity: "0.5",
+    fontWeight: "700",
+    fontSize: "25px",
+    background: "#fff",
+    width: "100%",
+    height: "100%",
+    border: "1px solid rgb(202, 16, 16)",
+    display: "flex",
+    justifyContent: "center", 
+    }}><span className='text-center'>SUSPENDED</span></div>}
             </table>
           </div>
         </div>
-        {/* <div className='col-lg-6 m-b-10 main-market  bg-gray' style={{ padding: "20px" }}>
-          {liveMatchData?.defaultMarkets?.[1]?.Runners.map((ItemNew: any, key: number) => {
-            const Item: any = updateOdds?.[ItemNew.SelectionId] || {}
-            return <>
-              <ButtonItem key={key} selectionid={ItemNew.SelectionId} title={ItemNew.RunnerName} lastOdds={lastOdds} liveMatchData={liveMatchData} />
-              <CasinoPnl sectionId={ItemNew.SelectionId} matchId={liveMatchData?.match_id} clsName={'text-center'} />
-            </>
-          })}
-        </div> */}
-        <div className='col-lg-8 m-b-10 main-market d-none  bg-gray' style={{ padding: '0px' }}>
-          <table className='table coupon-table table table-bordered suspendwidth'>
-            <thead style={{ borderBottom: "10px" }}>
-              <tr>
-                <th className={"box-2"} style={{ paddingLeft: "10px" }}>
-                </th>
-                <th className={`back ${"box-2"}`}>Even</th>
-                <th className={`back ${"box-2"}`}>Odd</th>
-                <th className={`back ${"box-2"}`}>Red <span className="card-icon"> <span className={"card-red"}>{"[{"}</span> </span></th>
-                <th className={`back ${"box-2"}`}>Black <span className="card-icon"> <span className={"card-black"}>{"]}"}</span> </span></th>
-              </tr>
-            </thead>
-            <tbody>
-              {oddeven()}
-            </tbody>
-          </table>
-          <table className='table coupon-table table table-bordered suspendwidth'>
-              <thead style={{ borderBottom: "0px" }}>
-                <tr>
-                  <th className={"box-2"} style={{ paddingLeft: "10px" }}>
-                  </th>
-                  <th className={`back ${"box-2"}`}>  <span className="card-icon"> <span className={"card-black"}>{"}"}</span> </span></th>
-                  <th className={`back ${"box-2"}`}><span className="card-icon"> <span className={"card-red"}>{"{"}</span> </span></th>
-                  <th className={`back ${"box-2"}`}><span className="card-icon"> <span className={"card-black"}>{"]"}</span> </span></th>
-                  <th className={`back ${"box-2"}`}><span className="card-icon"> <span className={"card-red"}>{"["}</span> </span></th>
-                </tr>
-              </thead>
-              <tbody>
-                {carditem()}
-              </tbody>
-            </table>
-        </div>
+       
+      
       </div>
     </div>
   )

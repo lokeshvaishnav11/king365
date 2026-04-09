@@ -346,17 +346,29 @@ const DragonTigerA = (props: any) => {
   }
 
   const [showMinmax, setShowMinmax] = React.useState(false);
+  const clsstatus = defaultNewData?.status == "dealing" ? "suspended" : "";
 
   return (
     <div>
     <div className="d-flex justify-content-between p-2 bg-theme text-white rounded"><span>WINNER</span><div>{showMinmax &&<span className='bg-dark rounded px-1'>Min/Max: 100 - 100000 </span>} <i  onClick={() => setShowMinmax(!showMinmax)} className="fa fa-info-circle" aria-hidden="true"></i></div> </div>
 
-      <div className='d-t-box m-b-10 buttonsuspended'>
+      <div className={`d-t-box m-b-10 buttonsuspended ${clsstatus}`} style={{position: "relative"}}>
         <div className='row row6 justify-content-center'>
           {buttonLayout('col-lg-3 col-6', [0, 2, 1])}
           {/* {buttonLayout('col-lg-3 col-12', [3])} */}
           {/* <Minmax min={liveMatchData.min} max={liveMatchData.max} /> */}
         </div>
+       {clsstatus && <div style={{    left: "35%",
+    position: "absolute",
+    textAlign: "center",
+    alignItems: "center",
+    display: "flex",
+    top: "47%",
+    zIndex: 99999,
+    color: "#ca1010",
+    opacity:"0.5",
+    fontWeight:"700",
+    fontSize: "25px"}}>SUSPENDED</div>}
       </div>
       {isMobile ? <div className="home_mobile d-none">
         <div className="mobile-header-for-casino">

@@ -4,18 +4,18 @@
     "gameCode": "dt20",
     "matchId": "25",
     "title": "Dargon Tiger One Day",
-    "image": "https://cdn.dreamdelhi.com/mac88/dt_mac88.webp"
+    "image": "/imgs/homedragonimage.jpeg"
   },
   {
     "gameCode": "teen20",
     "matchId": "1",
     "title": "20 20 Teen Patti",
-    "image": "https://cdn.dreamdelhi.com/mac88/tp1d.webp"
+    "image": "/imgs/hometeenimage.jpeg"
   },
   {
     "gameCode": "joker120",
     "matchId": "2",
     "title": "Joker Teen Patti",
-    "image": "https://cdn.mac88.com/macexcite/JTP1D.webp"
+    "image": "/imgs/homejokerimage.jpeg"
   }
 ]

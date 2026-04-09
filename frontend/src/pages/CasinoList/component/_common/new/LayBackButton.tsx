@@ -47,7 +47,7 @@ const LayButton = (props: any) => {
     }
     const ItemMarket: any = "1.98" 
     return <>
-     <td className={`back teen-section box-1 ${clsnamename}`}>
+     <td className={`back teen-section box-6 ${clsnamename}`}>
               <button className='back' onClick={() => onBet(true, ItemMarket)}>
                 <span className='odd'>{"1.98"}</span>{' '}
                 {/* <span className='fw-12 laysize' style={{display:"block"}}>{nFormatter(ItemMarket.bs1, 2)}</span> */}

@@ -248,7 +248,7 @@ console.log(defaultNewData,"default new data")
   const lastResultHistoryView = () => {
   return (
     <div className="d-flex flex-nowrap align-items-center py-2 px-1" style={{gap:"5px"}}>
-      <p className="text-white text-nowrap ">Last Result</p>
+      <p className="text-white text-nowrap fw-bold ">Recent Result</p>
 
       <div className="d-flex flex-nowrap">
        <div className="d-flex flex-nowrap">
@@ -618,13 +618,13 @@ console.log(defaultNewData,"default new data")
               <div className="card-header casino">
                 <h6 className="card-title d-inline-block">
                   {liveMatchData?.title || ""}
-                  <span
+                  {/* <span
                     className="fw-12 text-underlin"
                     onClick={showRules}
                     style={{ marginLeft: "10px" }}
                   >
                     RULES
-                  </span>
+                  </span> */}
                   <span className="float-right">
                     Round Id:{defaultNewData?.roundId} | Min:{" "}
                     {casinoMatchData?.min} | Max: {casinoMatchData?.max}
@@ -751,17 +751,9 @@ console.log(defaultNewData,"default new data")
         </div>
       ) : (
         <div className="prelative casino-container-box">
-          <Tabs>
-            <Tab eventKey="home" title="Game">
+          <div>
+            <div  title="Game">
               <div className="card m-b-10 my-bet">
-                <div className="card-header casino">
-                  <h6 className="card-title d-inline-block">
-                    {casinoMatchData?.title || ""}
-                    {gameCode == "race2020" &&
-                      casinoMatchData &&
-                      race2020Mobile()}
-                  </h6>
-                </div>
                 <div
                   className={`card-body ${gameCode}`}
                   style={{
@@ -826,7 +818,7 @@ console.log(defaultNewData,"default new data")
                 style={{ padding: "0px", position: "relative" }}
               >
                 {renderUiData(gameCode)}
-                {(liveMatchData?.remark != "" && gameCode != "Cards3J") ||
+                {/* {(liveMatchData?.remark != "" && gameCode != "Cards3J") ||
                 (liveMatchData?.event_data?.remark != "" &&
                   gameCode != "Cards3J") ? (
                   <div className="notice-casino-odds">
@@ -839,7 +831,7 @@ console.log(defaultNewData,"default new data")
                   </div>
                 ) : (
                   ""
-                )}
+                )} */}
               </div>
               {marketDataList.stake && (
                 <PlaceBetBox stake={marketDataList.stake} />
@@ -850,8 +842,8 @@ console.log(defaultNewData,"default new data")
               {gameCode == "fivewicket" && <Cricketv />}
               {/* {gameCode == "teen20" && <T20 />} */}
               {gameCode == "Superover" && <SoRules />}
-            </Tab>
-            <Tab eventKey="profile" title={""}>
+            </div>
+            {/* <div  title={""}>
               <div className="card m-b-10 my-bet">
                 <div className="card-header">
                   <h6 className="card-title d-inline-block">My Bet</h6>
@@ -860,16 +852,16 @@ console.log(defaultNewData,"default new data")
                   <MyBetComponent />
                 </div>
               </div>
-            </Tab>
-          </Tabs>
+            </div> */}
+          </div>
           <div className="csmobileround">
-            <span
+            {/* <span
               className="fw-12 text-underlin"
               onClick={showRules}
               style={{ marginLeft: "10px" }}
             >
               RULES
-            </span>
+            </span> */}
             <span>Round ID: {defaultNewData?.roundId}</span>
           </div>
         </div>

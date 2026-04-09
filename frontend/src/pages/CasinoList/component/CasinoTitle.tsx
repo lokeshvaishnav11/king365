@@ -1406,26 +1406,24 @@ const CasinoTitle = (props: any) => {
   return (
     <div>
       {lastResult && (
-        <div className='video-overlaybox'>
-          {lastResult.slug == 'queen' ||
-          lastResult.slug == 'card32' ||
-          lastResult.slug == 'card32b' ||
-          lastResult.slug == 'card32eu' ? (
-            <>
-              <div className='casino-video-title'>
-                <span className='casino-name'>{lastResult.slug}</span>
-                <div className='casino-video-rid'>
-                  Round ID:
-                  <span>{lastResult.match_id}</span>
-                </div>
-              </div>
-              {lastResult.slug == 'card32' || lastResult.slug == 'card32b'
-                ? card32VideoOverLay()
-                : queenVideoOverLay()}
-            </>
-          ) : (
-            ''
-          )}
+       <><div className='text-white  ' style={{position:"absolute" , top:"2px", fontSize:"10px",left:"2px"}}> RID:{lastResult?.roundId}</div><div className='video-overlaybox' style={{top:"15px"}}>
+          {/* {lastResult.slug == 'queen' ||
+    lastResult.slug == 'card32' ||
+    lastResult.slug == 'card32b' ||
+    lastResult.slug == 'card32eu' ? (
+      <>
+        <div className='casino-video-title'>
+          <span className='casino-name'>{lastResult.slug}</span>
+          <div className='casino-video-rid'>
+            RID:
+            <span>{lastResult?.roundId}</span>
+          </div>
+        </div>
+      </>
+    ) : (
+      ''
+    )} */}
+
 
           {lastResult.slug == 'race2020' ? race2020() : ''}
           {(lastResult.slug == 'lucky7eu' ||
@@ -1434,15 +1432,15 @@ const CasinoTitle = (props: any) => {
             lastResult.slug == 'ddb') &&
             lucky7B()}
           {(gameCode == 'dt20' && dt20())}
-            {(
+          {(
             lastResult.slug == 'dragontiger1Day') &&
             dt201day()}
           {(lastResult.slug == 'poker') &&
             poker()}
 
-{(lastResult.slug == 'onedaypoker20') &&
+          {(lastResult.slug == 'onedaypoker20') &&
             onepoker20()}
-                    {/* {lastResult?.gtype == 'dt20'  && dt20()} */}
+          {/* {lastResult?.gtype == 'dt20'  && dt20()} */}
 
           {lastResult.slug == 'teen' && lastResult?.match_id > 0 && onedayteen()}
           {((!isMobile && lastResult.slug == 'dtl20') || lastResult.slug == 'war') &&
@@ -1467,13 +1465,13 @@ const CasinoTitle = (props: any) => {
 
 
           {/* {gameId !== 'baccarat2' && gameId !== 'baccarat' ? (
-          <div className='video-overlay'>
-            <div className='videoCards'>{displaycards()}</div>
-          </div>
-        ) : (
-          ''
-        )} */}
-        </div>
+    <div className='video-overlay'>
+      <div className='videoCards'>{displaycards()}</div>
+    </div>
+  ) : (
+    ''
+  )} */}
+        </div></>
       )}
     </div>
   )

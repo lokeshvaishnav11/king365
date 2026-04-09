@@ -1625,7 +1625,7 @@ footer {
   color: var(--white-color);
   text-transform: uppercase;
   font-family: "Font Awesome 5 Free";
-  content: "\f023";
+  /* content: "\f023"; */
   font-weight: 900;
   font-size: 18px;
   top: 0;

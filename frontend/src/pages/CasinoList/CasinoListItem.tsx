@@ -1195,8 +1195,9 @@ const CasinoListItem = (props: any) => {
             return (
               <div className="casino-list-item">
                 <a
-                  href="#"
-                  onClick={(e) => onIntcasinoClick(e, Item.gameId)}
+                  // href="#"
+                  // onClick={(e) => onIntcasinoClick(e, Item.gameId)}
+                  onClick={(e) => toast.error("Game is coming soon")}
                 >
                   <div
                     className="casino-list-item-banner"
