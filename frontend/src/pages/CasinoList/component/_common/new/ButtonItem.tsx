@@ -52,7 +52,7 @@ const ButtonItem = (props: any) => {
     return <>
         <div className='row m-b-10'>
             <div className='col-12 text-center'>
-                <b>{title}</b>
+                <b style={{textTransform:"uppercase"}}>{title}</b>
             </div>
         </div>
         <button className={`text-uppercase btn-theme ${suspend}`} onClick={() => onBet(true, ItemMarket)}><b >{odd}</b></button>

@@ -769,13 +769,17 @@ const CasinoTitle = (props: any) => {
   // };
   
 
-  const teen20 = () => {
+const teen20 = () => {
   const cards = lastResult
     ? Object.keys(lastResult)
         .filter(key => key.startsWith("C"))
-        .sort() // ensure C1 → C6 order
+        .sort()
         .map(key => lastResult[key])
     : [];
+
+  // ✅ Alternate split
+  const playerA = cards.filter((_, i) => i % 2 === 0); // 0,2,4
+  const playerB = cards.filter((_, i) => i % 2 !== 0); // 1,3,5
 
   return (
     <div className="video-overlay">
@@ -784,11 +788,11 @@ const CasinoTitle = (props: any) => {
 
           {/* Player A */}
           <div className="mr-20">
-            <p className="m-b-0 text-white">
+            <p className="m-b-0 text-white text-nowrap">
               <b><span>Player A</span></b>
             </p>
             <div className="imgspace d-flex">
-              {cards.slice(0, 3).map((card, i) => (
+              {playerA.map((card, i) => (
                 <img
                   key={i}
                   alt=""
@@ -800,11 +804,11 @@ const CasinoTitle = (props: any) => {
 
           {/* Player B */}
           <div className="mr-20">
-            <p className="m-b-0 text-white">
+            <p className="m-b-0 text-white text-nowrap">
               <b><span>Player B</span></b>
             </p>
             <div className="imgspace d-flex">
-              {cards.slice(3, 6).map((card, i) => (
+              {playerB.map((card, i) => (
                 <img
                   key={i}
                   alt=""

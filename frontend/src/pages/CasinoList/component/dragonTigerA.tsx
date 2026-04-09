@@ -350,9 +350,9 @@ const DragonTigerA = (props: any) => {
 
   return (
     <div>
-    <div className="d-flex justify-content-between p-2 bg-theme text-white rounded"><span>WINNER</span><div>{showMinmax &&<span className='bg-dark rounded px-1'>Min/Max: 100 - 100000 </span>} <i  onClick={() => setShowMinmax(!showMinmax)} className="fa fa-info-circle" aria-hidden="true"></i></div> </div>
+    <div className="d-flex justify-content-between p-2 bg-theme text-white rounded" style={{background:"linear-gradient(-180deg, #2E4B5E 0%, #243A48 82%)"}}><span>WINNER</span><div>{showMinmax &&<span className='bg-dark rounded px-1'>Min/Max: 100 - 100000 </span>} <i  onClick={() => setShowMinmax(!showMinmax)} className="fa fa-info-circle" aria-hidden="true"></i></div> </div>
 
-      <div className={`d-t-box m-b-10 buttonsuspended ${clsstatus}`} style={{position: "relative"}}>
+      <div className={`d-t-box buttonsuspended ${clsstatus}`} style={{position: "relative"}}>
         <div className='row row6 justify-content-center'>
           {buttonLayout('col-lg-3 col-6', [0, 2, 1])}
           {/* {buttonLayout('col-lg-3 col-12', [3])} */}

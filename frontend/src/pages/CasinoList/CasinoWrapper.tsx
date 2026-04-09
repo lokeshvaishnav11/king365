@@ -92,33 +92,33 @@ const CasinoWrapper = (props: any) => {
 
   const [checkRoundIdChange, setCheckRoundIdChange] = useState("");
 
-const [defaultNewData, setDefaultNewData] = useState<any>('')
-const [ history, setHistory] = useState<any>([])
+  const [defaultNewData, setDefaultNewData] = useState<any>('')
+  const [history, setHistory] = useState<any>([])
 
   React.useEffect(() => {
-  const fetchData = async () => {
-    try {
-      const res = await axios.get(`https://reddysocket.chausar.com/data/${gameCode}`);
-      console.log(res.data, `${gameCode} DATA`);
-      setDefaultNewData(res.data.data);
-      setHistory(res.data.history)
-    } catch (err) {
-      console.log(err);
-    }
-  };
+    const fetchData = async () => {
+      try {
+        const res = await axios.get(`https://reddysocket.chausar.com/data/${gameCode}`);
+        console.log(res.data, `${gameCode} DATA`);
+        setDefaultNewData(res.data.data);
+        setHistory(res.data.history)
+      } catch (err) {
+        console.log(err);
+      }
+    };
 
-  // first call immediately
-  fetchData();
+    // first call immediately
+    fetchData();
 
-  // then repeat every 900ms
-  const interval = setInterval(fetchData, 900);
+    // then repeat every 900ms
+    const interval = setInterval(fetchData, 900);
 
-  // cleanup (VERY IMPORTANT)
-  return () => clearInterval(interval);
+    // cleanup (VERY IMPORTANT)
+    return () => clearInterval(interval);
 
-}, [gameCode]);
+  }, [gameCode]);
 
-console.log(defaultNewData,"default new data")
+  console.log(defaultNewData, "default new data")
 
 
 
@@ -159,7 +159,7 @@ console.log(defaultNewData,"default new data")
     casinoService.getLiveCasinoData(gameCode).then((res) => {
       // console.log(res,"responseis here")
       const fullMarketData = res?.data?.data.data;
-      console.log(res?.data,"fullMarketData",fullMarketData)
+      console.log(res?.data, "fullMarketData", fullMarketData)
       if (casinoMatchData?.match_id != fullMarketData?.match_id) {
         // dispatch(betPopup({ isOpen: false, betData: { ...betValues.betData, stack: 0, pnl: 0 } }))
         dispatch(setBookMarketList({}));
@@ -246,48 +246,50 @@ console.log(defaultNewData,"default new data")
   // gameCode, casinoMatchData
 
   const lastResultHistoryView = () => {
-  return (
-    <div className="d-flex flex-nowrap align-items-center py-2 px-1" style={{gap:"5px"}}>
-      <p className="text-white text-nowrap fw-bold ">Recent Result</p>
-
-      <div className="d-flex flex-nowrap">
-       <div className="d-flex flex-nowrap">
-  {history?.map((item:any, index:any) => {
-
-    // winner ka first letter nikaalna
-    let label = "";
-    if (item.winner === "dragon") label = "D";
-    else if (item.winner === "tiger") label = "T";
-    else if (item.winner === "Player A") label = "A";
-    else if (item.winner === "Player B") label = "B";
-    else label = "?";
-
     return (
-      <div
-        key={index}
-        className="d-flex align-items-center justify-content-center mr-10 "
-        style={{
-          width: "35px",
-          height: "35px",
-          borderRadius: "50%",
-          backgroundColor:
-            label === "D" ? "red" :
-            label === "T" ? "orange" :
-            label === "A" ? "green" :
-            label === "B" ? "blue" : "gray",
-          color: "#fff",
-          fontWeight: "bold"
-        }}
-      >
-        {label}
+      <div className="d-flex flex-nowrap align-items-center py-2 px-1" style={{ gap: "5px" }}>
+        <p className="text-white text-nowrap fw-bold ">Recent Result</p>
+
+        <div className="d-flex flex-nowrap">
+          <div className="d-flex flex-nowrap">
+            {history?.map((item: any, index: any) => {
+
+              // winner ka first letter nikaalna
+              let label = "";
+              if (item.winner === "dragon") label = "D";
+              else if (item.winner === "tiger") label = "T";
+              else if (item.winner === "Player A") label = "A";
+              else if (item.winner === "Player B") label = "B";
+              else label = "?";
+
+              return (
+                <div
+                  key={index}
+                  className="d-flex align-items-center justify-content-center mr-10 "
+                  style={{
+                    width: "35px",
+                    // height: "35px",
+                    borderRadius: "15px",
+                    backgroundColor:
+                      label === "D" ? "#72bbef" :
+                        label === "T" ? "#f9a9ba" :
+                          label === "A" ? "#72bbef" :
+                            label === "B" ? "#f9a9ba" : "gray",
+                    color: "#000000ff",
+                    fontWeight: "700",
+                    padding: "5px",
+                    fontSize: "12px"
+                  }}
+                >
+                  {label}
+                </div>
+              );
+            })}
+          </div>
+        </div>
       </div>
     );
-  })}
-</div>
-      </div>
-    </div>
-  );
-};
+  };
 
   React.useEffect(() => {
     if (gameCode) getMatchLiveInfo();
@@ -381,7 +383,7 @@ console.log(defaultNewData,"default new data")
         return (
           <OneDayTeen lastOdds={updateOdds} liveMatchData={liveMatchData} />
         );
-        case "joker120":
+      case "joker120":
         return (
           <TeenpattiJoker lastOdds={updateOdds} liveMatchData={liveMatchData} defaultNewData={defaultNewData} />
         );
@@ -504,14 +506,14 @@ console.log(defaultNewData,"default new data")
 
   // console.log("dfgdsfsfssjkdhfglskdhfglsdhfgjshd")
 
-  const gameIdMapmacc: Record<any , any> = {
+  const gameIdMapmacc: Record<any, any> = {
     card32b: 3034,
     baccarat2: 3033,
     dt20: "fNq3T-BMmL1",
     lucky7B: 3032,
     Tp1Day: "fNq3T-XRnLu",
     race2020: 3036,
-    teen20:"fNq3T-FVmT3",
+    teen20: "fNq3T-FVmT3",
     worli2: 3040,
     Cards3J: 3039,
     Dd: 3041,
@@ -535,7 +537,7 @@ console.log(defaultNewData,"default new data")
     aaa: "fNq3T-wVNlm",
     "dragon tiger 1 day": 3057,
     lucky7: "fNq3T-hBSZ8",
-    dt20b:"fNq3T-cVhfT",
+    dt20b: "fNq3T-cVhfT",
     Superover: 3060,
   };
 
@@ -545,7 +547,7 @@ console.log(defaultNewData,"default new data")
     dt20: "dt20",
     lucky7B: "lucky7eu",
     Tp1Day: "teen",
-    ddb:"btable",
+    ddb: "btable",
     race2020: 3036,
     teen20: "teen20",
     worli2: "worli2",
@@ -573,28 +575,28 @@ console.log(defaultNewData,"default new data")
     lucky7: "lucky7",
     dt20b: "dt202",
     Superover: "superover",
-    opentp:"teen8",
-    cricket2020:"cmatch20",
-    fivewicket:"cricketv3",
+    opentp: "teen8",
+    cricket2020: "cmatch20",
+    fivewicket: "cricketv3",
   };
 
   const fortv: Record<any, any> = {
     testtp: "teen9",
-    AAA:"aaa",
-    ddb:"btable",
-    dragontiger1Day:"dt6",
-    onedaypoker20:"poker20",
-    card32b:"card32eu",
-    cmeter2020:"cmeter",
-    Cards3J:"3cardj",
-    Superover:"superover",
-    fivewicket:"cricketv3",
-    cricket2020:"cmatch20",
-    race2020:"race20",
-    warcasino:"war",
-    Andarbahar:"ab20",
-    Andarbahar2:"abj",
-    worliinstant:"worli2",
+    AAA: "aaa",
+    ddb: "btable",
+    dragontiger1Day: "dt6",
+    onedaypoker20: "poker20",
+    card32b: "card32eu",
+    cmeter2020: "cmeter",
+    Cards3J: "3cardj",
+    Superover: "superover",
+    fivewicket: "cricketv3",
+    cricket2020: "cmatch20",
+    race2020: "race20",
+    warcasino: "war",
+    Andarbahar: "ab20",
+    Andarbahar2: "abj",
+    worliinstant: "worli2",
     //other codes remain same
   }
 
@@ -603,15 +605,14 @@ console.log(defaultNewData,"default new data")
 
   const gameId = gameCode ? gameIdMap?.[gameCode] ?? null : null;
 
-  const mappedCode = gameCode ? fortv?.[gameCode] ??  gameCode : gameCode; 
+  const mappedCode = gameCode ? fortv?.[gameCode] ?? gameCode : gameCode;
 
   return (
     <>
       {!isMobile ? (
         <div
-          className={`row mtc-5 row5 casino-container-box ${
-            gameCode === "cricket2020" ? "cc-20" : ""
-          }`}
+          className={`row mtc-5 row5 casino-container-box ${gameCode === "cricket2020" ? "cc-20" : ""
+            }`}
         >
           <div className="col-8 col-lg-8">
             <div className="card m-b-10 my-bet">
@@ -652,7 +653,7 @@ console.log(defaultNewData,"default new data")
                     background: "#000",
                   }}
                 >
-                  
+
                   {liveMatchData && gameCode && (
                     <img
                       title="stream"
@@ -664,19 +665,20 @@ console.log(defaultNewData,"default new data")
 
                       // src={`https://sfront.starrexch.me/casino-tv?id=${gameCode}`}
                       // src={`https://sfront.starrexch.me/casino-tv?id=${mappedCode}`}
-                         src="/imgs/casinoloader.gif"
+                      src="/imgs/casinoloader.gif"
 
                     />
                   )}
+
                   {/* <iframe src='https://diamond.igtechgaming.com/freecasino/tvop?id=lucky7' width="100%"></iframe> */}
                   {casinoMatchData && (
-                    <CasinoTimer lastOdds={defaultNewData}  />
+                    <CasinoTimer lastOdds={defaultNewData} />
                   )}
                   {casinoMatchData && (
-             <CasinoTitle lastResult={defaultNewData}  />
+                    <CasinoTitle lastResult={defaultNewData} />
                   )}
                   {(gameCode == "poker" && casinoMatchData?.desc != "") ||
-                  (gameCode == "onedaypoker20" && casinoMatchData?.desc != "")
+                    (gameCode == "onedaypoker20" && casinoMatchData?.desc != "")
                     ? oneDayPokerDescription(casinoMatchData?.desc)
                     : ""}
                   {gameCode == "cricket2020" && (
@@ -698,9 +700,9 @@ console.log(defaultNewData,"default new data")
               {(liveMatchData?.remark != "" &&
                 liveMatchData?.slug != "Superover" &&
                 liveMatchData?.slug != "fivewicket") ||
-              (liveMatchData?.event_data?.remark != "" &&
-                liveMatchData?.slug != "Superover" &&
-                liveMatchData?.slug != "fivewicket") ? (
+                (liveMatchData?.event_data?.remark != "" &&
+                  liveMatchData?.slug != "Superover" &&
+                  liveMatchData?.slug != "fivewicket") ? (
                 <div className="notice-casino-odds">
                   <div className="marqueeN">
                     <p>
@@ -752,8 +754,8 @@ console.log(defaultNewData,"default new data")
       ) : (
         <div className="prelative casino-container-box">
           <div>
-            <div  title="Game">
-              <div className="card m-b-10 my-bet">
+            <div title="Game">
+              <div className="card my-bet">
                 <div
                   className={`card-body ${gameCode}`}
                   style={{
@@ -787,12 +789,24 @@ console.log(defaultNewData,"default new data")
                       />
                     )}
 
+                    { defaultNewData?.winner && <div style={{
+                      position: "absolute",
+                      background: "#FD4226",
+                      color: "black",
+                      zIndex: 9999,
+                      left: "40%",
+                      top: "48%",
+                      padding: "5px",
+                      fontSize:"19px",
+                      borderRadius: "5px 0px 5px 0px ",
+                    }}>{defaultNewData?.winner} Win</div>}
+
                     {/* <iframe src='https://diamond.igtechgaming.com/freecasino/tvop?id=lucky7' width="100%"></iframe> */}
                     {casinoMatchData && (
                       <CasinoTimer lastOdds={defaultNewData} />
                     )}
                     {casinoMatchData && (
-                      <CasinoTitle lastResult={defaultNewData}  />
+                      <CasinoTitle lastResult={defaultNewData} />
                     )}
                     {casinoMatchData && casinoMatchData?.scoreCard ? (
                       <Score scoreData={casinoMatchData?.scoreCard} />
@@ -800,7 +814,7 @@ console.log(defaultNewData,"default new data")
                       ""
                     )}
                     {(gameCode == "poker" && casinoMatchData?.desc) ||
-                    (gameCode == "onedaypoker20" && casinoMatchData?.desc)
+                      (gameCode == "onedaypoker20" && casinoMatchData?.desc)
                       ? oneDayPokerDescription(casinoMatchData.desc)
                       : ""}
                     {gameCode == "cricket2020" && (
@@ -862,13 +876,13 @@ console.log(defaultNewData,"default new data")
             >
               RULES
             </span> */}
-            <span>Round ID: {defaultNewData?.roundId}</span>
+            {/* <span>Round ID: {defaultNewData?.roundId}</span> */}
           </div>
         </div>
       )}
-     <div style={{ overflowY: "auto", background:"black" }}>
-{lastResultHistoryView()}
-</div>
+      <div style={{ overflowY: "auto", background: "black", marginTop: "10px" }}>
+        {lastResultHistoryView()}
+      </div>
       {rulesModel ? (
         <CasinoRulesDetail
           title={casinoMatchData.title}

@@ -94,10 +94,10 @@ const  TeenpattiJoker = (props: any) => {
   
   return (
     <div className='' id={`${getCurrentMatch?.slug}`} style={{ marginTop: "-10px" }}>
-            <div className="d-flex justify-content-between p-2 bg-theme text-white rounded"><span>WINNER</span><div>{showMinmax &&<span className='bg-dark rounded px-1'>Min/Max: 100 - 100000 </span>} <i  onClick={() => setShowMinmax(!showMinmax)} className="fa fa-info-circle" aria-hidden="true"></i></div> </div>
+            <div className="d-flex justify-content-between p-2 bg-theme text-white rounded" style={{background:"linear-gradient(-180deg, #2E4B5E 0%, #243A48 82%)"}} ><span>WINNER</span><div>{showMinmax &&<span className='bg-dark rounded px-1'>Min/Max: 100 - 100000 </span>} <i  onClick={() => setShowMinmax(!showMinmax)} className="fa fa-info-circle" aria-hidden="true"></i></div> </div>
 
       <div className='row '>
-        <div className='col-lg-4 m-b-10 main-market  bg-gray' style={{ padding: '0px' }}>
+        <div className='col-lg-4 main-market  bg-gray' style={{ padding: '0px' }}>
           <div className='live-poker'>
             <table className='table coupon-table table table-bordered'>
               <thead style={{ borderBottom: "0px" }}>

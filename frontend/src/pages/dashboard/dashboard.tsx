@@ -34,6 +34,7 @@ import {
 import Fav from "../_layout/elements/fav";
 import axios from "axios";
 import authService from "../../services/auth.service";
+import { toast } from "react-toastify";
 
 const Dashboard = () => {
   const [matchList, setMatchList] = React.useState<LMatch[]>([]);
@@ -333,7 +334,7 @@ const Dashboard = () => {
   return (
     <>
       {" "}
-     {isMobile ? (
+      {isMobile ? (
         <GameTabMobile sportId={sportId} sportListState={sportListState} />
       ) : (
         ""
@@ -350,7 +351,7 @@ const Dashboard = () => {
         </div>
         <GameTab sportId={sportId} sportListState={sportListState} />
 
-       
+
 
         <ul
           className="d-flexg d-none"
@@ -581,12 +582,18 @@ const Dashboard = () => {
                 ))}
               </div>
 
-              <div className="row mx-0 mt-2">
+              <div className="row mx-0" style={{backgroundImage:"url(/imgs/homecasinobg.png)", backgroundSize:"contain", paddingTop:"15px"}}>
                 {somecasino?.map((item) => (
                   <div key={item.id} className="col-4 col-md-3 px-1">
                     <div className="csn_thumb mb-2">
                       <CustomLink
-                        to={`/casino/${item.gameCode}/${item.matchId}`}
+                        to={item.gameCode ? `/casino/${item.gameCode}/${item.matchId}` : "#"}
+                        onClick={(e) => {
+                          if (!item.gameCode) {
+                            e.preventDefault();
+                            toast.error("Game is coming soon");
+                          }
+                        }}
                       >
                         <img
                           className="img-fluid w-100"
@@ -600,7 +607,7 @@ const Dashboard = () => {
               </div>
 
               {location.pathname.includes("in-play") || !isMobile ? (
-                <div className="home-page">
+                <div className="home-page d-none">
                   <div
                     className="casino-list mt-2"
                     style={{ marginLeft: !isMobile ? "-6px" : "" }}

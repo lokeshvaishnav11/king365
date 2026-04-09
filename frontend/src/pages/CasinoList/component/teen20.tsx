@@ -143,7 +143,7 @@ const TeenPatti20 = (props: any) => {
                   {/* <th className={`back ${"box-4"}`}></th> */}
                 </div>
               </div>
-              <div className="d-flex justify-content-between p-2 mb-2 bg-theme text-white rounded"><span>WINNER</span><div>{showMinmax && <span className='bg-dark rounded px-1'>Min/Max: 100 - 100000 </span>} <i onClick={() => setShowMinmax(!showMinmax)} className="fa fa-info-circle" aria-hidden="true"></i></div> </div>
+              <div className="d-flex justify-content-between p-2 mb-2 bg-theme text-white rounded" style={{background:"linear-gradient(-180deg, #2E4B5E 0%, #243A48 82%)"}}><span>WINNER</span><div>{showMinmax && <span className='bg-dark rounded px-1'>Min/Max: 100 - 100000 </span>} <i onClick={() => setShowMinmax(!showMinmax)} className="fa fa-info-circle" aria-hidden="true"></i></div> </div>
 
               <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "10px" }}>
 
@@ -160,9 +160,9 @@ const TeenPatti20 = (props: any) => {
 
       <div className={` mt-2`}>
         {gameData?.map((item, index) => (
-          <div key={index} className="mb-3 relative">
+          <div key={index} className=" relative">
 
-            <div className="d-flex  justify-content-between p-2  bg-theme text-white rounded"><span>{item.title}</span><div>{showMinmax && <span className='bg-dark rounded px-1'>Min/Max: 100 - 100000 </span>} <i onClick={() => setShowMinmax(!showMinmax)} className="fa fa-info-circle" aria-hidden="true"></i></div> 
+            <div className="d-flex  justify-content-between p-2  bg-theme text-white" style={{background:"linear-gradient(-180deg, #2E4B5E 0%, #243A48 82%)", borderRadius:"4px 4px 0 0"}}><span>{item.title}</span><div>{showMinmax && <span className='bg-dark rounded px-1'>Min/Max: 100 - 100000 </span>} <i onClick={() => setShowMinmax(!showMinmax)} className="fa fa-info-circle" aria-hidden="true"></i></div> 
             </div>
             {/* Body */}
 {clsstatus2 && <div style={{    
@@ -171,7 +171,7 @@ position:"absolute",
     textAlign: "center",
     alignItems: "center",
     display: "flex",
-    top: index==0?"17%":index==1?"47%":"77%",
+    top: index==0?"23%":index==1?"56%":"88%",
     zIndex: 99999,
     color: "#ca1010",
     opacity:"0.5",
