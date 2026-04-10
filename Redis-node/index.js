@@ -307,48 +307,108 @@ const getJokerResultold = async (roundId) => {
   };
 };
 
+const getBestRankWithJoker = (cards, jokerValue) => {
+  let jokers = cards.filter(c => c.slice(0, -2) === jokerValue);
+  let normalCards = cards.filter(c => c.slice(0, -2) !== jokerValue);
+
+  // 🔥 No joker → normal rank
+  if (jokers.length === 0) {
+    return getRank(cards);
+  }
+
+  // 🔥 3 joker = highest (Trail A)
+  if (jokers.length === 3) {
+    return { rank: 6, name: "Trail", high: 14 };
+  }
+
+  // 🔥 2 joker → always Trail
+  if (jokers.length === 2) {
+    const val = getCardValue(normalCards[0]);
+    return { rank: 6, name: "Trail", high: val };
+  }
+
+  // 🔥 1 joker case (main logic)
+  const values = normalCards.map(getCardValue).sort((a,b)=>a-b);
+  const suits = normalCards.map(c => c.slice(-2));
+
+  // 👉 try Trail
+  if (values[0] === values[1]) {
+    return { rank: 6, name: "Trail", high: values[0] };
+  }
+
+  // 👉 try Pure Sequence
+  if (suits[0] === suits[1]) {
+    if (Math.abs(values[0] - values[1]) <= 2) {
+      return { rank: 5, name: "Pure Sequence", high: Math.max(...values) + 1 };
+    }
+  }
+
+  // 👉 try Sequence
+  if (Math.abs(values[0] - values[1]) <= 2) {
+    return { rank: 4, name: "Sequence", high: Math.max(...values) + 1 };
+  }
+
+  // 👉 try Color
+  if (suits[0] === suits[1]) {
+    return { rank: 3, name: "Color", high: Math.max(...values) };
+  }
+
+  // 👉 Pair bana do
+  return { rank: 2, name: "Pair", high: Math.max(...values) };
+};
+
 const getJokerResult = async (roundId) => {
   const bets = await Bet.find({ roundId, game: "joker120" });
 
- const deck = shuffleDeck(createDeck());
+  const deck = shuffleDeck(createDeck());
 
   const jokerCard = draw(deck,1)[0];
   const jokerValue = jokerCard.slice(0, -2);
 
   let A_cards, B_cards, winner;
 
-  // 🔥 SAME LOGIC for both cases (bets ho ya na ho)
-  if (bets.length === 0) {
-    A_cards = draw(deck,3);
-    B_cards = draw(deck,3);
+  let A_amt = 0, B_amt = 0;
 
-    const rA = getRank(A_cards);
-    const rB = getRank(B_cards);
+  bets.forEach(b => {
+    if (b.side === "A") A_amt += b.amount;
+    if (b.side === "B") B_amt += b.amount;
+  });
 
-    winner =
-      rA.rank > rB.rank || (rA.rank === rB.rank && rA.high > rB.high)
-        ? "Player A"
-        : "Player B";
+  const forcedWinner = bets.length === 0
+    ? null
+    : (A_amt < B_amt ? "A" : "B");
 
-  } else {
-    let A_amt = 0, B_amt = 0;
+  while (true) {
+    const newDeck = shuffleDeck(createDeck());
 
-    bets.forEach(b => {
-      if (b.side === "A") A_amt += b.amount;
-      if (b.side === "B") B_amt += b.amount;
-    });
+    // remove joker card from deck to avoid duplicate
+    const index = newDeck.indexOf(jokerCard);
+    if (index > -1) newDeck.splice(index, 1);
 
-    winner = A_amt < B_amt ? "Player A" : "Player B";
+    A_cards = draw(newDeck,3);
+    B_cards = draw(newDeck,3);
 
-    while (true) {
-      A_cards = draw(deck,3);
-      B_cards = draw(deck,3);
+    const rA = getBestRankWithJoker(A_cards, jokerValue);
+    const rB = getBestRankWithJoker(B_cards, jokerValue);
 
-      const rA = getRank(A_cards);
-      const rB = getRank(B_cards);
+    if (!forcedWinner) {
+      winner =
+        rA.rank > rB.rank || (rA.rank === rB.rank && rA.high > rB.high)
+          ? "A"
+          : "B";
+      break;
+    }
 
-      if (winner === "Player A" && (rA.rank > rB.rank || (rA.rank === rB.rank && rA.high > rB.high))) break;
-      if (winner === "Player B" && (rB.rank > rA.rank || (rA.rank === rB.rank && rB.high > rA.high))) break;
+    if (forcedWinner === "A") {
+      if (rA.rank > rB.rank || (rA.rank === rB.rank && rA.high > rB.high)) {
+        winner = "A";
+        break;
+      }
+    } else {
+      if (rB.rank > rA.rank || (rA.rank === rB.rank && rB.high > rA.high)) {
+        winner = "B";
+        break;
+      }
     }
   }
 
@@ -398,12 +458,27 @@ const runGame = async (gameName, logicFn) => {
       status: "dealing"
     };
 
-    for (let key of Object.keys(result)) {
-      if (key === "winner") continue;
-      await delay(1000);
-      data[key] = result[key];
-      await redis.set(gameName, JSON.stringify(data));
-    }
+    // for (let key of Object.keys(result)) {
+    //   if (key === "winner") continue;
+    //   await delay(1000);
+    //   data[key] = result[key];
+    //   await redis.set(gameName, JSON.stringify(data));
+    // }
+
+    const orderMap = {
+  teen20: ["C1","C2","C3","C4","C5","C6"],
+  joker120: ["C1","C2","C3","C4","C5","C6","C7"],
+  dt20: ["C1","C2"]
+};
+
+const order = orderMap[gameName] || Object.keys(result);
+
+for (let key of order) {
+  if (!result[key]) continue;
+  await delay(1000);
+  data[key] = result[key];
+  await redis.set(gameName, JSON.stringify(data));
+}
 
     data.status = "result";
     data.winner = result.winner;

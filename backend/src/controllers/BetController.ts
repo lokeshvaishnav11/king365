@@ -401,6 +401,7 @@ export class BetController extends ApiController {
         let runners = []
         if (bet_On == BetOn.CASINO) {
           const matchdata: any = await Casino.findOne({ match_id: match_id })
+          console.log(matchdata,"match data ",match_id)
           matchName = matchdata != null ? matchdata.title : ''
           if (matchdata.status == 0) {
             return this.fail(res, 'Match Is Not In Play')
@@ -736,6 +737,9 @@ export class BetController extends ApiController {
         { status: 'pending', userId: ObjectId(user._id), bet_on: BetOn.CASINO },
         { _id: 1, matchId: 1, marketId: 1 },
       )
+
+
+      console.log(userbet,"FGHJK")
 
       const event_id: any = []
         ;[...userbet, currenbet].map((Item: any) => {
