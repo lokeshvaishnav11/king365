@@ -109,20 +109,20 @@ const TeenPatti20 = (props: any) => {
       bAmount: 2091970
     },
     {
-      title: "FLUSH",
-      playerA: "PLAYER A (FLUSH)",
-      playerB: "PLAYER B (FLUSH)",
-      aValue: 8,
-      bValue: 8,
+      title: "PAIR (DUBBLE) 1:4",
+      playerA: "PLAYER A (PAIR)",
+      playerB: "PLAYER B (PAIR)",
+      aValue: 4,
+      bValue: 4,
       aAmount: 500000,
       bAmount: 500000
     },
     {
-      title: "STRAIGHT (ROW)",
-      playerA: "PLAYER A (STRAIGHT)",
-      playerB: "PLAYER B (STRAIGHT)",
-      aValue: 14,
-      bValue: 14,
+      title: "FLUSH (COLOR) 1:8",
+      playerA: "PLAYER A (FLUSH)",
+      playerB: "PLAYER B (FLUSH)",
+      aValue: 8,
+      bValue: 8,
       aAmount: 300000,
       bAmount: 300000
     }

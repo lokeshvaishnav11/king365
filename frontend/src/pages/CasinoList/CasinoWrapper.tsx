@@ -99,6 +99,8 @@ const CasinoWrapper = (props: any) => {
     const fetchData = async () => {
       try {
         const res = await axios.get(`https://reddysocket.chausar.com/data/${gameCode}`);
+        // const res = await axios.get(`http://localhost:3030/data/${gameCode}`);
+
         console.log(res.data, `${gameCode} DATA`);
         setDefaultNewData(res.data.data);
         setHistory(res.data.history)
@@ -789,17 +791,34 @@ const CasinoWrapper = (props: any) => {
                       />
                     )}
 
-                    { defaultNewData?.winner && <div style={{
-                      position: "absolute",
-                      background: "#FD4226",
-                      color: "black",
-                      zIndex: 9999,
-                      left: "40%",
-                      top: "48%",
-                      padding: "5px",
-                      fontSize:"19px",
-                      borderRadius: "5px 0px 5px 0px ",
-                    }}>{defaultNewData?.winner} Win</div>}
+                    {defaultNewData?.winner && (
+  <div
+    style={{
+      position: "absolute",
+      left: "50%",
+      top: "48%",
+      transform: "translate(-50%, -50%)",
+      zIndex: 9999,
+      padding: "8px 18px",
+      fontSize: "16px",
+      fontWeight: "500",
+      color: "#000",
+      borderRadius: "10px 0px 10px 0px",
+      
+      // 🔥 Gradient background
+      background: "linear-gradient(180deg, #FF7A3D, #FD4226)",
+
+      // 🔥 Border + glow
+      boxShadow: "0 4px 10px rgba(0,0,0,0.5), inset 0 2px 5px rgba(255,255,255,0.3)",
+
+      // 🔥 Text styling
+      letterSpacing: "1px",
+      textTransform: "uppercase",
+    }}
+  >
+    {defaultNewData?.winner} WIN
+  </div>
+)}
 
                     {/* <iframe src='https://diamond.igtechgaming.com/freecasino/tvop?id=lucky7' width="100%"></iframe> */}
                     {casinoMatchData && (

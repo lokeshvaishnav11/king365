@@ -70,6 +70,33 @@ const saveHistory = async (game, result) => {
 };
 
 //////////////////////////////////////////////////////
+// 🎴 DECK SYSTEM (HH/DD/CC/SS)
+//////////////////////////////////////////////////////
+
+const createDeck = () => {
+  const cards = ["A","2","3","4","5","6","7","8","9","10","J","Q","K"];
+  const suits = ["HH","DD","CC","SS"];
+
+  let deck = [];
+  for (let c of cards) {
+    for (let s of suits) {
+      deck.push(c + s);
+    }
+  }
+  return deck;
+};
+
+const shuffleDeck = (deck) => {
+  for (let i = deck.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [deck[i], deck[j]] = [deck[j], deck[i]];
+  }
+  return deck;
+};
+
+const draw = (deck, n) => deck.splice(0, n);
+
+//////////////////////////////////////////////////////
 // 🧠 CARD RANK SYSTEM (REAL)
 //////////////////////////////////////////////////////
 
@@ -152,12 +179,14 @@ const getDragonTigerResult = async (roundId) => {
     if (v === "A") return 1;
     return parseInt(v);
   };
+  const deck = shuffleDeck(createDeck());
+
 
   let C1, C2;
 
   while (true) {
-    C1 = getRandomCard();
-    C2 = getRandomCard();
+    C1 = draw(deck,1)[0];
+    C2 = draw(deck,1)[0];
 
     if (val(C1) !== val(C2)) break; // tie avoid
   }
@@ -174,36 +203,6 @@ const getDragonTigerResult = async (roundId) => {
 const getTeenPattiResult = async (roundId, game) => {
   const bets = await Bet.find({ roundId, game });
 
-  // if (bets.length === 0) {
-  //   const A = [getRandomCard(), getRandomCard(), getRandomCard()];
-  //   const B = [getRandomCard(), getRandomCard(), getRandomCard()];
-
-  //   return {
-  //     C1: A[0], C3: A[1], C5: A[2],
-  //     C2: B[0], C4: B[1], C6: B[2],
-  //     winner: "random"
-  //   };
-  // }
-
-  if (bets.length === 0) {
-  const A = [getRandomCard(), getRandomCard(), getRandomCard()];
-  const B = [getRandomCard(), getRandomCard(), getRandomCard()];
-
-  const rA = getRank(A);
-  const rB = getRank(B);
-
-  let winner =
-    rA.rank > rB.rank || (rA.rank === rB.rank && rA.high > rB.high)
-      ? "Player A"
-      : "Player B";
-
-  return {
-    C1: A[0], C3: A[1], C5: A[2],
-    C2: B[0], C4: B[1], C6: B[2],
-    winner
-  };
-}
-
   let A_amt = 0, B_amt = 0;
 
   bets.forEach(b => {
@@ -211,23 +210,34 @@ const getTeenPattiResult = async (roundId, game) => {
     if (b.side === "B") B_amt += b.amount;
   });
 
-  let winner = A_amt < B_amt ? "A" : "B";
+  const forcedWinner = bets.length === 0
+    ? null
+    : (A_amt < B_amt ? "A" : "B");
 
   let A_cards, B_cards, rA, rB;
 
   while (true) {
-    A_cards = [getRandomCard(), getRandomCard(), getRandomCard()];
-    B_cards = [getRandomCard(), getRandomCard(), getRandomCard()];
+    const deck = shuffleDeck(createDeck());
+
+    A_cards = draw(deck, 3);
+    B_cards = draw(deck, 3);
 
     rA = getRank(A_cards);
     rB = getRank(B_cards);
 
-    if (winner === "A") {
+    if (!forcedWinner) break;
+
+    if (forcedWinner === "A") {
       if (rA.rank > rB.rank || (rA.rank === rB.rank && rA.high > rB.high)) break;
     } else {
       if (rB.rank > rA.rank || (rA.rank === rB.rank && rB.high > rA.high)) break;
     }
   }
+
+  const winner =
+    rA.rank > rB.rank || (rA.rank === rB.rank && rA.high > rB.high)
+      ? "A"
+      : "B";
 
   return {
     C1: A_cards[0],
@@ -300,15 +310,17 @@ const getJokerResultold = async (roundId) => {
 const getJokerResult = async (roundId) => {
   const bets = await Bet.find({ roundId, game: "joker120" });
 
-  const jokerCard = getRandomCard();
+ const deck = shuffleDeck(createDeck());
+
+  const jokerCard = draw(deck,1)[0];
   const jokerValue = jokerCard.slice(0, -2);
 
   let A_cards, B_cards, winner;
 
   // 🔥 SAME LOGIC for both cases (bets ho ya na ho)
   if (bets.length === 0) {
-    A_cards = [getRandomCard(), getRandomCard(), getRandomCard()];
-    B_cards = [getRandomCard(), getRandomCard(), getRandomCard()];
+    A_cards = draw(deck,3);
+    B_cards = draw(deck,3);
 
     const rA = getRank(A_cards);
     const rB = getRank(B_cards);
@@ -329,8 +341,8 @@ const getJokerResult = async (roundId) => {
     winner = A_amt < B_amt ? "Player A" : "Player B";
 
     while (true) {
-      A_cards = [getRandomCard(), getRandomCard(), getRandomCard()];
-      B_cards = [getRandomCard(), getRandomCard(), getRandomCard()];
+      A_cards = draw(deck,3);
+      B_cards = draw(deck,3);
 
       const rA = getRank(A_cards);
       const rB = getRank(B_cards);
