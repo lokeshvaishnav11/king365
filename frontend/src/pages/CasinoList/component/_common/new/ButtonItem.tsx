@@ -52,10 +52,13 @@ const ButtonItem = (props: any) => {
     return <>
         <div className='row m-b-10'>
             <div className='col-12 text-center'>
-                <b style={{textTransform:"uppercase"}}>{title}</b>
+                <b style={{textTransform:"uppercase",fontSize:"12px"}}>{title}</b>
             </div>
         </div>
-        <button className={`text-uppercase btn-theme ${suspend}`} onClick={() => onBet(true, ItemMarket)}><b >{odd}</b></button>
+        <button style={{background:"#72bbef",    width: "105px",
+    borderRadius: "5px",
+    padding: "2px 0",
+    boxShadow: "0 2px 7px 1px #67828be6"}} className={`text-uppercase text-black back btn`} onClick={() => onBet(true, ItemMarket)}><span className="d-flex flex-column align-items-center">{odd}<span style={{fontSize:"10px"}}>50000</span></span></button>
     </>
 }
 export default React.memo(ButtonItem)

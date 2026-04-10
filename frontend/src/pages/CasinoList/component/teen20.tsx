@@ -158,25 +158,31 @@ const TeenPatti20 = (props: any) => {
 
 
 
-      <div className={` mt-2`}>
+      <div className={``}>
         {gameData?.map((item, index) => (
           <div key={index} className=" relative">
 
-            <div className="d-flex  justify-content-between p-2  bg-theme text-white" style={{background:"linear-gradient(-180deg, #2E4B5E 0%, #243A48 82%)", borderRadius:"4px 4px 0 0"}}><span>{item.title}</span><div>{showMinmax && <span className='bg-dark rounded px-1'>Min/Max: 100 - 100000 </span>} <i onClick={() => setShowMinmax(!showMinmax)} className="fa fa-info-circle" aria-hidden="true"></i></div> 
+            <div className="d-flex  justify-content-between px-2 py-1  bg-theme text-white" style={{background:"linear-gradient(-180deg, #2E4B5E 0%, #243A48 82%)", borderRadius:"4px 4px 0 0", fontSize:"12px"}}><span>{item.title}</span><div>{showMinmax && <span className='bg-dark rounded px-1'>Min/Max: 100 - 100000 </span>} <i onClick={() => setShowMinmax(!showMinmax)} className="fa fa-info-circle" aria-hidden="true"></i></div> 
             </div>
             {/* Body */}
-{clsstatus2 && <div style={{    
-  left: "35%",
-position:"absolute",
+{clsstatus2 && <div style={{   
+                position: "absolute",
     textAlign: "center",
     alignItems: "center",
+    top: index==0?"7%":index==1?"40%":"73%",
+    zIndex: "99999",
+    color: "rgb(202, 16, 16)",
+    opacity: "0.5",
+    fontWeight: "700",
+    fontSize: "25px",
+    background: "#fff",
+    width: "100%",
+    height: "27%",
+    border: "1.5px solid rgb(202, 16, 16)",
     display: "flex",
-    top: index==0?"23%":index==1?"56%":"88%",
-    zIndex: 99999,
-    color: "#ca1010",
-    opacity:"0.5",
-    fontWeight:"700",
-    fontSize: "25px"}}>SUSPENDED</div>}
+    justifyContent: "center", 
+    left:"0px"
+    }}><span className='text-center'>SUSPENDED</span></div>}
             
             <div
               className="row text-center"

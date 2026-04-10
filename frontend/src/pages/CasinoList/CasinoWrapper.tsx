@@ -260,8 +260,8 @@ const CasinoWrapper = (props: any) => {
               let label = "";
               if (item.winner === "dragon") label = "D";
               else if (item.winner === "tiger") label = "T";
-              else if (item.winner === "Player A") label = "A";
-              else if (item.winner === "Player B") label = "B";
+              else if (item.winner === "A" || item.winner === "Player A" ) label = "A";
+              else if (item.winner === "B" || item.winner === "Player B" ) label = "B";
               else label = "?";
 
               return (

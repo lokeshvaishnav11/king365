@@ -352,78 +352,30 @@ const DragonTigerA = (props: any) => {
     <div>
     <div className="d-flex justify-content-between p-2 bg-theme text-white rounded" style={{background:"linear-gradient(-180deg, #2E4B5E 0%, #243A48 82%)"}}><span>WINNER</span><div>{showMinmax &&<span className='bg-dark rounded px-1'>Min/Max: 100 - 100000 </span>} <i  onClick={() => setShowMinmax(!showMinmax)} className="fa fa-info-circle" aria-hidden="true"></i></div> </div>
 
-      <div className={`d-t-box buttonsuspended ${clsstatus}`} style={{position: "relative"}}>
-        <div className='row row6 justify-content-center'>
+      <div className={` buttonsuspended ${clsstatus}`} style={{position: "relative"}}>
+        <div style={{background:"linear-gradient(90deg,rgb(153 199 241) 0%,rgb(138 189 216 / 50%) 49%,rgb(146 198 246) 100%)"}} className='row row6 justify-content-center'>
           {buttonLayout('col-lg-3 col-6', [0, 2, 1])}
           {/* {buttonLayout('col-lg-3 col-12', [3])} */}
           {/* <Minmax min={liveMatchData.min} max={liveMatchData.max} /> */}
         </div>
-       {clsstatus && <div style={{    left: "35%",
-    position: "absolute",
+       {clsstatus && <div style={{   
+                position: "absolute",
     textAlign: "center",
     alignItems: "center",
+    top: "1%",
+    zIndex: "99999",
+    color: "rgb(202, 16, 16)",
+    opacity: "0.5",
+    fontWeight: "700",
+    fontSize: "25px",
+    background: "#fff",
+    width: "100%",
+    height: "100%",
+    border: "1.5px solid rgb(202, 16, 16)",
     display: "flex",
-    top: "47%",
-    zIndex: 99999,
-    color: "#ca1010",
-    opacity:"0.5",
-    fontWeight:"700",
-    fontSize: "25px"}}>SUSPENDED</div>}
-      </div>
-      {isMobile ? <div className="home_mobile d-none">
-        <div className="mobile-header-for-casino">
-          <ul className="nav nav-tabs">
-            <li className="nav-item"><a onClick={() => setActiveTab('dragon')} data-toggle="tab" href="#dragon" className={activeTab === 'dragon' ? "nav-link active" : "nav-link"}>Dragon</a></li>
-            <li className="nav-item"><a onClick={() => setActiveTab('tiger')} data-toggle="tab" href="#tiger" className={activeTab === 'tiger' ? "nav-link active" : "nav-link"}>Tiger</a></li>
-          </ul>
-        </div>
-      </div> : ""}
-      <div className='row row5 d-none'>
-        {isMobile && activeTab === "dragon" || !isMobile ? <div className='col-lg-6 col-12'>
-          <div className='d-t-box m-b-10 buttonsuspended'>
-            <div className='row row6'>
-              <div className='col-12'>
-                <h4 className='m-b-0 text-center text-uppercase'>Dragon</h4>
-              </div>
-              {buttonLayout('col-lg-6 col-6 mb-10 mt-10', [4, 5])}
-              {buttonLayout('col-lg-6 col-6', [6, 7])}
-              <Minmax min={liveMatchData.min} max={liveMatchData.max} />
-
-            </div>
-          </div>
-        </div> : ""}
-        {isMobile && activeTab === "tiger" || !isMobile ?
-          <div className='col-lg-6 col-12 '>
-            <div className='d-t-box m-b-10 buttonsuspended'>
-              <div className='row '>
-                <div className='col-12'>
-                  <h4 className='m-b-0 text-center text-uppercase'>Tiger</h4>
-                </div>
-                {buttonLayout('col-lg-6 col-6 mb-10 mt-10', [21, 22])}
-                {buttonLayout('col-lg-6 col-6', [23, 24])}
-                <Minmax min={liveMatchData.min} max={liveMatchData.max} />
-
-              </div>
-
-            </div>
-
-          </div> : ""}
-      </div>
-      <div className='row row5 d-none'>
-        {isMobile && activeTab === "dragon" || !isMobile ? <div className='col-lg-6 col-12'>
-          <div className='d-t-box m-b-10 buttonsuspended'>
-            <div className='row'>
-              {singleCard('Dragon', drgonCard)}
-            </div>
-          </div>
-        </div> : ""}
-        {isMobile && activeTab === "tiger" || !isMobile ? <div className='col-lg-6 col-12'>
-          <div className='d-t-box m-b-10 buttonsuspended'>
-            <div className='row'>
-              {singleCard('Tiger', tigerCard)}
-            </div>
-          </div>
-        </div> : ""}
+    justifyContent: "center", 
+    left:"0px"
+    }}><span className='text-center'>SUSPENDED</span></div>}
       </div>
     </div>
   )

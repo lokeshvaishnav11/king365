@@ -295,22 +295,41 @@ const CasinoTitle = (props: any) => {
   //   );
   // };
 
-  const dt20 = () => {
-    console.log(lastResult,"last result in dt20")
-  const cards = lastResult
-    ? [lastResult.C1, lastResult.C2]
-    : []; // Default cards if lastResult is not available
+const dt20 = () => {
+  const dragonCard = lastResult?.C1;
+  const tigerCard = lastResult?.C2;
 
   return (
     <div className="video-overlay">
-      <div className="imgspace d-flex">
-        {cards.map((card, i) => (
+      <div
+        className="d-flex flex-column justify-content-center align-items-baseline"
+        style={{gap:"4px"}}
+      >
+
+        {/* 🐉 Dragon */}
+        <div className="d-flex flex-column align-items-baseline">
+        
+            <span className="text-white">Dragon</span>
+  
           <img
-            key={i}
-            alt=""
-            src={`/imgs/casino/cards/${card ? card : "patti_back"}.png`}
+            alt="dragon"
+            src={`/imgs/casino/cards/${dragonCard ? dragonCard : "patti_back"}.png`}
+            style={{ width: "80px" }}
           />
-        ))}
+        </div>
+
+        {/* 🐯 Tiger */}
+        <div className="d-flex flex-column align-items-baseline">
+         
+            <span className="text-white">Tiger</span>
+         
+          <img
+            alt="tiger"
+            src={`/imgs/casino/cards/${tigerCard ? tigerCard : "patti_back"}.png`}
+            style={{ width: "80px" }}
+          />
+        </div>
+
       </div>
     </div>
   );
@@ -770,16 +789,11 @@ const CasinoTitle = (props: any) => {
   
 
 const teen20 = () => {
-  const cards = lastResult
-    ? Object.keys(lastResult)
-        .filter(key => key.startsWith("C"))
-        .sort()
-        .map(key => lastResult[key])
-    : [];
+  const getCard = (key:any) => lastResult?.[key] || "patti_back";
 
-  // ✅ Alternate split
-  const playerA = cards.filter((_, i) => i % 2 === 0); // 0,2,4
-  const playerB = cards.filter((_, i) => i % 2 !== 0); // 1,3,5
+  // Fixed mapping
+  const playerA = [getCard("C1"), getCard("C5"), getCard("C4")];
+  const playerB = [getCard("C3"), getCard("C2"), getCard("C6")];
 
   return (
     <div className="video-overlay">
@@ -796,7 +810,7 @@ const teen20 = () => {
                 <img
                   key={i}
                   alt=""
-                  src={`/imgs/casino/cards/${card === "1" ? "patti_back" : card}.png`}
+                  src={`/imgs/casino/cards/${card}.png`}
                 />
               ))}
             </div>
@@ -812,7 +826,7 @@ const teen20 = () => {
                 <img
                   key={i}
                   alt=""
-                  src={`/imgs/casino/cards/${card === "1" ? "patti_back" : card}.png`}
+                  src={`/imgs/casino/cards/${card}.png`}
                 />
               ))}
             </div>
