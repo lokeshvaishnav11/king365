@@ -98,8 +98,8 @@ const CasinoWrapper = (props: any) => {
   React.useEffect(() => {
     const fetchData = async () => {
       try {
-        // const res = await axios.get(`https://reddysocket.chausar.com/data/${gameCode}`);
-        const res = await axios.get(`http://localhost:3030/data/${gameCode}`);
+        const res = await axios.get(`https://reddysocket.chausar.com/data/${gameCode}`);
+        // const res = await axios.get(`http://localhost:3030/data/${gameCode}`);
 
         console.log(res.data, `${gameCode} DATA`);
         setDefaultNewData(res.data.data);
