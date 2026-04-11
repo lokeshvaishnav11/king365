@@ -25,7 +25,7 @@ const MobileFooter = () => {
           width: "100%",
           background: "linear-gradient(180deg, #1B2E39, #1B2E39)",
           height: "65px",
-          zIndex: 999,
+          zIndex: 99999999,
           borderTop: "1px solid rgba(255,255,255,0.1)"
         }}
       >
