@@ -818,40 +818,114 @@ const compareHands = (rA, rB) => {
 const hasJoker = (cards, jokerValue) =>
   cards.some(c => c.slice(0, -2) === jokerValue);
 
+// const getBestRankWithJoker = (cards, jokerValue) => {
+//   const jokers = cards.filter(c => c.slice(0, -2) === jokerValue);
+//   const normal = cards.filter(c => c.slice(0, -2) !== jokerValue);
+
+//   if (jokers.length === 0) return getRank(cards);
+
+//   if (jokers.length === 3) return { rank: 6, values: [14] };
+
+//   if (jokers.length === 2) {
+//     const val = getCardValue(normal[0]);
+//     return { rank: 6, values: [val] };
+//   }
+
+//   const values = normal.map(getCardValue).sort((a,b)=>a-b);
+//   const suits = normal.map(c => c.slice(-2));
+//   const isSameSuit = suits[0] === suits[1];
+
+//   if (values[0] === values[1]) return { rank: 6, values: [values[0]] };
+
+//   // if (isSameSuit && Math.abs(values[0]-values[1]) <= 2)
+//   //   return { rank: 5, values: [14] };
+
+//   // if (Math.abs(values[0]-values[1]) <= 2)
+//   //   return { rank: 4, values: [14] };
+
+//   // Sequence check (with joker)
+// for (let i = 2; i <= 14; i++) {
+//   const test = [...values, i].sort((a,b)=>a-b);
+
+//   const isSeq =
+//     (test[0]+1 === test[1] && test[1]+1 === test[2]) ||
+//     (test.toString() === "2,3,14");
+
+//   if (isSeq) {
+//     const isColor = cards.every(c => c.slice(-2) === cards[0].slice(-2));
+//     return {
+//       rank: isColor ? 5 : 4,
+//       values: [test[2]]
+//     };
+//   }
+// }
+
+//   if (isSameSuit)
+//     return { rank: 3, values: [14, ...values.sort((a,b)=>b-a)] };
+
+//   return { rank: 2, values: [Math.max(...values), 14] };
+// };
+
+//////////////////////////////////////////////////////
+// 🐉 DRAGON TIGER
+//////////////////////////////////////////////////////
+
+
 const getBestRankWithJoker = (cards, jokerValue) => {
   const jokers = cards.filter(c => c.slice(0, -2) === jokerValue);
   const normal = cards.filter(c => c.slice(0, -2) !== jokerValue);
 
   if (jokers.length === 0) return getRank(cards);
 
+  // 🔥 3 Joker = Trail
   if (jokers.length === 3) return { rank: 6, values: [14] };
 
+  // 🔥 2 Joker = Trail
   if (jokers.length === 2) {
     const val = getCardValue(normal[0]);
     return { rank: 6, values: [val] };
   }
 
+  // 🔥 1 Joker case
   const values = normal.map(getCardValue).sort((a,b)=>a-b);
   const suits = normal.map(c => c.slice(-2));
   const isSameSuit = suits[0] === suits[1];
 
-  if (values[0] === values[1]) return { rank: 6, values: [values[0]] };
+  // 👉 Pair → Trail
+  if (values[0] === values[1]) {
+    return { rank: 6, values: [values[0]] };
+  }
 
-  if (isSameSuit && Math.abs(values[0]-values[1]) <= 2)
-    return { rank: 5, values: [14] };
+  // 🔥 Sequence check with Joker
+  for (let i = 2; i <= 14; i++) {
+    const test = [...values, i].sort((a,b)=>a-b);
 
-  if (Math.abs(values[0]-values[1]) <= 2)
-    return { rank: 4, values: [14] };
+    const isSeq =
+      (test[0]+1 === test[1] && test[1]+1 === test[2]) ||
+      (test.toString() === "2,3,14");
 
-  if (isSameSuit)
-    return { rank: 3, values: [14, ...values.sort((a,b)=>b-a)] };
+    if (isSeq) {
+      return {
+        rank: isSameSuit ? 5 : 4, // ✅ FIX: normal cards se decide
+        values: [test[2]]
+      };
+    }
+  }
 
-  return { rank: 2, values: [Math.max(...values), 14] };
+  // 🔥 Color (Flush)
+  if (isSameSuit) {
+    return {
+      rank: 3,
+      values: [14, ...values.sort((a,b)=>b-a)]
+    };
+  }
+
+  // 🔥 Pair banega joker se
+  return {
+    rank: 2,
+    values: [Math.max(...values), 14]
+  };
 };
-
-//////////////////////////////////////////////////////
-// 🐉 DRAGON TIGER
-//////////////////////////////////////////////////////
 
 const getDragonTigerResult = async () => {
   const deck = shuffleDeck(createDeck());
@@ -952,13 +1026,21 @@ const getJokerResult = async (roundId) => {
     A_cards = draw(newDeck,3);
     B_cards = draw(newDeck,3);
 
-    const rA = hasJoker(A_cards,jokerValue)
-      ? getBestRankWithJoker(A_cards,jokerValue)
-      : getRank(A_cards);
+  // 👉 Player A Joker Check
+let rA;
+if (hasJoker(A_cards, jokerValue)) {
+  rA = getBestRankWithJoker(A_cards, jokerValue);
+} else {
+  rA = getRank(A_cards);
+}
 
-    const rB = hasJoker(B_cards,jokerValue)
-      ? getBestRankWithJoker(B_cards,jokerValue)
-      : getRank(B_cards);
+// 👉 Player B Joker Check
+let rB;
+if (hasJoker(B_cards, jokerValue)) {
+  rB = getBestRankWithJoker(B_cards, jokerValue);
+} else {
+  rB = getRank(B_cards);
+}
 
     let win = compareHands(rA,rB);
     if (win === "TIE") win = Math.random() < 0.5 ? "A":"B";
