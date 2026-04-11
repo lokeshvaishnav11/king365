@@ -1019,6 +1019,23 @@ const runGame = async (gameName, logicFn) => {
   }
 };
 
+
+app.get("/data/:name", async (req, res) => {
+  try {
+    const { name } = req.params;
+
+    const data = await redis.get(name);
+    const history = await redis.get(`${name}_history`);
+
+    res.json({
+      success: true,
+      data: data ? JSON.parse(data) : null,
+      history: history ? JSON.parse(history) : []
+    });
+  } catch (err) {
+    res.status(500).json({ success: false });
+  }
+});
 //////////////////////////////////////////////////////
 // 🚀 START
 //////////////////////////////////////////////////////
