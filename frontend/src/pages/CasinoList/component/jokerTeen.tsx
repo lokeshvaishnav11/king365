@@ -110,7 +110,7 @@ const  TeenpattiJoker = (props: any) => {
     textAlign: "center",
     alignItems: "center",
     top: "1%",
-    zIndex: "99999",
+   zIndex: "99",
     color: "rgb(202, 16, 16)",
     opacity: "0.5",
     fontWeight: "700",

@@ -331,10 +331,10 @@ const DragonTigerA = (props: any) => {
                   <ButtonItem selectionid={market.SelectionId} title={title} odd={oddVal} lastOdds={lastOdds} liveMatchData={liveMatchData} defaultNewData={defaultNewData} />
                 </div>
               </div>
-              <div className='row'>
+              <div className='row '>
                 <div className='col-12 text-center'>
                   <div className='m-t-5' style={{ marginTop: '10px' }}>
-                    <CasinoPnl sectionId={market.SelectionId} matchId={liveMatchData.match_id} />
+                    {/* <CasinoPnl sectionId={market.SelectionId} matchId={liveMatchData.match_id} /> */}
                   </div>
                 </div>
               </div>
@@ -363,7 +363,7 @@ const DragonTigerA = (props: any) => {
     textAlign: "center",
     alignItems: "center",
     top: "1%",
-    zIndex: "99999",
+   zIndex: "99",
     color: "rgb(202, 16, 16)",
     opacity: "0.5",
     fontWeight: "700",

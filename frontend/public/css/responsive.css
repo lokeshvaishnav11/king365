@@ -736,7 +736,7 @@
     top: 10%;
     left: 2%;
     right: 2%;
-    z-index: 3;
+    z-index: 99999999;
   }
 
   .backdrop-custom {

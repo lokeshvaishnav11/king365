@@ -66,6 +66,7 @@ import { selectUserData } from "../../redux/actions/login/loginSlice";
 import { useWebsocketUser } from "../../context/webSocketUser";
 import axios from "axios";
 import TeenpattiJoker from "./component/jokerTeen";
+import CasinoResultDetail from "./CasinoResultDetail";
 // import datajson from './Casinojson'
 
 // const isMobile = true;
@@ -94,6 +95,14 @@ const CasinoWrapper = (props: any) => {
 
   const [defaultNewData, setDefaultNewData] = useState<any>('')
   const [history, setHistory] = useState<any>([])
+  const [popupdata, setPopData] = useState<any>({})
+  const [popupstatus, setPopStatus] = useState<any>(false)
+
+   const handleResultsClick = (Item: any) => {
+
+    setPopData({ ...Item, ...{ title: gameCode, slug: gameCode, "event_data": { title: gameCode } } })
+    setPopStatus(true)
+  }
 
   React.useEffect(() => {
     const fetchData = async () => {
@@ -282,6 +291,7 @@ const CasinoWrapper = (props: any) => {
                     padding: "5px",
                     fontSize: "12px"
                   }}
+                  onClick={() => handleResultsClick(item)}
                 >
                   {label}
                 </div>
@@ -798,7 +808,7 @@ const CasinoWrapper = (props: any) => {
       left: "50%",
       top: "48%",
       transform: "translate(-50%, -50%)",
-      zIndex: 9999,
+      zIndex: 99,
       padding: "8px 18px",
       fontSize: "16px",
       fontWeight: "500",
@@ -902,6 +912,11 @@ const CasinoWrapper = (props: any) => {
       <div style={{ overflowY: "auto", background: "black", marginTop: "10px" }}>
         {lastResultHistoryView()}
       </div>
+       <CasinoResultDetail
+              popupdata={popupdata}
+              setPopStatus={setPopStatus}
+              popupstatus={popupstatus}
+            />
       {rulesModel ? (
         <CasinoRulesDetail
           title={casinoMatchData.title}

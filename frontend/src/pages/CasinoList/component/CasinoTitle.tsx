@@ -792,8 +792,8 @@ const teen20 = () => {
   const getCard = (key:any) => lastResult?.[key] || "patti_back";
 
   // Fixed mapping
-  const playerA = [getCard("C1"), getCard("C5"), getCard("C4")];
-  const playerB = [getCard("C3"), getCard("C2"), getCard("C6")];
+  const playerA = [getCard("C1"), getCard("C3"), getCard("C5")];
+  const playerB = [getCard("C2"), getCard("C4"), getCard("C6")];
 
   return (
     <div className="video-overlay">

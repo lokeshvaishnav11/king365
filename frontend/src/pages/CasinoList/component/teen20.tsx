@@ -170,7 +170,7 @@ const TeenPatti20 = (props: any) => {
     textAlign: "center",
     alignItems: "center",
     top: index==0?"7%":index==1?"40%":"73%",
-    zIndex: "99999",
+    zIndex: "99",
     color: "rgb(202, 16, 16)",
     opacity: "0.5",
     fontWeight: "700",
