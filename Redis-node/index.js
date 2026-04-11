@@ -677,6 +677,460 @@
 // });
 
 
+// const express = require("express");
+// const Redis = require("ioredis");
+// const mongoose = require("mongoose");
+// const cors = require("cors");
+
+// const app = express();
+// app.use(cors());
+// app.use(express.json());
+
+// //////////////////////////////////////////////////////
+// // 🔗 MONGODB
+// //////////////////////////////////////////////////////
+
+// const dsn = "mongodb+srv://365infayou:Jv9lwv6csl7J1Jp5@cluster365.sxln4q8.mongodb.net/infa?retryWrites=true&w=majority&appName=Cluster365";
+
+// mongoose.connect(dsn)
+//   .then(() => console.log("Mongo Connected"))
+//   .catch(err => console.log(err));
+
+// //////////////////////////////////////////////////////
+// // 🔥 REDIS
+// //////////////////////////////////////////////////////
+
+// const redis = new Redis({
+//   host: "127.0.0.1",
+//   port: 6379,
+// });
+
+// //////////////////////////////////////////////////////
+// // 🧠 MODEL
+// //////////////////////////////////////////////////////
+
+// const BetSchema = new mongoose.Schema({
+//   roundId: Number,
+//   game: String,
+//   userId: String,
+//   amount: Number,
+//   side: String,
+// });
+
+// const Bet = mongoose.model("Bet", BetSchema);
+
+// //////////////////////////////////////////////////////
+// // 🧠 HELPERS
+// //////////////////////////////////////////////////////
+
+// const delay = (ms) => new Promise(res => setTimeout(res, ms));
+
+// let counter = 0;
+// const getRoundId = () => {
+//   counter = (counter + 1) % 1000;
+//   return Number(`${Date.now()}${counter}`);
+// };
+
+// //////////////////////////////////////////////////////
+// // 🎴 DECK
+// //////////////////////////////////////////////////////
+
+// const createDeck = () => {
+//   const cards = ["A","2","3","4","5","6","7","8","9","10","J","Q","K"];
+//   const suits = ["HH","DD","CC","SS"];
+//   let deck = [];
+//   for (let c of cards) {
+//     for (let s of suits) {
+//       deck.push(c + s);
+//     }
+//   }
+//   return deck;
+// };
+
+// const shuffleDeck = (deck) => {
+//   for (let i = deck.length - 1; i > 0; i--) {
+//     const j = Math.floor(Math.random() * (i + 1));
+//     [deck[i], deck[j]] = [deck[j], deck[i]];
+//   }
+//   return deck;
+// };
+
+// const draw = (deck, n) => deck.splice(0, n);
+
+// //////////////////////////////////////////////////////
+// // 🧠 CARD LOGIC
+// //////////////////////////////////////////////////////
+
+// const getCardValue = (card) => {
+//   let v = card.slice(0, -2);
+//   if (v === "A") return 14;
+//   if (v === "K") return 13;
+//   if (v === "Q") return 12;
+//   if (v === "J") return 11;
+//   return parseInt(v);
+// };
+
+// const getRank = (cards) => {
+//   let values = cards.map(getCardValue).sort((a, b) => a - b);
+//   let suits = cards.map(c => c.slice(-2));
+
+//   const isSameSuit = suits.every(s => s === suits[0]);
+//   const isTrail = values[0] === values[1] && values[1] === values[2];
+
+//   const isLowSequence = (values[0] === 2 && values[1] === 3 && values[2] === 14);
+
+//   const isSequence =
+//     isLowSequence ||
+//     (values[0] + 1 === values[1] && values[1] + 1 === values[2]);
+
+//   if (isTrail) return { rank: 6, values: [values[0]] };
+//   if (isSequence && isSameSuit) return { rank: 5, values: [isLowSequence ? 3 : values[2]] };
+//   if (isSequence) return { rank: 4, values: [isLowSequence ? 3 : values[2]] };
+//   if (isSameSuit) return { rank: 3, values: [...values].sort((a,b)=>b-a) };
+
+//   if (values[0] === values[1] || values[1] === values[2]) {
+//     let pair = values[1];
+//     let kicker = values[0] === values[1] ? values[2] : values[0];
+//     return { rank: 2, values: [pair, kicker] };
+//   }
+
+//   return { rank: 1, values: [...values].sort((a,b)=>b-a) };
+// };
+
+// const compareHands = (rA, rB) => {
+//   if (rA.rank !== rB.rank) return rA.rank > rB.rank ? "A" : "B";
+
+//   const len = Math.max(rA.values.length, rB.values.length);
+
+//   for (let i = 0; i < len; i++) {
+//     const a = rA.values[i] || 0;
+//     const b = rB.values[i] || 0;
+//     if (a !== b) return a > b ? "A" : "B";
+//   }
+
+//   return "TIE";
+// };
+
+// //////////////////////////////////////////////////////
+// // 🃏 JOKER HELPERS
+// //////////////////////////////////////////////////////
+
+// const hasJoker = (cards, jokerValue) =>
+//   cards.some(c => c.slice(0, -2) === jokerValue);
+
+// // const getBestRankWithJoker = (cards, jokerValue) => {
+// //   const jokers = cards.filter(c => c.slice(0, -2) === jokerValue);
+// //   const normal = cards.filter(c => c.slice(0, -2) !== jokerValue);
+
+// //   if (jokers.length === 0) return getRank(cards);
+
+// //   if (jokers.length === 3) return { rank: 6, values: [14] };
+
+// //   if (jokers.length === 2) {
+// //     const val = getCardValue(normal[0]);
+// //     return { rank: 6, values: [val] };
+// //   }
+
+// //   const values = normal.map(getCardValue).sort((a,b)=>a-b);
+// //   const suits = normal.map(c => c.slice(-2));
+// //   const isSameSuit = suits[0] === suits[1];
+
+// //   if (values[0] === values[1]) return { rank: 6, values: [values[0]] };
+
+// //   // if (isSameSuit && Math.abs(values[0]-values[1]) <= 2)
+// //   //   return { rank: 5, values: [14] };
+
+// //   // if (Math.abs(values[0]-values[1]) <= 2)
+// //   //   return { rank: 4, values: [14] };
+
+// //   // Sequence check (with joker)
+// // for (let i = 2; i <= 14; i++) {
+// //   const test = [...values, i].sort((a,b)=>a-b);
+
+// //   const isSeq =
+// //     (test[0]+1 === test[1] && test[1]+1 === test[2]) ||
+// //     (test.toString() === "2,3,14");
+
+// //   if (isSeq) {
+// //     const isColor = cards.every(c => c.slice(-2) === cards[0].slice(-2));
+// //     return {
+// //       rank: isColor ? 5 : 4,
+// //       values: [test[2]]
+// //     };
+// //   }
+// // }
+
+// //   if (isSameSuit)
+// //     return { rank: 3, values: [14, ...values.sort((a,b)=>b-a)] };
+
+// //   return { rank: 2, values: [Math.max(...values), 14] };
+// // };
+
+// //////////////////////////////////////////////////////
+// // 🐉 DRAGON TIGER
+// //////////////////////////////////////////////////////
+
+
+// const getBestRankWithJoker = (cards, jokerValue) => {
+//   const jokers = cards.filter(c => c.slice(0, -2) === jokerValue);
+//   const normal = cards.filter(c => c.slice(0, -2) !== jokerValue);
+
+//   if (jokers.length === 0) return getRank(cards);
+
+//   // 🔥 3 Joker = Trail
+//   if (jokers.length === 3) return { rank: 6, values: [14] };
+
+//   // 🔥 2 Joker = Trail
+//   if (jokers.length === 2) {
+//     const val = getCardValue(normal[0]);
+//     return { rank: 6, values: [val] };
+//   }
+
+//   // 🔥 1 Joker case
+//   const values = normal.map(getCardValue).sort((a,b)=>a-b);
+//   const suits = normal.map(c => c.slice(-2));
+//   const isSameSuit = suits[0] === suits[1];
+
+//   // 👉 Pair → Trail
+//   if (values[0] === values[1]) {
+//     return { rank: 6, values: [values[0]] };
+//   }
+
+//   // 🔥 Sequence check with Joker
+//   for (let i = 2; i <= 14; i++) {
+//     const test = [...values, i].sort((a,b)=>a-b);
+
+//     const isSeq =
+//       (test[0]+1 === test[1] && test[1]+1 === test[2]) ||
+//       (test.toString() === "2,3,14");
+
+//     if (isSeq) {
+//       return {
+//         rank: isSameSuit ? 5 : 4, // ✅ FIX: normal cards se decide
+//         values: [test[2]]
+//       };
+//     }
+//   }
+
+//   // 🔥 Color (Flush)
+//   if (isSameSuit) {
+//     return {
+//       rank: 3,
+//       values: [14, ...values.sort((a,b)=>b-a)]
+//     };
+//   }
+
+//   // 🔥 Pair banega joker se
+//   return {
+//     rank: 2,
+//     values: [Math.max(...values), 14]
+//   };
+// };
+
+// const getDragonTigerResult = async () => {
+//   const deck = shuffleDeck(createDeck());
+
+//   let C1, C2;
+//   const val = (c) => {
+//     let v = c.slice(0, -2);
+//     if (["J","Q","K"].includes(v)) return 10;
+//     if (v === "A") return 1;
+//     return parseInt(v);
+//   };
+
+//   while (true) {
+//     C1 = draw(deck,1)[0];
+//     C2 = draw(deck,1)[0];
+//     if (val(C1) !== val(C2)) break;
+//   }
+
+//   return {
+//     C1,
+//     C2,
+//     winner: val(C1) > val(C2) ? "dragon" : "tiger"
+//   };
+// };
+
+// //////////////////////////////////////////////////////
+// // 🃏 TEEN PATTI (NORMAL)
+// //////////////////////////////////////////////////////
+
+// const getTeenPattiResult = async (roundId) => {
+//   const bets = await Bet.find({ roundId, game: "teen20" });
+
+//   let A_amt = 0, B_amt = 0;
+//   bets.forEach(b => {
+//     if (b.side === "A") A_amt += b.amount;
+//     if (b.side === "B") B_amt += b.amount;
+//   });
+
+//   const forcedWinner = bets.length ? (A_amt < B_amt ? "A" : "B") : null;
+
+//   let A_cards, B_cards, winner, attempts = 0;
+
+//   while (true) {
+//     attempts++;
+
+//     const deck = shuffleDeck(createDeck());
+//     A_cards = draw(deck,3);
+//     B_cards = draw(deck,3);
+
+//     const rA = getRank(A_cards);
+//     const rB = getRank(B_cards);
+
+//     let win = compareHands(rA, rB);
+//     if (win === "TIE") win = Math.random() < 0.5 ? "A" : "B";
+
+//     if (!forcedWinner || win === forcedWinner || attempts > 30) {
+//       winner = win;
+//       break;
+//     }
+//   }
+
+//   return {
+//     C1: A_cards[0], C2: B_cards[0],
+//     C3: A_cards[1], C4: B_cards[1],
+//     C5: A_cards[2], C6: B_cards[2],
+//     winner
+//   };
+// };
+
+// //////////////////////////////////////////////////////
+// // 🃏 JOKER TEEN PATTI
+// //////////////////////////////////////////////////////
+
+// const getJokerResult = async (roundId) => {
+//   const bets = await Bet.find({ roundId, game: "joker120" });
+
+//   let A_amt = 0, B_amt = 0;
+//   bets.forEach(b => {
+//     if (b.side === "A") A_amt += b.amount;
+//     if (b.side === "B") B_amt += b.amount;
+//   });
+
+//   const forcedWinner = bets.length ? (A_amt < B_amt ? "A" : "B") : null;
+
+//   const deck = shuffleDeck(createDeck());
+//   const jokerCard = draw(deck,1)[0];
+//   const jokerValue = jokerCard.slice(0,-2);
+
+//   let A_cards, B_cards, winner, attempts = 0;
+
+//   while (true) {
+//     attempts++;
+
+//     const newDeck = shuffleDeck(createDeck());
+//     const index = newDeck.indexOf(jokerCard);
+//     if (index > -1) newDeck.splice(index,1);
+
+//     A_cards = draw(newDeck,3);
+//     B_cards = draw(newDeck,3);
+
+//   // 👉 Player A Joker Check
+// let rA;
+// if (hasJoker(A_cards, jokerValue)) {
+//   rA = getBestRankWithJoker(A_cards, jokerValue);
+// } else {
+//   rA = getRank(A_cards);
+// }
+
+// // 👉 Player B Joker Check
+// let rB;
+// if (hasJoker(B_cards, jokerValue)) {
+//   rB = getBestRankWithJoker(B_cards, jokerValue);
+// } else {
+//   rB = getRank(B_cards);
+// }
+
+//     let win = compareHands(rA,rB);
+//     if (win === "TIE") win = Math.random() < 0.5 ? "A":"B";
+
+//     if (!forcedWinner || win === forcedWinner || attempts > 30) {
+//       winner = win;
+//       break;
+//     }
+//   }
+
+//   return {
+//     C1: jokerCard,
+//     C2: B_cards[0], C3: A_cards[0],
+//     C4: B_cards[1], C5: A_cards[1],
+//     C6: B_cards[2], C7: A_cards[2],
+//     winner,
+//     joker: jokerValue
+//   };
+// };
+
+// //////////////////////////////////////////////////////
+// // 🎮 GAME LOOP
+// //////////////////////////////////////////////////////
+
+// const runGame = async (gameName, logicFn) => {
+//   while (true) {
+//     let time = 20;
+//     const roundId = getRoundId();
+
+//     while (time--) {
+//       await redis.set(gameName, JSON.stringify({ roundId, autotime: time, status:"running" }));
+//       await delay(1000);
+//     }
+
+//     await redis.set(gameName, JSON.stringify({ roundId, autotime:0, status:"suspend" }));
+
+//     const result = await logicFn(roundId);
+
+//     let data = { roundId, autotime:0, status:"dealing" };
+
+//     const orderMap = {
+//       teen20:["C1","C2","C3","C4","C5","C6"],
+//       joker120:["C1","C2","C3","C4","C5","C6","C7"],
+//       dt20:["C1","C2"]
+//     };
+
+//     for (let key of orderMap[gameName]) {
+//       await delay(1000);
+//       data[key] = result[key];
+//       await redis.set(gameName, JSON.stringify(data));
+//     }
+
+//     data.status = "result";
+//     data.winner = result.winner;
+
+//     await redis.set(gameName, JSON.stringify(data));
+//     await delay(3000);
+//   }
+// };
+
+
+// app.get("/data/:name", async (req, res) => {
+//   try {
+//     const { name } = req.params;
+
+//     const data = await redis.get(name);
+//     const history = await redis.get(`${name}_history`);
+
+//     res.json({
+//       success: true,
+//       data: data ? JSON.parse(data) : null,
+//       history: history ? JSON.parse(history) : []
+//     });
+//   } catch (err) {
+//     res.status(500).json({ success: false });
+//   }
+// });
+// //////////////////////////////////////////////////////
+// // 🚀 START
+// //////////////////////////////////////////////////////
+
+// app.listen(3030, () => {
+//   console.log("Server running");
+
+//   runGame("dt20", getDragonTigerResult);
+//   runGame("teen20", getTeenPattiResult);
+//   runGame("joker120", getJokerResult);
+// });
+
+
 const express = require("express");
 const Redis = require("ioredis");
 const mongoose = require("mongoose");
@@ -758,174 +1212,109 @@ const shuffleDeck = (deck) => {
 const draw = (deck, n) => deck.splice(0, n);
 
 //////////////////////////////////////////////////////
-// 🧠 CARD LOGIC
+// 🧠 CARD ENGINE (FINAL)
 //////////////////////////////////////////////////////
 
-const getCardValue = (card) => {
-  let v = card.slice(0, -2);
-  if (v === "A") return 14;
-  if (v === "K") return 13;
-  if (v === "Q") return 12;
-  if (v === "J") return 11;
-  return parseInt(v);
+const RANK_ORDER = ["2","3","4","5","6","7","8","9","10","J","Q","K","A"];
+const SUITS = ["HH","DD","CC","SS"];
+
+const getVal = (r) => {
+  if (r === "A") return 14;
+  if (r === "K") return 13;
+  if (r === "Q") return 12;
+  if (r === "J") return 11;
+  return parseInt(r);
 };
 
-const getRank = (cards) => {
-  let values = cards.map(getCardValue).sort((a, b) => a - b);
-  let suits = cards.map(c => c.slice(-2));
+const evaluate = (cards) => {
+  const vals = cards.map(c => getVal(c.slice(0,-2))).sort((a,b)=>a-b);
+  const suits = cards.map(c => c.slice(-2));
 
-  const isSameSuit = suits.every(s => s === suits[0]);
-  const isTrail = values[0] === values[1] && values[1] === values[2];
+  const sameSuit = suits.every(s => s === suits[0]);
+  const isTrail = vals[0] === vals[1] && vals[1] === vals[2];
 
-  const isLowSequence = (values[0] === 2 && values[1] === 3 && values[2] === 14);
+  const isLowSeq = vals[0] === 2 && vals[1] === 3 && vals[2] === 14;
+  const isSeq = isLowSeq || (vals[0]+1 === vals[1] && vals[1]+1 === vals[2]);
 
-  const isSequence =
-    isLowSequence ||
-    (values[0] + 1 === values[1] && values[1] + 1 === values[2]);
+  if (isSeq && sameSuit) return { rank: 6, vals: [isLowSeq ? 3 : vals[2]] };
+  if (isTrail) return { rank: 5, vals: [vals[0]] };
+  if (isSeq) return { rank: 4, vals: [isLowSeq ? 3 : vals[2]] };
+  if (sameSuit) return { rank: 3, vals: [...vals].sort((a,b)=>b-a) };
 
-  if (isTrail) return { rank: 6, values: [values[0]] };
-  if (isSequence && isSameSuit) return { rank: 5, values: [isLowSequence ? 3 : values[2]] };
-  if (isSequence) return { rank: 4, values: [isLowSequence ? 3 : values[2]] };
-  if (isSameSuit) return { rank: 3, values: [...values].sort((a,b)=>b-a) };
-
-  if (values[0] === values[1] || values[1] === values[2]) {
-    let pair = values[1];
-    let kicker = values[0] === values[1] ? values[2] : values[0];
-    return { rank: 2, values: [pair, kicker] };
+  if (vals[0] === vals[1] || vals[1] === vals[2]) {
+    const pair = vals[1];
+    const kicker = vals[0] === vals[1] ? vals[2] : vals[0];
+    return { rank: 2, vals: [pair, kicker] };
   }
 
-  return { rank: 1, values: [...values].sort((a,b)=>b-a) };
+  return { rank: 1, vals: [...vals].sort((a,b)=>b-a) };
 };
 
-const compareHands = (rA, rB) => {
-  if (rA.rank !== rB.rank) return rA.rank > rB.rank ? "A" : "B";
+const compareEval = (a, b) => {
+  if (a.rank !== b.rank) return a.rank > b.rank ? "A" : "B";
 
-  const len = Math.max(rA.values.length, rB.values.length);
-
-  for (let i = 0; i < len; i++) {
-    const a = rA.values[i] || 0;
-    const b = rB.values[i] || 0;
-    if (a !== b) return a > b ? "A" : "B";
+  for (let i = 0; i < 3; i++) {
+    const x = a.vals[i] || 0;
+    const y = b.vals[i] || 0;
+    if (x !== y) return x > y ? "A" : "B";
   }
 
   return "TIE";
 };
 
 //////////////////////////////////////////////////////
-// 🃏 JOKER HELPERS
+// 🃏 JOKER ENGINE (BRUTE FORCE)
 //////////////////////////////////////////////////////
 
-const hasJoker = (cards, jokerValue) =>
-  cards.some(c => c.slice(0, -2) === jokerValue);
+const bestHand = (cards, jokerValue) => {
+  if (!jokerValue) return evaluate(cards);
 
-// const getBestRankWithJoker = (cards, jokerValue) => {
-//   const jokers = cards.filter(c => c.slice(0, -2) === jokerValue);
-//   const normal = cards.filter(c => c.slice(0, -2) !== jokerValue);
+  const jokers = cards.filter(c => c.slice(0,-2) === jokerValue);
 
-//   if (jokers.length === 0) return getRank(cards);
+  if (jokers.length === 0) return evaluate(cards);
 
-//   if (jokers.length === 3) return { rank: 6, values: [14] };
+  const nonJoker = cards.filter(c => c.slice(0,-2) !== jokerValue);
 
-//   if (jokers.length === 2) {
-//     const val = getCardValue(normal[0]);
-//     return { rank: 6, values: [val] };
-//   }
+  let best = null;
 
-//   const values = normal.map(getCardValue).sort((a,b)=>a-b);
-//   const suits = normal.map(c => c.slice(-2));
-//   const isSameSuit = suits[0] === suits[1];
+  for (let r of RANK_ORDER) {
+    for (let s of SUITS) {
 
-//   if (values[0] === values[1]) return { rank: 6, values: [values[0]] };
+      let newCards = [...nonJoker];
 
-//   // if (isSameSuit && Math.abs(values[0]-values[1]) <= 2)
-//   //   return { rank: 5, values: [14] };
+      for (let i = 0; i < jokers.length; i++) {
+        newCards.push(r + s);
+      }
 
-//   // if (Math.abs(values[0]-values[1]) <= 2)
-//   //   return { rank: 4, values: [14] };
+      const curr = evaluate(newCards);
 
-//   // Sequence check (with joker)
-// for (let i = 2; i <= 14; i++) {
-//   const test = [...values, i].sort((a,b)=>a-b);
+      if (!best) best = curr;
+      else {
+        const win = compareEval(curr, best);
+        if (win === "A") best = curr;
+      }
+    }
+  }
 
-//   const isSeq =
-//     (test[0]+1 === test[1] && test[1]+1 === test[2]) ||
-//     (test.toString() === "2,3,14");
+  return best;
+};
 
-//   if (isSeq) {
-//     const isColor = cards.every(c => c.slice(-2) === cards[0].slice(-2));
-//     return {
-//       rank: isColor ? 5 : 4,
-//       values: [test[2]]
-//     };
-//   }
-// }
+const finalCompare = (A_cards, B_cards, jokerValue) => {
+  const rA = bestHand(A_cards, jokerValue);
+  const rB = bestHand(B_cards, jokerValue);
 
-//   if (isSameSuit)
-//     return { rank: 3, values: [14, ...values.sort((a,b)=>b-a)] };
+  let res = compareEval(rA, rB);
 
-//   return { rank: 2, values: [Math.max(...values), 14] };
-// };
+  if (res === "TIE") {
+    res = Math.random() < 0.5 ? "A" : "B";
+  }
+
+  return res;
+};
 
 //////////////////////////////////////////////////////
 // 🐉 DRAGON TIGER
 //////////////////////////////////////////////////////
-
-
-const getBestRankWithJoker = (cards, jokerValue) => {
-  const jokers = cards.filter(c => c.slice(0, -2) === jokerValue);
-  const normal = cards.filter(c => c.slice(0, -2) !== jokerValue);
-
-  if (jokers.length === 0) return getRank(cards);
-
-  // 🔥 3 Joker = Trail
-  if (jokers.length === 3) return { rank: 6, values: [14] };
-
-  // 🔥 2 Joker = Trail
-  if (jokers.length === 2) {
-    const val = getCardValue(normal[0]);
-    return { rank: 6, values: [val] };
-  }
-
-  // 🔥 1 Joker case
-  const values = normal.map(getCardValue).sort((a,b)=>a-b);
-  const suits = normal.map(c => c.slice(-2));
-  const isSameSuit = suits[0] === suits[1];
-
-  // 👉 Pair → Trail
-  if (values[0] === values[1]) {
-    return { rank: 6, values: [values[0]] };
-  }
-
-  // 🔥 Sequence check with Joker
-  for (let i = 2; i <= 14; i++) {
-    const test = [...values, i].sort((a,b)=>a-b);
-
-    const isSeq =
-      (test[0]+1 === test[1] && test[1]+1 === test[2]) ||
-      (test.toString() === "2,3,14");
-
-    if (isSeq) {
-      return {
-        rank: isSameSuit ? 5 : 4, // ✅ FIX: normal cards se decide
-        values: [test[2]]
-      };
-    }
-  }
-
-  // 🔥 Color (Flush)
-  if (isSameSuit) {
-    return {
-      rank: 3,
-      values: [14, ...values.sort((a,b)=>b-a)]
-    };
-  }
-
-  // 🔥 Pair banega joker se
-  return {
-    rank: 2,
-    values: [Math.max(...values), 14]
-  };
-};
 
 const getDragonTigerResult = async () => {
   const deck = shuffleDeck(createDeck());
@@ -952,7 +1341,7 @@ const getDragonTigerResult = async () => {
 };
 
 //////////////////////////////////////////////////////
-// 🃏 TEEN PATTI (NORMAL)
+// 🃏 TEEN PATTI
 //////////////////////////////////////////////////////
 
 const getTeenPattiResult = async (roundId) => {
@@ -975,11 +1364,7 @@ const getTeenPattiResult = async (roundId) => {
     A_cards = draw(deck,3);
     B_cards = draw(deck,3);
 
-    const rA = getRank(A_cards);
-    const rB = getRank(B_cards);
-
-    let win = compareHands(rA, rB);
-    if (win === "TIE") win = Math.random() < 0.5 ? "A" : "B";
+    let win = finalCompare(A_cards, B_cards, null);
 
     if (!forcedWinner || win === forcedWinner || attempts > 30) {
       winner = win;
@@ -1026,24 +1411,7 @@ const getJokerResult = async (roundId) => {
     A_cards = draw(newDeck,3);
     B_cards = draw(newDeck,3);
 
-  // 👉 Player A Joker Check
-let rA;
-if (hasJoker(A_cards, jokerValue)) {
-  rA = getBestRankWithJoker(A_cards, jokerValue);
-} else {
-  rA = getRank(A_cards);
-}
-
-// 👉 Player B Joker Check
-let rB;
-if (hasJoker(B_cards, jokerValue)) {
-  rB = getBestRankWithJoker(B_cards, jokerValue);
-} else {
-  rB = getRank(B_cards);
-}
-
-    let win = compareHands(rA,rB);
-    if (win === "TIE") win = Math.random() < 0.5 ? "A":"B";
+    let win = finalCompare(A_cards, B_cards, jokerValue);
 
     if (!forcedWinner || win === forcedWinner || attempts > 30) {
       winner = win;
@@ -1051,14 +1419,22 @@ if (hasJoker(B_cards, jokerValue)) {
     }
   }
 
-  return {
-    C1: jokerCard,
-    C2: B_cards[0], C3: A_cards[0],
-    C4: B_cards[1], C5: A_cards[1],
-    C6: B_cards[2], C7: A_cards[2],
-    winner,
-    joker: jokerValue
-  };
+return {
+  C1: jokerCard,
+
+  // ✅ Player A
+  C2: A_cards[0],
+  C4: A_cards[1],
+  C6: A_cards[2],
+
+  // ✅ Player B
+  C3: B_cards[0],
+  C5: B_cards[1],
+  C7: B_cards[2],
+
+  winner,
+  joker: jokerValue
+};
 };
 
 //////////////////////////////////////////////////////
@@ -1101,23 +1477,21 @@ const runGame = async (gameName, logicFn) => {
   }
 };
 
+//////////////////////////////////////////////////////
+// API
+//////////////////////////////////////////////////////
 
 app.get("/data/:name", async (req, res) => {
   try {
     const { name } = req.params;
 
     const data = await redis.get(name);
-    const history = await redis.get(`${name}_history`);
-
-    res.json({
-      success: true,
-      data: data ? JSON.parse(data) : null,
-      history: history ? JSON.parse(history) : []
-    });
+    res.json({ success: true, data: data ? JSON.parse(data) : null });
   } catch (err) {
     res.status(500).json({ success: false });
   }
 });
+
 //////////////////////////////////////////////////////
 // 🚀 START
 //////////////////////////////////////////////////////
