@@ -425,6 +425,20 @@ const PlaceBetBox = ({ stake }: { stake: IUserBetStake }) => {
               </form>
             </div>
           </div>
+
+             {getPlaceBet.status === IApiStatus.Loading ? 
+                     <div className='rounded' style={{color: "black",
+    position: "absolute",
+    zIndex: 99,
+    top: "75%",
+    left: "37%",
+    background: "beige",
+    padding: "9px",
+    display:"flex",
+    alignItems:"center",
+    flexDirection:"column"}}><i className='mx-5 fas fa-spinner fa-spin'></i>Loading</div>: ""}
+
+                     
         </>
       )}
     </>

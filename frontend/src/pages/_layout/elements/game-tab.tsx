@@ -75,6 +75,11 @@ import './header.css' // 👈 CSS alag file me daalo
 
 import { CustomLink } from './custom-link';
 import { useLocation } from 'react-router-dom';
+import CricketIcon from '../../svg/CricketIcon';
+import TennisIcon from '../../svg/TennisIcon';
+import LiveCasinoIcon from '../../svg/LiveCasinoIcon';
+import SoccerIcon from '../../svg/SoccerIcon';
+import TipsIcon from '../../svg/TipsIcon';
 
 const GameTabs = (props: any) => {
 const location = useLocation();
@@ -92,15 +97,11 @@ const location = useLocation();
   ];
 
   const icons: any = {
-    "Cricket": "fas fa-baseball-ball",
-    "Tennis": "fas fa-table-tennis",
-    "Soccer": "fas fa-futbol",
-    "Horse Racing": "fas fa-horse",
-    "Greyhound Racing": "fas fa-dog",
-    "Basketball": "fas fa-basketball-ball",
-    "Lottery": "fas fa-ticket-alt",
-    "Live Casino": "fas fa-dice",
-    "Tips & Previews": "fas fa-lightbulb"
+    "Cricket": <CricketIcon />,
+    "Tennis": <TennisIcon />,
+    "Soccer": <SoccerIcon />,
+    "Live Casino": <LiveCasinoIcon />,
+    "Tips & Previews":<TipsIcon />
   };
 
   const isActive = (item: any) => {
@@ -124,8 +125,10 @@ const location = useLocation();
           display: "flex",
           overflowX: "auto",
           whiteSpace: "nowrap",
-          flex: 1
+          flex: 1,
+
         }}
+        className='px-1 py-2'
       >
 
         {menuItems.map((item, index) => (
@@ -133,7 +136,7 @@ const location = useLocation();
             key={index}
             className={item.title === "Vimaan" ? "vimaan-item" : ""}
             style={{
-              padding: "10px 18px",
+              padding: "0px 10px",
               fontSize: "14px",
               cursor: "pointer",
               display: "flex",
@@ -141,6 +144,8 @@ const location = useLocation();
               gap: "6px",
               fontWeight:"700",
               color: isActive(item) ? "white" : "#000000",
+              background:item.title === "Vimaan" ? "#000000" : "transparent",
+              borderRadius:item.title == "Vimaan" ? "7px 7px 0 0" : "none"
             }}
           >
             {/* ✅ Vimaan me image */}
@@ -152,7 +157,7 @@ const location = useLocation();
                 className='vimaan-text'
               />
             ) : (
-              <i className={icons[item.title]}   style={{ color: isActive(item) ? "white" : "#000000" }}></i>
+            <>{icons[item.title]}</>
             )}
 
              {/* 🔍 Search Input */}
@@ -174,7 +179,7 @@ const location = useLocation();
         )}
 
       {/* RIGHT SIDE - SEARCH ICON */}
-      <div  onClick={() => setShowSearch(!showSearch)} style={{ padding: "0 15px", color: "white", cursor: "pointer" }}>
+      <div  onClick={() => setShowSearch(!showSearch)} style={{ padding: "14px 15px", color: "white", cursor: "pointer",background:"linear-gradient(#525252 0%, #2d2d2d 80%)" }}>
         <i className="fas fa-search"></i>
       </div>
 

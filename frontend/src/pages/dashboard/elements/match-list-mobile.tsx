@@ -60,15 +60,15 @@ const MatchListMobile = (props: any) => {
                   fontWeight: "700",
                 }}
               >
-                {match.name}
-              </a>
-              <p className="tx-666 tx-12" style={{ marginTop: "3px" }}>
-                {new Date(match.matchDateTime).getTime() < new Date().getTime() ? <span className="vimaan-text px-1" style={{fontSize:"10px"}}>In Play</span> : (
+                {match.name}{new Date(match.matchDateTime).getTime() < new Date().getTime() ? <span className="vimaan-text px-1" style={{fontSize:"10px"}}>In Play</span> : (
                   <i
                     className="fa-regular fa-clock px-1"
                     style={{ color: "#008000" }}
                   /> 
                 )}
+              </a>
+              <p className="tx-666 tx-12" style={{ marginTop: "3px" }}>
+                
                 {moment(match.matchDateTime).format(dateFormat)}
               </p>
             </div>
@@ -387,15 +387,15 @@ const MatchListMobile = (props: any) => {
                                   fontWeight: "700",
                                 }}
                               >
-                                {match.name}
-                              </a>
-                              <p className="tx-666 tx-12" style={{ marginTop: "3px" }}>
-                {new Date(match.matchDateTime).getTime() < new Date().getTime() ? <span className="vimaan-text px-1" style={{fontSize:"10px"}}>In Play</span> : (
+                                {match.name} {new Date(match.matchDateTime).getTime() < new Date().getTime() ? <span className="vimaan-text px-1" style={{fontSize:"10px"}}>In Play</span> : (
                   <i
                     className="fa-regular fa-clock px-1"
                     style={{ color: "#008000" }}
                   /> 
                 )}
+                              </a>
+                              <p className="tx-666 tx-12" style={{ marginTop: "3px" }}>
+               
                 {moment(match.matchDateTime).format(dateFormat)}
               </p>
                             </div>

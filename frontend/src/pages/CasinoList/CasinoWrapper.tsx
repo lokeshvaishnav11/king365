@@ -785,10 +785,11 @@ const CasinoWrapper = (props: any) => {
                     }}
                   >
                     {liveMatchData && gameCode && (
-                      <img
+                    <div style={{display:"flex", alignItems:"center", justifyContent:"center"}}> <img
                         title="stream"
-                        width="100%"
-                        height={isMobile ? "250" : "420"}
+                        height={200}
+                        // width="100%"
+                        // height={isMobile ? "250" : "420"}
                         style={{ border: "0px" }}
                         // src={casinoMatchData?.tv}
                         //  src={`https://mac88-casino-stream.scoreswift.xyz/stream?stream_id=${gameId}`}
@@ -798,7 +799,7 @@ const CasinoWrapper = (props: any) => {
                         // src={`https://sfront.starrexch.me/casino-tv?id=${mappedCode}`}
                         src="/imgs/casinoloader.gif"
 
-                      />
+                      /></div> 
                     )}
 
                     {defaultNewData?.winner && (

@@ -555,12 +555,16 @@ const Dashboard = () => {
                 <span>My Favourites</span>
               </h2>
 
+              <hr style={{ borderTop:"3px solid #265e04",    marginTop: "1px",
+    marginBottom: "1px"}} />
+
               <div
                 style={{
                   background: "#0b5d4f",
                   display: "flex",
                   overflowX: "auto",
                   whiteSpace: "nowrap",
+                 
                 }}
               >
                 {menuItems.map((item, index) => (
