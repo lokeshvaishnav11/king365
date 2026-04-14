@@ -1523,7 +1523,7 @@ const sendResult = async (gameName, roundId, result) => {
   //////////////////////////////////////////////////////
   try {
     await axios.post(
-      "http://localhost:3015/api/save-casino-match",
+      "https://rapi.chausar.com/api/save-casino-match",
       convertResult
     );
 
