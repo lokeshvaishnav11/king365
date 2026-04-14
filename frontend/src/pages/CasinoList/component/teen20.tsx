@@ -33,10 +33,10 @@ const TeenPatti20 = (props: any) => {
             odds: item.aValue,
             volume: 100,
             marketId: defaultNewData.roundId,
-            marketName: "Teen20",
-            matchId: defaultNewData?.roundId || 0,
-            selectionName: item.title,
-            selectionId: parseInt(defaultNewData.roundId),
+            marketName: item.SelectioName,
+            matchId: 11,
+            selectionName: item.SelectioName,
+            selectionId: item["sid"],
             pnl: 0,
             stack: 0,
             currentMarketOdds: isBack ? item.b1 : item.l1,
@@ -44,7 +44,7 @@ const TeenPatti20 = (props: any) => {
             exposure: -0,
             ipAddress: ipAddress,
             type: IBetType.Match,
-            matchName: "Teen 20 20",
+            matchName: "teen20",
             betOn: IBetOn.CASINO,
             gtype: "teen20",
           },
@@ -101,30 +101,66 @@ const TeenPatti20 = (props: any) => {
   const gameData = [
     {
       title: "WINNER",
-      playerA: "PLAYER A",
-      playerB: "PLAYER B",
+      // playerA: "PLAYER A",
+      // playerB: "PLAYER B",
       aValue: 1.98,
       bValue: 1.98,
       aAmount: 1917956,
-      bAmount: 2091970
+      bAmount: 2091970,
+      playerA:{
+      sid: 1,
+      SelectioName:"Player A",
+      aValue: 1.98,
+
+      },
+       playerB:{
+      sid: 2,
+      SelectioName:"Player B",
+       bValue: 1.98,
+
+      }
     },
     {
       title: "PAIR (DUBBLE) 1:4",
-      playerA: "PLAYER A (PAIR)",
-      playerB: "PLAYER B (PAIR)",
+      // playerA: "PLAYER A (PAIR)",
+      // playerB: "PLAYER B (PAIR)",
       aValue: 4,
       bValue: 4,
       aAmount: 500000,
-      bAmount: 500000
+      bAmount: 500000,
+       playerA:{
+      sid: 5,
+      SelectioName:"Player A",
+      aValue: 1.98,
+
+      },
+       playerB:{
+      sid: 6,
+      SelectioName:"Player B",
+       bValue: 1.98,
+
+      }
     },
     {
       title: "FLUSH (COLOR) 1:8",
-      playerA: "PLAYER A (FLUSH)",
-      playerB: "PLAYER B (FLUSH)",
+      // playerA: "PLAYER A (FLUSH)",
+      // playerB: "PLAYER B (FLUSH)",
       aValue: 8,
       bValue: 8,
       aAmount: 300000,
-      bAmount: 300000
+      bAmount: 300000,
+       playerA:{
+      sid: 7,
+      SelectioName:"Player A",
+      aValue: 1.98,
+
+      },
+       playerB:{
+      sid: 8,
+      SelectioName:"Player B",
+       bValue: 1.98,
+
+      }
     }
   ];
 
@@ -191,7 +227,7 @@ const TeenPatti20 = (props: any) => {
 
               {/* Player A */}
               <div className="col-6 pb-2">
-                <h6 className="fw-bold">{item.playerA}</h6>
+                <h6 className="fw-bold">{item.playerA.SelectioName}</h6>
 
                 <button
                   className={`btn w-75 ${clsstatus2} `}
@@ -201,7 +237,7 @@ const TeenPatti20 = (props: any) => {
                     boxShadow: "0 4px 10px rgba(0,0,0,0.3)",
                     fontSize: "12px"
                   }}
-                  onClick={() => onBet(true, item)}
+                  onClick={() => onBet(true, item.playerA)}
                 >
                   <div style={{ fontSize: "12px", fontWeight: "bold" }}>
                     {item.aValue}
@@ -212,7 +248,7 @@ const TeenPatti20 = (props: any) => {
 
               {/* Player B */}
               <div className="col-6 pb-2">
-                <h6 className="fw-bold">{item.playerB}</h6>
+                <h6 className="fw-bold">{item.playerB.SelectioName}</h6>
 
                 <button
                   className={`btn w-75 ${clsstatus2} `}
@@ -222,7 +258,7 @@ const TeenPatti20 = (props: any) => {
                     boxShadow: "0 4px 10px rgba(0,0,0,0.3)",
                     fontSize: "12px"
                   }}
-                  onClick={() => onBet(true, item)}
+                  onClick={() => onBet(true, item.playerB)}
                 >
                   <div style={{ fontSize: "12px", fontWeight: "bold" }}>
                     {item.bValue}

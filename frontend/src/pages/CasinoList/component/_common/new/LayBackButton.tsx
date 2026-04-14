@@ -8,7 +8,7 @@ import authService from "../../../../../services/auth.service";
 import { nFormatter } from "../../../../../utils/helper";
 
 const LayButton = (props: any) => {
-    const { selectionid, lastOdds, liveMatchData, clsnamename , defaultNewData } = props;
+    const { selectionid, lastOdds, liveMatchData, clsnamename , defaultNewData,ItemNew } = props;
     const dispatch = useAppDispatch()
     const userState = useAppSelector(selectUserData)
     const onBet = (isBack = false, item: any) => {
@@ -26,10 +26,10 @@ const LayButton = (props: any) => {
                         odds: 1.98,
                         volume: isBack ? (item.bs1>1000000 ? 1 : item.bs1) : (item.ls1>1000000 ? 1 : item.ls1),
                         marketId: defaultNewData?.roundId,
-                        marketName: "Joker120",
-                        matchId:  defaultNewData?.roundId || 0,
-                        selectionName: "PlayerA",
-                        selectionId: 1,
+                        marketName: "Bookmaker",
+                        matchId:  84,
+                        selectionName: ItemNew.RunnerName,
+                        selectionId: ItemNew.SelectionId,
                         pnl: 0,
                         stack: 0,
                         currentMarketOdds: isBack ? item.b1 : item.l1,
@@ -37,7 +37,7 @@ const LayButton = (props: any) => {
                         exposure: -0,
                         ipAddress: ipAddress,
                         type: IBetType.Match,
-                        matchName: "Joker120",
+                        matchName: "joker120",
                         betOn: IBetOn.CASINO,
                         gtype: "joker120",
                     },
@@ -48,7 +48,7 @@ const LayButton = (props: any) => {
     const ItemMarket: any = "1.98" 
     return <>
      <td className={`back teen-section box-6 ${clsnamename}`}>
-              <button className='back' onClick={() => onBet(true, ItemMarket)}>
+              <button className='back' onClick={() => onBet(true, ItemNew)}>
                 <span className='odd'>{"1.98"}</span>{' '}
                 {/* <span className='fw-12 laysize' style={{display:"block"}}>{nFormatter(ItemMarket.bs1, 2)}</span> */}
               </button>

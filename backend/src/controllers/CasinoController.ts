@@ -368,7 +368,7 @@ export class CasinoController extends ApiController {
       const getPendingResults = await CasinoGameResult.find({
         'data.status': ['processing'],
       })
-      // console.log(getPendingResults,"hahahahahahahaha")
+      console.log(getPendingResults,"hahahahahahahaha")
 
       this.setPendingResult(getPendingResults)
     } catch (e: unknown) { }
@@ -980,6 +980,7 @@ export class CasinoController extends ApiController {
     getPendingResults.map(async (casinoResultData: any) => {
       casinoResultData = redisData ? { data: casinoResultData } : casinoResultData
       let { mid: marketId, result: selectionId, resultsids, sid50, ...rest } = casinoResultData.data
+      console.log(marketId,resultsids,"FGHJKL")
       let winSids: any = []
       const casinoType = casinoResultData.gameType
       if (!selectionId && resultsids && resultsids.length > 0) {
@@ -1002,6 +1003,9 @@ export class CasinoController extends ApiController {
           },
         },
       ])
+
+
+      console.log(userbet,"userbet")
       let userIdList: any = []
       const parentIdList: any = []
       const declare_result = userbet.map(async (Item: any) => {
@@ -1539,6 +1543,7 @@ export class CasinoController extends ApiController {
       case 'onedaypoker20':
       case 'Tp1Day':
       case 'teen20':
+      case 'joker120':
       case 'poker6player':
       case 'opentp':
       case 'testtp':
@@ -1547,7 +1552,7 @@ export class CasinoController extends ApiController {
           if (ItemBetList.gtype === 'worliinstant' && ItemBetList.selectionId > 10) {
             ItemBetList.odds = 5
           }
-          if (ItemBetList.gtype == 'Tp1Day') {
+          if (ItemBetList.gtype == 'Tp1Day' ) {
             ItemBetList.odds = ItemBetList.odds / 100 + 1
           }
           if (resultsids && resultsids.length > 0) {
@@ -1567,7 +1572,7 @@ export class CasinoController extends ApiController {
                   ? 'profit'
                   : 'loss'
           }
-
+         console.log(profit_type ,"prooo")
           if (profit_type == 'profit') {
             if (ItemBetList.isBack === true) {
               profitLossAmt =
@@ -1576,7 +1581,7 @@ export class CasinoController extends ApiController {
             } else if (ItemBetList.isBack === false)
               profitLossAmt = parseFloat(ItemBetList.stack.toString())
 
-            if (ItemBetList.gtype === 'onedaypoker' || ItemBetList.gtype === 'teen20') {
+            if (ItemBetList.gtype === 'onedaypoker' || ItemBetList.gtype === 'teen20' || ItemBetList.gtype === 'joker120') {
               if (data.odds) {
                 const oddsData = data.odds //JSON.parse(data.odds)
                 if (oddsData && oddsData[`SID${ItemBetList.selectionId}`]) {
@@ -1586,7 +1591,7 @@ export class CasinoController extends ApiController {
                 }
               }
             }
-            // profitLossAmt =
+            // profitLossAmt = 
             //   (parseFloat(ItemBetList.odds.toString()) - 1) *
             //   parseFloat(ItemBetList.stack.toString())
           } else if (profit_type == 'loss') {

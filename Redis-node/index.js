@@ -1135,6 +1135,7 @@ const express = require("express");
 const Redis = require("ioredis");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const axios = require('axios')
 
 const app = express();
 app.use(cors());
@@ -1441,6 +1442,99 @@ return {
 // 🎮 GAME LOOP
 //////////////////////////////////////////////////////
 
+const sendResult = async (gameName, roundId, result) => {
+  let sidarr = [];
+  let cards = [];
+
+  //////////////////////////////////////////////////////
+  // 🐉 DRAGON TIGER
+  //////////////////////////////////////////////////////
+  if (gameName === "dt20") {
+    cards = [result.C1, result.C2];
+
+    if (result.winner === "dragon") sidarr.push("SID1");
+    else if (result.winner === "tiger") sidarr.push("SID2");
+
+    var winnerString = result.winner;
+  }
+
+  //////////////////////////////////////////////////////
+  // 🃏 TEEN PATTI
+  //////////////////////////////////////////////////////
+  if (gameName === "teen20") {
+    cards = [
+      result.C1, result.C2,
+      result.C3, result.C4,
+      result.C5, result.C6
+    ];
+
+    if (result.winner === "A") sidarr.push("SID1");
+    else if (result.winner === "B") sidarr.push("SID2");
+
+    var winnerString = result.winner === "A" ? "Player A" : "Player B";
+  }
+
+  //////////////////////////////////////////////////////
+  // 🃏 JOKER
+  //////////////////////////////////////////////////////
+  if (gameName === "joker120") {
+    cards = [
+      result.C1,
+      result.C2, result.C3,
+      result.C4, result.C5,
+      result.C6, result.C7
+    ];
+
+    if (result.winner === "A") sidarr.push("SID1");
+    else if (result.winner === "B") sidarr.push("SID2");
+
+    var winnerString = result.winner === "A" ? "Player A" : "Player B";
+  }
+
+  //////////////////////////////////////////////////////
+  // 🧠 FINAL OBJECT
+  //////////////////////////////////////////////////////
+  const convertResult = {
+    mid: roundId.toString(),
+    data: {
+      mid: roundId.toString(),
+      gameType: gameName,
+      autotime: "0",
+      gtype: gameName,
+      min: "5",
+      max: "10000",
+
+      ...cards.reduce((acc, card, index) => {
+        acc[`C${index + 1}`] = card;
+        return acc;
+      }, {}),
+
+      resultsids: sidarr.join(","), // 🔥 IMPORTANT
+      sid50: "",
+      winnersString: winnerString,
+      result: winnerString,
+      winnerName: winnerString,
+    },
+    gameType: gameName,
+  };
+
+  //////////////////////////////////////////////////////
+  // 🚀 API CALL
+  //////////////////////////////////////////////////////
+  try {
+    await axios.post(
+      "http://localhost:3015/api/save-casino-match",
+      convertResult
+    );
+
+    console.log("✅ Result Sent:", gameName, roundId);
+  } catch (err) {
+    console.log("❌ Error sending result:", err.message);
+  }
+};
+
+
+
 const runGame = async (gameName, logicFn) => {
   while (true) {
     let time = 20;
@@ -1473,6 +1567,7 @@ const runGame = async (gameName, logicFn) => {
     data.winner = result.winner;
 
     await redis.set(gameName, JSON.stringify(data));
+    await sendResult(gameName, roundId, result);
     await delay(3000);
   }
 };

@@ -80,7 +80,7 @@ const  TeenpattiJoker = (props: any) => {
               <b className='text-center' >{ItemNew.RunnerName}</b>
               {/* <CasinoPnl sectionId={ItemNew.SelectionId} matchId={liveMatchData?.match_id} /> */}
             </td>
-            <LayBackButton selectionid={ItemNew.SelectionId} lastOdds={lastOdds} liveMatchData={liveMatchData} clsnamename={''} defaultNewData={defaultNewData} />
+            <LayBackButton selectionid={ItemNew.SelectionId} lastOdds={lastOdds} liveMatchData={liveMatchData} clsnamename={''} defaultNewData={defaultNewData} ItemNew = {ItemNew}/>
   
 
           </tr>
