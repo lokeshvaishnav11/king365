@@ -39,6 +39,7 @@ const Header = () => {
   const ref = useRef<any>(null);
   const userState = useAppSelector<{ user: User }>(selectUserData);
   const balance = useAppSelector(selectBalance);
+  console.log(balance , "chehdjjd")
   const selectHideBal = useAppSelector<HideBalExp>(selectHideBalExp);
   const rules = useAppSelector(selectRules);
   const dispatch = useAppDispatch();
@@ -201,7 +202,8 @@ const Header = () => {
 
           {/* Center - Info */}
           <div className="text-center">
-            <div className="fw-bold">Main PTI {balance.balance?.toFixed(2)}</div>
+            {/* @ts-ignore */}
+            <div className="fw-bold">Main PTI {balance.balance - (balance?.exposer + balance?.casinoexposer) }</div>
             <div>
              <a
                         href="#"
