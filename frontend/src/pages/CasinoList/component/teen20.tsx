@@ -161,8 +161,178 @@ const TeenPatti20 = (props: any) => {
        bValue: 1.98,
 
       }
-    }
+    },
+    {
+      title: "STRAIGHT (ROWN) 1:14",
+      // playerA: "PLAYER A (FLUSH)",
+      // playerB: "PLAYER B (FLUSH)",
+      aValue: 14,
+      bValue: 14,
+      aAmount: 500000,
+      bAmount: 500000,
+       playerA:{
+      sid: 9,
+      SelectioName:"Player A",
+      aValue: 1.98,
+
+      },
+       playerB:{
+      sid: 10,
+      SelectioName:"Player B",
+       bValue: 1.98,
+
+      }
+    },
+ {
+      title: "STRAIGHT FLUSH ( PAKKI ROWN ) 1:40",
+      // playerA: "PLAYER A (FLUSH)",
+      // playerB: "PLAYER B (FLUSH)",
+      aValue: 40,
+      bValue: 40,
+      aAmount: 500000,
+      bAmount: 500000,
+       playerA:{
+      sid: 11,
+      SelectioName:"Player A",
+      aValue: 1.98,
+
+      },
+       playerB:{
+      sid: 12,
+      SelectioName:"Player B",
+       bValue: 1.98,
+
+      }
+    },
+     {
+      title: "TRIO ( TEEN ) 1:75",
+      // playerA: "PLAYER A (FLUSH)",
+      // playerB: "PLAYER B (FLUSH)",
+      aValue: 75,
+      bValue: 75,
+      aAmount: 1000000,
+      bAmount: 1000000,
+       playerA:{
+      sid: 12,
+      SelectioName:"Player A",
+      aValue: 1.98,
+
+      },
+       playerB:{
+      sid: 13,
+      SelectioName:"Player B",
+       bValue: 1.98,
+
+      }
+    },
+    {
+      title: "PUTLA (1 PICTURE IN GAME) 1:0.70",
+      // playerA: "PLAYER A (FLUSH)",
+      // playerB: "PLAYER B (FLUSH)",
+      aValue: 1.7,
+      bValue: 1.7,
+      aAmount: 1000000,
+      bAmount: 1000000,
+       playerA:{
+      sid: 13,
+      SelectioName:"Player A",
+      aValue: 1.98,
+
+      },
+       playerB:{
+      sid: 14,
+      SelectioName:"Player B",
+       bValue: 1.98,
+
+      }
+    },
+    {
+      title: "PUTLA (2 PICTURE IN GAME) 1:4",
+      // playerA: "PLAYER A (FLUSH)",
+      // playerB: "PLAYER B (FLUSH)",
+      aValue: 4,
+      bValue: 4,
+      aAmount: 1000000,
+      bAmount: 1000000,
+       playerA:{
+      sid: 14,
+      SelectioName:"Player A",
+      aValue: 1.98,
+
+      },
+       playerB:{
+      sid: 15,
+      SelectioName:"Player B",
+       bValue: 1.98,
+
+      }
+    },
+    {
+      title: "PUTLA (3 PICTURE IN GAME) 1:25",
+      // playerA: "PLAYER A (FLUSH)",
+      // playerB: "PLAYER B (FLUSH)",
+      aValue: 25,
+      bValue: 25,
+      aAmount: 500000,
+      bAmount: 500000,
+       playerA:{
+      sid: 15,
+      SelectioName:"Player A",
+      aValue: 1.98,
+
+      },
+       playerB:{
+      sid: 16,
+      SelectioName:"Player B",
+       bValue: 1.98,
+
+      }
+    },
+    {
+      title: "LOVE MARRIAGE (Q & K WITH SAME SUIT) 1:25",
+      // playerA: "PLAYER A (FLUSH)",
+      // playerB: "PLAYER B (FLUSH)",
+      aValue: 25,
+      bValue: 25,
+      aAmount: 500000,
+      bAmount: 500000,
+       playerA:{
+      sid: 15,
+      SelectioName:"Player A",
+      aValue: 1.98,
+
+      },
+       playerB:{
+      sid: 16,
+      SelectioName:"Player B",
+       bValue: 1.98,
+
+      }
+    },
+    {
+      title: "BF LOVE GF (Q & K WITH SAME SUIT) 1:25",
+      // playerA: "PLAYER A (FLUSH)",
+      // playerB: "PLAYER B (FLUSH)",
+      aValue: 25,
+      bValue: 25,
+      aAmount: 500000,
+      bAmount: 500000,
+       playerA:{
+      sid: 15,
+      SelectioName:"Player A",
+      aValue: 1.98,
+
+      },
+       playerB:{
+      sid: 16,
+      SelectioName:"Player B",
+       bValue: 1.98,
+
+      }
+    },
   ];
+
+  const topSizes = ["2%", "11%", "20%", "29%", "38.2%", "47.4%", "56.5%", "65.64%", "74.5%", "83.7%", "92.9%"];
 
   return (
     <div className=' '>
@@ -205,7 +375,7 @@ const TeenPatti20 = (props: any) => {
                 position: "absolute",
     textAlign: "center",
     alignItems: "center",
-    top: index==0?"7%":index==1?"40%":"73%",
+    top: topSizes[index],
     zIndex: "99",
     color: "rgb(202, 16, 16)",
     opacity: "0.5",
@@ -213,7 +383,7 @@ const TeenPatti20 = (props: any) => {
     fontSize: "25px",
     background: "#fff",
     width: "100%",
-    height: "27%",
+    height: "7%",
     border: "1.5px solid rgb(202, 16, 16)",
     display: "flex",
     justifyContent: "center", 

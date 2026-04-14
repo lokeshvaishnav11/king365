@@ -67,7 +67,7 @@ const  TeenpattiJoker = (props: any) => {
     }
   }
   const laybacklayout = () => {
-    const clsnamehead = 'box-4gh text-center'
+    const clsnamehead = 'box-4gh'
     return (liveMatchDataDefault?.defaultMarkets?.[0]?.Runners.map((ItemNew: any, key: number) => {
       const ItemMarket: any = lastOdds?.[ItemNew.SelectionId] || {}
     //   const clsstatus = !ItemMarket.gstatus || ItemMarket.gstatus === 'SUSPENDED' || ItemMarket.gstatus === 'CLOSED' ? 'suspended' : ''
@@ -76,8 +76,8 @@ const  TeenpattiJoker = (props: any) => {
       return (
         (
           <tr key={key} className={`${clsstatus} suspendedd `}>
-            <td className={clsnamehead} style={{ paddingLeft: "10px" }}>
-              <b className='text-center' >{ItemNew.RunnerName}</b>
+            <td className={clsnamehead} style={{ paddingLeft: "10px", textAlign:"left" }}>
+              <b className='text-left pl-2' style={{fontSize:"12px"}} >{ItemNew.RunnerName}</b>
               {/* <CasinoPnl sectionId={ItemNew.SelectionId} matchId={liveMatchData?.match_id} /> */}
             </td>
             <LayBackButton selectionid={ItemNew.SelectionId} lastOdds={lastOdds} liveMatchData={liveMatchData} clsnamename={''} defaultNewData={defaultNewData} ItemNew = {ItemNew}/>
@@ -99,7 +99,7 @@ const  TeenpattiJoker = (props: any) => {
       <div className='row '>
         <div className='col-lg-4 main-market  bg-gray' style={{ padding: '0px' }}>
           <div className='live-poker'>
-            <table className='table coupon-table table table-bordered'>
+            <table className='table-sm table-bordered table'>
               <thead style={{ borderBottom: "0px" }}>
               </thead>
               <tbody>

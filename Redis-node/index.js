@@ -1533,6 +1533,24 @@ const sendResult = async (gameName, roundId, result) => {
   }
 };
 
+const saveHistory = async (gameName, resultData) => {
+  try {
+    const key = `${gameName}_history`;
+
+    let history = await redis.get(key);
+    history = history ? JSON.parse(history) : [];
+
+    // latest result add karo
+    history.unshift(resultData);
+
+    // sirf last 20 records rakho
+    history = history.slice(0, 20);
+
+    await redis.set(key, JSON.stringify(history));
+  } catch (err) {
+    console.log("History Save Error:", err.message);
+  }
+};
 
 
 const runGame = async (gameName, logicFn) => {
@@ -1567,6 +1585,7 @@ const runGame = async (gameName, logicFn) => {
     data.winner = result.winner;
 
     await redis.set(gameName, JSON.stringify(data));
+    await saveHistory(gameName, data); 
     await sendResult(gameName, roundId, result);
     await delay(3000);
   }
@@ -1581,7 +1600,9 @@ app.get("/data/:name", async (req, res) => {
     const { name } = req.params;
 
     const data = await redis.get(name);
-    res.json({ success: true, data: data ? JSON.parse(data) : null });
+    const history = await redis.get(`${name}_history`);
+
+    res.json({ success: true, data: data ? JSON.parse(data) : null,history: history ? JSON.parse(history) : null });
   } catch (err) {
     res.status(500).json({ success: false });
   }
