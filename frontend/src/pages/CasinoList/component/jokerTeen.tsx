@@ -12,6 +12,16 @@ import LayBackButton from './_common/new/LayBackButton';
 import ButtonItem from './_common/new/ButtonItem';
 import BackButtonPnl from './_common/new/BackButtonPnl';
 import { useParams } from 'react-router-dom'
+import PlaceBetBox from '../../odds/components/place-bet-box';
+import IMarket from '../../../models/IMarket';
+import { IUserBetStake } from '../../../models/IUserStake';
+import userService from '../../../services/user.service';
+import PlaceBetBoxCasino from '../../odds/components/place-bet-box-casino';
+
+type MarketData = {
+  markets: IMarket[];
+  stake: IUserBetStake;
+};
 
 const  TeenpattiJoker = (props: any) => {
   const { lastOdds, liveMatchData ,defaultNewData } = props
@@ -27,11 +37,32 @@ const  TeenpattiJoker = (props: any) => {
       }
     ]
   }
-   const { gameCode } = useParams()
   const dispatch = useAppDispatch()
   const userState = useAppSelector(selectUserData)
   const getCurrentMatch = useAppSelector(selectCasinoCurrentMatch)
   const [updateOdds, setUpdateOdds] = useState<any>(undefined)
+
+  const [marketDataList, setMarketDataList] = React.useState<MarketData>(
+      {} as MarketData
+    );
+  
+  const { gameCode } = useParams<{ gameCode?: any }>();
+
+React.useEffect(() => {
+  (async () => {
+    try {
+      const res = await userService.getUserStake();
+
+      setMarketDataList({
+        markets: [],
+        stake: res.data.data.userStake,
+      });
+    } catch (e: any) {
+      const error = e?.response?.data?.message;
+      console.log(error);
+    }
+  })();
+}, [gameCode]);
 
   const onBet = (isBack = false, item: any) => {
     const ipAddress = authService.getIpAddress()
@@ -81,7 +112,6 @@ const  TeenpattiJoker = (props: any) => {
               {/* <CasinoPnl sectionId={ItemNew.SelectionId} matchId={liveMatchData?.match_id} /> */}
             </td>
             <LayBackButton selectionid={ItemNew.SelectionId} lastOdds={lastOdds} liveMatchData={liveMatchData} clsnamename={''} defaultNewData={defaultNewData} ItemNew = {ItemNew}/>
-  
 
           </tr>
         )
@@ -105,6 +135,7 @@ const  TeenpattiJoker = (props: any) => {
               <tbody>
                 {laybacklayout()}
               </tbody>
+
               {defaultNewData.status == "dealing" && <div style={{   
                 position: "absolute",
     textAlign: "center",
@@ -123,11 +154,14 @@ const  TeenpattiJoker = (props: any) => {
     justifyContent: "center", 
     }}><span className='text-center'>SUSPENDED</span></div>}
             </table>
+
           </div>
         </div>
        
       
       </div>
+   <PlaceBetBoxCasino stake={marketDataList.stake} />
+
     </div>
   )
 }

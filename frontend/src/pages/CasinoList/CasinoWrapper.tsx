@@ -735,9 +735,9 @@ const CasinoWrapper = (props: any) => {
             <div id="sidebar-right" className=" ">
               <div className="ps">
                 <div className="sidebar-right-inner">
-                  {marketDataList.stake && (
+                  {/* {marketDataList.stake && (
                     <PlaceBetBox stake={marketDataList.stake} />
-                  )}
+                  )} */}
                   <div className="card m-b-10 my-bet">
                     <div className="card-header">
                       <h6 className="card-title d-inline-block">My Bet</h6>
@@ -877,9 +877,9 @@ const CasinoWrapper = (props: any) => {
                   ""
                 )} */}
               </div>
-              {marketDataList.stake && (
+              {/* {marketDataList.stake && (
                 <PlaceBetBox stake={marketDataList.stake} />
-              )}
+              )} */}
               {/* <LastResults lastResult={casinoMatchData} gameId={gameCode} /> */}
               {gameCode == "poker" && <OnedaypokerRules />}
               {gameCode == "teen8" && <Openteenpatti />}

@@ -261,13 +261,49 @@ import CasinoPnl from './casinoPnl'
 import ButtonItem from './_common/new/ButtonItem'
 import Minmax from './_common/minmax'
 import CardItem from './_common/new/CardItem'
+import PlaceBetBox from '../../odds/components/place-bet-box'
+import IMarket from '../../../models/IMarket'
+import { IUserBetStake } from '../../../models/IUserStake'
+import userService from '../../../services/user.service'
+import { useParams } from 'react-router-dom'
+import PlaceBetBoxCasino from '../../odds/components/place-bet-box-casino'
+
+
+type MarketData = {
+  markets: IMarket[];
+  stake: IUserBetStake;
+};
 
 const DragonTigerA = (props: any) => {
   const { lastOdds, liveMatchData , defaultNewData} = props
+    const { gameCode } = useParams<{ gameCode?: any }>();
+
   console.log(lastOdds,liveMatchData, defaultNewData, "FGHJKL")
   const drgonCard: any = [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
   const tigerCard: any = [25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37];
   const [activeTab, setActiveTab] = useState("dragon")
+
+const [marketDataList, setMarketDataList] = React.useState<MarketData>(
+    {} as MarketData
+  );
+
+
+React.useEffect(() => {
+  (async () => {
+    try {
+      const res = await userService.getUserStake();
+
+      setMarketDataList({
+        markets: [],
+        stake: res.data.data.userStake,
+      });
+    } catch (e: any) {
+      const error = e?.response?.data?.message;
+      console.log(error);
+    }
+  })();
+}, [gameCode]);
+
   const singleCard = (MarketName: any, marketIndex: any) => {
     const finalMarketList = liveMatchData?.data?.defaultMarkets?.filter((ItemN: any, index: number) => marketIndex.indexOf(index) > -1) || []
     return (
@@ -357,6 +393,7 @@ const DragonTigerA = (props: any) => {
           {buttonLayout('col-lg-3 col-6', [0, 2, 1])}
           {/* {buttonLayout('col-lg-3 col-12', [3])} */}
           {/* <Minmax min={liveMatchData.min} max={liveMatchData.max} /> */}
+          
         </div>
        {clsstatus && <div style={{   
                 position: "absolute",
@@ -376,6 +413,8 @@ const DragonTigerA = (props: any) => {
     justifyContent: "center", 
     left:"0px"
     }}><span className='text-center'>SUSPENDED</span></div>}
+    <PlaceBetBoxCasino stake={marketDataList.stake} />
+
       </div>
     </div>
   )

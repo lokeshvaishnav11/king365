@@ -8,6 +8,17 @@ import { IBetOn, IBetType } from '../../../models/IBet';
 import React, { useState } from 'react';
 import CasinoPnl from './casinoPnl';
 import Limitinfo from './_common/limitinfo';
+import userService from '../../../services/user.service';
+import { IUserBetStake } from '../../../models/IUserStake';
+import IMarket from '../../../models/IMarket';
+import { useParams } from 'react-router-dom';
+import PlaceBetBox from '../../odds/components/place-bet-box';
+import PlaceBetBoxCasino from '../../odds/components/place-bet-box-casino';
+
+type MarketData = {
+  markets: IMarket[];
+  stake: IUserBetStake;
+};
 
 const TeenPatti20 = (props: any) => {
   const { lastOdds, liveMatchData, defaultNewData } = props
@@ -52,6 +63,29 @@ const TeenPatti20 = (props: any) => {
       )
     }
   }
+
+  const [marketDataList, setMarketDataList] = React.useState<MarketData>(
+      {} as MarketData
+    );
+  
+    const { gameCode } = useParams<{ gameCode?: any }>();
+  
+  React.useEffect(() => {
+    (async () => {
+      try {
+        const res = await userService.getUserStake();
+  
+        setMarketDataList({
+          markets: [],
+          stake: res.data.data.userStake,
+        });
+      } catch (e: any) {
+        const error = e?.response?.data?.message;
+        console.log(error);
+      }
+    })();
+  }, [gameCode]);
+
   const laybacklayout = () => {
     const clsnamehead = ''
     const clsnamename = ''
@@ -349,6 +383,8 @@ const TeenPatti20 = (props: any) => {
                   {/* <th className={`back ${"box-4"}`}></th> */}
                 </div>
               </div>
+              
+              
               <div className="d-flex justify-content-between p-2 mb-2 bg-theme text-white rounded" style={{background:"linear-gradient(-180deg, #2E4B5E 0%, #243A48 82%)"}}><span>WINNER</span><div>{showMinmax && <span className='bg-dark rounded px-1'>Min/Max: 100 - 100000 </span>} <i onClick={() => setShowMinmax(!showMinmax)} className="fa fa-info-circle" aria-hidden="true"></i></div> </div>
 
               <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "10px" }}>
@@ -363,10 +399,12 @@ const TeenPatti20 = (props: any) => {
 
 
 
+     {!clsstatus2 &&  <PlaceBetBoxCasino stake={marketDataList.stake} />}
 
       <div className={``}>
+
         {gameData?.map((item, index) => (
-          <div key={index} className=" relative">
+          <div key={index} className=" relative" >
 
             <div className="d-flex  justify-content-between px-2 py-1  bg-theme text-white" style={{background:"linear-gradient(-180deg, #2E4B5E 0%, #243A48 82%)", borderRadius:"4px 4px 0 0", fontSize:"12px"}}><span>{item.title}</span><div>{showMinmax && <span className='bg-dark rounded px-1'>Min/Max: 100 - 100000 </span>} <i onClick={() => setShowMinmax(!showMinmax)} className="fa fa-info-circle" aria-hidden="true"></i></div> 
             </div>

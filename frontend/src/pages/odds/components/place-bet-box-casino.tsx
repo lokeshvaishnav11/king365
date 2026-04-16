@@ -15,7 +15,7 @@ import { IApiStatus } from '../../../models/IApiStatus'
 import { useWebsocketUser } from '../../../context/webSocketUser'
 import { OddsType } from '../../../models/IMarket'
 
-const PlaceBetBox = ({ stake }: { stake: IUserBetStake }) => {
+const PlaceBetBoxCasino = ({ stake }: { stake: IUserBetStake }) => {
   console.log(stake,"stake")
   const [betObj, setBetObj] = React.useState<IBet>({} as IBet)
   const betValues = useAppSelector(selectBetPopup,shallowEqual)
@@ -199,18 +199,18 @@ const PlaceBetBox = ({ stake }: { stake: IUserBetStake }) => {
     <>
       { betValues.isOpen && (
         <>
-          <div onClick={onBackDrop} className='backdrop-custom'></div>
+          <div onClick={onBackDrop} className=''></div>
 
-          <div className='card place-bet'>
-            <div className='card-header'>
+          <div className='card place-bet ' style={{position:"relative",left:"0px" ,right:"0px"}}>
+            {/* <div className='card-header'>
               <h6 className='card-title d-inline-block col-10'>Place Bet</h6>
               <span className='card-title d-inline-block col-2' onClick={closeBetPopup}>
                 X
               </span>
-            </div>
+            </div> */}
             <div style={{background:"#bdd8ecc2"}} className={`table-responsive ${betObj.isBack ? 'back' : 'lay'}`}>
               <form onSubmit={onSubmit}>
-                <table className='coupon-table table table-borderedless'>
+                <table className=' coupon-table table table-borderedless'>
                   <thead>
                     <tr style={{display:"none"}}>
                       <th style={{ width: '35%', textAlign: 'left' }}>(Bet for)</th>
@@ -444,5 +444,5 @@ const PlaceBetBox = ({ stake }: { stake: IUserBetStake }) => {
     </>
   )
 }
-export default React.memo(PlaceBetBox)
+export default React.memo(PlaceBetBoxCasino)
 
