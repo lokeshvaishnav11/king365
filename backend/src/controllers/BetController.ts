@@ -1488,7 +1488,9 @@ export class BetController extends ApiController {
         const val = converted[key];
         if (val && typeof val === "object" && val._bsontype === "Decimal128") {
           converted[key] = parseFloat(val.toString());
-        }
+        } else if (val === null) {
+      converted[key] = 0; // or keep null if you want
+    }
       }
       return converted;
     }
@@ -1522,14 +1524,14 @@ export class BetController extends ApiController {
 
       
 
-    
+    const safeBets = bets.map(b => convertDecimalFields(b.toObject()));
 
-      return this.success(res, {
-        status: true,
-        users: usersWithThisAsParent,
-        userIds,
-        bets,
-      });
+return this.success(res, {
+  status: true,
+  users: usersWithThisAsParent,
+  userIds,
+  bets: safeBets,
+});
 
     } catch (e: any) {
       return this.fail(res, e);

@@ -436,7 +436,7 @@ const PlaceBetBox = ({ stake }: { stake: IUserBetStake }) => {
     padding: "9px",
     display:"flex",
     alignItems:"center",
-    flexDirection:"column"}}><i className='mx-5 fas fa-spinner fa-spin'></i>Loading</div>: ""}
+    flexDirection:"column"}}><img src='/imgs/tiktokloading.gif' style={{height:"100px",width:"150px"}} />Loading</div>: ""}
 
                      
         </>
