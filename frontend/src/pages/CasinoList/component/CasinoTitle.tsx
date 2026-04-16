@@ -309,7 +309,7 @@ const dt20 = () => {
         {/* 🐉 Dragon */}
         <div className="d-flex flex-column align-items-baseline">
         
-            <span className="text-white">Dragon</span>
+          <span className="text-white mb-2"  style={{fontSize:"16px",fontWeight:"bold"}}>Dragon</span>
   
           <img
             alt="dragon"
@@ -321,8 +321,7 @@ const dt20 = () => {
         {/* 🐯 Tiger */}
         <div className="d-flex flex-column align-items-baseline">
          
-            <span className="text-white">Tiger</span>
-         
+          <span className="text-white mb-2"  style={{fontSize:"16px",fontWeight:"bold"}}>Tiger</span>
           <img
             alt="tiger"
             src={`/imgs/casino/cards/${tigerCard ? tigerCard : "patti_back"}.png`}

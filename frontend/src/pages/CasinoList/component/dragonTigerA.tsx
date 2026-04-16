@@ -413,9 +413,10 @@ React.useEffect(() => {
     justifyContent: "center", 
     left:"0px"
     }}><span className='text-center'>SUSPENDED</span></div>}
-    <PlaceBetBoxCasino stake={marketDataList.stake} />
 
       </div>
+    <PlaceBetBoxCasino stake={marketDataList.stake} />
+
     </div>
   )
 }
