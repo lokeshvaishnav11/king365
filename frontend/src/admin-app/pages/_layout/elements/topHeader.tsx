@@ -73,35 +73,31 @@ const TopHeader = ({ onMenuToggle }: TopHeaderProps) => {
   const getRoleOptions = (): { key: RoleType; label: string }[] => {
     const userRole = userState?.user?.role as RoleType;
 
-    const allRoles = {
+    const allRoles:any = {
       admin: "Super Admin",
-      sadmin: "Admin",
-      suadmin: "Sub Admin",
-      smdl: "Master",
-      mdl: "Super",
-      dl: "Agent",
+      // sadmin: "Admin",
+      // suadmin: "Sub Admin",
+      // smdl: "Master",
+      // mdl: "Super",
+      // dl: "Agent",
       user: "Client",
     };
 
-    const roleMap: Record<RoleType, RoleType[]> = {
+    const roleMap: Record<any, any> = {
       [RoleType.admin]: [
-        RoleType.sadmin,
-        RoleType.smdl,
-        RoleType.mdl,
-        RoleType.dl,
         RoleType.user,
       ],
-      [RoleType.sadmin]: [RoleType.smdl, RoleType.mdl,  RoleType.dl, RoleType.user,],
+      // [RoleType.sadmin]: [RoleType.smdl, RoleType.mdl,  RoleType.dl, RoleType.user,],
 
-      [RoleType.smdl]: [RoleType.mdl, RoleType.dl, RoleType.user],
-      [RoleType.mdl]: [RoleType.dl, RoleType.user],
-      [RoleType.dl]: [RoleType.user],
-      [RoleType.user]: [],
+      // [RoleType.smdl]: [RoleType.mdl, RoleType.dl, RoleType.user],
+      // [RoleType.mdl]: [RoleType.dl, RoleType.user],
+      // [RoleType.dl]: [RoleType.user],
+      // [RoleType.user]: [],
     };
 
     const allowedRoles = roleMap[userRole] || [];
 
-    return allowedRoles.map((key) => ({
+    return allowedRoles.map((key:any) => ({
       key,
       label: allRoles[key],
     }));
