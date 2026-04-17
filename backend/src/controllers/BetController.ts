@@ -12,6 +12,7 @@ import UserSocket from '../sockets/user-socket'
 import { Casino } from '../models/CasinoMatches'
 import { BetLock } from '../models/BetLock'
 import axios from 'axios'
+import { Fancy } from '../models/Fancy'
 const ObjectId = Types.ObjectId
 const default_settings: any = { minBet: 100, maxBet: 100, delay: 0 }
 const defaultRatio: any = {
@@ -1066,6 +1067,64 @@ export class BetController extends ApiController {
       return this.fail(res, e)
     }
   }
+
+   betList22 = async (req: Request, res: Response): Promise<Response> => {
+    console.log(req.body, req.query, req.user, "req.bod");
+    try {
+      const user: any = req.user;
+      const { matchId } = req.query;
+      let userId: any = { userId: ObjectId(user._id) };
+      if (user.role !== RoleType.user)
+        userId = { parentStr: { $in: ObjectId(user._id) } };
+
+      // Use `.lean()` here to get plain JS objects
+      const bets: Array<IBet> = await Bet.find({
+        ...userId,
+        matchId,
+        status: "completed",
+      })
+        .sort({ createdAt: -1 })
+        .lean();
+
+      console.log(bets, "cheeek bets completed");
+
+     
+
+      if (bets.length > 0) {
+        const betFirst = bets[0];
+        if (betFirst.bet_on !== "CASINO") {
+          const markets: any = await Market.find({ matchId }).lean();
+          console.log(markets, "marktesss");
+
+          const profitlist = this.getoddsprofit(bets, markets);
+
+          // sirf MATCH_ODDS bets me market ka result add karo
+      
+
+         
+          return this.success(res, { bets, odds_profit: profitlist });
+        } else {
+          const markets: any = await Casino.findOne({
+            match_id: matchId,
+          }).lean();
+          console.log(JSON.stringify(markets), "marketsmarketsmarketsmarkets");
+
+          const profitlist = this.getcasinooddsprofit(
+            bets,
+            markets.event_data.market,
+            markets
+          );
+          
+      
+          return this.success(res, { bets, odds_profit: profitlist });
+        }
+      } else {
+        return this.success(res, { bets: [], odds_profit: [] });
+      }
+    } catch (e: any) {
+      return this.fail(res, e);
+    }
+  };
 
   getoddsprofit = (bets: any, markets: any) => {
     var odds_profit: any = {}

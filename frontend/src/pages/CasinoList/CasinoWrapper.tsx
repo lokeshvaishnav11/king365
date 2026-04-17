@@ -67,6 +67,7 @@ import { useWebsocketUser } from "../../context/webSocketUser";
 import axios from "axios";
 import TeenpattiJoker from "./component/jokerTeen";
 import CasinoResultDetail from "./CasinoResultDetail";
+import MyBetComponent22 from "../odds/components/my-bet-component22";
 // import datajson from './Casinojson'
 
 // const isMobile = true;
@@ -887,16 +888,16 @@ const CasinoWrapper = (props: any) => {
               {/* {gameCode == "teen20" && <T20 />} */}
               {gameCode == "Superover" && <SoRules />}
             </div>
-            {/* <div  title={""}>
+            <div  title={""}>
               <div className="card m-b-10 my-bet">
-                <div className="card-header">
+                {/* <div className="card-header">
                   <h6 className="card-title d-inline-block">My Bet</h6>
-                </div>
+                </div> */}
                 <div className="card-body">
-                  <MyBetComponent />
+                  <MyBetComponent22 data={defaultNewData} />
                 </div>
               </div>
-            </div> */}
+            </div> 
           </div>
           <div className="csmobileround">
             {/* <span
