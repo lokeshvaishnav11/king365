@@ -411,7 +411,7 @@ const PlaceBetBox = ({ stake }: { stake: IUserBetStake }) => {
                     type='submit'
                     disabled={getPlaceBet.status === IApiStatus.Loading}
                     className='btn btn-sm btn-success float-right col-6'
-                              style={{background:"#bdbdbd", border:"1px solid black", color:"white", fontWeight:"700"}}
+                              style={{background:betObj.stack > 0 ? "linear-gradient(-180deg, #315195 0%, #14213D 100%)" : "linear-gradient(-180deg, #315195 0%, #14213D 100%)", border:"1px solid black", color:"white", fontWeight:"700" , opacity:betObj.stack > 0 ? 1 : .65}}
 
                   >
                     Place Bet

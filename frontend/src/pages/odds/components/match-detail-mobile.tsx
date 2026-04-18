@@ -9,6 +9,7 @@ import { useAppDispatch, useAppSelector } from '../../../redux/hooks'
 import { selectBetCount } from '../../../redux/actions/bet/betSlice'
 import Fancy from './fancy'
 import { useWebsocketUser } from '../../../context/webSocketUser'
+import TossOdds from './toss-odds'
 
 const MatchDetailWrapper = (props: any) => {
   const dispatch = useAppDispatch()
@@ -24,6 +25,21 @@ const MatchDetailWrapper = (props: any) => {
 
   console.log("match detail wrapper rendered",props.currentMatch)
 
+   const [active, setActive] = React.useState("All");
+
+  const buttons = [
+    { label: "All", color: "#000" ,background:"linear-gradient(#A4DC60 0%, #4F9F21 100%)" },
+    { label: "Popular", color: "#000" ,background:"linear-gradient(#A4DC60 0%, #4F9F21 100%)" },
+    { label: "Match Odds", color: "#000" ,background:"linear-gradient(#A4DC60 0%, #4F9F21 100%)" },
+    { label: "Tied Match", color: "#000" ,background:"linear-gradient(#A4DC60 0%, #4F9F21 100%)" },
+    { label: "Bookmaker", color: "#000" ,background:"linear-gradient(#A4DC60 0%, #4F9F21 100%)" },
+  ];
+
+  const matchName = props.currentMatch?.name || "";
+
+  // "vs" se split (case insensitive handle)
+
+
   return (
     <>
       <div className='prelative'>
@@ -37,6 +53,7 @@ const MatchDetailWrapper = (props: any) => {
               </span>
             </div> */}
 
+         
              <div className='game-heading clsforellipse text-center'>
               <span className='card-header-title giveMeEllipsis' style={{fontSize:"17px", textTransform:"capitalize", fontWeight:"bolder"}}>{props.currentMatch?.sportId == "4" ? "Cricket" : props.currentMatch?.sportId == "2" ? "Tennis" : props.currentMatch?.sportId == "1" ? "Soccer" : "Sports"}</span>
             </div> 
@@ -94,10 +111,38 @@ const MatchDetailWrapper = (props: any) => {
             {tavstatus && props.otherTv()}
             {props.t10Tv(250)}
 
+             <div className="d-flex gap-2 flex-nowrap text-nowrap py-2 " style={{overflowX:"auto",gap:"4px",paddingLeft:"3px",background:"linear-gradient(-180deg, #e0e6e6 0%, #e0e6e6 100%)"}}>
+      {buttons.map((btn, index) => (
+        <div
+          key={index}
+          onClick={() => setActive(btn.label)}
+          style={{
+            padding: "10px",
+            borderRadius: "21px",
+            cursor: "pointer",
+            fontWeight: "700",
+            fontSize:"13.50px",
+            background:
+              active === btn.label ? btn.background : "#34495e",
+            color: active === btn.label ? btn.color : "#fff",
+            border:
+              active === btn.label
+                ? "1px solid #000"
+                : "1px solid transparent",
+            transition: "0.3s",
+          }}
+        >
+          {btn.label}
+        </div>
+      ))}
+    </div>
+
+
             <div className='markets'>
               {/* Score Component Here */}
               <div className='main-market'>
                 {props.markets && <MatchOdds data={props.markets} />}
+                {<TossOdds matchName={props.currentMatch?.name} />}
               </div>
             </div>
             <br />
