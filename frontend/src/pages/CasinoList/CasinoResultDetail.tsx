@@ -45,7 +45,7 @@
 
 
 // const teen20 = () => {
-//   const getCard = (key:any) => popupdata?.[key] || "patti_back";
+//   const getCard = (key:any) => popupdata?.[key] || "1";
 
 //   const playerA = [getCard("C1"), getCard("C3"), getCard("C5")];
 //   const playerB = [getCard("C2"), getCard("C4"), getCard("C6")];
@@ -83,7 +83,7 @@
 //           {playerA.map((card, i) => (
 //             <img
 //               key={i}
-//               src={`/imgs/casino/cards/${card}.png`}
+//               src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${card}.png`}
 //               alt=""
 //               style={{ width: "55px", borderRadius: "6px" }}
 //             />
@@ -132,7 +132,7 @@
 //           {playerB.map((card, i) => (
 //             <img
 //               key={i}
-//               src={`/imgs/casino/cards/${card}.png`}
+//               src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${card}.png`}
 //               alt=""
 //               style={{ width: "55px", borderRadius: "6px" }}
 //             />
@@ -197,8 +197,8 @@
 
 //           <img
 //             alt="dragon"
-//             src={`/imgs/casino/cards/${
-//               dragonCard ? dragonCard : "patti_back"
+//             src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${
+//               dragonCard ? dragonCard : "1"
 //             }.png`}
 //             style={{
 //               width: "70px",
@@ -247,8 +247,8 @@
 
 //           <img
 //             alt="tiger"
-//             src={`/imgs/casino/cards/${
-//               tigerCard ? tigerCard : "patti_back"
+//             src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${
+//               tigerCard ? tigerCard : "1"
 //             }.png`}
 //             style={{
 //               width: "70px",
@@ -281,7 +281,7 @@
 
 
 //  const unlimitedJokerone = () => {
-//   const getCard = (key:any) => popupdata?.[key] || "patti_back";
+//   const getCard = (key:any) => popupdata?.[key] || "1";
 
 //   const playerA = [getCard("C2"), getCard("C4"), getCard("C6")];
 //   const playerB = [getCard("C3"), getCard("C5"), getCard("C7")];
@@ -307,7 +307,7 @@
 //           {playerA.map((card, i) => (
 //             <img
 //               key={i}
-//               src={`/imgs/casino/cards/${card}.png`}
+//               src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${card}.png`}
 //               alt=""
 //               style={{ width: "55px", borderRadius: "6px" }}
 //             />
@@ -343,7 +343,7 @@
 //           {playerB.map((card, i) => (
 //             <img
 //               key={i}
-//               src={`/imgs/casino/cards/${card}.png`}
+//               src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${card}.png`}
 //               alt=""
 //               style={{ width: "55px", borderRadius: "6px" }}
 //             />
@@ -358,7 +358,7 @@
 //         </div>
 
 //         <img
-//           src={`/imgs/casino/cards/${joker}.png`}
+//           src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${joker}.png`}
 //           alt=""
 //           style={{
 //             width: "60px",
@@ -429,7 +429,7 @@ const CasinoResultDetail = (props:any) => {
   // 🃏 TEEN PATTI
   //////////////////////////////////////////////////////
   const teen20 = () => {
-    const getCard = (key:any) => popupdata?.[key] || "patti_back";
+    const getCard = (key:any) => popupdata?.[key] || "1";
 
     const playerA = [getCard("C1"), getCard("C3"), getCard("C5")];
     const playerB = [getCard("C2"), getCard("C4"), getCard("C6")];
@@ -451,7 +451,7 @@ const CasinoResultDetail = (props:any) => {
 
           <div style={{ display: "flex", justifyContent: "center", gap: "6px", marginTop: "4px" }}>
             {playerA.map((card, i) => (
-              <img key={i} src={`/imgs/casino/cards/${card}.png`} style={{ width: "55px" }} />
+              <img key={i} src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${card}.png`} style={{ width: "55px" }} />
             ))}
           </div>
 
@@ -479,7 +479,7 @@ const CasinoResultDetail = (props:any) => {
 
           <div style={{ display: "flex", justifyContent: "center", gap: "6px", marginTop: "4px" }}>
             {playerB.map((card, i) => (
-              <img key={i} src={`/imgs/casino/cards/${card}.png`} style={{ width: "55px" }} />
+              <img key={i} src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${card}.png`} style={{ width: "55px" }} />
             ))}
           </div>
 
@@ -522,7 +522,7 @@ const CasinoResultDetail = (props:any) => {
           <div style={{ textAlign: "center" }}>
             <div style={{ fontSize: "13px", fontWeight: "600" }}>Dragon</div>
 
-            <img src={`/imgs/casino/cards/${dragonCard || "patti_back"}.png`} style={{ width: "70px" }} />
+            <img src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${dragonCard || "1"}.png`} style={{ width: "70px" }} />
 
             {winner === "dragon" && (
               <div style={{
@@ -543,7 +543,7 @@ const CasinoResultDetail = (props:any) => {
           <div style={{ textAlign: "center" }}>
             <div style={{ fontSize: "13px", fontWeight: "600" }}>Tiger</div>
 
-            <img src={`/imgs/casino/cards/${tigerCard || "patti_back"}.png`} style={{ width: "70px" }} />
+            <img src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${tigerCard || "1"}.png`} style={{ width: "70px" }} />
 
             {winner === "tiger" && (
               <div style={{
@@ -568,7 +568,7 @@ const CasinoResultDetail = (props:any) => {
   // 🃏 JOKER
   //////////////////////////////////////////////////////
   const joker120 = () => {
-    const getCard = (key:any) => popupdata?.[key] || "patti_back";
+    const getCard = (key:any) => popupdata?.[key] || "1";
 
     const playerA = [getCard("C2"), getCard("C4"), getCard("C6")];
     const playerB = [getCard("C3"), getCard("C5"), getCard("C7")];
@@ -591,7 +591,7 @@ const CasinoResultDetail = (props:any) => {
 
           <div style={{ display: "flex", justifyContent: "center", gap: "6px" }}>
             {playerA.map((card, i) => (
-              <img key={i} src={`/imgs/casino/cards/${card}.png`} style={{ width: "55px" }} />
+              <img key={i} src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${card}.png`} style={{ width: "55px" }} />
             ))}
           </div>
 
@@ -619,7 +619,7 @@ const CasinoResultDetail = (props:any) => {
 
           <div style={{ display: "flex", justifyContent: "center", gap: "6px" }}>
             {playerB.map((card, i) => (
-              <img key={i} src={`/imgs/casino/cards/${card}.png`} style={{ width: "55px" }} />
+              <img key={i} src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${card}.png`} style={{ width: "55px" }} />
             ))}
           </div>
 
@@ -645,7 +645,7 @@ const CasinoResultDetail = (props:any) => {
             JOKER
           </div>
 
-          <img src={`/imgs/casino/cards/${joker}.png`} style={{ width: "60px" }} />
+          <img src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${joker}.png`} style={{ width: "60px" }} />
         </div>
       </div>
     );

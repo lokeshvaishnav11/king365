@@ -21,7 +21,7 @@ const LuckSeven = (props: any) => {
                     <CasinoPnl matchId={liveMatchData?.match_id} sectionId={market?.SelectionId} />
                 </div>
                 <div className="col-2 text-center card-seven">
-                    <img src="/imgs/casino/cards/7all.jpg" className="card-seven-single" />
+                    <img src="https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/7all.jpg" className="card-seven-single" />
                 </div>
                 <div className="col-5 text-center">
                    <ButtonItem selectionid={market2.SelectionId} title={market2.RunnerName} lastOdds={lastOdds} liveMatchData={liveMatchData} />

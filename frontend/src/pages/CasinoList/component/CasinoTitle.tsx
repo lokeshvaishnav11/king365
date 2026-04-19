@@ -8,7 +8,7 @@ import { isMobile } from 'react-device-detect'
 import PropTypes from 'prop-types'
 import Carousel from 'react-elastic-carousel'
 import { useParams } from 'react-router-dom'
-// import img from "/imgs/casino/cards/AHH.png"
+// import img from "https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/AHH.png"
 
 const breakPoints: any = [
   { width: 1, itemsToShow: 4 },
@@ -187,7 +187,7 @@ const CasinoTitle = (props: any) => {
                         return (
                           <img
                             key={index}
-                            src={`/imgs/casino/cards/${card}.png`}
+                            src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${card}.png`}
                           />
                         )
                       })}
@@ -228,7 +228,7 @@ const CasinoTitle = (props: any) => {
                   return (
                     <img
                       key={index}
-                      src={`/imgs/casino/cards/${card}.png`}
+                      src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${card}.png`}
                     />
                   )
                 })}
@@ -249,9 +249,9 @@ const CasinoTitle = (props: any) => {
         <div className='card-inner'>
           {/* <h3 className='text-white'>Card</h3>{' '} */}
           <img
-            // src={`/imgs/casino/cards/${cardName}.png`}
+            // src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${cardName}.png`}
             // src ={img}
-            src={`/imgs/casino/cards/${cardName == "1" ?  "patti_back" : cardName}.png`}
+            src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${cardName == "1" ?  "1" : cardName}.png`}
           />
         </div>
       </div>
@@ -263,11 +263,11 @@ const CasinoTitle = (props: any) => {
       <div className='video-overlay'>
        <div className='imgspace d-flex'>
           <img
-            src={`/imgs/casino/cards/${lastResult.C1 == "1" ? "patti_back" : lastResult.C1}.png`}
+            src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${lastResult.C1 == "1" ? "1" : lastResult.C1}.png`}
           />{' '}
           
           <img
-            src={`/imgs/casino/cards/${lastResult?.C2 == "1" ? "patti_back" : lastResult?.C2}.png`}
+            src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${lastResult?.C2 == "1" ? "1" : lastResult?.C2}.png`}
           />
         </div>
       </div>
@@ -286,7 +286,7 @@ const CasinoTitle = (props: any) => {
   //           <img
   //             key={i}
   //             alt=""
-  //             src={`/imgs/casino/cards/${card === "1" ? "patti_back" : card}.png`}
+  //             src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${card === "1" ? "1" : card}.png`}
   //           />
           
   //         ))}
@@ -313,7 +313,7 @@ const dt20 = () => {
   
           <img
             alt="dragon"
-            src={`/imgs/casino/cards/${dragonCard ? dragonCard : "patti_back"}.png`}
+            src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${dragonCard ? dragonCard : "1"}.png`}
             style={{ width: "80px" }}
           />
         </div>
@@ -324,7 +324,7 @@ const dt20 = () => {
           <span className="text-white mb-2"  style={{fontSize:"16px",fontWeight:"bold"}}>Tiger</span>
           <img
             alt="tiger"
-            src={`/imgs/casino/cards/${tigerCard ? tigerCard : "patti_back"}.png`}
+            src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${tigerCard ? tigerCard : "1"}.png`}
             style={{ width: "80px" }}
           />
         </div>
@@ -350,11 +350,11 @@ const dt20 = () => {
               <div className='imgspace'>
                 <img
                   alt=''
-                  src={`/imgs/casino/cards/${cards[0] == "1" ? "patti_back" : cards[0]}.png`}
+                  src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${cards[0] == "1" ? "1" : cards[0]}.png`}
                 />
                 <img
                   alt=''
-                  src={`/imgs/casino/cards/${cards[1] == "1" ? "patti_back" : cards[1]}.png`}
+                  src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${cards[1] == "1" ? "1" : cards[1]}.png`}
                 />
               </div>
             </div>
@@ -367,11 +367,11 @@ const dt20 = () => {
               <div className='imgspace'>
                 <img
                   alt=''
-                  src={`/imgs/casino/cards/${cards[2] == "1" ? "patti_back" : cards[2]}.png`}
+                  src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${cards[2] == "1" ? "1" : cards[2]}.png`}
                 />
                 <img
                   alt=''
-                  src={`/imgs/casino/cards/${cards[3] == "1" ? "patti_back" : cards[3]}.png`}
+                  src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${cards[3] == "1" ? "1" : cards[3]}.png`}
                 />
               </div>
             </div>
@@ -385,23 +385,23 @@ const dt20 = () => {
             <div className='imgspace'>
               <img
                 alt=''
-                src={`/imgs/casino/cards/${cards[4] == "1" ? "patti_back" : cards[4]}.png`}
+                src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${cards[4] == "1" ? "1" : cards[4]}.png`}
               />
               <img
                 alt=''
-                src={`/imgs/casino/cards/${cards[5] == "1" ? "patti_back" : cards[5]}.png`}
+                src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${cards[5] == "1" ? "1" : cards[5]}.png`}
               />
               <img
                 alt=''
-                src={`/imgs/casino/cards/${cards[6] == "1" ? "patti_back" : cards[6]}.png`}
+                src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${cards[6] == "1" ? "1" : cards[6]}.png`}
               />
               <img
                 alt=''
-                src={`/imgs/casino/cards/${cards[7] == "1" ? "patti_back" : cards[7]}.png`}
+                src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${cards[7] == "1" ? "1" : cards[7]}.png`}
               />
               <img
                 alt=''
-                src={`/imgs/casino/cards/${cards[8] == "1" ? "patti_back" : cards[8]}.png`}
+                src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${cards[8] == "1" ? "1" : cards[8]}.png`}
               />
             </div>
           </div>
@@ -426,11 +426,11 @@ const dt20 = () => {
               <div className='imgspace'>
                 <img
                   alt=''
-                  src={`/imgs/casino/cards/${lastResult.C1 == "1" ? "patti_back" : lastResult.C1}.png`}
+                  src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${lastResult.C1 == "1" ? "1" : lastResult.C1}.png`}
                 />
                 <img
                   alt=''
-                  src={`/imgs/casino/cards/${lastResult.C2 == "1" ? "patti_back" : lastResult.C2}.png`}
+                  src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${lastResult.C2 == "1" ? "1" : lastResult.C2}.png`}
                 />
               </div>
             </div>
@@ -443,11 +443,11 @@ const dt20 = () => {
               <div className='imgspace'>
                 <img
                   alt=''
-                  src={`/imgs/casino/cards/${lastResult.C3 == "1" ? "patti_back" : lastResult.C3}.png`}
+                  src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${lastResult.C3 == "1" ? "1" : lastResult.C3}.png`}
                 />
                 <img
                   alt=''
-                  src={`/imgs/casino/cards/${lastResult.C4 == "1" ? "patti_back" : lastResult.C4}.png`}
+                  src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${lastResult.C4 == "1" ? "1" : lastResult.C4}.png`}
                 />
               </div>
             </div>
@@ -461,23 +461,23 @@ const dt20 = () => {
             <div className='imgspace'>
               <img
                 alt=''
-                src={`/imgs/casino/cards/${lastResult.C5 == "1" ? "patti_back" : lastResult.C5}.png`}
+                src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${lastResult.C5 == "1" ? "1" : lastResult.C5}.png`}
               />
               <img
                 alt=''
-                src={`/imgs/casino/cards/${lastResult.C6 == "1" ? "patti_back" : lastResult.C6}.png`}
+                src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${lastResult.C6 == "1" ? "1" : lastResult.C6}.png`}
               />
               <img
                 alt=''
-                src={`/imgs/casino/cards/${lastResult.C7 == "1" ? "patti_back" : lastResult.C7}.png`}
+                src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${lastResult.C7 == "1" ? "1" : lastResult.C7}.png`}
               />
               <img
                 alt=''
-                src={`/imgs/casino/cards/${lastResult.C8 == "1" ? "patti_back" : lastResult.C8}.png`}
+                src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${lastResult.C8 == "1" ? "1" : lastResult.C8}.png`}
               />
               <img
                 alt=''
-                src={`/imgs/casino/cards/${lastResult.C9 == "1" ? "patti_back" : lastResult.C9}.png`}
+                src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${lastResult.C9 == "1" ? "1" : lastResult.C9}.png`}
               />
             </div>
           </div>
@@ -500,16 +500,16 @@ const dt20 = () => {
   //             <div className='imgspace d-flex'>
   //               <img
   //                 alt=''
-  //                 src={`/imgs/casino/cards/${lastResult.C1 ==  "1" ? "patti_back" : lastResult.C1}.png`}
+  //                 src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${lastResult.C1 ==  "1" ? "1" : lastResult.C1}.png`}
   //               />
 
   //               <img
   //                 alt=''
-  //                 src={`/imgs/casino/cards/${lastResult.C3==  "1" ? "patti_back" : lastResult.C3}.png`}
+  //                 src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${lastResult.C3==  "1" ? "1" : lastResult.C3}.png`}
   //               />
   //               <img
   //                 alt=''
-  //                 src={`/imgs/casino/cards/${lastResult.C5 ==  "1" ? "patti_back" : lastResult.C5}.png`}
+  //                 src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${lastResult.C5 ==  "1" ? "1" : lastResult.C5}.png`}
   //               />
   //             </div>
   //           </div>
@@ -522,15 +522,15 @@ const dt20 = () => {
   //             <div className='imgspace d-flex'>
   //               <img
   //                 alt=''
-  //                 src={`/imgs/casino/cards/${lastResult.C2 ==  "1" ? "patti_back" : lastResult.C2}.png`}
+  //                 src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${lastResult.C2 ==  "1" ? "1" : lastResult.C2}.png`}
   //               />
   //               <img
   //                 alt=''
-  //                 src={`/imgs/casino/cards/${lastResult.C4 ==  "1" ? "patti_back" : lastResult.C4}.png`}
+  //                 src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${lastResult.C4 ==  "1" ? "1" : lastResult.C4}.png`}
   //               />
   //               <img
   //                 alt=''
-  //                 src={`/imgs/casino/cards/${lastResult.C6 ==  "1" ? "patti_back" : lastResult.C6}.png`}
+  //                 src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${lastResult.C6 ==  "1" ? "1" : lastResult.C6}.png`}
   //               />
   //             </div>
   //           </div>
@@ -558,7 +558,7 @@ const dt20 = () => {
                   <img
                     key={i}
                     alt=""
-                    src={`/imgs/casino/cards/${card === "1" ? "patti_back" : card}.png`}
+                    src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${card === "1" ? "1" : card}.png`}
                   />
                 ))}
               </div>
@@ -574,7 +574,7 @@ const dt20 = () => {
                   <img
                     key={i}
                     alt=""
-                    src={`/imgs/casino/cards/${card === "1" ? "patti_back" : card}.png`}
+                    src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${card === "1" ? "1" : card}.png`}
                   />
                 ))}
               </div>
@@ -592,13 +592,13 @@ const dt20 = () => {
           {/* <h3 className='text-white'>DEALER</h3>{' '} */}
           <div className='d-flex'>
             <img
-              src={`/imgs/casino/cards/${lastResult.C1 == "1" ? "patti_back" : lastResult.C1}.png`}
+              src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${lastResult.C1 == "1" ? "1" : lastResult.C1}.png`}
             />
             <img
-              src={`/imgs/casino/cards/${lastResult.C2 == "1" ? "patti_back" : lastResult.C2}.png`}
+              src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${lastResult.C2 == "1" ? "1" : lastResult.C2}.png`}
             />
             <img
-              src={`/imgs/casino/cards/${lastResult.C3 == "1" ? "patti_back" : lastResult.C3}.png`}
+              src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${lastResult.C3 == "1" ? "1" : lastResult.C3}.png`}
             />
           </div>
         </div>
@@ -617,13 +617,13 @@ const dt20 = () => {
           {/* <h3 className='text-white'>DEALER</h3>{' '} */}
           <div className='d-flex'>
           <img
-          src={`/imgs/casino/cards/${finalString[8] === "1" ? "patti_back" : finalString[8]}.png`}
+          src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${finalString[8] === "1" ? "1" : finalString[8]}.png`}
          />
           <img
-          src={`/imgs/casino/cards/${finalString[17] === "1" ? "patti_back" : finalString[17]}.png`}
+          src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${finalString[17] === "1" ? "1" : finalString[17]}.png`}
          />
         <img
-          src={`/imgs/casino/cards/${finalString[26] === "1" ? "patti_back" : finalString[26]}.png`}
+          src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${finalString[26] === "1" ? "1" : finalString[26]}.png`}
         />
           </div>
         </div>
@@ -638,13 +638,13 @@ const dt20 = () => {
         <div className='video-overlay'>
           <div className='imgspace d-flex'>
             <img
-              src={`/imgs/casino/cards/${lastResult.C1 == "1" ? "patti_back" : lastResult.C1 }.png`}
+              src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${lastResult.C1 == "1" ? "1" : lastResult.C1 }.png`}
             />{' '}
             <img
-              src={`/imgs/casino/cards/${lastResult.C2 == "1" ? "patti_back" : lastResult.C2}.png`}
+              src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${lastResult.C2 == "1" ? "1" : lastResult.C2}.png`}
             />
             <img
-              src={`/imgs/casino/cards/${lastResult.C3 == "1" ? "patti_back" : lastResult.C3}.png`}
+              src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${lastResult.C3 == "1" ? "1" : lastResult.C3}.png`}
             />
           </div>
         </div>
@@ -661,7 +661,7 @@ const dt20 = () => {
             {/* <h3 className='text-white'>DEALER</h3>{' '} */}
             <div className='imgspace d-flex'>
               <img
-                src={`/imgs/casino/cards/${lastResult.C1}.png`}
+                src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${lastResult.C1}.png`}
               />{' '}
             </div>
           </div>
@@ -679,7 +679,7 @@ const dt20 = () => {
             {/* <h3 className='text-white'>DEALER</h3>{' '} */}
             <div className='imgspace d-flex'>
               <img
-                src={`/imgs/casino/cards/${lastResult.C7 == "1" ? "patti_back" : lastResult.C7}.png`}
+                src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${lastResult.C7 == "1" ? "1" : lastResult.C7}.png`}
                 />{' '}
             </div>
           </div>
@@ -702,15 +702,15 @@ const dt20 = () => {
   //             <div className='imgspace d-flex'>
   //               <img
   //                 alt=''
-  //                 src={`/imgs/casino/cards/${lastResult.C1 == "1" ? "patti_back" : lastResult.C1}.png`}
+  //                 src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${lastResult.C1 == "1" ? "1" : lastResult.C1}.png`}
   //               />
   //               <img
   //                 alt=''
-  //                 src={`/imgs/casino/cards/${lastResult.C3  == "1" ? "patti_back" : lastResult.C3}.png`}
+  //                 src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${lastResult.C3  == "1" ? "1" : lastResult.C3}.png`}
   //               />
   //               <img
   //                 alt=''
-  //                 src={`/imgs/casino/cards/${lastResult.C5 == "1" ? "patti_back" : lastResult.C5}.png`}
+  //                 src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${lastResult.C5 == "1" ? "1" : lastResult.C5}.png`}
   //               />
   //             </div>
   //           </div>
@@ -723,15 +723,15 @@ const dt20 = () => {
   //             <div className='imgspace d-flex'>
   //               <img
   //                 alt=''
-  //                 src={`/imgs/casino/cards/${lastResult.C2 == "1" ? "patti_back" : lastResult.C2}.png`}
+  //                 src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${lastResult.C2 == "1" ? "1" : lastResult.C2}.png`}
   //               />
   //               <img
   //                 alt=''
-  //                 src={`/imgs/casino/cards/${lastResult.C4 == "1" ? "patti_back" : lastResult.C4}.png`}
+  //                 src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${lastResult.C4 == "1" ? "1" : lastResult.C4}.png`}
   //               />
   //               <img
   //                 alt=''
-  //                 src={`/imgs/casino/cards/${lastResult.C6 == "1" ? "patti_back" : lastResult.C6}.png`}
+  //                 src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${lastResult.C6 == "1" ? "1" : lastResult.C6}.png`}
   //               />
   //             </div>
   //           </div>
@@ -759,7 +759,7 @@ const dt20 = () => {
   //                 <img
   //                   key={i}
   //                   alt=""
-  //                   src={`/imgs/casino/cards/${card === "1" ? "patti_back" : card}.png`}
+  //                   src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${card === "1" ? "1" : card}.png`}
   //                 />
   //               ))}
   //             </div>
@@ -775,7 +775,7 @@ const dt20 = () => {
   //                 <img
   //                   key={i}
   //                   alt=""
-  //                   src={`/imgs/casino/cards/${card === "1" ? "patti_back" : card}.png`}
+  //                   src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${card === "1" ? "1" : card}.png`}
   //                 />
   //               ))}
   //             </div>
@@ -788,7 +788,7 @@ const dt20 = () => {
   
 
 const teen20 = () => {
-  const getCard = (key:any) => lastResult?.[key] || "patti_back";
+  const getCard = (key:any) => lastResult?.[key] || "1";
 
   // Fixed mapping
   const playerA = [getCard("C1"), getCard("C3"), getCard("C5")];
@@ -809,7 +809,7 @@ const teen20 = () => {
                 <img
                   key={i}
                   alt=""
-                  src={`/imgs/casino/cards/${card}.png`}
+                  src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${card}.png`}
                 />
               ))}
             </div>
@@ -825,7 +825,7 @@ const teen20 = () => {
                 <img
                   key={i}
                   alt=""
-                  src={`/imgs/casino/cards/${card}.png`}
+                  src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${card}.png`}
                 />
               ))}
             </div>
@@ -846,23 +846,23 @@ const teen20 = () => {
               <div className='imgspace d-flex'>
                 <img
                   alt=''
-                  src={`/imgs/casino/cards/${lastResult.C13 == "1" ? "patti_back" : lastResult.C13 }.png`}
+                  src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${lastResult.C13 == "1" ? "1" : lastResult.C13 }.png`}
                 />
                 <img
                   alt=''
-                  src={`/imgs/casino/cards/${lastResult.C14 == "1" ? "patti_back" : lastResult.C14}.png`}
+                  src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${lastResult.C14 == "1" ? "1" : lastResult.C14}.png`}
                 />
                 <img
                   alt=''
-                  src={`/imgs/casino/cards/${lastResult.C15 == "1" ? "patti_back" : lastResult.C15}.png`}
+                  src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${lastResult.C15 == "1" ? "1" : lastResult.C15}.png`}
                 />
                 <img
                   alt=''
-                  src={`/imgs/casino/cards/${lastResult.C16 == "1" ? "patti_back" : lastResult.C16}.png`}
+                  src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${lastResult.C16 == "1" ? "1" : lastResult.C16}.png`}
                 />
                 <img
                   alt=''
-                  src={`/imgs/casino/cards/${lastResult.C17 == "1" ? "patti_back" : lastResult.C17}.png`}
+                  src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${lastResult.C17 == "1" ? "1" : lastResult.C17}.png`}
                 />
               </div>
             </div>
@@ -920,7 +920,7 @@ const teen20 = () => {
                                 return (
                                   <img
                                     key={index}
-                                    src={`/imgs/casino/cards/${card}.png`}
+                                    src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${card}.png`}
                                   />
                                 )
                               })}
@@ -953,15 +953,15 @@ const teen20 = () => {
               <div className='imgspace d-flex'>
                 <img
                   alt=''
-                  src={`/imgs/casino/cards/${lastResult.C1 == "1" ? "patti_back" : lastResult.C1}.png`}
+                  src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${lastResult.C1 == "1" ? "1" : lastResult.C1}.png`}
                 />
                 <img
                   alt=''
-                  src={`/imgs/casino/cards/${lastResult.C2 == "1" ? "patti_back" : lastResult.C2}.png`}
+                  src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${lastResult.C2 == "1" ? "1" : lastResult.C2}.png`}
                 />
                 <img
                   alt=''
-                  src={`/imgs/casino/cards/${lastResult.C3 == "1" ? "patti_back" : lastResult.C3}.png`}
+                  src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${lastResult.C3 == "1" ? "1" : lastResult.C3}.png`}
                 />
               </div>
             </div>
@@ -974,15 +974,15 @@ const teen20 = () => {
               <div className='imgspace d-flex'>
                 <img
                   alt=''
-                  src={`/imgs/casino/cards/${lastResult.C4 == "1" ? "patti_back" : lastResult.C4}.png`}
+                  src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${lastResult.C4 == "1" ? "1" : lastResult.C4}.png`}
                 />
                 <img
                   alt=''
-                  src={`/imgs/casino/cards/${lastResult.C5 == "1" ? "patti_back" : lastResult.C5}.png`}
+                  src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${lastResult.C5 == "1" ? "1" : lastResult.C5}.png`}
                 />
                 <img
                   alt=''
-                  src={`/imgs/casino/cards/${lastResult.C6 == "1" ? "patti_back" : lastResult.C6}.png`}
+                  src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${lastResult.C6 == "1" ? "1" : lastResult.C6}.png`}
                 />
               </div>
             </div>
@@ -995,15 +995,15 @@ const teen20 = () => {
               <div className='imgspace d-flex'>
                 <img
                   alt=''
-                  src={`/imgs/casino/cards/${lastResult.C7 == "1" ? "patti_back" : lastResult.C7}.png`}
+                  src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${lastResult.C7 == "1" ? "1" : lastResult.C7}.png`}
                 />
                 <img
                   alt=''
-                  src={`/imgs/casino/cards/${lastResult.C8 == "1" ? "patti_back" : lastResult.C8}.png`}
+                  src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${lastResult.C8 == "1" ? "1" : lastResult.C8}.png`}
                 />
                 <img
                   alt=''
-                  src={`/imgs/casino/cards/${lastResult.C9 == "1" ? "patti_back" : lastResult.C9}.png`}
+                  src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${lastResult.C9 == "1" ? "1" : lastResult.C9}.png`}
                 />
               </div>
             </div>
@@ -1068,7 +1068,7 @@ const teen20 = () => {
   //                   alt=''
   //                   className='mb-1'
   //                   key={key}
-  //                   src={`/imgs/casino/cards/${Item}.png`}
+  //                   src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${Item}.png`}
   //                 />
   //               )
   //             })}
@@ -1092,7 +1092,7 @@ const teen20 = () => {
                 key={index}
                 alt={`card-${index}`}
                 className="mb-1"
-                src={`/imgs/casino/cards/${card === "1" ? "patti_back" : card}.png`}
+                src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${card === "1" ? "1" : card}.png`}
               />
             ))}
           </div>
@@ -1114,7 +1114,7 @@ const teen20 = () => {
             <div className='imgspace'>
               <img
                 alt=''
-                 src={`/imgs/casino/cards/${lastResult.C1 ? lastResult.C1 :"patti_back" }.png`}
+                 src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${lastResult.C1 ? lastResult.C1 :"1" }.png`}
               />
             </div>
           </div>
@@ -1128,15 +1128,15 @@ const teen20 = () => {
               <div className='imgspace d-flex'>
                 <img
                   alt=''
-                  src={`/imgs/casino/cards/${lastResult.C2 ? lastResult.C2 :"patti_back" }.png`}
+                  src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${lastResult.C2 ? lastResult.C2 :"1" }.png`}
                 />
                 <img
                   alt=''
-                  src={`/imgs/casino/cards/${lastResult.C4 ? lastResult.C4 :"patti_back" }.png`}
+                  src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${lastResult.C4 ? lastResult.C4 :"1" }.png`}
                 />
                 <img
                   alt=''
-                  src={`/imgs/casino/cards/${lastResult.C6 ? lastResult.C6 :"patti_back" }.png`}
+                  src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${lastResult.C6 ? lastResult.C6 :"1" }.png`}
                 />
               </div>
             </div>
@@ -1149,15 +1149,15 @@ const teen20 = () => {
               <div className='imgspace d-flex'>
                 <img
                   alt=''
-                  src={`/imgs/casino/cards/${lastResult.C3 ? lastResult.C3 :"patti_back" }.png`}
+                  src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${lastResult.C3 ? lastResult.C3 :"1" }.png`}
                 />
                 <img
                   alt=''
-                  src={`/imgs/casino/cards/${lastResult.C5 ? lastResult.C5 :"patti_back" }.png`}
+                  src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${lastResult.C5 ? lastResult.C5 :"1" }.png`}
                 />
                 <img
                   alt=''
-                  src={`/imgs/casino/cards/${lastResult.C7 ? lastResult.C7 :"patti_back" }.png`}
+                  src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${lastResult.C7 ? lastResult.C7 :"1" }.png`}
                 />
               </div>
             </div>
@@ -1267,7 +1267,7 @@ const teen20 = () => {
                         <img
                           alt=''
                           key={key}
-                          src={`/imgs/casino/cards/${Item}.png`}
+                          src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${Item}.png`}
                         />
                       )
                     })}
@@ -1290,7 +1290,7 @@ const teen20 = () => {
                         <img
                           alt=''
                           key={key}
-                          src={`/imgs/casino/cards/${Item}.png`}
+                          src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${Item}.png`}
                         />
                       )
                     })}

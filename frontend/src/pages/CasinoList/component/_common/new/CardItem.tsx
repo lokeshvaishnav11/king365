@@ -48,7 +48,7 @@ const CardItem = (props: any) => {
     const suspend = !ItemMarket.gstatus || ItemMarket.gstatus == 0 || ItemMarket.gstatus=="SUSPENDED" || ItemMarket.gstatus=="CLOSED"? 'suspended' : '';
     const newtitle = title=='Card A'?'Card 1':title;
     return <div className={`lucky7card  ${suspend}`} >
-    <img onClick={() => onBet(true, ItemMarket)} src={`/imgs/casino/cards/${newtitle}.jpeg`} className="m-r-5 m-l-5 wd-casino" />
+    <img onClick={() => onBet(true, ItemMarket)} src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${newtitle}.jpeg`} className="m-r-5 m-l-5 wd-casino" />
 </div>
 }
 export default React.memo(CardItem)
