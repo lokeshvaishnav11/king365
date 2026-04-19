@@ -452,6 +452,8 @@ const TeenPatti20 = (props: any) => {
                   </div>
                   <div>{item.aAmount}</div>
                 </button>
+                <CasinoPnl sectionId={item.playerA.SelectioName} matchId={defaultNewData?.roundId} classData={'text-center'} />
+
               </div>
 
               {/* Player B */}
@@ -473,6 +475,8 @@ const TeenPatti20 = (props: any) => {
                   </div>
                   <div>{item.bAmount}</div>
                 </button>
+                 <CasinoPnl sectionId={item.playerB.SelectioName} matchId={defaultNewData?.roundId} classData={'text-center'} />
+
               </div>
 
 

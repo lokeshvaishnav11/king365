@@ -324,7 +324,7 @@ React.useEffect(() => {
                 <CardItem selectionid={market.SelectionId} title={runName} lastOdds={lastOdds} liveMatchData={liveMatchData} />
                 <div>
                   <div className='m-t-5'>
-                    <CasinoPnl sectionId={market.SelectionId} matchId={liveMatchData.data.match_id} />
+                  ghjkl  <CasinoPnl sectionId={market.runName} matchId={liveMatchData.data.match_id} />
                   </div>
                 </div>
               </div>
@@ -370,7 +370,7 @@ React.useEffect(() => {
               <div className='row '>
                 <div className='col-12 text-center'>
                   <div className='m-t-5' style={{ marginTop: '10px' }}>
-                    {/* <CasinoPnl sectionId={market.SelectionId} matchId={liveMatchData.match_id} /> */}
+                    <CasinoPnl sectionId={title} matchId={defaultNewData?.roundId} />
                   </div>
                 </div>
               </div>
@@ -415,7 +415,7 @@ React.useEffect(() => {
     }}><span className='text-center'>SUSPENDED</span></div>}
 
       </div>
-    <PlaceBetBoxCasino stake={marketDataList.stake} />
+    <PlaceBetBoxCasino stake={marketDataList?.stake} />
 
     </div>
   )

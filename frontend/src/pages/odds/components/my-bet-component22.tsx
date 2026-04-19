@@ -54,7 +54,7 @@ const MyBetComponent22 = (props: any) => {
             bets.data.data &&
             setMyAllBet(bets.data.data.bets);
           // dispatch(setbetlist(bets.data.data.bets))
-          // dispatch(setBookMarketList(bets.data.data.odds_profit))
+          dispatch(setBookMarketList(bets.data.data.odds_profit))
           // dispatch(setBetCount(bets.data.data.bets.length))
         })
         .catch((e) => {

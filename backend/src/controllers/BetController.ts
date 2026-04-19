@@ -1034,7 +1034,10 @@ export class BetController extends ApiController {
   betList = async (req: Request, res: Response): Promise<Response> => {
     try {
       const user: any = req.user
-      const { matchId } = req.query
+      var { matchId } = req.query
+    if(matchId == "2"){
+      matchId = "84"
+    }
       let userId: any = { userId: ObjectId(user._id) }
       if (user.role !== RoleType.user) userId = { parentStr: { $in: ObjectId(user._id) } }
       const bets: Array<IBet | null> = await Bet.find({
@@ -1212,106 +1215,168 @@ export class BetController extends ApiController {
     return odds_profit
   }
 
+  // getcasinooddsprofit = (bets: any, markets: any, matchInfo: any) => {
+  //   var odds_profit: any = {}
+  //   const filterbets =
+  //     bets && bets.length > 0 ? bets.filter((Item: any) => Item.bet_on == BetOn.CASINO) : []
+  //   const promiseprofit = filterbets.map((Item: any) => {
+  //     const selectionIdBet = Item.selectionId
+  //     const getBetType = Item.isBack
+  //     const lossAmt = Item.matchId == 33 ? Item.stack : Item.loss
+  //     const getOdds = Item.odds
+  //     let profitAmt: number = 0
+  //     if (Item.fancystatus == 'yes') {
+  //       profitAmt = Item.pnl
+  //     } else {
+  //       profitAmt = (parseFloat(getOdds) - 1) * parseFloat(lossAmt)
+  //     }
+  //     let filtermarket =
+  //       markets && markets.length > 0
+  //         ? markets.filter((ItemMarket: any) => ItemMarket.MarketName == Item.marketName)
+  //         : []
+  //     const filtermarketdata: any =
+  //       filtermarket && filtermarket.length > 0 ? filtermarket[0] : { Runners: [] }
+  //     if (filtermarketdata) {
+  //       filtermarketdata.Runners.map((mData: any, mIndex: number) => {
+  //         var SelectionId = mData.SelectionId
+  //         if (odds_profit[Item.marketId + '_' + SelectionId] == undefined) {
+  //           odds_profit[Item.marketId + '_' + SelectionId] = 0
+  //         }
+  //         console.log(matchInfo.match_id)
+  //         if (matchInfo.match_id == 33) {
+  //           //// specific condition for cmeter game
+  //           if (SelectionId == selectionIdBet) {
+  //             if (getBetType) {
+  //               odds_profit[Item.marketId + '_' + SelectionId] =
+  //                 odds_profit[Item.marketId + '_' + SelectionId] + lossAmt
+  //             } else {
+  //               odds_profit[Item.marketId + '_' + SelectionId] =
+  //                 odds_profit[Item.marketId + '_' + SelectionId] - profitAmt
+  //             }
+  //           }
+  //         } else if (matchInfo.match_id == 46) {
+  //           // race2020
+  //           if (SelectionId == selectionIdBet) {
+  //             if (getBetType) {
+  //               odds_profit[Item.marketId + '_' + SelectionId] =
+  //                 odds_profit[Item.marketId + '_' + SelectionId] + lossAmt
+  //             } else {
+  //               odds_profit[Item.marketId + '_' + SelectionId] =
+  //                 odds_profit[Item.marketId + '_' + SelectionId] + lossAmt
+  //             }
+  //           }
+  //         } else if (Item.fancystatus == 'yes') {
+  //           // all fancy cases
+  //           const filterbets =
+  //             bets && bets.length > 0
+  //               ? bets.filter((ItemN: any) => {
+  //                 console.log(ItemN.marketId, ' ItemN.marketId')
+  //                 return (
+  //                   ItemN.bet_on == BetOn.CASINO &&
+  //                   ItemN.marketId == Item.marketId &&
+  //                   !ItemN.isBack
+  //                 )
+  //               })
+  //               : []
+  //           if (SelectionId == selectionIdBet) {
+  //             if (getBetType) {
+  //               odds_profit[Item.marketId + '_' + SelectionId] =
+  //                 odds_profit[Item.marketId + '_' + SelectionId] +
+  //                 (filterbets.length > 0 ? Item.pnl : -Item.stack)
+  //             } else {
+  //               odds_profit[Item.marketId + '_' + SelectionId] =
+  //                 odds_profit[Item.marketId + '_' + SelectionId] + lossAmt
+  //             }
+  //           }
+  //         } else {
+  //           if (SelectionId == selectionIdBet) {
+  //             if (getBetType) {
+  //               odds_profit[Item.marketId + '_' + SelectionId] =
+  //                 odds_profit[Item.marketId + '_' + SelectionId] + profitAmt
+  //             } else {
+  //               odds_profit[Item.marketId + '_' + SelectionId] =
+  //                 odds_profit[Item.marketId + '_' + SelectionId] - profitAmt
+  //             }
+  //           } else {
+  //             if (getBetType) {
+  //               odds_profit[Item.marketId + '_' + SelectionId] =
+  //                 odds_profit[Item.marketId + '_' + SelectionId] - lossAmt
+  //             } else {
+  //               odds_profit[Item.marketId + '_' + SelectionId] =
+  //                 odds_profit[Item.marketId + '_' + SelectionId] + lossAmt
+  //             }
+  //           }
+  //         }
+  //       })
+  //     }
+  //   })
+  //   Promise.all(promiseprofit)
+  //   console.log(odds_profit, 'odds_profit')
+  //   /// odds_profit = { ...odds_profit }
+  //   return odds_profit
+  // }
+
   getcasinooddsprofit = (bets: any, markets: any, matchInfo: any) => {
-    var odds_profit: any = {}
-    const filterbets =
-      bets && bets.length > 0 ? bets.filter((Item: any) => Item.bet_on == BetOn.CASINO) : []
-    const promiseprofit = filterbets.map((Item: any) => {
-      const selectionIdBet = Item.selectionId
-      const getBetType = Item.isBack
-      const lossAmt = Item.matchId == 33 ? Item.stack : Item.loss
-      const getOdds = Item.odds
-      let profitAmt: number = 0
-      if (Item.fancystatus == 'yes') {
-        profitAmt = Item.pnl
+  let odds_profit: any = {};
+
+  const filterbets =
+    bets?.length > 0
+      ? bets.filter((b: any) => b.bet_on == BetOn.CASINO)
+      : [];
+
+      console.log(matchInfo,"matchInfo")
+  filterbets.forEach((Item: any) => {
+    const roundId = Item.marketId;
+    const selectionName = Item.selectionName;
+    const stake = Number(Item.stack || Item.stake || 0);
+
+    // 🔥 GAME BASED ODDS
+    let odds = 2;
+
+    if (matchInfo.slug === "dt20") {
+      odds = selectionName === "Tie" ? 11 : 2;
+    }
+
+    if (
+      matchInfo.slug === "joker120" ||
+      matchInfo.slug === "teen20"
+    ) {
+      odds = 1.98; // 🔥 FIXED
+    }
+
+    const profit = (odds - 1) * stake;
+
+    if (!odds_profit[roundId]) {
+      odds_profit[roundId] = {};
+    }
+
+    let selections: string[] = [];
+
+    if (matchInfo.slug === "dt20") {
+      selections = ["Dragon", "Tiger", "Tie"];
+    } else {
+      selections = ["Player A", "Player B"];
+    }
+
+    // init
+    selections.forEach((sel) => {
+      if (odds_profit[roundId][sel] === undefined) {
+        odds_profit[roundId][sel] = 0;
+      }
+    });
+
+    // 🔥 CORE LOGIC
+    selections.forEach((sel) => {
+      if (sel === selectionName) {
+        odds_profit[roundId][sel] += profit;
       } else {
-        profitAmt = (parseFloat(getOdds) - 1) * parseFloat(lossAmt)
+        odds_profit[roundId][sel] -= stake;
       }
-      let filtermarket =
-        markets && markets.length > 0
-          ? markets.filter((ItemMarket: any) => ItemMarket.MarketName == Item.marketName)
-          : []
-      const filtermarketdata: any =
-        filtermarket && filtermarket.length > 0 ? filtermarket[0] : { Runners: [] }
-      if (filtermarketdata) {
-        filtermarketdata.Runners.map((mData: any, mIndex: number) => {
-          var SelectionId = mData.SelectionId
-          if (odds_profit[Item.marketId + '_' + SelectionId] == undefined) {
-            odds_profit[Item.marketId + '_' + SelectionId] = 0
-          }
-          console.log(matchInfo.match_id)
-          if (matchInfo.match_id == 33) {
-            //// specific condition for cmeter game
-            if (SelectionId == selectionIdBet) {
-              if (getBetType) {
-                odds_profit[Item.marketId + '_' + SelectionId] =
-                  odds_profit[Item.marketId + '_' + SelectionId] + lossAmt
-              } else {
-                odds_profit[Item.marketId + '_' + SelectionId] =
-                  odds_profit[Item.marketId + '_' + SelectionId] - profitAmt
-              }
-            }
-          } else if (matchInfo.match_id == 46) {
-            // race2020
-            if (SelectionId == selectionIdBet) {
-              if (getBetType) {
-                odds_profit[Item.marketId + '_' + SelectionId] =
-                  odds_profit[Item.marketId + '_' + SelectionId] + lossAmt
-              } else {
-                odds_profit[Item.marketId + '_' + SelectionId] =
-                  odds_profit[Item.marketId + '_' + SelectionId] + lossAmt
-              }
-            }
-          } else if (Item.fancystatus == 'yes') {
-            // all fancy cases
-            const filterbets =
-              bets && bets.length > 0
-                ? bets.filter((ItemN: any) => {
-                  console.log(ItemN.marketId, ' ItemN.marketId')
-                  return (
-                    ItemN.bet_on == BetOn.CASINO &&
-                    ItemN.marketId == Item.marketId &&
-                    !ItemN.isBack
-                  )
-                })
-                : []
-            if (SelectionId == selectionIdBet) {
-              if (getBetType) {
-                odds_profit[Item.marketId + '_' + SelectionId] =
-                  odds_profit[Item.marketId + '_' + SelectionId] +
-                  (filterbets.length > 0 ? Item.pnl : -Item.stack)
-              } else {
-                odds_profit[Item.marketId + '_' + SelectionId] =
-                  odds_profit[Item.marketId + '_' + SelectionId] + lossAmt
-              }
-            }
-          } else {
-            if (SelectionId == selectionIdBet) {
-              if (getBetType) {
-                odds_profit[Item.marketId + '_' + SelectionId] =
-                  odds_profit[Item.marketId + '_' + SelectionId] + profitAmt
-              } else {
-                odds_profit[Item.marketId + '_' + SelectionId] =
-                  odds_profit[Item.marketId + '_' + SelectionId] - profitAmt
-              }
-            } else {
-              if (getBetType) {
-                odds_profit[Item.marketId + '_' + SelectionId] =
-                  odds_profit[Item.marketId + '_' + SelectionId] - lossAmt
-              } else {
-                odds_profit[Item.marketId + '_' + SelectionId] =
-                  odds_profit[Item.marketId + '_' + SelectionId] + lossAmt
-              }
-            }
-          }
-        })
-      }
-    })
-    Promise.all(promiseprofit)
-    console.log(odds_profit, 'odds_profit')
-    /// odds_profit = { ...odds_profit }
-    return odds_profit
-  }
+    });
+  });
+
+  return odds_profit;
+};
 
   alluserbetList = async (req: Request, res: Response): Promise<Response> => {
     try {

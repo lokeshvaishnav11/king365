@@ -109,9 +109,12 @@ React.useEffect(() => {
           <tr key={key} className={`${clsstatus} suspendedd `}>
             <td className={clsnamehead} style={{ paddingLeft: "10px", textAlign:"left" }}>
               <b className='text-left pl-2' style={{fontSize:"12px"}} >{ItemNew.RunnerName}</b>
+                          <CasinoPnl sectionId={ItemNew?.RunnerName} matchId={defaultNewData?.roundId} classData={'text-center'} />
+
               {/* <CasinoPnl sectionId={ItemNew.SelectionId} matchId={liveMatchData?.match_id} /> */}
             </td>
             <LayBackButton selectionid={ItemNew.SelectionId} lastOdds={lastOdds} liveMatchData={liveMatchData} clsnamename={''} defaultNewData={defaultNewData} ItemNew = {ItemNew}/>
+    
 
           </tr>
         )
