@@ -791,7 +791,7 @@ const CasinoWrapper = (props: any) => {
                         height={200}
                         // width="100%"
                         // height={isMobile ? "250" : "420"}
-                        style={{ border: "0px" }}
+                        style={{ border: "0px",marginTop:"20px" }}
                         // src={casinoMatchData?.tv}
                         //  src={`https://mac88-casino-stream.scoreswift.xyz/stream?stream_id=${gameId}`}
 

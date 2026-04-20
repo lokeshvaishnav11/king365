@@ -152,7 +152,7 @@ class MatchOdds extends React.PureComponent<
             return (
               <div key={market._id}>
                 <div className='market-title mt-1' style={{background:"none", padding:"8px 0px"}}>
-                 <span className='bg-theme px-2 py-1' style={{borderTopRightRadius:"10px" , gap:"2px"}}>
+                 <span className='bg-theme px-2 py-1' style={{borderTopRightRadius:"10px" ,background:"linear-gradient(-180deg, #2E4B5E 0%, #243A48 82%)", gap:"2px",fontSize:"12px",fontWeight:"700"}}>
                   {market.marketName}
                   <a
                     href='#Bookmaker-market'
@@ -172,11 +172,11 @@ class MatchOdds extends React.PureComponent<
                   {/* <span className='float-right m-r-10'>
                     Maximum Bet <span>{this.offplaylimit(market)}</span>
                   </span> */}
-                  <span className='text-dark ml-1'><span className='bg-warning rounded px-1' style={{paddingBottom:"3px" }}><i style={{fontSize:"x-small"}} className='fa fa-circle'/></span> Cash out</span>
+                  <span className='text-dark ml-1' style={{fontSize:"11px"}}><span className='bg-warning rounded px-1' style={{paddingBottom:"3px" }}><i style={{fontSize:"x-small"}} className='fa fa-circle'/></span> Cash out</span>
                 </div>
                 <div className='table-header'>
                   <div className={`float-left country-name ${classforheadingfirst} min-max`} style={{borderTop:"1px solid #7e97a7"}}>
-               <div className='text-center py-1' style={{background:"#bed5d8", borderRadius:"2px"}}><div>Min/Max 100-1000</div></div>
+               <div className='text-center py-1' style={{background:"#bed5d8", borderRadius:"3px"}}><div><span style={{color:"#315195",fontSize:"10px",fontWeight:"700"}}>Min/Max</span> <span style={{fontSize:"10px",fontWeight:"700"}}>100-1000</span></div></div>
                   </div>
                   {(!isMobile && market.oddsType != OddsType.BM) ||
                     market.oddsType == OddsType.BM ? (
@@ -189,10 +189,10 @@ class MatchOdds extends React.PureComponent<
                   )}
 
                   <div className={`back ${classforheading} float-left text-center`} style={{borderColor:"#7e97a7"}}>
-                    <b>BACK</b>
+                    <span style={{fontSize:"12px",fontWeight:"bold"}}>Back</span>
                   </div>
                   <div className={`lay ${classforheading} float-left text-center`} style={{borderColor:"#7e97a7"}} >
-                    <b>LAY</b>
+                    <span style={{fontSize:"12px",fontWeight:"bold"}}>Lay</span>
                   </div>
                    <>
                       <div className='box-1 float-left' style={{borderRight:"none", borderTop:"1px solid #7e97a7"}}  />
@@ -224,7 +224,7 @@ class MatchOdds extends React.PureComponent<
                           >
                             <div className={` country-name ${classforheadingfirst}`} style={{borderColor:"#7e97a7"}}>
                               <span className='team-name'>
-                                <b>{runner.runnerName}</b>
+                                <span style={{fontSize:"13px",fontWeight:"700"}}>{runner.runnerName}</span>
                               </span>
                               <p>
                                 {getMarketBook[`${market.marketId}_${runner.selectionId}`] ? (

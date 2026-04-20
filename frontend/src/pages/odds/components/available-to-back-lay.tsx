@@ -73,7 +73,7 @@ export const AvailableToBackLay = React.memo(({ selections, market, runner }: Pr
           key={index}
           className={`${classforbox}  text-center ${cls} ${blinkCls}`}
         >
-          <span className='odd d-block'>
+          <span className='odd d-block' style={{fontSize:"12px",fontWeight:"700"}}>
             {market.oddsType == OddsType.BM
               ? back.price
                 ? back.price
@@ -82,7 +82,7 @@ export const AvailableToBackLay = React.memo(({ selections, market, runner }: Pr
               ? back.price
               : '-'}
           </span>
-          <span className='d-block'>{back.size ? nFormatter(back.size, 1) : '-'}</span>
+          <span className='d-block' style={{fontSize:"11px",fontWeight:""}}>{back.size ? nFormatter(back.size, 1) : '-'}</span>
         </div>
       )
     })
@@ -105,7 +105,7 @@ export const AvailableToBackLay = React.memo(({ selections, market, runner }: Pr
           key={index}
           className={`${classforbox}   text-center ${cls} ${blinkCls}`}
         >
-          <span className='odd d-block'>
+          <span className='odd d-block' style={{fontSize:"12px",fontWeight:"700"}}>
             {market.oddsType == OddsType.BM
               ? lay.price
                 ? lay.price
@@ -114,7 +114,7 @@ export const AvailableToBackLay = React.memo(({ selections, market, runner }: Pr
               ? lay.price
               : '-'}
           </span>
-          <span className='d-block'>{lay.size ? nFormatter(lay.size, 1) : '-'}</span>
+          <span className='d-block' style={{fontSize:"11px",fontWeight:""}}>{lay.size ? nFormatter(lay.size, 1) : '-'}</span>
         </div>
       )
     })

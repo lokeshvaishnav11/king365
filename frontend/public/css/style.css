@@ -113,7 +113,6 @@ body {
     }
 }
 
-
 .game-fancy {
     font-weight: 700;
     padding: 0 7px 0 2px;
@@ -135,6 +134,32 @@ body {
 
 @media only screen and (min-device-width: 768px) and (max-device-width: 990px) {
     .game-fancy {
+        font-size:2vw
+    }
+}
+
+
+.game-fancy-2 {
+    font-weight: 700;
+    padding: 0 7px 0 2px;
+    background: linear-gradient(180deg,#f26d1c 15%,#d14100 100%);
+    color: #fff;
+    font-style: italic;
+    border-radius: 4px;
+    letter-spacing: 0px;
+    font-size: 12px;
+    margin-left: .22rem!important
+}
+
+@media only screen and (max-device-width: 990px) {
+    .game-fancy-2 {
+        font-size:4vw;
+        position: relative
+    }
+}
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 990px) {
+    .game-fancy-2 {
         font-size:2vw
     }
 }

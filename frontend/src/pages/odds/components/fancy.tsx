@@ -276,6 +276,117 @@ class Fancy extends React.Component<
 
     return (
       <>
+   <div style={{ display: "flex", gap: "21px" }}>
+
+  {/* TAB 1 */}
+  <div
+    style={{
+      display: "flex",
+      alignItems: "center",
+      background: "linear-gradient(180deg,#0a92a5 15%,#076875 100%)",
+      color: "#fff",
+      fontWeight: "700",
+      fontSize: "13px",
+      padding: "6px 12px",
+      // borderTopLeftRadius: "6px",
+      // borderBottomLeftRadius: "6px",
+      position: "relative",
+    }}
+  >
+    Session
+
+    {/* Right Slant */}
+    <div
+      style={{
+        position: "absolute",
+        right: "-15px",
+        top: "0",
+        width: "30px",
+        height: "100%",
+        background: "inherit",
+        transform: "skewX(20deg)",
+        borderTopRightRadius: "8px",
+      }}
+    ></div>
+
+    {/* Info Icon */}
+    <div
+      style={{
+        marginLeft: "18px",
+   
+        width: "18px",
+        height: "18px",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        zIndex: 2,
+      }}
+    >
+      <i className="fa fa-info-circle" style={{ fontSize: "12px" }} />
+    </div>
+
+     <div
+      style={{
+        position: "absolute",
+        right: "-15px",
+        top: "0",
+        width: "30px",
+        height: "100%",
+        background: "inherit",
+        transform: "skewX(20deg)",
+        borderTopRightRadius: "8px",
+      }}
+    ></div>
+  </div>
+
+  {/* TAB 2 */}
+  <div
+    style={{
+      display: "flex",
+      alignItems: "center",
+      background: "linear-gradient(180deg,#ff7a00 15%,#e65c00 100%)",
+      color: "#fff",
+      fontWeight: "700",
+      fontSize: "13px",
+      padding: "6px 12px",
+      borderTopLeftRadius: "6px",
+      // borderBottomLeftRadius: "6px",
+      position: "relative",
+    }}
+  >
+    Sportsbook
+
+    {/* Right Slant */}
+    <div
+      style={{
+        position: "absolute",
+        right: "-15px",
+        top: "0",
+        width: "30px",
+        height: "100%",
+        background: "inherit",
+        transform: "skewX(20deg)",
+        borderTopRightRadius: "8px",
+      }}
+    ></div>
+
+    {/* Info Icon */}
+    <div
+      style={{
+        marginLeft: "18px",
+        width: "18px",
+        height: "18px",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        zIndex: 2,
+      }}
+    >
+      <i className="fa fa-info-circle" style={{ fontSize: "12px" }} />
+    </div>
+  </div>
+
+</div>
         <ul role='tablist' className='nav nav-tabs fancy-group px-4 py-1' aria-label='Tabs' style={{background:"linear-gradient(180deg, #0a92a5 15%, #076875 100%)"}}>
           {this.fancyMenu(fancyType)}
         </ul>

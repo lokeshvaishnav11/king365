@@ -50,6 +50,7 @@
     font-size: 26px;
   }
 }
+
 /* 🔥 blinking + zoom animation */
 .vimaan-text {
   animation: blinkZoom 1s infinite;
@@ -59,15 +60,15 @@
 /* animation */
 @keyframes blinkZoom {
   0% {
-    color: red;
+    color: #ff0000;
     transform: scale(1);
   }
   50% {
-    color: yellow;
+    color: #008000;
     transform: scale(1.2);
   }
   100% {
-    color: red;
+    color: #ff0000;
     transform: scale(1);
   }
 }

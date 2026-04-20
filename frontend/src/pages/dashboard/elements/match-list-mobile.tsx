@@ -87,6 +87,8 @@ const MatchListMobile = (props: any) => {
                       <i className='fas fa-tv v-m icon-tv' />
                     </span> */}
               {match.isFancy && <span className="game-fancy me-1">F</span>}
+              {match.isFancy && <span className="game-fancy-2 me-1">S</span>}
+
               {match.isBookMaker && (
                 <span className="game-bookmakers me-lg-1">BM</span>
               )}
@@ -155,8 +157,9 @@ const MatchListMobile = (props: any) => {
                 key={tab}
                 onClick={() => setActiveTab(tab)}
                 className={`btn flex-fill rounded ${
-                  activeTab === tab ? "bg-theme text-white" : ""
+                  activeTab === tab ? " text-white" : ""
                 }`}
+                style={{background:activeTab == tab ? "#3B5160" :""}}
               >
                 {tab}
               </button>
@@ -297,7 +300,7 @@ const MatchListMobile = (props: any) => {
                       <td colSpan={6}>
                         <div
                           style={{
-                            background: "var(--theme1-bg)",
+                            background: "linear-gradient(-180deg, #315195 0%, #14213D 100%)",
                             color: "white",
                             fontSize: "14px",
                             lineHeight: "30px",
@@ -322,7 +325,7 @@ const MatchListMobile = (props: any) => {
                       <td colSpan={6}>
                         <div
                           style={{
-                            background: "var(--theme1-bg)",
+                            background: "linear-gradient(-180deg, #315195 0%, #14213D 100%)",
                             color: "white",
                             fontSize: "14px",
                             lineHeight: "30px",
@@ -347,7 +350,7 @@ const MatchListMobile = (props: any) => {
                       <td colSpan={6}>
                         <div
                           style={{
-                            background: "var(--theme1-bg)",
+                            background: "linear-gradient(-180deg, #315195 0%, #14213D 100%)",
                             color: "white",
                             fontSize: "14px",
                             lineHeight: "30px",
@@ -468,6 +471,8 @@ const MatchListMobile = (props: any) => {
                               {match.isFancy && (
                                 <span className="game-fancy me-1">F</span>
                               )}
+              {match.isFancy && <span className="game-fancy-2 me-1">S</span>}
+
                               {match.isBookMaker && (
                                 <span className="game-bookmakers me-lg-1">
                                   BM

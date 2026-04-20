@@ -32,6 +32,7 @@ import casinoSlugs from "../../../utils/casino-slugs.json";
 import UserService from "../../../services/user.service";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import "./header.css";
+import BetHome from "../../svg/BetHome";
 
 const Header = () => {
   // const isMobile = true
@@ -194,7 +195,7 @@ const Header = () => {
               color: "white",
             }}
           >
-            <i className="fas fa-coins"></i>
+            <BetHome/>
             <span className="fw-bold">Bets</span>
           </CustomLink>
 
