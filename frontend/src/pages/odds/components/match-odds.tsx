@@ -22,7 +22,7 @@ interface Props {
   currentMatch?: IMatch
   setRules: (data: { open: boolean; type: string }) => void
   marketUserBookId?: any
-  betPopup:any
+  betPopup: any
 }
 
 class MatchOdds extends React.PureComponent<
@@ -134,127 +134,127 @@ class MatchOdds extends React.PureComponent<
 
 
   handleCashout = (market: any) => {
-  const { currentMatch, getMarketBook, betPopup } = this.props;
+    const { currentMatch, getMarketBook, betPopup } = this.props;
 
-  if (!currentMatch || !getMarketBook || !market?.runners?.length) return;
+    if (!currentMatch || !getMarketBook || !market?.runners?.length) return;
 
-  const pnlMap: Record<number, number> = {};
+    const pnlMap: Record<number, number> = {};
 
-  market.runners.forEach((runner: any) => {
-    const key = `${market.marketId}_${runner.selectionId}`;
-    pnlMap[runner.selectionId] = Number(getMarketBook[key] || 0);
-  });
+    market.runners.forEach((runner: any) => {
+      const key = `${market.marketId}_${runner.selectionId}`;
+      pnlMap[runner.selectionId] = Number(getMarketBook[key] || 0);
+    });
 
-  const values = Object.entries(pnlMap);
+    const values = Object.entries(pnlMap);
 
-  const negative = values.reduce((min, curr) =>
-    curr[1] < min[1] ? curr : min
-  );
+    const negative = values.reduce((min, curr) =>
+      curr[1] < min[1] ? curr : min
+    );
 
-  const positive = values.reduce((max, curr) =>
-    curr[1] > max[1] ? curr : max
-  );
+    const positive = values.reduce((max, curr) =>
+      curr[1] > max[1] ? curr : max
+    );
 
-  if (!positive || !negative) return;
+    if (!positive || !negative) return;
 
-  const selectionId = Number(positive[0]);
-  const positivePnl = positive[1];
-  const negativePnl = negative[1];
+    const selectionId = Number(positive[0]);
+    const positivePnl = positive[1];
+    const negativePnl = negative[1];
 
-  const diff = positivePnl - negativePnl;
-  if (diff <= 0) return;
+    const diff = positivePnl - negativePnl;
+    if (diff <= 0) return;
 
-  const runner = market.runners.find(
-    (r: any) => r.selectionId === selectionId
-  );
+    const runner = market.runners.find(
+      (r: any) => r.selectionId === selectionId
+    );
 
-  if (!runner) return;
+    if (!runner) return;
 
-  // ✅ FIXED ODDS
-  const backOdds =
-    runner.ex?.availableToBack?.find((o: any) => o.price > 1)?.price || null;
+    // ✅ FIXED ODDS
+    const backOdds =
+      runner.ex?.availableToBack?.find((o: any) => o.price > 1)?.price || null;
 
-  const layOdds =
-    runner.ex?.availableToLay?.find((o: any) => o.price > 1)?.price || null;
+    const layOdds =
+      runner.ex?.availableToLay?.find((o: any) => o.price > 1)?.price || null;
 
-  if (!backOdds && !layOdds) return;
+    if (!backOdds && !layOdds) return;
 
-  let calcBackOdds = backOdds;
-  let calcLayOdds = layOdds;
+    let calcBackOdds = backOdds;
+    let calcLayOdds = layOdds;
 
-  if (market.oddsType === OddsType.BM) {
-    if (backOdds) calcBackOdds = backOdds / 100 + 1;
-    if (layOdds) calcLayOdds = layOdds / 100 + 1;
-  }
+    if (market.oddsType === OddsType.BM) {
+      if (backOdds) calcBackOdds = backOdds / 100 + 1;
+      if (layOdds) calcLayOdds = layOdds / 100 + 1;
+    }
 
-  const backStack = calcBackOdds ? diff / calcBackOdds : 0;
-  const layStack = calcLayOdds ? diff / calcLayOdds : 0;
+    const backStack = calcBackOdds ? diff / calcBackOdds : 0;
+    const layStack = calcLayOdds ? diff / calcLayOdds : 0;
 
-  let isBack = false;
-  let stack = 0;
-  let odds = 0;
+    let isBack = false;
+    let stack = 0;
+    let odds = 0;
 
-  if (backStack <= layStack && backStack <= 100) {
-    isBack = true;
-    stack = backStack;
-    odds = backOdds!;
-  } else if (layStack <= 100) {
-    isBack = false;
-    stack = layStack;
-    odds = layOdds!;
-  } else {
-    isBack = backStack < layStack;
-    stack = Math.min(backStack, layStack);
-    odds = isBack ? backOdds! : layOdds!;
-  }
+    if (backStack <= layStack && backStack <= 100) {
+      isBack = true;
+      stack = backStack;
+      odds = backOdds!;
+    } else if (layStack <= 100) {
+      isBack = false;
+      stack = layStack;
+      odds = layOdds!;
+    } else {
+      isBack = backStack < layStack;
+      stack = Math.min(backStack, layStack);
+      odds = isBack ? backOdds! : layOdds!;
+    }
 
-  const cashoutStack = Number(stack.toFixed(2));
+    const cashoutStack = Number(stack.toFixed(2));
 
-  const cashoutOdds =
-    market.oddsType === OddsType.BM
-      ? isBack
-        ? backOdds! / 100 + 1
-        : layOdds! / 100 + 1
-      : odds;
+    const cashoutOdds =
+      market.oddsType === OddsType.BM
+        ? isBack
+          ? backOdds! / 100 + 1
+          : layOdds! / 100 + 1
+        : odds;
 
-  const cashoutPnl = isBack
-    ? cashoutOdds * cashoutStack - cashoutStack
-    : cashoutStack;
+    const cashoutPnl = isBack
+      ? cashoutOdds * cashoutStack - cashoutStack
+      : cashoutStack;
 
-  const cashoutExposure = isBack
-    ? -cashoutStack
-    : -(cashoutOdds * cashoutStack - cashoutStack);
+    const cashoutExposure = isBack
+      ? -cashoutStack
+      : -(cashoutOdds * cashoutStack - cashoutStack);
 
-  betPopup({
-    isOpen: true,
-    betData: {
-      betOn: "MATCH_ODDS",
-      marketId: market.marketId,
-      currentMarketOdds: odds,
-      matchId: currentMatch.matchId,
+    betPopup({
+      isOpen: true,
+      betData: {
+        betOn: "MATCH_ODDS",
+        marketId: market.marketId,
+        currentMarketOdds: odds,
+        matchId: currentMatch.matchId,
 
-      marketName: market.marketName,
-      oddsType: market.oddsType,
+        marketName: market.marketName,
+        oddsType: market.oddsType,
 
-      selectionId: runner.selectionId,
-      selectionName: runner.runnerName,
+        selectionId: runner.selectionId,
+        selectionName: runner.runnerName,
 
-      matchName: currentMatch.name,
+        matchName: currentMatch.name,
 
-      odds: odds,
-      stack: cashoutStack,
-      pnl: Number(cashoutPnl.toFixed(2)),
-      exposure: Number(cashoutExposure.toFixed(2)),
+        odds: odds,
+        stack: cashoutStack,
+        pnl: Number(cashoutPnl.toFixed(2)),
+        exposure: Number(cashoutExposure.toFixed(2)),
 
-      isBack,
-      type: "CASHOUT",
-    },
-  });
-};
+        isBack,
+        type: "CASHOUT",
+      },
+    });
+  };
 
   render(): React.ReactNode {
     const { data, getMarketBook } = this.props
-    console.log(data ,"markkettjkdsatatat")
+    console.log(data, "markkettjkdsatatat")
     const { runnersData } = this.state
     return (
       <div>
@@ -272,57 +272,65 @@ class MatchOdds extends React.PureComponent<
             if (!setVisibleMarketStatus) return null
             return (
               <div key={market._id}>
-                <div className='market-title mt-1' style={{background:"none", padding:"8px 0px"}}>
-                 <span className='bg-theme px-2 py-1' style={{borderTopRightRadius:"10px" ,background:"linear-gradient(-180deg, #2E4B5E 0%, #243A48 82%)", gap:"2px",fontSize:"12px",fontWeight:"700"}}>
-                  {market.marketName}
-                  <a
-                    href='#Bookmaker-market'
-                    onClick={(e: MouseEvent<HTMLAnchorElement>) => {
-                      e.preventDefault()
-                      this.props.setRules({
-                        open: true,
-                        type: market.oddsType === OddsType.BM ? 'Bookmaker' : market.oddsType,
-                      })
-                    }}
-                    className='m-l-5 game-rules-icon'
-                  >
-                    <span>
-                      <i className='fa fa-info-circle float-righ' />
-                    </span>
-                  </a> </span>
+                <div className='market-title mt-1' style={{ background: "none", padding: "8px 0px" }}>
+                  <span className='bg-theme px-2 py-1' style={{ borderTopRightRadius: "10px", background: "linear-gradient(-180deg, #2E4B5E 0%, #243A48 82%)", gap: "2px", fontSize: "12px", fontWeight: "700" }}>
+                    {market.marketName}
+                    <a
+                      href='#Bookmaker-market'
+                      onClick={(e: MouseEvent<HTMLAnchorElement>) => {
+                        e.preventDefault()
+                        this.props.setRules({
+                          open: true,
+                          type: market.oddsType === OddsType.BM ? 'Bookmaker' : market.oddsType,
+                        })
+                      }}
+                      className='m-l-5 game-rules-icon'
+                    >
+                      <span>
+                        <i className='fa fa-info-circle float-righ' />
+                      </span>
+                    </a> </span>
                   {/* <span className='float-right m-r-10'>
                     Maximum Bet <span>{this.offplaylimit(market)}</span>
                   </span> */}
-                  <span className='text-dark ml-1' style={{fontSize:"11px"}}><span className='bg-warning rounded px-1' style={{paddingBottom:"3px" }}><i style={{fontSize:"x-small"}} className='fa fa-circle'/></span> Cash out</span>
-                </div>
+                  <span
+                    className='text-dark ml-1'
+                    style={{ fontSize: "11px", cursor: "pointer" }}
+                    onClick={() => this.handleCashout(market)}
+                  >
+                    <span className='bg-warning rounded px-1' style={{ paddingBottom: "3px" }}>
+                      <i style={{ fontSize: "x-small" }} className='fa fa-circle' />
+                    </span>
+                    Cash out
+                  </span>                </div>
                 <div className='table-header'>
-                  <div className={`float-left country-name ${classforheadingfirst} min-max`} style={{borderTop:"1px solid #7e97a7"}}>
-               <div className='text-center py-1' style={{background:"#bed5d8", borderRadius:"3px"}}><div><span style={{color:"#315195",fontSize:"10px",fontWeight:"700"}}>Min/Max</span> <span style={{fontSize:"10px",fontWeight:"700"}}>100-1000</span></div></div>
+                  <div className={`float-left country-name ${classforheadingfirst} min-max`} style={{ borderTop: "1px solid #7e97a7" }}>
+                    <div className='text-center py-1' style={{ background: "#bed5d8", borderRadius: "3px" }}><div><span style={{ color: "#315195", fontSize: "10px", fontWeight: "700" }}>Min/Max</span> <span style={{ fontSize: "10px", fontWeight: "700" }}>100-1000</span></div></div>
                   </div>
                   {(!isMobile && market.oddsType != OddsType.BM) ||
                     market.oddsType == OddsType.BM ? (
                     <>
-                      <div className='box-1 float-left' style={{borderRight:"none", borderTop:"1px solid #7e97a7"}}  />
-                      <div  className='box-1 float-left' style={{borderRight:"none",borderLeft:"none" ,borderTop:"1px solid #7e97a7"}} />
+                      <div className='box-1 float-left' style={{ borderRight: "none", borderTop: "1px solid #7e97a7" }} />
+                      <div className='box-1 float-left' style={{ borderRight: "none", borderLeft: "none", borderTop: "1px solid #7e97a7" }} />
                     </>
                   ) : (
                     ''
                   )}
 
-                  <div className={`back ${classforheading} float-left text-center`} style={{borderColor:"#7e97a7"}}>
-                    <span style={{fontSize:"12px",fontWeight:"bold"}}>Back</span>
+                  <div className={`back ${classforheading} float-left text-center`} style={{ borderColor: "#7e97a7" }}>
+                    <span style={{ fontSize: "12px", fontWeight: "bold" }}>Back</span>
                   </div>
-                  <div className={`lay ${classforheading} float-left text-center`} style={{borderColor:"#7e97a7"}} >
-                    <span style={{fontSize:"12px",fontWeight:"bold"}}>Lay</span>
+                  <div className={`lay ${classforheading} float-left text-center`} style={{ borderColor: "#7e97a7" }} >
+                    <span style={{ fontSize: "12px", fontWeight: "bold" }}>Lay</span>
                   </div>
-                   <>
-                      <div className='box-1 float-left' style={{borderRight:"none", borderTop:"1px solid #7e97a7"}}  />
-                      <div  className='box-1 float-left' style={{borderRight:"none",borderLeft:"none" ,borderTop:"1px solid #7e97a7"}} />
-                    </>
+                  <>
+                    <div className='box-1 float-left' style={{ borderRight: "none", borderTop: "1px solid #7e97a7" }} />
+                    <div className='box-1 float-left' style={{ borderRight: "none", borderLeft: "none", borderTop: "1px solid #7e97a7" }} />
+                  </>
                   {!isMobile ? (
                     <>
-                      <div className='box-1 float-left' style={{borderColor:"#7e97a7"}} />
-                      <div className='box-1 float-left' style={{borderColor:"#7e97a7"}} />
+                      <div className='box-1 float-left' style={{ borderColor: "#7e97a7" }} />
+                      <div className='box-1 float-left' style={{ borderColor: "#7e97a7" }} />
                     </>
                   ) : (
                     ''
@@ -343,9 +351,9 @@ class MatchOdds extends React.PureComponent<
                             className={`table-row ${runner.status === 'SUSPENDED' ? 'suspended' : ''
                               }`}
                           >
-                            <div className={` country-name ${classforheadingfirst}`} style={{borderColor:"#7e97a7"}}>
+                            <div className={` country-name ${classforheadingfirst}`} style={{ borderColor: "#7e97a7" }}>
                               <span className='team-name'>
-                                <span style={{fontSize:"13px",fontWeight:"700"}}>{runner.runnerName}</span>
+                                <span style={{ fontSize: "13px", fontWeight: "700" }}>{runner.runnerName}</span>
                               </span>
                               <p>
                                 {getMarketBook[`${market.marketId}_${runner.selectionId}`] ? (
@@ -356,13 +364,13 @@ class MatchOdds extends React.PureComponent<
                                         : 'blue'
                                     }
                                   >
-                                   ( {getMarketBook[
+                                    ( {getMarketBook[
                                       `${market.marketId}_${runner.selectionId}`
                                     ].toLocaleString()} )
                                   </span>
                                 ) : (
                                   <span className='' style={{ color: 'black' }}>
-                                   
+
                                   </span>
                                 )}
 
