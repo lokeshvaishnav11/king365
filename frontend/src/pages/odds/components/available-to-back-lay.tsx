@@ -20,7 +20,6 @@ type Props = {
 
 // const isMobile = true;
 export const AvailableToBackLay = React.memo(({ selections, market, runner }: Props) => {
-  console.log(selections,market,runner,"FGHJKLFGHJKLCGHJKL")
   const dispatch = useAppDispatch()
   const getCurrentMatch = useAppSelector(selectCurrentMatch)
   const userState = useAppSelector(selectUserData)
@@ -63,9 +62,10 @@ export const AvailableToBackLay = React.memo(({ selections, market, runner }: Pr
       const cls = index === 2 ? 'back' : `back${i}`
       const blinkCls = back.changed ? 'blink' : ''
       if (isMobile && market.oddsType == OddsType.B && index != 2) return
+       if (isMobile && market.oddsType == OddsType.BM && index != 2) return
       const classforbox =
         (!isMobile && market.oddsType != OddsType.BM) || market.oddsType == OddsType.BM
-          ? 'box-1'
+          ? 'box-2'
           : 'box-2'
       return (
         <div
@@ -94,9 +94,10 @@ export const AvailableToBackLay = React.memo(({ selections, market, runner }: Pr
       const cls = index === 0 ? 'lay' : `lay${i}`
       const blinkCls = lay.changed ? 'blink' : ''
       if (isMobile && market.oddsType == OddsType.B && index != 0) return
+       if (isMobile && market.oddsType == OddsType.BM && index != 0) return
       const classforbox =
         (!isMobile && market.oddsType != OddsType.BM) || market.oddsType == OddsType.BM
-          ? 'box-1'
+          ? 'box-2'
           : 'box-2'
 
       return (
