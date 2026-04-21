@@ -298,7 +298,7 @@ export class BetController extends ApiController {
             : parentinfo != null && parentinfo.partnership != undefined && bet_On == BetOn.CASINO
               ? parentinfo.partnership[4]
               : defaultRatio
-        const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
+        // const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
         const betClickTime = new Date()
 
         const userBlance: IBalance | null = await Balance.findOne({
@@ -364,9 +364,9 @@ export class BetController extends ApiController {
           return this.fail(res, 'Check Maximum or Minimum Bet Limit')
         }
 
-        if (market_name == 'Match Odds') {
-          await delay((parseInt(settings.delay) - 5) * 1000)
-        }
+        // if (market_name == 'Match Odds') {
+        //   await delay((parseInt(settings.delay) - 5) * 1000)
+        // }
         if (market_name != 'Fancy' && bet_On != BetOn.CASINO) {
           const errors = await this.checkMarketOddsConditions({
             market_id,
@@ -466,7 +466,8 @@ export class BetController extends ApiController {
           let exposer = await this.getexposerfunction(user, false, json)
           if (exposer != 'failed') {
             let available_balance = userBlance && userBlance.balance ? userBlance.balance : -exposer
-            if (available_balance && available_balance < parseInt(exposer)) {
+            let casinoexpo:any = userBlance.casinoexposer
+            if (available_balance && available_balance < parseInt(exposer) + parseInt(casinoexpo)) {
               return this.fail(res, ' Max limit Exceed.')
             }
             await bet.save(function (err) {
@@ -504,7 +505,8 @@ export class BetController extends ApiController {
           if (casinoexposer != 'failed') {
             let available_balance =
               userBlance && userBlance.balance ? userBlance.balance : -casinoexposer
-            if (available_balance && available_balance < parseInt(casinoexposer)) {
+              let matchexpo : any = userBlance.exposer
+            if (available_balance && available_balance < parseInt(casinoexposer) + parseInt(matchexpo)) {
               return this.fail(res, ' Max limit Exceed.')
             }
             await bet.save(function (err) {

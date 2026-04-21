@@ -17,7 +17,7 @@
   --link-bg: #bbb;
   --grey-bg: #ccc;
   --light-bg: #eee;
-  --suspended-color: #730709;
+  --suspended-color: #f6f9f9;
   --red-color: #ff0000;
   --yellow-color: #ffff00;
   --green-color: #00ff00;
@@ -1884,7 +1884,7 @@ select.form-control {
   top: 0;
   right: 0;
   background-color: rgba(0, 0, 0, 0.6);
-  color: #ff0000;
+  color: #cbc0c0;
   width: 510px;
   height: 100%;
   font-size: 20px;
