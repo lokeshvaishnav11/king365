@@ -98,7 +98,7 @@ React.useEffect(() => {
     }
   }
   const laybacklayout = () => {
-    const clsnamehead = 'box-4gh'
+    const clsnamehead = 'box-5gh'
     return (liveMatchDataDefault?.defaultMarkets?.[0]?.Runners.map((ItemNew: any, key: number) => {
       const ItemMarket: any = lastOdds?.[ItemNew.SelectionId] || {}
     //   const clsstatus = !ItemMarket.gstatus || ItemMarket.gstatus === 'SUSPENDED' || ItemMarket.gstatus === 'CLOSED' ? 'suspended' : ''
@@ -107,10 +107,10 @@ React.useEffect(() => {
       return (
         (
           <tr key={key} className={`${clsstatus} suspendedd `}>
-            <td className={clsnamehead} style={{ paddingLeft: "10px", textAlign:"left" }}>
+            <td className={clsnamehead} style={{ paddingLeft: "10px", }}>
               <b className='text-left pl-2' style={{fontSize:"12px"}} >{ItemNew.RunnerName}</b>
-              <CasinoPnl sectionId={ItemNew?.RunnerName} matchId={defaultNewData?.roundId} classData={'text-center'} />
-
+              
+      <div style={{marginLeft:"4px"}}><CasinoPnl sectionId={ItemNew?.RunnerName} matchId={defaultNewData?.roundId}  /></div>
               {/* <CasinoPnl sectionId={ItemNew.SelectionId} matchId={liveMatchData?.match_id} /> */}
             </td>
             <LayBackButton selectionid={ItemNew.SelectionId} lastOdds={lastOdds} liveMatchData={liveMatchData} clsnamename={''} defaultNewData={defaultNewData} ItemNew = {ItemNew}/>

@@ -30,41 +30,73 @@
 import { useAppSelector } from '../../../redux/hooks'
 import { selectMarketBook } from '../../../redux/actions/bet/betSlice';
 
+// const CasinoPnl = (props: any) => {
+//   const { sectionId, matchId, clsName } = props;
+
+//   const getMarketBook: any = useAppSelector(selectMarketBook);
+
+//   // Safe access
+//   const pnlValue = getMarketBook?.[matchId]?.[sectionId] ;
+
+//   console.log(
+//     getMarketBook?.[matchId]?.Tiger,
+//     pnlValue,
+//     sectionId,
+//     matchId,
+//     "odds_profit is here"
+//   );
+
+//   return (
+//     <>
+//    {pnlValue &&( <p className={`m-b-0 m-t-5 ${clsName}`}>
+      
+//       <span
+//         className={
+//           pnlValue > 0
+//             ? `green ${clsName}`
+//             : pnlValue < 0
+//             ? `red ${clsName}`
+//             : clsName
+//         }
+//       >
+//         { pnlValue > 0 ? "P : " : "L : " } {pnlValue}
+//       </span>
+      
+//     </p>)}
+
+//     </>
+//   );
+// };
+
+// export default CasinoPnl;
+
+
 const CasinoPnl = (props: any) => {
   const { sectionId, matchId, clsName } = props;
 
   const getMarketBook: any = useAppSelector(selectMarketBook);
 
-  // Safe access
-  const pnlValue = getMarketBook?.[matchId]?.[sectionId] ;
+  const pnlValue = getMarketBook?.[matchId]?.[sectionId];
 
-  console.log(
-    getMarketBook?.[matchId]?.Tiger,
-    pnlValue,
-    sectionId,
-    matchId,
-    "odds_profit is here"
-  );
+  if (!pnlValue) return null;
+
+  const isProfit = pnlValue > 0;
+  const label = isProfit ? "P : " : "L : ";
+  const amount = Math.abs(pnlValue); // ✅ remove minus
 
   return (
-    <>
-   {pnlValue &&( <p className={`m-b-0 m-t-5 ${clsName}`}>
-      
+    <p className={`m-b-0 m-t-5 ${clsName}`}>
+      <span style={{ color: "black" }}>{label}</span>
+
       <span
         className={
-          pnlValue > 0
-            ? `green ${clsName}`
-            : pnlValue < 0
-            ? `red ${clsName}`
-            : clsName
+          isProfit ? "green" : "red"
         }
+        style={{ marginLeft: "4px", fontWeight: "600" }}
       >
-        { pnlValue > 0 ? "P : " : "L : " } {pnlValue}
+        {amount}
       </span>
-      
-    </p>)}
-
-    </>
+    </p>
   );
 };
 

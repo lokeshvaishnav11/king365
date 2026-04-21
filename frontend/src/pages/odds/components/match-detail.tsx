@@ -13,6 +13,9 @@ import { Modal } from 'react-bootstrap'
 import { useNavigateCustom } from '../../_layout/elements/custom-link'
 import UnsetteleBetHistoryAdmin from '../../../admin-app/pages/UnsetteleBetHistory/UnsetteleBetHistoryAdmin'
 import { useWebsocketUser } from '../../../context/webSocketUser'
+import betService from '../../../services/bet.service'
+import { setBetCount, setbetlist, setBookMarketList } from '../../../redux/actions/bet/betSlice'
+import MyBetComponent22 from './my-bet-component22'
 
 const MatchDetail = (props: any) => {
   const userState = useAppSelector(selectUserData)
@@ -28,7 +31,10 @@ const MatchDetail = (props: any) => {
       return
     }
     navigate.go('/unsettledbet')
+
+    
   }
+
   return (
     <>
       <div
@@ -59,6 +65,8 @@ const MatchDetail = (props: any) => {
               </Fragment>
             )}
           </div>
+
+           <MyBetComponent22 />
           {/* tab here */}
           <div id='sidebar-right' className='col-4 pl0 '>
             <div className='ps'>

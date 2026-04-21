@@ -1038,6 +1038,9 @@ export class BetController extends ApiController {
     if(matchId == "2"){
       matchId = "84"
     }
+    if(matchId == "1"){
+      matchId = "11"
+    }
       let userId: any = { userId: ObjectId(user._id) }
       if (user.role !== RoleType.user) userId = { parentStr: { $in: ObjectId(user._id) } }
       const bets: Array<IBet | null> = await Bet.find({

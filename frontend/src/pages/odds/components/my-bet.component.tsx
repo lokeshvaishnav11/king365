@@ -74,7 +74,7 @@ const MyBetComponent = () => {
   }, [getMyAllBet])
 
   return (
-    <div className='table-responsive-new' style={{height:"200px", overflowY:"scroll"}}>
+    <div className='table-responsive-new d-none' style={{height:"200px", overflowY:"scroll"}} >
       <table className='table coupon-table scorall mybet'>
         <thead>
           <tr >
