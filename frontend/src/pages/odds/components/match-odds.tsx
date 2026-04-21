@@ -34,6 +34,7 @@ class MatchOdds extends React.PureComponent<
     getMarketBook: any
     remarkMarket: any
     runnersName: Record<string, string>
+    cashoutPreview: any
   }
 > {
   static contextType = SocketContext
@@ -65,6 +66,7 @@ class MatchOdds extends React.PureComponent<
       getMarketBook: props.getMarketBook,
       remarkMarket: remarkMarket,
       runnersName: runnersName,
+      cashoutPreview: null,
     }
   }
 
@@ -133,324 +135,303 @@ class MatchOdds extends React.PureComponent<
   }
 
 
+
+
   // handleCashout = (market: any) => {
   //   const { currentMatch, getMarketBook, betPopup } = this.props;
 
+  //   console.log("🚀 CASHOUT CLICKED");
 
-  //   console.log("hello inside cashout")
+  //   if (!currentMatch) return console.log("❌ No currentMatch");
+  //   if (!getMarketBook) return console.log("❌ No getMarketBook");
+  //   if (!market?.runners?.length) return console.log("❌ No runners");
 
-  //   if (!currentMatch || !getMarketBook || !market?.runners?.length) return;
-  // console.log("hello inside cashout 2",getMarketBook)
+  //   // ✅ HELPER: correct odds pick
+  //   const getValidBackOdds = (runner: any) => {
+  //     const backs = runner?.ex?.availableToBack || [];
+  //     for (let i = backs.length - 1; i >= 0; i--) {
+  //       if (backs[i]?.price > 1 && Number(backs[i]?.size) > 0) {
+  //         return backs[i].price;
+  //       }
+  //     }
+  //     return null;
+  //   };
+
+  //   const getValidLayOdds = (runner: any) => {
+  //     const lays = runner?.ex?.availableToLay || [];
+  //     for (let i = 0; i < lays.length; i++) {
+  //       if (lays[i]?.price > 1 && Number(lays[i]?.size) > 0) {
+  //         return lays[i].price;
+  //       }
+  //     }
+  //     return null;
+  //   };
+
+  //   // ✅ STEP 1: Build PNL MAP
   //   const pnlMap: Record<number, number> = {};
 
   //   market.runners.forEach((runner: any) => {
   //     const key = `${market.marketId}_${runner.selectionId}`;
-  //     pnlMap[runner.selectionId] = Number(getMarketBook[key] || 0);
+  //     pnlMap[runner.selectionId] = Number(getMarketBook?.[key] ?? 0);
   //   });
 
+  //   console.log("📊 PNL MAP:", pnlMap);
+
   //   const values = Object.entries(pnlMap);
+  //   if (values.length < 2) return console.log("❌ Not enough runners");
+
+  //   // ✅ STEP 2: Find PROFIT & LOSS
+  //   const positive = values.reduce((max, curr) =>
+  //     curr[1] > max[1] ? curr : max
+  //   );
 
   //   const negative = values.reduce((min, curr) =>
   //     curr[1] < min[1] ? curr : min
   //   );
 
-  //   const positive = values.reduce((max, curr) =>
-  //     curr[1] > max[1] ? curr : max
-  //   );
+  //   const profitSelectionId = Number(positive[0]);
+  //   const lossSelectionId = Number(negative[0]);
 
-  //   if (!positive || !negative) return;
-
-  //   const selectionId = Number(positive[0]);
   //   const positivePnl = positive[1];
   //   const negativePnl = negative[1];
 
-  //   const diff = positivePnl - negativePnl;
-  //   if (diff <= 0) return;
+  //   console.log("📈 Profit:", positivePnl, "📉 Loss:", negativePnl);
 
-  //   const runner = market.runners.find(
-  //     (r: any) => r.selectionId === selectionId
+  //   // ❌ no hedge needed
+  //   if (positivePnl <= 0) {
+  //     console.log("❌ No profit → skip");
+  //     return;
+  //   }
+
+  //   // ✅ STEP 3: LIVE MARKET
+  //   const liveMarket = this.state.runnersData?.[market.marketId];
+  //   if (!liveMarket) return console.log("❌ No live market");
+
+  //   const profitRunner = liveMarket.runners?.find(
+  //     (r: any) => r.selectionId === profitSelectionId
   //   );
 
-  //   if (!runner) return;
+  //   const lossRunner = liveMarket.runners?.find(
+  //     (r: any) => r.selectionId === lossSelectionId
+  //   );
 
-  //   // ✅ FIXED ODDS
-  //   const backOdds =
-  //     runner.ex?.availableToBack?.find((o: any) => o.price > 1)?.price || null;
-
-  //   const layOdds =
-  //     runner.ex?.availableToLay?.find((o: any) => o.price > 1)?.price || null;
-
-  //   if (!backOdds && !layOdds) return;
-
-  //   let calcBackOdds = backOdds;
-  //   let calcLayOdds = layOdds;
-
-  //   if (market.oddsType === OddsType.BM) {
-  //     if (backOdds) calcBackOdds = backOdds / 100 + 1;
-  //     if (layOdds) calcLayOdds = layOdds / 100 + 1;
+  //   if (!profitRunner || !lossRunner) {
+  //     console.log("❌ Runner not found");
+  //     return;
   //   }
 
-  //   const backStack = calcBackOdds ? diff / calcBackOdds : 0;
-  //   const layStack = calcLayOdds ? diff / calcLayOdds : 0;
+  //   console.log("🎯 Profit Runner:", profitRunner.runnerName);
+  //   console.log("🎯 Loss Runner:", lossRunner.runnerName);
 
-  //   let isBack = false;
-  //   let stack = 0;
-  //   let odds = 0;
+  //   // ✅ STEP 4: GET CORRECT ODDS
+  //   const profitBackOdds = getValidBackOdds(profitRunner);
+  //   const lossBackOdds = getValidBackOdds(lossRunner);
 
-  //   if (backStack <= layStack && backStack <= 100) {
-  //     isBack = true;
-  //     stack = backStack;
-  //     odds = backOdds!;
-  //   } else if (layStack <= 100) {
-  //     isBack = false;
-  //     stack = layStack;
-  //     odds = layOdds!;
-  //   } else {
-  //     isBack = backStack < layStack;
-  //     stack = Math.min(backStack, layStack);
-  //     odds = isBack ? backOdds! : layOdds!;
+  //   if (!profitBackOdds || !lossBackOdds) {
+  //     console.log("❌ Valid odds not found");
+  //     return;
   //   }
 
-  //   const cashoutStack = Number(stack.toFixed(2));
+  //   console.log("🎯 ProfitOdds:", profitBackOdds);
+  //   console.log("🎯 OppositeOdds:", lossBackOdds);
 
-  //   const cashoutOdds =
-  //     market.oddsType === OddsType.BM
-  //       ? isBack
-  //         ? backOdds! / 100 + 1
-  //         : layOdds! / 100 + 1
-  //       : odds;
+  //   // ✅ STEP 5: ORIGINAL STAKE (IMPORTANT)
+  //   // ⚠️ ideally DB se lo (exact bet amount)
+  //   let originalStake = Math.abs(negativePnl);
 
-  //   const cashoutPnl = isBack
-  //     ? cashoutOdds * cashoutStack - cashoutStack
-  //     : cashoutStack;
+  //   // 🛑 SAFETY FIX (avoid huge wrong stake)
+  //   if (originalStake > 10000) {
+  //     console.log("⚠️ Adjusting unrealistic stake");
+  //     originalStake = originalStake / 2;
+  //   }
 
-  //   const cashoutExposure = isBack
-  //     ? -cashoutStack
-  //     : -(cashoutOdds * cashoutStack - cashoutStack);
+  //   console.log("💰 Original Stake:", originalStake);
 
+  //   // ✅ STEP 6: FINAL HEDGE FORMULA
+  //   let hedgeStack = (originalStake * profitBackOdds) / lossBackOdds;
+
+  //   if (!isFinite(hedgeStack) || hedgeStack <= 0) {
+  //     console.log("❌ Invalid hedge");
+  //     return;
+  //   }
+
+  //   const finalStack = Number(hedgeStack.toFixed(2));
+
+  //   console.log("🔥 FINAL STACK:", finalStack);
+
+  //   // ✅ STEP 7: TRIGGER CASHOUT (BACK opposite)
   //   betPopup({
   //     isOpen: true,
   //     betData: {
   //       betOn: "MATCH_ODDS",
   //       marketId: market.marketId,
-  //       currentMarketOdds: odds,
   //       matchId: currentMatch.matchId,
 
   //       marketName: market.marketName,
   //       oddsType: market.oddsType,
 
-  //       selectionId: runner.selectionId,
-  //       selectionName: runner.runnerName,
+  //       selectionId: lossRunner.selectionId,
+  //       selectionName: lossRunner.runnerName,
 
   //       matchName: currentMatch.name,
 
-  //       odds: odds,
-  //       stack: cashoutStack,
-  //       pnl: Number(cashoutPnl.toFixed(2)),
-  //       exposure: Number(cashoutExposure.toFixed(2)),
+  //       odds: lossBackOdds,
+  //       stack: finalStack,
 
-  //       isBack,
+  //       pnl: 0,
+  //       exposure: -finalStack,
+
+  //       isBack: true,
   //       type: "CASHOUT",
   //     },
   //   });
+
+  //   console.log("✅ CASHOUT SUCCESS");
   // };
 
 
   handleCashout = (market: any) => {
-  const { currentMatch, getMarketBook, betPopup } = this.props;
+    const { currentMatch, getMarketBook, betPopup } = this.props;
+    const { cashoutPreview } = this.state;
 
-  console.log("🚀 CASHOUT CLICKED");
-  console.log("📊 Market:", market);
-  console.log("📘 MarketBook FULL:", getMarketBook);
+    console.log("🚀 CASHOUT CLICKED");
 
-  if (!currentMatch) {
-    console.log("❌ No currentMatch");
-    return;
-  }
+    if (!currentMatch || !getMarketBook || !market?.runners?.length) {
+      console.log("❌ Missing data");
+      return;
+    }
 
-  if (!getMarketBook) {
-    console.log("❌ No getMarketBook");
-    return;
-  }
+    // ✅ If already preview exists → PLACE BET
+    if (cashoutPreview && cashoutPreview.marketId === market.marketId) {
+      console.log("✅ SECOND CLICK → PLACING BET");
 
-  if (!market?.runners?.length) {
-    console.log("❌ No runners");
-    return;
-  }
+      // 👉 DIRECT BET (NO POPUP)
+      betPopup({
+        isOpen: true, // ❌ popup band
+        betData: {
+          ...cashoutPreview.betData,
+          autoConfirm: true, // 👈 backend me handle kar lena
+        },
+      });
 
-  // 🔹 STEP 1: Build PNL MAP
-  const pnlMap: Record<number, number> = {};
+      // reset preview
+      this.setState({ cashoutPreview: null });
 
-  market.runners.forEach((runner: any) => {
-    const key = `${market.marketId}_${runner.selectionId}`;
-    const val = getMarketBook?.[key];
+      return;
+    }
 
-    console.log("🔑 Checking key:", key, "➡️ Value:", val);
+    // =========================
+    // ✅ FIRST CLICK → CALCULATE
+    // =========================
 
-    pnlMap[runner.selectionId] = Number(val ?? 0);
-  });
+    const pnlMap: Record<number, number> = {};
 
-  console.log("📊 PNL MAP:", pnlMap);
+    market.runners.forEach((runner: any) => {
+      const key = `${market.marketId}_${runner.selectionId}`;
+      pnlMap[runner.selectionId] = Number(getMarketBook?.[key] ?? 0);
+    });
 
-  const values = Object.entries(pnlMap);
+    const values = Object.entries(pnlMap);
+    if (values.length < 2) return;
 
-  if (!values.length) {
-    console.log("❌ No pnl values");
-    return;
-  }
+    const positive = values.reduce((max, curr) =>
+      curr[1] > max[1] ? curr : max
+    );
 
-  // 🔹 STEP 2: Find max & min pnl
-  const negative = values.reduce((min, curr) =>
-    curr[1] < min[1] ? curr : min
-  );
+    const negative = values.reduce((min, curr) =>
+      curr[1] < min[1] ? curr : min
+    );
 
-  const positive = values.reduce((max, curr) =>
-    curr[1] > max[1] ? curr : max
-  );
+    const profitSelectionId = Number(positive[0]);
+    const lossSelectionId = Number(negative[0]);
 
-  console.log("📉 Negative:", negative);
-  console.log("📈 Positive:", positive);
+    const positivePnl = positive[1];
+    const negativePnl = negative[1];
 
-  if (!positive || !negative) {
-    console.log("❌ Positive or Negative missing");
-    return;
-  }
+    console.log("📈 Profit:", positivePnl, "📉 Loss:", negativePnl);
 
-  const selectionId = Number(positive[0]);
-  const positivePnl = positive[1];
-  const negativePnl = negative[1];
+    if (positivePnl <= 0) {
+      console.log("❌ No profit");
+      return;
+    }
 
-  const diff = positivePnl - negativePnl;
+    const liveMarket = this.state.runnersData?.[market.marketId];
+    if (!liveMarket) return;
 
-  console.log("💰 Diff:", diff);
+    const profitRunner = liveMarket.runners.find(
+      (r: any) => r.selectionId === profitSelectionId
+    );
 
-  if (diff <= 0) {
-    console.log("❌ No profit → Cashout skipped");
-    return;
-  }
+    const lossRunner = liveMarket.runners.find(
+      (r: any) => r.selectionId === lossSelectionId
+    );
 
-  // 🔹 STEP 3: Find runner
- const liveMarket = this.state.runnersData?.[market.marketId];
+    if (!profitRunner || !lossRunner) return;
 
-const runner = liveMarket?.runners?.find(
-  (r: any) => r.selectionId === selectionId
-);
+    // ✅ EXACT ODDS PICK (TERA RULE)
+    const profitOdds = profitRunner.ex?.availableToBack?.[2]?.price;
+    const oppositeOdds = lossRunner.ex?.availableToBack?.[2]?.price;
 
-  console.log("🏃 Selected Runner:", runner);
+    if (!profitOdds || !oppositeOdds) {
+      console.log("❌ Odds missing");
+      return;
+    }
 
-  if (!runner) {
-    console.log("❌ Runner not found");
-    return;
-  }
+    console.log("🎯 ProfitOdds:", profitOdds);
+    console.log("🎯 OppositeOdds:", oppositeOdds);
 
-  // 🔹 STEP 4: Get odds
-  const backOdds =
-    runner.ex?.availableToBack?.find((o: any) => o.price > 1)?.price || null;
+    // ✅ ORIGINAL BET STAKE (correct logic)
+    const originalStake = Math.abs(negativePnl);
 
-  const layOdds =
-    runner.ex?.availableToLay?.find((o: any) => o.price > 1)?.price || null;
+    // ✅ HEDGE FORMULA (CORRECT)
+    const hedgeStack = (originalStake * profitOdds) / oppositeOdds;
 
-  console.log("🎯 BackOdds:", backOdds, "LayOdds:", layOdds);
+    const finalStack = Number(hedgeStack.toFixed(2));
 
-  if (!backOdds && !layOdds) {
-    console.log("❌ No odds available");
-    return;
-  }
+    console.log("🔥 Hedge Stack:", finalStack);
 
-  let calcBackOdds = backOdds;
-  let calcLayOdds = layOdds;
+    // ✅ CALCULATE FINAL LOSS
+    const finalLoss =
+      finalStack * oppositeOdds - finalStack - originalStake;
 
-  if (market.oddsType === OddsType.BM) {
-    if (backOdds) calcBackOdds = backOdds / 100 + 1;
-    if (layOdds) calcLayOdds = layOdds / 100 + 1;
-  }
+    console.log("💀 Final Loss:", finalLoss);
 
-  console.log("📐 CalcBackOdds:", calcBackOdds, "CalcLayOdds:", calcLayOdds);
+    // SAVE PREVIEW
+    this.setState({
+      cashoutPreview: {
+        marketId: market.marketId,
+        loss: Number(finalLoss.toFixed(2)),
+        betData: {
+          betOn: "MATCH_ODDS",
+          marketId: market.marketId,
+          matchId: currentMatch.matchId,
 
-  // 🔹 STEP 5: Calculate stacks
-  const backStack = calcBackOdds ? diff / calcBackOdds : 0;
-  const layStack = calcLayOdds ? diff / calcLayOdds : 0;
+          marketName: market.marketName,
+          oddsType: market.oddsType,
 
-  console.log("📦 BackStack:", backStack, "LayStack:", layStack);
+          selectionId: lossRunner.selectionId,
+          selectionName: lossRunner.runnerName,
 
-  let isBack = false;
-  let stack = 0;
-  let odds = 0;
+          matchName: currentMatch.name,
 
-  if (backStack <= layStack && backStack <= 100) {
-    isBack = true;
-    stack = backStack;
-    odds = backOdds!;
-  } else if (layStack <= 100) {
-    isBack = false;
-    stack = layStack;
-    odds = layOdds!;
-  } else {
-    isBack = backStack < layStack;
-    stack = Math.min(backStack, layStack);
-    odds = isBack ? backOdds! : layOdds!;
-  }
+          odds: oppositeOdds,
+          stack: finalStack,
 
-  console.log("⚖️ Final Decision:", { isBack, stack, odds });
+          pnl: 0,
+          exposure: -finalStack,
 
-  const cashoutStack = Number(stack.toFixed(2));
+          isBack: true,
+          type: "CASHOUT",
+        },
+      },
+    });
 
-  const cashoutOdds =
-    market.oddsType === OddsType.BM
-      ? isBack
-        ? backOdds! / 100 + 1
-        : layOdds! / 100 + 1
-      : odds;
-
-  const cashoutPnl = isBack
-    ? cashoutOdds * cashoutStack - cashoutStack
-    : cashoutStack;
-
-  const cashoutExposure = isBack
-    ? -cashoutStack
-    : -(cashoutOdds * cashoutStack - cashoutStack);
-
-  console.log("🧾 Final Bet Data:", {
-    cashoutStack,
-    cashoutOdds,
-    cashoutPnl,
-    cashoutExposure,
-  });
-
-  // 🔹 STEP 6: Trigger popup
-  betPopup({
-    isOpen: true,
-    betData: {
-      betOn: "MATCH_ODDS",
-      marketId: market.marketId,
-      currentMarketOdds: odds,
-      matchId: currentMatch.matchId,
-
-      marketName: market.marketName,
-      oddsType: market.oddsType,
-
-      selectionId: runner.selectionId,
-      selectionName: runner.runnerName,
-
-      matchName: currentMatch.name,
-
-      odds: odds,
-      stack: cashoutStack,
-      pnl: Number(cashoutPnl.toFixed(2)),
-      exposure: Number(cashoutExposure.toFixed(2)),
-
-      isBack,
-      type: "CASHOUT",
-    },
-  });
-
-  console.log("✅ CASHOUT TRIGGERED SUCCESS");
-};
-
+    console.log("🟡 PREVIEW READY → CLICK AGAIN TO CONFIRM");
+  };
   render(): React.ReactNode {
     const { data, getMarketBook } = this.props
-    console.log(data, "markkettjkdsatatat")
     const { runnersData } = this.state
+    const preview = this.state.cashoutPreview;
     return (
       <div>
         {data &&
@@ -493,11 +474,17 @@ const runner = liveMarket?.runners?.find(
                     style={{ fontSize: "11px", cursor: "pointer" }}
                     onClick={() => this.handleCashout(market)}
                   >
-                    <span className='bg-warning rounded px-1' style={{ paddingBottom: "3px" }}>
-                      <i style={{ fontSize: "x-small" }} className='fa fa-circle' />
-                    </span>
-                    Cash out
-                  </span>                </div>
+
+                    {preview && preview.marketId === market.marketId ? (
+                      <span style={{ color: "red" }}>
+                        ✔ {preview.loss}
+                      </span>
+                    ) : (
+                      <span className='text-dark ml-1'><span className='bg-warning rounded px-1' style={{ paddingBottom: "3px" }}><i style={{ fontSize: "x-small" }} className='fa fa-circle' /></span> Cash out</span>
+
+                    )}
+
+                  </span>            </div>
                 <div className='table-header'>
                   <div className={`float-left country-name ${classforheadingfirst} min-max`} style={{ borderTop: "1px solid #7e97a7" }}>
                     <div className='text-center py-1' style={{ background: "#bed5d8", borderRadius: "3px" }}><div><span style={{ color: "#315195", fontSize: "10px", fontWeight: "700" }}>Min/Max</span> <span style={{ fontSize: "10px", fontWeight: "700" }}>100-1000</span></div></div>
@@ -543,8 +530,12 @@ const runner = liveMarket?.runners?.find(
                         <div key={runner.selectionId}>
                           <div
                             data-title={runner.status}
-                            className={`table-row ${runner.status === 'SUSPENDED' ? 'suspended' : ''
-                              }`}
+                            className={`table-row ${runner.status === 'SUSPENDED' ? 'suspended' : ''}`}
+                            style={
+                              market.oddsType === OddsType.BM
+                                ? { background: "#f6efd5" } // 👈 cream bg like image
+                                : {}
+                            }
                           >
                             <div className={` country-name ${classforheadingfirst}`} style={{ borderColor: "#7e97a7" }}>
                               <span className='team-name'>

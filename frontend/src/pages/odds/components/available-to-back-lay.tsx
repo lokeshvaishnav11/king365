@@ -71,7 +71,18 @@ export const AvailableToBackLay = React.memo(({ selections, market, runner }: Pr
         <div
           onClick={() => onBet(true, back)}
           key={index}
-          className={`${classforbox}  text-center ${cls} ${blinkCls}`}
+       className={`${classforbox} text-center ${cls} ${blinkCls}`}
+style={
+  market.oddsType === OddsType.BM
+    ? {
+      border: "1px solid white",
+        background: "#a7d8f5",
+        borderRadius:'4px',
+       margin: "1px 2px 1px -5px"
+      
+      }
+    : {}
+}
         >
           <span className='odd d-block' style={{fontSize:"12px",fontWeight:"700"}}>
             {market.oddsType == OddsType.BM
@@ -104,7 +115,18 @@ export const AvailableToBackLay = React.memo(({ selections, market, runner }: Pr
         <div
           onClick={() => onBet(false, lay)}
           key={index}
-          className={`${classforbox}   text-center ${cls} ${blinkCls}`}
+         className={`${classforbox} text-center ${cls} ${blinkCls}`}
+style={
+  market.oddsType === OddsType.BM
+    ? {
+        border: "1px solid white",
+        background: "#a7d8f5",
+        borderRadius:'4px',
+        margin: "1px",
+        marginRight:"2px"
+      }
+    : {}
+}
         >
           <span className='odd d-block' style={{fontSize:"12px",fontWeight:"700"}}>
             {market.oddsType == OddsType.BM
