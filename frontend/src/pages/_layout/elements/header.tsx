@@ -204,7 +204,7 @@ const Header = () => {
           {/* Center - Info */}
           <div className="text-center">
             {/* @ts-ignore */}
-<div className="fw-bold">Main PTI {Math.max(0, (balance?.balance || 0) - ((balance?.exposer || 0) + (balance?.casinoexposer || 0)))}
+<div className="fw-bold">Main PTI {Math.max(0, (balance?.balance || 0) - ((balance?.exposer || 0) ))}
 </div>           <div>
              <a
                         href="#"
