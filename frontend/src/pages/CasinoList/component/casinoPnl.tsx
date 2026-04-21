@@ -36,7 +36,7 @@ const CasinoPnl = (props: any) => {
   const getMarketBook: any = useAppSelector(selectMarketBook);
 
   // Safe access
-  const pnlValue = getMarketBook?.[matchId]?.[sectionId] ?? 0;
+  const pnlValue = getMarketBook?.[matchId]?.[sectionId] ;
 
   console.log(
     getMarketBook?.[matchId]?.Tiger,
@@ -47,8 +47,9 @@ const CasinoPnl = (props: any) => {
   );
 
   return (
-    <p className={`m-b-0 m-t-5 ${clsName}`}>
-      (
+    <>
+   {pnlValue &&( <p className={`m-b-0 m-t-5 ${clsName}`}>
+      
       <span
         className={
           pnlValue > 0
@@ -58,10 +59,12 @@ const CasinoPnl = (props: any) => {
             : clsName
         }
       >
-        {pnlValue.toLocaleString()}
+        { pnlValue > 0 ? "P : " : "L : " } {pnlValue}
       </span>
-      )
-    </p>
+      
+    </p>)}
+
+    </>
   );
 };
 

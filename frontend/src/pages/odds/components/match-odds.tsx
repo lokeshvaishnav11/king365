@@ -22,6 +22,7 @@ interface Props {
   currentMatch?: IMatch
   setRules: (data: { open: boolean; type: string }) => void
   marketUserBookId?: any
+  betPopup:any
 }
 
 class MatchOdds extends React.PureComponent<
@@ -131,6 +132,126 @@ class MatchOdds extends React.PureComponent<
     return this.props.currentMatch?.inPlay ? inplayl : offplayl
   }
 
+
+  handleCashout = (market: any) => {
+  const { currentMatch, getMarketBook, betPopup } = this.props;
+
+  if (!currentMatch || !getMarketBook || !market?.runners?.length) return;
+
+  const pnlMap: Record<number, number> = {};
+
+  market.runners.forEach((runner: any) => {
+    const key = `${market.marketId}_${runner.selectionId}`;
+    pnlMap[runner.selectionId] = Number(getMarketBook[key] || 0);
+  });
+
+  const values = Object.entries(pnlMap);
+
+  const negative = values.reduce((min, curr) =>
+    curr[1] < min[1] ? curr : min
+  );
+
+  const positive = values.reduce((max, curr) =>
+    curr[1] > max[1] ? curr : max
+  );
+
+  if (!positive || !negative) return;
+
+  const selectionId = Number(positive[0]);
+  const positivePnl = positive[1];
+  const negativePnl = negative[1];
+
+  const diff = positivePnl - negativePnl;
+  if (diff <= 0) return;
+
+  const runner = market.runners.find(
+    (r: any) => r.selectionId === selectionId
+  );
+
+  if (!runner) return;
+
+  // ✅ FIXED ODDS
+  const backOdds =
+    runner.ex?.availableToBack?.find((o: any) => o.price > 1)?.price || null;
+
+  const layOdds =
+    runner.ex?.availableToLay?.find((o: any) => o.price > 1)?.price || null;
+
+  if (!backOdds && !layOdds) return;
+
+  let calcBackOdds = backOdds;
+  let calcLayOdds = layOdds;
+
+  if (market.oddsType === OddsType.BM) {
+    if (backOdds) calcBackOdds = backOdds / 100 + 1;
+    if (layOdds) calcLayOdds = layOdds / 100 + 1;
+  }
+
+  const backStack = calcBackOdds ? diff / calcBackOdds : 0;
+  const layStack = calcLayOdds ? diff / calcLayOdds : 0;
+
+  let isBack = false;
+  let stack = 0;
+  let odds = 0;
+
+  if (backStack <= layStack && backStack <= 100) {
+    isBack = true;
+    stack = backStack;
+    odds = backOdds!;
+  } else if (layStack <= 100) {
+    isBack = false;
+    stack = layStack;
+    odds = layOdds!;
+  } else {
+    isBack = backStack < layStack;
+    stack = Math.min(backStack, layStack);
+    odds = isBack ? backOdds! : layOdds!;
+  }
+
+  const cashoutStack = Number(stack.toFixed(2));
+
+  const cashoutOdds =
+    market.oddsType === OddsType.BM
+      ? isBack
+        ? backOdds! / 100 + 1
+        : layOdds! / 100 + 1
+      : odds;
+
+  const cashoutPnl = isBack
+    ? cashoutOdds * cashoutStack - cashoutStack
+    : cashoutStack;
+
+  const cashoutExposure = isBack
+    ? -cashoutStack
+    : -(cashoutOdds * cashoutStack - cashoutStack);
+
+  betPopup({
+    isOpen: true,
+    betData: {
+      betOn: "MATCH_ODDS",
+      marketId: market.marketId,
+      currentMarketOdds: odds,
+      matchId: currentMatch.matchId,
+
+      marketName: market.marketName,
+      oddsType: market.oddsType,
+
+      selectionId: runner.selectionId,
+      selectionName: runner.runnerName,
+
+      matchName: currentMatch.name,
+
+      odds: odds,
+      stack: cashoutStack,
+      pnl: Number(cashoutPnl.toFixed(2)),
+      exposure: Number(cashoutExposure.toFixed(2)),
+
+      isBack,
+      type: "CASHOUT",
+    },
+  });
+};
+
   render(): React.ReactNode {
     const { data, getMarketBook } = this.props
     console.log(data ,"markkettjkdsatatat")
@@ -235,13 +356,13 @@ class MatchOdds extends React.PureComponent<
                                         : 'blue'
                                     }
                                   >
-                                    {getMarketBook[
+                                   ( {getMarketBook[
                                       `${market.marketId}_${runner.selectionId}`
-                                    ].toLocaleString()}
+                                    ].toLocaleString()} )
                                   </span>
                                 ) : (
                                   <span className='' style={{ color: 'black' }}>
-                                    {'0'}
+                                   
                                   </span>
                                 )}
 
