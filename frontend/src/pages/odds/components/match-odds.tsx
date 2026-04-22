@@ -13,6 +13,9 @@ import BookPopup from './fancy/book-popup'
 import IMatch from '../../../models/IMatch'
 import { setRules } from '../../../redux/actions/common/commonSlice'
 import UserBookPopup from './user-book-popup'
+import PlaceBetBoxMatchodds from './place-bet-box-matchodds'
+import { IUserBetStake } from '../../../models/IUserStake'
+
 
 interface Props {
   data: IMarket[]
@@ -23,6 +26,7 @@ interface Props {
   setRules: (data: { open: boolean; type: string }) => void
   marketUserBookId?: any
   betPopup: any
+  marketDataList?: any
 }
 
 class MatchOdds extends React.PureComponent<
@@ -35,6 +39,7 @@ class MatchOdds extends React.PureComponent<
     remarkMarket: any
     runnersName: Record<string, string>
     cashoutPreview: any
+    marketDataList: any
   }
 > {
   static contextType = SocketContext
@@ -67,6 +72,7 @@ class MatchOdds extends React.PureComponent<
       remarkMarket: remarkMarket,
       runnersName: runnersName,
       cashoutPreview: null,
+      marketDataList: props.marketDataList,
     }
   }
 
@@ -133,6 +139,8 @@ class MatchOdds extends React.PureComponent<
         : this.props.currentMatch?.offPlayMaxLimit
     return this.props.currentMatch?.inPlay ? inplayl : offplayl
   }
+
+
 
 
 
@@ -572,10 +580,13 @@ class MatchOdds extends React.PureComponent<
                               market={market}
                               runner={runner}
                             />
+                           
                           </div>
                         </div>
+                        
                       )
                     })}
+
                 {this.state.remarkMarket[market.marketId] ? (
                   <div className='table-remark text-right remark'>
                     {this.state.remarkMarket[market.marketId]}
@@ -586,6 +597,8 @@ class MatchOdds extends React.PureComponent<
               </div>
             )
           })}
+                       {this?.state?.marketDataList?.stake &&  <PlaceBetBoxMatchodds stake={this?.state?.marketDataList?.stake} />}
+
         {this.props.fancySelectionId && <BookPopup />}
         {this.props.marketUserBookId && <UserBookPopup />}
       </div>

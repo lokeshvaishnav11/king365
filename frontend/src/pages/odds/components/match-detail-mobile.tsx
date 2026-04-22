@@ -141,7 +141,7 @@ const MatchDetailWrapper = (props: any) => {
             <div className='markets'>
               {/* Score Component Here */}
               <div className='main-market'>
-                {props.markets && <MatchOdds data={props.markets} />}
+                {props.markets && <MatchOdds data={props.markets} marketDataList={props.marketDataList}  />}
                 {<TossOdds matchName={props.currentMatch?.name} />}
               </div>
             </div>
@@ -153,7 +153,7 @@ const MatchDetailWrapper = (props: any) => {
                 {<Fancy socketUser={socketUser} fancies={props.fancies} matchId={props.matchId!} />}
               </Fragment>
             )}
-            {props.marketDataList.stake && <PlaceBetBox stake={props.marketDataList.stake} />}
+            {/* {props.marketDataList.stake && <PlaceBetBox stake={props.marketDataList.stake} />} */}
           </div>
           {/* <Tab eventKey='profile' title={`PLACED BET (${betCount})`}>
             <div className='card m-b-10 my-bet'>
