@@ -209,7 +209,7 @@ const Header = () => {
              <a
                         href="#"
                         onClick={getExposer}
-                        style={{ color: "#fff", textDecoration: "none" }}
+                        style={{ color: "#fff", textDecoration: "none",fontSize:"11.5px" }}
                       >
                         <span>Exp: </span>
                      (   <b style={{ color: "#dd2222" }}>

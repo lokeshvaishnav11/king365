@@ -85,13 +85,13 @@ const MatchListMobile = (props: any) => {
                     )} */}
               {/* <span className='game-icon'>
                       <i className='fas fa-tv v-m icon-tv' />
-                    </span> */}
+                    </span> */}  {match.isBookMaker && (
+                <span className="game-bookmakers me-lg-1">BM</span>
+              )}
               {match.isFancy && <span className="game-fancy me-1">F</span>}
               {match.isFancy && <span className="game-fancy-2 me-1">S</span>}
 
-              {match.isBookMaker && (
-                <span className="game-bookmakers me-lg-1">BM</span>
-              )}
+            
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="25"
@@ -467,17 +467,17 @@ const MatchListMobile = (props: any) => {
                     )} */}
                               {/* <span className='game-icon'>
                       <i className='fas fa-tv v-m icon-tv' />
-                    </span> */}
+                    </span> */}  {match.isBookMaker && (
+                                <span className="game-bookmakers me-lg-1">
+                                  BM
+                                </span>
+                              )}
                               {match.isFancy && (
                                 <span className="game-fancy me-1">F</span>
                               )}
               {match.isFancy && <span className="game-fancy-2 me-1">S</span>}
 
-                              {match.isBookMaker && (
-                                <span className="game-bookmakers me-lg-1">
-                                  BM
-                                </span>
-                              )}
+                            
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 width="25"

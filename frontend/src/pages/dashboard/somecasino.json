@@ -4,22 +4,22 @@
     "title": "Joker Teen Patti",
     "image": "/imgs/homejokerimage.jpeg"
   },
-  {
-    "image":"https://kingexch365.com/api/users/images/Vimaan1.webp"
 
-  },
   {
+    "gameCode": "teen20",
+    "matchId": "1",
+    "title": "20 20 Teen Patti",
+    "image": "/imgs/hometeen20image.jpeg"
+  }, {
     "id": "dt1",
     "gameCode": "dt20",
     "matchId": "25",
     "title": "Dargon Tiger One Day",
     "image": "/imgs/homedragonimage.jpeg"
   },
-  {
-    "gameCode": "teen20",
-    "matchId": "1",
-    "title": "20 20 Teen Patti",
-    "image": "/imgs/hometeen20image.jpeg"
+    {
+    "image":"https://kingexch365.com/api/users/images/Vimaan1.webp"
+
   },
   
   {
