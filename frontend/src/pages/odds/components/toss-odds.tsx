@@ -50,7 +50,7 @@ const TossOdds = ({matchName}:any) => {
 
   return (
       <><div className='market-title mt-1' style={{ background: "none", padding: "8px 0px" }}>
-          <span className='bg-theme px-2 py-1' style={{ borderTopRightRadius: "10px", gap: "2px" }}>
+          <span className=' px-2 py-1' style={{ borderTopRightRadius: "10px", gap: "2px",background:"linear-gradient(-180deg, #2E4B5E 0%, #243A48 82%)",fontSize: "12px", fontWeight: "700"}}>
               Who will win the toss
               <a
                   href='#Bookmaker-market'
@@ -70,7 +70,7 @@ const TossOdds = ({matchName}:any) => {
           {/* <span className='float-right m-r-10'>
       Maximum Bet <span>{this.offplaylimit(market)}</span>
     </span> */}
-          <span className='text-dark ml-1'><span className='bg-warning rounded px-1' style={{ paddingBottom: "3px" }}><i style={{ fontSize: "x-small" }} className='fa fa-circle' /></span> Cash out</span>
+          <span className='text-dark ml-1' style={{fontSize: "11px",}}><span className='bg-warning rounded px-1' style={{ paddingBottom: "3px" }}><i style={{ fontSize: "x-small" }} className='fa fa-circle' /></span> Cash out</span>
       </div><div
           className="container-fluid p-2"
           style={{
@@ -123,7 +123,7 @@ const TossOdds = ({matchName}:any) => {
                           <div style={{ fontSize: "12px",fontWeight:"700" }}>
                               {"1.98"}
                           </div>
-                          <div style={{ fontSize: "11px" }}>3M</div>
+                          <div style={{ fontSize: "11px",fontWeight:"300" }}>3M</div>
                       </div>
                   </div>
 

@@ -765,17 +765,17 @@
     justify-content: center;
     align-items: center;
     height: 100%;
-    width: 60%;
+    width: 41%;
     right: 0;
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: rgba(0, 0, 0, 0.509);
     color: var(--white-color);
-    text-transform: uppercase;
-    font-family: "Font Awesome 5 Free";
+    text-transform: capitalize;
+    /* font-family: "Font Awesome 5 Free"; */
     content: attr(data-title);
-    font-weight: 900;
-    font-size: 18px;
+    font-weight: 400;
+    font-size: 12px;
     top: 0;
-    color: red;
+    color: #fff;
   }
 
   .suspendedteen:after {

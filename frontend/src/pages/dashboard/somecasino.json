@@ -1,4 +1,9 @@
-[
+[{
+    "gameCode": "joker120",
+    "matchId": "2",
+    "title": "Joker Teen Patti",
+    "image": "/imgs/homejokerimage.jpeg"
+  },
   {
     "image":"https://kingexch365.com/api/users/images/Vimaan1.webp"
 
@@ -16,12 +21,7 @@
     "title": "20 20 Teen Patti",
     "image": "/imgs/hometeen20image.jpeg"
   },
-  {
-    "gameCode": "joker120",
-    "matchId": "2",
-    "title": "Joker Teen Patti",
-    "image": "/imgs/homejokerimage.jpeg"
-  },
+  
   {
     "image": "https://kingexch365.com/api/users/images/1%20Day%20teenpatti.webp"
   },
