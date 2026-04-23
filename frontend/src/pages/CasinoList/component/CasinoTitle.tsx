@@ -1108,7 +1108,7 @@ const teen20 = () => {
           <div className='mr-20'>
             <p className='m-b-0 text-white'>
               <b>
-                <span className='' style={{ color: '#ef910f' }}>Joker</span>
+                <span>Joker</span>
               </b>
             </p>
             <div className='imgspace'>
@@ -1175,7 +1175,7 @@ const teen20 = () => {
           <div className='mr-20'>
             <p className='m-b-0 text-white'>
               <b>
-                <span className='' style={{ color: '#ef910f' }}>Joker</span>
+                <span>Joker</span>
               </b>
             </p>
             <div className='imgspace'>

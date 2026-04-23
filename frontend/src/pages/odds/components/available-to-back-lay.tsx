@@ -56,8 +56,55 @@ export const AvailableToBackLay = React.memo(({ selections, market, runner }: Pr
     }
   }
 
+  // console.log(selections,"availableToBack")
+
+  const [prevBack, setPrevBack] = React.useState<any[]>([])
+const [prevLay, setPrevLay] = React.useState<any[]>([])
+
+const [backWithChange, setBackWithChange] = React.useState<any[]>([])
+const [layWithChange, setLayWithChange] = React.useState<any[]>([])
+
+
+React.useEffect(() => {
+  console.log(selections,"selectionsselectionsselections")
+  if (!selections) return
+
+  // ✅ BACK
+  const updatedBack = selections.availableToBack?.map((item: any, index: number) => {
+    const prev = prevBack[index]
+
+    return {
+      ...item,
+      changed: prev && prev.price !== item.price
+    }
+  }) || []
+
+  // ✅ LAY
+  const updatedLay = selections.availableToLay?.map((item: any, index: number) => {
+    const prev = prevLay[index]
+
+    return {
+      ...item,
+      changed: prev && prev.price !== item.price
+    }
+  }) || []
+
+  setBackWithChange(updatedBack)
+  setLayWithChange(updatedLay)
+
+  setPrevBack(selections.availableToBack || [])
+  setPrevLay(selections.availableToLay || [])
+
+  // 👉 blink reset after 500ms
+  setTimeout(() => {
+    setBackWithChange(prev => prev.map(i => ({ ...i, changed: false })))
+    setLayWithChange(prev => prev.map(i => ({ ...i, changed: false })))
+  }, 500)
+
+}, [selections])
+
   const availableToBack = () => {
-    return selections?.availableToBack?.map((back: any, index: number) => {
+    return backWithChange?.map((back: any, index: number) => {
       const i = 2 - index
       const cls = index === 2 ? 'back' : `back${i}`
       const blinkCls = back.changed ? 'blink' : ''
@@ -100,7 +147,7 @@ style={
   }
 
   const availableToLay = () => {
-    return selections?.availableToLay?.map((lay: any, index: number) => {
+    return layWithChange?.map((lay: any, index: number) => {
       const i = index
       const cls = index === 0 ? 'lay' : `lay${i}`
       const blinkCls = lay.changed ? 'blink' : ''

@@ -23,7 +23,7 @@ const MatchDetailWrapper = (props: any) => {
   //   }
   // }, [])
 
-  console.log("match detail wrapper rendered",props.currentMatch)
+  console.log("match detail wrapper rendered",props)
 
    const [active, setActive] = React.useState("All");
 
@@ -107,7 +107,7 @@ const MatchDetailWrapper = (props: any) => {
 
 </div>
 
-            {props.scoreBoard()}
+            {/* {props.scoreBoard()} */}
             {tavstatus && props.otherTv()}
             {props.t10Tv(250)}
 
@@ -141,8 +141,8 @@ const MatchDetailWrapper = (props: any) => {
             <div className='markets'>
               {/* Score Component Here */}
               <div className='main-market'>
-                {props.markets && <MatchOdds data={props.markets} marketDataList={props.marketDataList}  />}
-                {<TossOdds matchName={props.currentMatch?.name} />}
+                {props.markets &&   <MatchOdds data={props?.markets} marketDataList={props?.marketDataList}  />}
+                {props?.currentMatch?.sportId == "4" && <TossOdds matchName={props?.currentMatch?.name} />}
               </div>
             </div>
             <br />

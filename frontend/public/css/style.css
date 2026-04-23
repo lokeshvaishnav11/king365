@@ -1796,7 +1796,7 @@ footer {
   }
 
   50% {
-    background-color: #ffc01a;
+    background-color: #26f1f8;
   }
 
   99% {
@@ -8394,9 +8394,9 @@ footer p {
 .fancy-tripple-box .suspended::after {
   width: 46%;
   content: attr(data-title);
-  font-size: 16px;
-  color: #ff0000;
-  font-family: Arial, Verdana, Helvetica, sans-serif;
+  font-size: 12px;
+  color: #ffffff;
+  /* font-family: Arial, Verdana, Helvetica, sans-serif; */
 }
 
 .race2020 .suspended::after {

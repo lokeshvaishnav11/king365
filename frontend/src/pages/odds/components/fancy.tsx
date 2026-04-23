@@ -133,7 +133,7 @@ class Fancy extends React.Component<
     if (this.props.socketUser) {
       this.props.socketUser.on('addNewFancy', ({ newFancy, fancy }: any) => {
         const type = this.FancyBallTypes(fancy.RunnerName)
-        const allFacies = [...this.state.fancies[type]]
+        const allFacies = [...this.state?.fancies[type]]
 
         if (this.checkFancyKey(allFacies, fancy) === -1 && this.props.fancyType == newFancy.gtype) {
           const items = { ...this.state.fancyUpdate }

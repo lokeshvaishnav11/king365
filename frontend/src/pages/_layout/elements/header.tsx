@@ -199,7 +199,7 @@ const Header = () => {
             <span className="fw-bold">Bets</span>
           </CustomLink>
 
-          <div className="d-flex align-items-center " style={{ gap: "6px" }}>
+          <div className="d-flex align-items-center " style={{ gap: "6px",fontSize:"12px" }}>
 
           {/* Center - Info */}
           <div className="text-center">
