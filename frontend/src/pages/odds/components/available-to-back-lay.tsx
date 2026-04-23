@@ -66,7 +66,6 @@ const [layWithChange, setLayWithChange] = React.useState<any[]>([])
 
 
 React.useEffect(() => {
-  console.log(selections,"selectionsselectionsselections")
   if (!selections) return
 
   // ✅ BACK

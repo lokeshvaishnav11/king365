@@ -76,8 +76,11 @@ class MatchOdds extends React.PureComponent<
     }
   }
 
+
   componentDidMount(): void {
     this.socketEvents()
+  console.log(this.props,"currentMatrfrrch")
+
   }
 
   componentWillUnmount(): void {
@@ -297,12 +300,14 @@ class MatchOdds extends React.PureComponent<
   //   console.log("✅ CASHOUT SUCCESS");
   // };
 
+  
+
 
   handleCashout = (market: any) => {
     const { currentMatch, getMarketBook, betPopup } = this.props;
     const { cashoutPreview } = this.state;
 
-    console.log("🚀 CASHOUT CLICKED");
+    console.log("🚀 CASHOUT CLICKED" );
 
     if (!currentMatch || !getMarketBook || !market?.runners?.length) {
       console.log("❌ Missing data");
@@ -333,6 +338,8 @@ class MatchOdds extends React.PureComponent<
     // =========================
 
     const pnlMap: Record<number, number> = {};
+
+
 
     market.runners.forEach((runner: any) => {
       const key = `${market.marketId}_${runner.selectionId}`;
@@ -402,7 +409,7 @@ class MatchOdds extends React.PureComponent<
     const finalLoss =
       finalStack * oppositeOdds - finalStack - originalStake;
 
-    console.log("💀 Final Loss:", finalLoss);
+    console.log("💀 Final Loss:", finalLoss );
 
     // SAVE PREVIEW
     this.setState({
@@ -436,6 +443,7 @@ class MatchOdds extends React.PureComponent<
 
     console.log("🟡 PREVIEW READY → CLICK AGAIN TO CONFIRM");
   };
+  
   render(): React.ReactNode {
     const { data, getMarketBook } = this.props
     const { runnersData } = this.state
@@ -536,6 +544,7 @@ class MatchOdds extends React.PureComponent<
                       }
                       return (
                         <div key={runner.selectionId}>
+
                           <div
                             data-title={runner.status}
                             className={`table-row ${runner.status === 'SUSPENDED' ? 'suspended' : ''}`}
@@ -582,10 +591,12 @@ class MatchOdds extends React.PureComponent<
                             />
                            
                           </div>
-                        </div>
-                        
+                        </div>   
                       )
+                      
                     })}
+                       {this?.state?.marketDataList?.stake && this.props.bet?.betData?.marketId === market.marketId &&  <PlaceBetBoxMatchodds stake={this?.state?.marketDataList?.stake} />}
+
 
                 {this.state.remarkMarket[market.marketId] ? (
                   <div className='table-remark text-right remark'>
@@ -597,7 +608,6 @@ class MatchOdds extends React.PureComponent<
               </div>
             )
           })}
-                       {this?.state?.marketDataList?.stake &&  <PlaceBetBoxMatchodds stake={this?.state?.marketDataList?.stake} />}
 
         {this.props.fancySelectionId && <BookPopup />}
         {this.props.marketUserBookId && <UserBookPopup />}

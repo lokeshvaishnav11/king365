@@ -1,10 +1,11 @@
 import React, { MouseEvent } from 'react'
 import authService from '../../../services/auth.service';
-import { useAppDispatch } from '../../../redux/hooks';
-import { betPopup } from '../../../redux/actions/bet/betSlice';
+import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
+import { betPopup, selectBetPopup } from '../../../redux/actions/bet/betSlice';
 import { IBetOn, IBetType } from '../../../models/IBet';
+import PlaceBetBoxMatchodds from './place-bet-box-matchodds';
 
-const TossOdds = ({matchName}:any) => {
+const TossOdds = ({matchName, marketDataList}:any) => {
 
     console.log(matchName,"matchName")
       const dispatch = useAppDispatch()
@@ -13,6 +14,10 @@ const TossOdds = ({matchName}:any) => {
     const teams = matchName ? matchName?.split(/\s+v(?:s)?\s+/i) : [];
   const teamA = teams[0]?.trim() || "Team A";
   const teamB = teams[1]?.trim() || "Team B";
+
+
+const betValues = useAppSelector(selectBetPopup)
+
 
 
     const onBet = (isBack = false, back: { price: number; size: number }) => {
@@ -128,7 +133,10 @@ const TossOdds = ({matchName}:any) => {
                   </div>
 
               </div>
-          </div></>
+             
+          </div>{marketDataList?.stake &&
+  betValues?.betData?.marketName === "Toss" && <PlaceBetBoxMatchodds stake={marketDataList?.stake} />}
+              </>
   )
 }
 

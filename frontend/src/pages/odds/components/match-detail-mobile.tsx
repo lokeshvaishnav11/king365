@@ -142,7 +142,7 @@ const MatchDetailWrapper = (props: any) => {
               {/* Score Component Here */}
               <div className='main-market'>
                 {props.markets &&   <MatchOdds data={props?.markets} marketDataList={props?.marketDataList}  />}
-                {props?.currentMatch?.sportId == "4" && <TossOdds matchName={props?.currentMatch?.name} />}
+                {props?.currentMatch?.sportId == "4" && <TossOdds matchName={props?.currentMatch?.name} marketDataList={props?.marketDataList} />}
               </div>
             </div>
             <br />

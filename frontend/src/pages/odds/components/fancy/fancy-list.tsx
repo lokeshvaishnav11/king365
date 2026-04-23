@@ -66,7 +66,7 @@ export const FancyList = React.memo(
         {/* <div>Hello world this debug side</div> */}
         {fancies?.length > 0 &&
           
-          fancies.map((fancy: LFancy) => {
+          fancies?.map((fancy: LFancy) => {
             if (!fancy?.active) return  null
             let updatedFancy: IFancy = {} as IFancy
             if (fancyUpdate[fancy.marketId]) {
