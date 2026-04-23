@@ -75,7 +75,7 @@ const betValues = useAppSelector(selectBetPopup)
           {/* <span className='float-right m-r-10'>
       Maximum Bet <span>{this.offplaylimit(market)}</span>
     </span> */}
-          <span className='text-dark ml-1' style={{fontSize: "11px",}}><span className='bg-warning rounded px-1' style={{ paddingBottom: "3px" }}><i style={{ fontSize: "x-small" }} className='fa fa-circle' /></span> Cash out</span>
+          {/* <span className='text-dark ml-1' style={{fontSize: "11px",}}><span className='bg-warning rounded px-1' style={{ paddingBottom: "3px" }}><i style={{ fontSize: "x-small" }} className='fa fa-circle' /></span> Cash out</span> */}
       </div><div
           className="container-fluid p-2"
           style={{

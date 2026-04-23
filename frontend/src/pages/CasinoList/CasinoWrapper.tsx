@@ -828,7 +828,7 @@ const CasinoWrapper = (props: any) => {
       textTransform: "uppercase",
     }}
   >
-    {defaultNewData?.winner} WIN
+    {defaultNewData?.winner == "A" ? "Player A" : defaultNewData?.winner == "B" ? "Player B" : defaultNewData?.winner} WIN
   </div>
 )}
 

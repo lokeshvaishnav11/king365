@@ -127,7 +127,7 @@ const MyBetComponent22 = (props: any) => {
 
     setTimeout(() => {
       setShowCelebration(false);
-    }, 2500);
+    }, 4500);
   }
 
 

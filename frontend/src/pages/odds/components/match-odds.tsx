@@ -485,7 +485,7 @@ class MatchOdds extends React.PureComponent<
                   {/* <span className='float-right m-r-10'>
                     Maximum Bet <span>{this.offplaylimit(market)}</span>
                   </span> */}
-                  <span
+                 {(market.marketName === "Match Odds" || market.marketName === "Bookmaker") && <span
                     className='text-dark ml-1'
                     style={{ fontSize: "11px", cursor: "pointer" }}
                     onClick={() => this.handleCashout(market)}
@@ -500,7 +500,7 @@ class MatchOdds extends React.PureComponent<
 
                     )}
 
-                  </span>            </div>
+                  </span> }           </div>
                 <div className='table-header'>
                   <div className={`float-left country-name ${classforheadingfirst} min-max`} style={{ borderTop: "1px solid #7e97a7" }}>
                     <div className='text-center py-1' style={{ background: "#bed5d8", borderRadius: "3px" }}><div><span style={{ color: "#315195", fontSize: "10px", fontWeight: "700" }}>Min/Max</span> <span style={{ fontSize: "10px", fontWeight: "700" }}>100-1000</span></div></div>

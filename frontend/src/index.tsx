@@ -8,6 +8,7 @@ import reportWebVitals from './reportWebVitals'
 import { WebSocketUserProvider } from './context/webSocketUser'
 import { WebSocketCasinoProvider } from './context/webSocketCasino'
 import { createRoot } from 'react-dom/client';
+import TikTokLoader from './TikTokLoader'
 
 const rootElement = document.getElementById('root');
 
@@ -17,7 +18,7 @@ if (rootElement) {
     <Suspense
       fallback={
         <div className='suspense-loading'>
-          <img src='/imgs/logo.png' width={200} />
+         <TikTokLoader/>
         </div>
       }
     >

@@ -117,18 +117,18 @@ const location = useLocation();
 };
 
   return (
-    <div style={{ display: "flex", alignItems: "center", background: "#0b5d4f" }}>
+    <div style={{ display: "flex", alignItems: "center", background: "linear-gradient(-180deg,#14805e 0, #184438 100%)" }}>
 
       {/* LEFT SIDE - SCROLL MENU */}
       <div
         style={{
           display: "flex",
           overflowX: "auto",
-          whiteSpace: "nowrap",
+          // whiteSpace: "nowrap",
           flex: 1,
 
         }}
-        className='px-1 py-2'
+        className='px-1 pt-2'
       >
 
         {menuItems.map((item, index) => (

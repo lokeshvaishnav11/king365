@@ -106,7 +106,7 @@ React.useEffect(() => {
 
       return (
         (
-          <tr key={key} className={`${clsstatus} suspendedd `}>
+          <tr key={key} className={`  `}>
             <td className={clsnamehead} style={{ paddingLeft: "10px", }}>
               <b className='text-left pl-2' style={{fontSize:"12px"}} >{ItemNew.RunnerName}</b>
               

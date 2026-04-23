@@ -35,6 +35,7 @@ import Fav from "../_layout/elements/fav";
 import axios from "axios";
 import authService from "../../services/auth.service";
 import { toast } from "react-toastify";
+import Marqueemessge from "../../admin-app/pages/_layout/elements/welcome";
 
 const Dashboard = () => {
   const [matchList, setMatchList] = React.useState<LMatch[]>([]);
@@ -339,7 +340,8 @@ const Dashboard = () => {
       ) : (
         ""
       )}
-      <div className="pb-4 mtc-5">
+      {/* <Marqueemessge message={"messages"} /> */}
+      <div className="pb-4 ">
         {!isMobile ? <Fav /> : ""}
         {/* {!isMobile ? <GameTab sportId={sportId} sportListState={sportListState} /> : ''} */}
 
