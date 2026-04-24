@@ -16,7 +16,7 @@ const Marqueemessge = (props: any) => {
     }
   }
   return (
-    <div className='marqueeheader'>
+    <div className='marqueeheader' style={{background:"linear-gradient(-180deg, #2E4B5E 0%, #243A48 82%)",padding:"0px"}}>
       {/* {isMobile ? (
         <span className='search float-left'>
           <a
@@ -41,8 +41,9 @@ const Marqueemessge = (props: any) => {
       ) : (
         ''
       )} */}
-      <div className='marqueeN' style={{ color: "#fff" }}>
-        {/* <p>{props.message}</p> */}
+     <div style={{background:"linear-gradient(-180deg, #274253 0%, #0f191f 82%)",padding:"4px 4px 0px 9px"}}> <h4 style={{display:"flex",alignItems:"center",gap:"4px",fontSize:"12px",fontWeight:"700",color:"white",marginBottom:"4px"}}><i className="fa fa-microphone"></i> News </h4></div>
+      <div className='marqueeN' style={{ color: "#fff",fontSize:"12px",fontWeight:"700", padding:"0px" }}>
+        <p>{props.message}</p>
       </div>
     </div>
   )

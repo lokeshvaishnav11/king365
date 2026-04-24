@@ -1,30 +1,29 @@
-import React from 'react'
-import User from '../../models/User'
-import { useAppDispatch, useAppSelector } from '../../redux/hooks'
-import { loginAction } from '../../redux/actions/login/login.action'
-import { selectUserData } from '../../redux/actions/login/loginSlice'
-import { useWebsocketUser } from '../../context/webSocketUser'
-import { useNavigateCustom } from '../_layout/elements/custom-link'
-import { isMobile } from 'react-device-detect'
-import api from '../../utils/api'
-import SubmitButton from '../../components/SubmitButton'
+import React from "react";
+import User from "../../models/User";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { loginAction } from "../../redux/actions/login/login.action";
+import { selectUserData } from "../../redux/actions/login/loginSlice";
+import { useWebsocketUser } from "../../context/webSocketUser";
+import { useNavigateCustom } from "../_layout/elements/custom-link";
+import { isMobile } from "react-device-detect";
+import api from "../../utils/api";
+import SubmitButton from "../../components/SubmitButton";
 
 const Login = () => {
-  const dispatch = useAppDispatch()
-  const userState = useAppSelector(selectUserData)
-  const { socketUser } = useWebsocketUser()
+  const dispatch = useAppDispatch();
+  const userState = useAppSelector(selectUserData);
+  const { socketUser } = useWebsocketUser();
 
-  const navigate = useNavigateCustom()
+  const navigate = useNavigateCustom();
 
   const [loginForm, setLoginForm] = React.useState<User>({
-    username: '',
-    password: '',
-    logs: '',
-    isDemo: false
-  })
+    username: "",
+    password: "",
+    logs: "",
+    isDemo: false,
+  });
 
-  const [isDemoLogin, setIsDemoLogin] = React.useState(false) // Track Demo Login
-
+  const [isDemoLogin, setIsDemoLogin] = React.useState(false); // Track Demo Login
 
   // React.useEffect(() => {
   //   api.get(`${process.env.REACT_APP_IP_API_URL}`).then((res) => {
@@ -33,138 +32,185 @@ const Login = () => {
   // }, [])
 
   React.useEffect(() => {
-    if (userState.status === 'done') {
-      const { role, _id } = userState.user
-      socketUser.emit('login', {
+    if (userState.status === "done") {
+      const { role, _id } = userState.user;
+      socketUser.emit("login", {
         role: userState.user.role,
         sessionId: userState.user.sessionId,
         _id,
-      })
-      localStorage.setItem('login-session', userState.user.sessionId)
+      });
+      localStorage.setItem("login-session", userState.user.sessionId);
 
-      if (userState.user.role && ['admin', '1', '2', '3'].includes(userState.user.role)) {
-        return navigate.go('/')
+      if (
+        userState.user.role &&
+        ["admin", "1", "2", "3"].includes(userState.user.role)
+      ) {
+        return navigate.go("/");
       }
 
-      return isMobile ? navigate.go('/match/4') : navigate.go('/')
+      return isMobile ? navigate.go("/match/4") : navigate.go("/");
     }
-  }, [userState])
+  }, [userState]);
 
   const handleForm = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setLoginForm({ ...loginForm, [e.target.name]: e.target.value })
-  }
+    setLoginForm({ ...loginForm, [e.target.name]: e.target.value });
+  };
   const handleSubmitDemoLogin = () => {
     const loginFormNew = { ...loginForm, isDemo: true };
-    setLoginForm(loginFormNew)
-    setIsDemoLogin(true)
-
-  }
+    setLoginForm(loginFormNew);
+    setIsDemoLogin(true);
+  };
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-    dispatch(loginAction(loginForm))
-    setIsDemoLogin(false)
-
-  }
+    event.preventDefault();
+    dispatch(loginAction(loginForm));
+    setIsDemoLogin(false);
+  };
   return (
     <div>
-      <div className='login' style={{display: "flex",
+      <a
+        className="crossIcon"
+        style={{
+          position: "absolute",
+          fontSize: "21px",
+          top: "20px",
+          right: "40px",
+          background: "linear-gradient(-180deg,#14805e 0, #184438 100%)",
+          padding: "4px 8px",
+          color: "black",
+          borderRadius: "9px",
+          cursor: "pointer",
+        }}
+        href="/login"
+      >
+        <i className="fas fa-times" />
+      </a>
+      <div
+        className="login"
+        style={{
+          display: "flex",
           justifyContent: "center",
-          alignItems: "center", fontWeight:"700"}}>
-        <div className='loginInner1'>
+          alignItems: "center",
+          fontWeight: "700",
+        }}
+      >
+        <div className="loginInner1">
           {/* <div className='log-logo m-b-20 text-center'>
             <img src='/imgs/logo.png' className='logo-login' />
           </div> */}
-          <div className='featured-box-login featured-box-secundary default' style={{background:"none"}}>
-           <div className='log-logo m-b-20 text-center'>
-            <img src='/imgs/logo.png' className='logo-login' style={{width:"70%"}} />
-          </div>
+          <div
+            className="featured-box-login featured-box-secundary default"
+            style={{ background: "none" }}
+          >
+            <div className="log-logo m-b-20 text-center">
+              <img
+                src="/imgs/logo.png"
+                className="logo-login"
+                style={{ width: "70%" }}
+              />
+            </div>
             <form
               onSubmit={(e) => handleSubmit(e)}
-              role='form'
-              autoComplete='off'
-              method='post'
+              role="form"
+              autoComplete="off"
+              method="post"
             >
-              <div className='form-group m-b-20'>
+              <div className="form-group m-b-20">
                 <input
-                  name='username'
-                  placeholder='User Name'
-                  type='text'
-                  className='form-control'
-                  aria-required='true'
-                  aria-invalid='false'
+                  name="username"
+                  placeholder="User Name"
+                  type="text"
+                  className="form-control"
+                  aria-required="true"
+                  aria-invalid="false"
                   onChange={handleForm}
-                  required={!isDemoLogin} 
-
+                  required={!isDemoLogin}
                 />
-                <i className='fas fa-user'></i>
-                <small className='text-danger' style={{ display: 'none' }}></small>
+                <i className="fas fa-user"></i>
+                <small
+                  className="text-danger"
+                  style={{ display: "none" }}
+                ></small>
               </div>
-              <div className='form-group m-b-20'>
+              <div className="form-group m-b-20">
                 <input
-                  name='password'
-                  placeholder='Password'
-                  type='password'
-                  className='form-control'
-                  aria-required='true'
-                  aria-invalid='false'
+                  name="password"
+                  placeholder="Password"
+                  type="password"
+                  className="form-control"
+                  aria-required="true"
+                  aria-invalid="false"
                   onChange={handleForm}
-                  required={!isDemoLogin} 
-
+                  required={!isDemoLogin}
                 />
-                <i className='fas fa-key'></i>
+                <i className="fas fa-key"></i>
                 {userState.error ? (
-                  <small className='text-danger'>{userState.error}</small>
+                  <small className="text-danger">{userState.error}</small>
                 ) : (
-                  ''
+                  ""
                 )}
               </div>
-              <div className='form-group text-center mb-0'>
-                  <SubmitButton type='submit' className='btn btn-submit btn-login mb-10' style={{backgroundImage:"linear-gradient(-180deg, #14805e 0, #184438 100%)", border:"none"}}>
-                    Login
-                  {userState.status === 'loading' ? (
-                    <i className='ml-2 fas fa-spinner fa-spin'></i>
+              <div className="form-group text-center mb-0">
+                <SubmitButton
+                  type="submit"
+                  className="btn btn-submit btn-login mb-10"
+                  style={{
+                    backgroundImage:
+                      "linear-gradient(-180deg, #14805e 0, #184438 100%)",
+                    border: "none",
+                  }}
+                >
+                  Login
+                  {/* {userState.status === "loading" ? (
+                    <i className="ml-2 fas fa-spinner fa-spin"></i>
                   ) : (
                     ""
-                  )}
+                  )} */}
                 </SubmitButton>
-                <SubmitButton type='submit' onClick={() => handleSubmitDemoLogin()} className='btn btn-submit btn-login mb-10' style={{backgroundImage:"linear-gradient(-180deg, #14805e 0, #184438 100%)", border:"none"}}>
+                <SubmitButton
+                  type="submit"
+                  onClick={() => handleSubmitDemoLogin()}
+                  className="btn btn-submit btn-login mb-10"
+                  style={{
+                    backgroundImage:
+                      "linear-gradient(-180deg, #14805e 0, #184438 100%)",
+                    border: "none",
+                  }}
+                >
                   Login with Demo ID
-                  {userState.status === 'loading' ? (
-                    <i className='ml-2 fas fa-spinner fa-spin'></i>
+                  {/* {userState.status === "loading" ? (
+                    <i className="ml-2 fas fa-spinner fa-spin"></i>
                   ) : (
                     ""
-                  )}
+                  )} */}
                 </SubmitButton>
-                <small className='recaptchaTerms d-none'>
+                <small className="recaptchaTerms d-none">
                   This site is protected by reCAPTCHA and the Google
                   <a
-                    target={'_blank'}
-                    rel='noopener noreferrer'
-                    href='https://policies.google.com/privacy'
+                    target={"_blank"}
+                    rel="noopener noreferrer"
+                    href="https://policies.google.com/privacy"
                   >
                     Privacy Policy
-                  </a>{' '}
+                  </a>{" "}
                   and
                   <a
-                    target={'_blank'}
-                    rel='noopener noreferrer'
-                    href='https://policies.google.com/terms'
+                    target={"_blank"}
+                    rel="noopener noreferrer"
+                    href="https://policies.google.com/terms"
                   >
                     Terms of Service
-                  </a>{' '}
+                  </a>{" "}
                   apply.
                 </small>
               </div>
-              <div className='mt-2 text-center download-apk'></div>
+              <div className="mt-2 text-center download-apk"></div>
             </form>
           </div>
         </div>
       </div>
-      <section className="footer footer-login"><div className="footer-top"><div className="footer-links"><nav className="navbar navbar-expand-sm"><ul className="navbar-nav"><li className="nav-item"><a className="nav-link" href="/terms-and-conditions" target="_blank"> Terms and Conditions </a></li><li className="nav-item"><a className="nav-link" href="/responsible-gaming" target="_blank"> Responsible Gaming </a></li></ul></nav></div><div className="support-detail"><h2>24X7 Support</h2><p></p></div><div className="social-icons-box"></div></div></section>
-
     </div>
+    //  <section className="footer d-none footer-login"><div className="footer-top"><div className="footer-links"><nav className="navbar navbar-expand-sm"><ul className="navbar-nav"><li className="nav-item"><a className="nav-link" href="/terms-and-conditions" target="_blank"> Terms and Conditions </a></li><li className="nav-item"><a className="nav-link" href="/responsible-gaming" target="_blank"> Responsible Gaming </a></li></ul></nav></div><div className="support-detail"><h2>24X7 Support</h2><p></p></div><div className="social-icons-box"></div></div></section>
+  );
+};
 
-  )
-}
-
-export default Login
+export default Login;

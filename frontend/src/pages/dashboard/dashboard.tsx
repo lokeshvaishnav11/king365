@@ -344,6 +344,7 @@ const Dashboard = () => {
       <div className="pb-4 ">
         {!isMobile ? <Fav /> : ""}
         {/* {!isMobile ? <GameTab sportId={sportId} sportListState={sportListState} /> : ''} */}
+<Marqueemessge message={'Ball by Ball Started in Our Exchange'} />
 
         <div>
           <img
@@ -352,8 +353,7 @@ const Dashboard = () => {
           />
         </div>
         <GameTab sportId={sportId} sportListState={sportListState} />
-
-
+{/* <div _ngcontent-ng-c261849108="" class="col-md-12 marquee-text ng-star-inserted"><div _ngcontent-ng-c261849108="" class="marquee-box"><h4 _ngcontent-ng-c261849108=""><i _ngcontent-ng-c261849108="" class="fa fa-microphone"></i> News </h4><div _ngcontent-ng-c261849108="" class="scrolling-text hideDekstop"><div _ngcontent-ng-c261849108="" class="marquelikeDiv"> Ball by Ball Started in Our Exchange </div></div><marquee _ngcontent-ng-c261849108="" direction="left" scrollamount="5" behavior="scroll" class="hideMobile">Ball by Ball Started in Our Exchange</marquee></div></div> */}
 
         <ul
           className="d-flexg d-none"

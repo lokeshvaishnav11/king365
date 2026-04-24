@@ -260,7 +260,7 @@ const CasinoWrapper = (props: any) => {
   const lastResultHistoryView = () => {
     return (
       <div className="d-flex flex-nowrap align-items-center py-2 px-1" style={{ gap: "5px" }}>
-        <p className="text-white text-nowrap fw-bold ">Recent Result</p>
+        <b className="text-white text-nowrap fw-bold ">Recent Result</b>
 
         <div className="d-flex flex-nowrap">
           <div className="d-flex flex-nowrap">

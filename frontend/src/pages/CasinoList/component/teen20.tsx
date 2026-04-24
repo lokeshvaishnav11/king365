@@ -406,7 +406,7 @@ const TeenPatti20 = (props: any) => {
         {gameData?.map((item, index) => (
           <div key={index} className=" relative" >
 
-            <div className="d-flex  justify-content-between px-2 py-1  bg-theme text-white" style={{background:"linear-gradient(-180deg, #2E4B5E 0%, #243A48 82%)", borderRadius:"4px 4px 0 0", fontSize:"12px"}}><span>{item.title}</span><div>{showMinmax && <span className='bg-dark rounded px-1'>Min/Max: 100 - 100000 </span>} <i onClick={() => setShowMinmax(!showMinmax)} className="fa fa-info-circle" aria-hidden="true"></i></div> 
+            <div className="d-flex  justify-content-between px-2 py-1  bg-theme text-white" style={{background:"linear-gradient(-180deg, #2E4B5E 0%, #243A48 82%)", borderRadius:"4px 4px 0 0", fontSize:"12px"}}><strong style={{fontSize:"12px"}}>{item.title}</strong><div>{showMinmax && <span className='bg-dark rounded px-1'>Min/Max: 100 - 100000 </span>} <i onClick={() => setShowMinmax(!showMinmax)} className="fa fa-info-circle" aria-hidden="true"></i></div> 
             </div>
             {/* Body */}
 {clsstatus2 && <div style={{   
@@ -435,7 +435,7 @@ const TeenPatti20 = (props: any) => {
 
               {/* Player A */}
               <div className="col-6 pb-2">
-                <h6 className="fw-bold">{item.playerA.SelectioName}</h6>
+                <h6 className="fw-bold" style={{fontSize:"12px",fontWeight:"700",textTransform:"uppercase"}}>{item.playerA.SelectioName}</h6>
 
                 <button
                   className={`btn w-75 ${clsstatus2} `}
@@ -458,7 +458,7 @@ const TeenPatti20 = (props: any) => {
 
               {/* Player B */}
               <div className="col-6 pb-2">
-                <h6 className="fw-bold">{item.playerB.SelectioName}</h6>
+                <h6 className="fw-bold" style={{fontSize:"12px",fontWeight:"700",textTransform:"uppercase"}}>{item.playerB.SelectioName}</h6>
 
                 <button
                   className={`btn w-75 ${clsstatus2} `}

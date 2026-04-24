@@ -196,7 +196,7 @@ const Header = () => {
             }}
           >
             <BetHome/>
-            <span className="fw-bold">Bets</span>
+            <span className="fw-bold" style={{fontSize:"12px",fontWeight:"700"}}>Bets</span>
           </CustomLink>
 
           <div className="d-flex align-items-center " style={{ gap: "6px",fontSize:"12px",fontWeight:"700" }}>

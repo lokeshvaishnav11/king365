@@ -1,6 +1,7 @@
 const Footer = () => {
   return (
-    <><div className="d-none">
+    <>
+    <div className="d-none">
       <section className="footer">
         <div className="footer-top">
           <div className="footer-links">
@@ -68,7 +69,8 @@ const Footer = () => {
         © Copyright 2026. All Rights Reserved. Powered by BETBHAI365
       </p>
     </div> */}
-    </div><div className="container mt-3 pb-4">
+    </div>
+    <div className="container mt-3 pb-4 d-none">
 
         {/* TOP LINKS */}
         <div className="text-center mb-2">
