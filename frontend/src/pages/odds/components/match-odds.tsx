@@ -467,6 +467,7 @@ class MatchOdds extends React.PureComponent<
                 <div className='market-title mt-1' style={{ background: "none", padding: "8px 0px" }}>
                   <span className='bg-theme px-2 py-1' style={{ borderTopRightRadius: "10px", background: "linear-gradient(-180deg, #2E4B5E 0%, #243A48 82%)", gap: "2px", fontSize: "12px", fontWeight: "700" }}>
                     {market.marketName}
+                  
                     <a
                       href='#Bookmaker-market'
                       onClick={(e: MouseEvent<HTMLAnchorElement>) => {
@@ -499,8 +500,8 @@ class MatchOdds extends React.PureComponent<
 
                     )}
 
-                  </span> }           </div>
-                <div className='table-header'>
+                  </span> }           </div>                  
+                <div className='table-header' style={{ position: "relative"}}>
                   <div className={`float-left country-name ${classforheadingfirst} min-max`} style={{ borderTop: "1px solid #7e97a7" }}>
                     <div className='text-center py-1' style={{ background: "#bed5d8", borderRadius: "3px" }}><div><span style={{ color: "#315195", fontSize: "10px", fontWeight: "700" }}>Min/Max</span> <span style={{ fontSize: "10px", fontWeight: "700" }}>100-1000</span></div></div>
                   </div>
@@ -533,10 +534,32 @@ class MatchOdds extends React.PureComponent<
                     ''
                   )}
                 </div>
+
+                     {/* { <div style={{   
+                position: "absolute",
+    textAlign: "center",
+    alignItems: "center",
+    // top: "1%",
+   zIndex: "99",
+    color: "rgb(202, 16, 16)",
+    opacity: "0.65",
+    fontWeight: "700",
+    fontSize: "25px",
+    background: "#fff",
+    width: "100%",
+    height:  market.marketName === "Bookmaker" ? "92px" : "85px",
+    // height:"87px",
+    border: "2px solid rgb(202, 16, 16)",
+    display: "flex",
+    justifyContent: "center", 
+    left:"0px"
+    }}><span className='text-center'>SUSPENDED</span></div>} */}
+
+
                 {oddsData &&
                   oddsData?.runners
                     ?.sort((a: any, b: any) => a?.sortPriority - b?.sortPriority)
-                    .map((runner: IRunner) => {
+                    .map((runner: IRunner, index:any) => {
                       runner = {
                         ...runner,
                         runnerName: this.state.runnersName?.[market.marketId]?.[runner.selectionId],
@@ -553,6 +576,28 @@ class MatchOdds extends React.PureComponent<
                                 : {}
                             }
                           >
+
+                           {index == 0 &&
+                            runner?.status === "SUSPENDED" &&
+                            <div style={{   
+                position: "absolute",
+    textAlign: "center",
+    alignItems: "center",
+    // top: "1%",
+   zIndex: "99",
+    color: "rgb(202, 16, 16)",
+    opacity: "0.65",
+    fontWeight: "700",
+    fontSize: "25px",
+    background: "#fff",
+    width: "100%",
+    height:  market.marketName === "Bookmaker" ? "92px" : "85px",
+    // height:"87px",
+    border: "2px solid rgb(202, 16, 16)",
+    display: "flex",
+    justifyContent: "center", 
+    left:"0px"
+    }}><span className='text-center'>SUSPENDED</span></div>}
                             <div className={` country-name ${classforheadingfirst}`} style={{ borderColor: "#7e97a7" }}>
                               <span className='team-name'>
                                 <span style={{ fontSize: "13px", fontWeight: "700" }}>{runner.runnerName}</span>
@@ -588,8 +633,11 @@ class MatchOdds extends React.PureComponent<
                               market={market}
                               runner={runner}
                             />
+
+                            
                            
                           </div>
+                    
                         </div>   
                       )
                       
@@ -604,6 +652,8 @@ class MatchOdds extends React.PureComponent<
                 ) : (
                   ''
                 )}
+
+            
               </div>
             )
           })}
