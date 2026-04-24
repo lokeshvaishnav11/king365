@@ -47,17 +47,21 @@ const PnlCalculate = ({
   if (marketId !== betValues.betData.marketId) return null
   return (
     <span
-      className='float-right'
-      style={{
-        color:
-          (pnl.current === '0' && selectionId === betValues.betData.selectionId) ||
-            (pnl.oppsite === '0' && selectionId !== betValues.betData.selectionId)
-            ? 'black'
-            : pnl.colorVal,
-      }}
-    >
-      {betValues.betData.selectionId === selectionId ? pnl.current : pnl.oppsite}
-    </span>
+  className='float-left'
+  style={{
+    color:
+      (pnl.current === '0' && selectionId === betValues.betData.selectionId) ||
+      (pnl.oppsite === '0' && selectionId !== betValues.betData.selectionId)
+        ? 'red'
+        : pnl.colorVal,
+  }}
+>
+  (
+  {betValues.betData.selectionId === selectionId
+    ? Math.abs(Number(pnl.current))
+    : Math.abs(Number(pnl.oppsite))}
+  )
+</span>
   )
 }
 

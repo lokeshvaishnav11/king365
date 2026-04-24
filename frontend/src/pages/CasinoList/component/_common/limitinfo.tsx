@@ -11,7 +11,7 @@ const LimitInfo = (props:any) => {
       aria-expanded='false'
       className='info-icon collapsed'
     >
-      <i className='fas fa-info-circle m-l-10'></i>
+      <img src="/imgs/infofancy.svg" className='fas fa-info-circle m-l-10'></img>
     </a>
     <div id={`min-max-info${nameString.replace(' ', '')}`} className='min-max-info collapse'>
       <span className='m-r-5'>

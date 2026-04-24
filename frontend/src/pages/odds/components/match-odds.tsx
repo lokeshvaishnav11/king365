@@ -478,9 +478,8 @@ class MatchOdds extends React.PureComponent<
                       }}
                       className='m-l-5 game-rules-icon'
                     >
-                      <span>
-                        <i className='fa fa-info-circle float-righ' />
-                      </span>
+                     
+                        <img width={16} height={16} src="/imgs/matchinfoicon.png" />                  
                     </a> </span>
                   {/* <span className='float-right m-r-10'>
                     Maximum Bet <span>{this.offplaylimit(market)}</span>

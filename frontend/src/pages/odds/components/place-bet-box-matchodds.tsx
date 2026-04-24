@@ -436,7 +436,7 @@ const PlaceBetBoxMatchOdds = ({ stake }: { stake: IUserBetStake }) => {
                     // onClick={reset}
                     onClick={closeBetPopup}
                     type="button"
-                    className="btn btn-sm btn-danger float-left col-6"
+                    className="btn  btn-danger float-left col-6"
                     style={{
                       background: "white",
                       border: "1px solid black",
@@ -449,7 +449,7 @@ const PlaceBetBoxMatchOdds = ({ stake }: { stake: IUserBetStake }) => {
                   <button
                     type="submit"
                     disabled={getPlaceBet.status === IApiStatus.Loading}
-                    className="btn btn-sm btn-success float-right col-6"
+                    className="btn  btn-success float-right col-6"
                     style={{
                       background: "linear-gradient(-180deg, #315195 0%, #14213D 100%)",
                       border: "1px solid black",
@@ -468,7 +468,7 @@ const PlaceBetBoxMatchOdds = ({ stake }: { stake: IUserBetStake }) => {
                 </div>
               </form>
             </div>{" "}
-            {getPlaceBet.status === IApiStatus.Loading && (
+            { (
               <div
                 className="rounded"
                 style={{

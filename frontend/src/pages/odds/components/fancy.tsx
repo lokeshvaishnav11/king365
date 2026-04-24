@@ -322,7 +322,8 @@ class Fancy extends React.Component<
         zIndex: 2,
       }}
     >
-      <i className="fa fa-info-circle" style={{ fontSize: "12px" }} />
+                                             <img width={16} height={16} src="/imgs/matchinfoicon.png" />                  
+
     </div>
 
      <div
@@ -382,7 +383,8 @@ class Fancy extends React.Component<
         zIndex: 2,
       }}
     >
-      <i className="fa fa-info-circle" style={{ fontSize: "12px" }} />
+                                          <img width={16} height={16} src="/imgs/matchinfoicon.png" />                  
+
     </div>
   </div>
 
