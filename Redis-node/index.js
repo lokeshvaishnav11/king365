@@ -1523,7 +1523,9 @@ const sendResult = async (gameName, roundId, result) => {
   //////////////////////////////////////////////////////
   try {
     await axios.post(
-      "https://rapi.chausar.com/api/save-casino-match",
+      // "https://rapi.chausar.com/api/save-casino-match",
+      "http://localhost:3015/api/save-casino-match",
+
       convertResult
     );
 
@@ -1555,7 +1557,7 @@ const saveHistory = async (gameName, resultData) => {
 
 const runGame = async (gameName, logicFn) => {
   while (true) {
-    let time = 20;
+let time = gameName === "joker120" ? 30 : 20;
     const roundId = getRoundId();
 
     while (time--) {

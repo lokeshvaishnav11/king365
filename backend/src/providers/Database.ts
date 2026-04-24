@@ -12,7 +12,7 @@ export class Database {
     // const dsn = Locals.config().mongooseUrl
     // const dsn = Locals.config().mongooseUrl + `?retryWrites=false&replicaSet=myReplicaSet`
 
-   const dsn =  "mongodb://admin:betbhaiAdmin123@72.61.18.12:27017/infa?replicaSet=rs0&authSource=admin"
+   const dsn =  "mongodb://admin:betbhaiAdmin123@72.61.18.12:27017/kk?replicaSet=rs0&authSource=admin"
     // const dsn = "mongodb://admin:Diamond11123@72.61.19.197:27017/infa?authSource=admin&replicaSet=rs0";
 
 

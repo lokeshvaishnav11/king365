@@ -1047,7 +1047,8 @@ export class CasinoController extends ApiController {
           // type_string +
           // ' / ' +
           // selectionId
-          //For casino game sport id should be 5000
+          //For casino game sport id should be 5000\
+          console.log( profitLossAmt,"profitLoss")
           await fancyController.addprofitlosstouser({
             userId: ObjectId(Item._id),
             bet_id: ObjectId(ItemBetList._id),
@@ -1581,7 +1582,7 @@ export class CasinoController extends ApiController {
             } else if (ItemBetList.isBack === false)
               profitLossAmt = parseFloat(ItemBetList.stack.toString())
 
-            if (ItemBetList.gtype === 'onedaypoker' || ItemBetList.gtype === 'teen20' || ItemBetList.gtype === 'joker120') {
+            if (ItemBetList.gtype === 'onedaypoker' || ItemBetList.gtype === 'teen20') {
               if (data.odds) {
                 const oddsData = data.odds //JSON.parse(data.odds)
                 if (oddsData && oddsData[`SID${ItemBetList.selectionId}`]) {
