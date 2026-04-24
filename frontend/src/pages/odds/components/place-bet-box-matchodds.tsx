@@ -468,7 +468,7 @@ const PlaceBetBoxMatchOdds = ({ stake }: { stake: IUserBetStake }) => {
                 </div>
               </form>
             </div>{" "}
-            { (
+            {getPlaceBet.status === IApiStatus.Loading && (
               <div
                 className="rounded"
                 style={{
