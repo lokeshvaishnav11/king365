@@ -5,7 +5,7 @@ import { IFancy } from '../../../../models/IFancy'
 import IMatch from '../../../../models/IMatch'
 import LFancy from '../../../../models/LFancy'
 import { RoleType } from '../../../../models/User'
-import { betPopup, selectMarketBook, setBookFancy } from '../../../../redux/actions/bet/betSlice'
+import { betPopup, selectBetPopup, selectMarketBook, setBookFancy } from '../../../../redux/actions/bet/betSlice'
 import { selectLoader } from '../../../../redux/actions/common/commonSlice'
 import { selectUserData } from '../../../../redux/actions/login/loginSlice'
 import { selectCurrentMatch } from '../../../../redux/actions/sports/sportSlice'
@@ -14,14 +14,16 @@ import authService from '../../../../services/auth.service'
 import Limitinfo from '../../../CasinoList/component/_common/limitinfo'
 import PnlCalculate from '../pnl-calculate'
 import { OddsType } from '../../../../models/IMarket'
+import PlaceBetBoxMatchodds from '../place-bet-box-matchodds'
 
 export const FancyList = React.memo(
-  ({ fancies, fancyUpdate }: { fancies: LFancy[]; fancyUpdate: Record<string, IFancy> }) => {
+  ({ fancies, fancyUpdate, marketDataList }: { fancies: LFancy[]; fancyUpdate: Record<string, IFancy>; marketDataList: any }) => {
     const userState = useAppSelector(selectUserData)
     const loading = useAppSelector(selectLoader)
     const dispatch = useAppDispatch()
     const getCurrentMatch: IMatch = useAppSelector(selectCurrentMatch)
     const getMarketBook: any = useAppSelector(selectMarketBook)
+    const betValues = useAppSelector(selectBetPopup) 
 
     const onBet = (isBack = false, market: any) => {
       if (userState.user.role !== RoleType.user) return false
@@ -165,6 +167,7 @@ export const FancyList = React.memo(
                     )}
                   </div>
                 </div>
+                {marketDataList?.stake && betValues?.betData?.marketName === "Fancy" && betValues?.betData?.selectionName === fancy.fancyName && ( <PlaceBetBoxMatchodds stake={marketDataList.stake} /> )}
                 {updatedFancy.rem && (
                   <div className='table-remark text-right'>
                     <p className='m-b-0'>{updatedFancy.rem}</p>

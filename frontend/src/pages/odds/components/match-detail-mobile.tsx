@@ -150,7 +150,7 @@ const MatchDetailWrapper = (props: any) => {
             {props.fancies && props.currentMatch && props.currentMatch.sportId == '4' && !String(props?.currentMatch?.matchId).startsWith('1313') && (
               <Fragment>
                 {/* @ts-expect-error */}
-                {<Fancy socketUser={socketUser} fancies={props.fancies} matchId={props.matchId!} />}
+                {<Fancy socketUser={socketUser} fancies={props.fancies} matchId={props.matchId!} marketDataList={props?.marketDataList} />}
               </Fragment>
             )}
             {/* {props.marketDataList.stake && <PlaceBetBox stake={props.marketDataList.stake} />} */}

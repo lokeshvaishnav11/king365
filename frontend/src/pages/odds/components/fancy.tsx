@@ -26,6 +26,7 @@ class Fancy extends React.Component<
     fancyType: string
     setRules: (data: { open: boolean; type: string }) => void
     socketUser: any
+    marketDataList: any
   },
   {
     fancies: FancyBallTypes
@@ -422,7 +423,7 @@ class Fancy extends React.Component<
               {fancies && (
                 <>
                   {this.fancyheader('Session Market')}
-                  <FancyList fancies={fancies.blank} fancyUpdate={fancyUpdate} />
+                  <FancyList fancies={fancies.blank} fancyUpdate={fancyUpdate} marketDataList={this.props.marketDataList}  />
                 </>
               )}
             </div>
@@ -433,7 +434,7 @@ class Fancy extends React.Component<
                 {!isMobile && <div className='market-title mt-1'>Over by Over Session Market</div>}
                 {this.fancyheader('Over by Over Session Market')}
                 {/* Over by over session here*/}
-                {fancies && <FancyList fancies={fancies.overBallNo} fancyUpdate={fancyUpdate} />}
+                {fancies && <FancyList fancies={fancies.overBallNo} fancyUpdate={fancyUpdate} marketDataList={this.props.marketDataList}  />}
               </div>
             )}
             {fancies?.ballRun?.length > 0 && (
@@ -442,7 +443,7 @@ class Fancy extends React.Component<
                 {this.fancyheader('Ball by Ball Session Market')}
 
                 {/* Ball by Ball Session here*/}
-                {fancies && <FancyList fancies={fancies.ballRun} fancyUpdate={fancyUpdate} />}
+                {fancies && <FancyList fancies={fancies.ballRun} fancyUpdate={fancyUpdate} marketDataList={this.props.marketDataList}  />}
               </div>
             )}
           </div>
