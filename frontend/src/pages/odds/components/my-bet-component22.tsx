@@ -99,6 +99,8 @@ const MyBetComponent22 = (props: any) => {
       const currentRoundId = props?.data?.roundId;
         const winner = props?.data?.winner?.trim().toLowerCase();
 
+        // console.log(currentRoundId,winner,"rahuadlgfdfg")
+
 
       if (!currentRoundId || !winner || !getMyAllBet.length) return;
 
@@ -110,15 +112,24 @@ const MyBetComponent22 = (props: any) => {
 
       // 🔍 find bet of this round
       const roundBet = getMyAllBet.find(
-        (bet: any) => bet.matchId == matchId && bet.marketId == currentRoundId,
+        (bet: any) => bet?.marketId == currentRoundId,
+        //yhn matchid se nhi kr skte gametype se kr skte hai like gamecode se if need
       );
 
       if (!roundBet) return;
 
-        const selection = roundBet.selectionName?.trim().toLowerCase();
+        // const selection = roundBet.selectionName?.trim().toLowerCase(); old wala jisme exact winner = slectionName
+        const rawSelection = roundBet.selectionName?.trim().toLowerCase();
+
+// convert "player a" -> "a"
+let selection = rawSelection;
+
+if (rawSelection?.includes("player")) {
+  selection = rawSelection.replace("player", "").trim(); // "a"
+}
 
 
-      console.log(roundBet?.selectionName, "roundsdfvbet" , props?.data?.winner);
+      console.log(roundBet?.selectionName,selection, "roundsdfvbet" , props?.data?.winner);
 
       if (selection === winner) {
     lastCelebratedRound.current = currentRoundId;
