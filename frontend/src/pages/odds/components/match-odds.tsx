@@ -608,15 +608,15 @@ class MatchOdds extends React.PureComponent<
                                     className={
                                       getMarketBook[`${market.marketId}_${runner.selectionId}`] > 0
                                         ? 'green'
-                                        : 'blue'
-                                    }
+                                        : 'red'
+                                    } style ={{fontSize:"12px"}}
                                   >
                                     ( {getMarketBook[
                                       `${market.marketId}_${runner.selectionId}`
                                     ].toLocaleString()} )
                                   </span>
                                 ) : (
-                                  <span className='' style={{ color: 'black' }}>
+                                  <span className=''>
 
                                   </span>
                                 )}

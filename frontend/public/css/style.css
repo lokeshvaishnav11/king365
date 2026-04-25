@@ -8920,7 +8920,7 @@ footer p {
   -ms-flex: 1 1 auto;
   flex: 1 1 auto;
   padding: 1.25rem;
-  border: 1px solid #eee;
+  /* border: 1px solid #eee; */
 }
 
 .setting-box {

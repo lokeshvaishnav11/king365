@@ -812,7 +812,7 @@ const CasinoWrapper = (props: any) => {
       transform: "translate(-50%, -50%)",
       zIndex: 99,
       padding: "8px 18px",
-      fontSize: "16px",
+      fontSize: "12px",
       fontWeight: "500",
       color: "#000",
       borderRadius: "10px 0px 10px 0px",

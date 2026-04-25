@@ -14,7 +14,11 @@ export const getPlaceBetAction = createAsyncThunk(
         dispatch(setExposer(res.data.data.exposer))
         dispatch(setBookMarketList(res.data.data.profitlist))
         dispatch(setbetlist(res.data.data.bet))
-        toast.success('Bet Placed Successfully')
+        toast.success('Bet Placed Successfully', {
+        style: {
+          fontSize: "12px",   // 👈 yaha size chhota kar
+        }
+      });
         return res.data.data.bet
       })
       .catch((e) => {

@@ -23,7 +23,8 @@ const Login = () => {
     isDemo: false,
   });
 
-  const [isDemoLogin, setIsDemoLogin] = React.useState(false); // Track Demo Login
+  const [isDemoLogin, setIsDemoLogin] = React.useState(false);
+  const [showPassword, setShowPassword] = React.useState(false);// Track Demo Login
 
   // React.useEffect(() => {
   //   api.get(`${process.env.REACT_APP_IP_API_URL}`).then((res) => {
@@ -132,7 +133,7 @@ const Login = () => {
                 ></small>
               </div>
               <div className="form-group m-b-20">
-                <input
+                {/* <input
                   name="password"
                   placeholder="Password"
                   type="password"
@@ -141,8 +142,20 @@ const Login = () => {
                   aria-invalid="false"
                   onChange={handleForm}
                   required={!isDemoLogin}
+                /> */}
+                <input
+                  name="password"
+                  placeholder="Password"
+                  type={showPassword ? "text" : "password"}   // 👈 yaha change
+                  className="form-control"
+                  onChange={handleForm}
+                  required={!isDemoLogin}
                 />
-                <i className="fas fa-key"></i>
+                <i
+                  className={showPassword ? "fas fa-key" : "fas fa-key"}
+                  style={{ cursor: "pointer" }}
+                  onClick={() => setShowPassword(!showPassword)}
+                ></i>
                 {userState.error ? (
                   <small className="text-danger">{userState.error}</small>
                 ) : (

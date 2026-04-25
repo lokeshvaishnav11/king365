@@ -71,6 +71,37 @@ import { selectMarketBook } from '../../../redux/actions/bet/betSlice';
 // export default CasinoPnl;
 
 
+// const CasinoPnl = (props: any) => {
+//   const { sectionId, matchId, clsName } = props;
+
+//   const getMarketBook: any = useAppSelector(selectMarketBook);
+
+//   const pnlValue = getMarketBook?.[matchId]?.[sectionId];
+
+//   if (!pnlValue) return null;
+
+//   const isProfit = pnlValue > 0;
+//   const label = isProfit ? "P : " : "L : ";
+//   const amount = Math.abs(pnlValue); 
+
+//   return (
+//     <p className={`m-b-0 m-t-5 ${clsName}`}>
+//       <span style={{ color: "black" }}>{label}</span>
+
+//       <span
+//         className={
+//           isProfit ? "green" : "red"
+//         }
+//         style={{ marginLeft: "4px" }}
+//       >
+//         {amount}
+//       </span>
+//     </p>
+//   );
+// };
+
+// export default CasinoPnl;
+
 const CasinoPnl = (props: any) => {
   const { sectionId, matchId, clsName } = props;
 
@@ -82,19 +113,19 @@ const CasinoPnl = (props: any) => {
 
   const isProfit = pnlValue > 0;
   const label = isProfit ? "P : " : "L : ";
-  const amount = Math.abs(pnlValue); // ✅ remove minus
+  const amount = Math.abs(pnlValue);
+
+  const formattedAmount = amount.toLocaleString('en-IN'); // 👈 yaha magic
 
   return (
     <p className={`m-b-0 m-t-5 ${clsName}`}>
       <span style={{ color: "black" }}>{label}</span>
 
       <span
-        className={
-          isProfit ? "green" : "red"
-        }
-        style={{ marginLeft: "4px", fontWeight: "600" }}
+        className={isProfit ? "green" : "red"}
+        style={{ marginLeft: "4px", fontSize:"12px" }}
       >
-        {amount}
+        {formattedAmount}
       </span>
     </p>
   );
