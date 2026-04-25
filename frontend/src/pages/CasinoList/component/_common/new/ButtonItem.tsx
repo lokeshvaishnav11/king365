@@ -5,15 +5,18 @@ import { betPopup } from "../../../../../redux/actions/bet/betSlice";
 import { selectUserData } from "../../../../../redux/actions/login/loginSlice";
 import { useAppDispatch, useAppSelector } from "../../../../../redux/hooks";
 import authService from "../../../../../services/auth.service";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const ButtonItem = (props: any) => {
     const { selectionid, title, lastOdds, liveMatchData ,defaultNewData , odd } = props;
     const dispatch = useAppDispatch()
     const userState = useAppSelector(selectUserData)
 
-    const onBet = (isBack = false, item: any) => {
+    const onBet = async (isBack = false, item: any) => {
         console.log("sdfgsdf", item);
         const ipAddress = authService.getIpAddress()
+      
         if (userState.user.role === RoleType.user) {
             const oddsVal = parseFloat(isBack ? item.b1 : item.l1);
             if (oddsVal <= 0) return

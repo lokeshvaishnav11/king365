@@ -378,15 +378,10 @@ export class BetController extends ApiController {
           })
           if (errors) return this.fail(res, errors)
         } else if (bet_On == BetOn.CASINO) {
-          /// perform casino validation
-          // const errors = await this.checkFancyOddsConditions({
-          //   match_id,
-          //   selectionId,
-          //   isBack,
-          //   odds,
-          //   selectionName,
-          // })
-          // if (errors) return this.fail(res, errors)
+         const res1 = await axios.get(`https://reddysocket.chausar.com/data/${betData.gtype}`);
+           if(res1.data.data.status != "running" || res1.data.data.roundId != betData.marketId ){
+          return this.fail(res,"market suspend")
+      }
         } else {
           const errors = await this.checkFancyOddsConditions({
             match_id,

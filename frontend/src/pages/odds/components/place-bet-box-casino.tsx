@@ -16,6 +16,8 @@ import { useWebsocketUser } from "../../../context/webSocketUser";
 import { OddsType } from "../../../models/IMarket";
 import TikTokLoader from "../../../TikTokLoader";
 import { useParams } from "react-router-dom";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const PlaceBetBoxCasino = ({ stake }: { stake: IUserBetStake }) => {
   console.log(stake, "stake");
@@ -166,8 +168,9 @@ const PlaceBetBoxCasino = ({ stake }: { stake: IUserBetStake }) => {
     onStack(0);
   };
 
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+      
     dispatch(getPlaceBetAction(betObj));
   };
 

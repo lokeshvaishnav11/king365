@@ -119,11 +119,11 @@ const CasinoPnl = (props: any) => {
 
   return (
     <p className={`m-b-0 m-t-5 ${clsName}`}>
-      <span style={{ color: "black" }}>{label}</span>
+      <span style={{ color: "black" ,fontSize:"12px" }}>{label}</span>
 
       <span
         className={isProfit ? "green" : "red"}
-        style={{ marginLeft: "4px", fontSize:"12px" }}
+        style={{ fontSize:"12px" }}
       >
         {formattedAmount}
       </span>
