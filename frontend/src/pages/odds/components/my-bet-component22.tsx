@@ -18,6 +18,8 @@ import { selectCasinoCurrentMatch } from "../../../redux/actions/casino/casinoSl
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import accountService from "../../../services/account.service";
 import betService from "../../../services/bet.service";
+import Lottie from "lottie-react";
+import animationData from "./animation.json"
 
 const MyBetComponent22 = (props: any) => {
   const [getMyAllBet, setMyAllBet] = React.useState<IBet[]>([]);
@@ -435,8 +437,9 @@ if (rawSelection?.includes("player")) {
 
       {showCelebration && (
         <div className="celebration-overlay">
-          <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExb3B5ZWkyYTVnN2VoajZ4bDdvM2JrYWQxdWQ5bDBsMThxbmtob3V2ayZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/9u2VQAwIgpMZKT6qTV/giphy.gif" alt="celebrate" />
-          Celebration succsess 
+          {/* <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExb3B5ZWkyYTVnN2VoajZ4bDdvM2JrYWQxdWQ5bDBsMThxbmtob3V2ayZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/9u2VQAwIgpMZKT6qTV/giphy.gif" alt="celebrate" />
+          Celebration succsess  */}
+          <Lottie animationData={animationData} loop />
         </div>
       )}
     </>
