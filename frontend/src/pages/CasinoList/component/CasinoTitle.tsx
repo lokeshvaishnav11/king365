@@ -309,7 +309,7 @@ const dt20 = () => {
         {/* 🐉 Dragon */}
         <div className="d-flex flex-column align-items-baseline">
         
-          <span className="text-white mb-2"  style={{fontSize:"16px",fontWeight:"bold"}}>Dragon</span>
+          <span className="text-white mb-2"  style={{fontSize:"16px",fontWeight:"bold"}}>DRAGON</span>
   
           <img
             alt="dragon"
@@ -321,7 +321,7 @@ const dt20 = () => {
         {/* 🐯 Tiger */}
         <div className="d-flex flex-column align-items-baseline">
          
-          <span className="text-white mb-2"  style={{fontSize:"16px",fontWeight:"bold"}}>Tiger</span>
+          <span className="text-white mb-2"  style={{fontSize:"16px",fontWeight:"bold"}}>TIGER</span>
           <img
             alt="tiger"
             src={`https://g1ver.sprintstaticdata.com/v73/static/front/img/cards/${tigerCard ? tigerCard : "1"}.png`}
@@ -802,7 +802,7 @@ const teen20 = () => {
           {/* Player A */}
           <div className="mr-20">
             <p className="m-b-0 text-white text-nowrap">
-              <b><span>Player A</span></b>
+              <b><span>PLAYER A</span></b>
             </p>
             <div className="imgspace d-flex">
               {playerA.map((card, i) => (
@@ -818,7 +818,7 @@ const teen20 = () => {
           {/* Player B */}
           <div className="mr-20">
             <p className="m-b-0 text-white text-nowrap">
-              <b><span>Player B</span></b>
+              <b><span>PLAYER B</span></b>
             </p>
             <div className="imgspace d-flex">
               {playerB.map((card, i) => (
@@ -1108,7 +1108,7 @@ const teen20 = () => {
           <div className='mr-20'>
             <p className='m-b-0 text-white'>
               <b>
-                <span>Joker</span>
+                <span>JOKER</span>
               </b>
             </p>
             <div className='imgspace'>
@@ -1122,7 +1122,7 @@ const teen20 = () => {
             <div className='mr-20'>
               <p className='m-b-0 text-white'>
                 <b>
-                  <span className=''>Player A</span>
+                  <span className=''>PLAYER A</span>
                 </b>
               </p>
               <div className='imgspace d-flex'>
@@ -1143,7 +1143,7 @@ const teen20 = () => {
             <div className='mr-20'>
               <p className='m-b-0 text-white'>
                 <b>
-                  <span className=''>Player B</span>
+                  <span className=''>PLAYER B</span>
                 </b>
               </p>
               <div className='imgspace d-flex'>

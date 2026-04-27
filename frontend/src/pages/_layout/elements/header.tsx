@@ -40,7 +40,7 @@ const Header = () => {
   const ref = useRef<any>(null);
   const userState = useAppSelector<{ user: User }>(selectUserData);
   const balance = useAppSelector(selectBalance);
-  console.log(balance , "chehdjjd")
+  console.log(balance, "chehdjjd")
   const selectHideBal = useAppSelector<HideBalExp>(selectHideBalExp);
   const rules = useAppSelector(selectRules);
   const dispatch = useAppDispatch();
@@ -191,62 +191,64 @@ const Header = () => {
               borderRadius: "4px",
               background: "#1c6b52",
               cursor: "pointer",
-              gap:"8px",
+              gap: "8px",
               color: "white",
             }}
           >
-            <BetHome/>
-            <span className="fw-bold" style={{fontSize:"12px",fontWeight:"700"}}>Bets</span>
+            <BetHome />
+            <span className="fw-bold" style={{ fontSize: "12px", fontWeight: "700" }}>Bets</span>
           </CustomLink>
 
-          <div className="d-flex align-items-center " style={{ gap: "6px",fontSize:"12px",fontWeight:"700" }}>
+          
 
-          {/* Center - Info */}
-          <div className="text-center">
-            {/* @ts-ignore */}
-<div className="fw-bold">Main PTI {Math.max(0, (balance?.balance || 0) - ((balance?.exposer || 0) ))}
-</div>           <div>
-             <a
-                        href="#"
-                        onClick={getExposer}
-                        style={{ color: "#fff", textDecoration: "none",fontSize:"11.5px",fontWeight:"700" }}
-                      >
-                        <span>Exp: </span>
-                     (   <b style={{ color: "#dd2222" }}>
-                          {balance.exposer > 0
-                            ? balance.exposer?.toFixed(2)
-                            : 0}
-                        </b>)
-                      </a>
+          <div className="d-flex align-items-center " style={{ gap: "6px", fontSize: "12px", fontWeight: "700" }}>
+
+            {/* Center - Info */}
+            <div className="text-center">
+              {/* @ts-ignore */}
+              <div className="fw-bold">Main PTI {Math.max(0, (balance?.balance || 0) - ((balance?.exposer || 0)))}
+              </div>           <div>
+                <a
+                  href="#"
+                  onClick={getExposer}
+                  style={{ color: "#fff", textDecoration: "none", fontSize: "11.5px", fontWeight: "700" }}
+                >
+                  <span>Exp: </span>
+                  (   <b style={{ color: "#dd2222" }}>
+                    {balance.exposer > 0
+                      ? balance.exposer?.toFixed(2)
+                      : 0}
+                  </b>)
+                </a>
+              </div>
             </div>
-          </div>
 
-          {/* Right - Icons */}
-          <div className="d-flex gap-2" style={{gap:"8px"}}>
-            <button
-              className="btn"
-              style={{
-                background: "#1c6b52",
-                border: "1px solid #0d3b2e",
-                borderRadius: "4px",
-                color: "white",
-              }}
-            >
-              <i className="fas fa-undo"></i>
-            </button>
+            {/* Right - Icons */}
+            <div className="d-flex gap-2" style={{ gap: "8px" }}>
+              <button
+                className="btn"
+                style={{
+                  background: "#1c6b52",
+                  border: "1px solid #0d3b2e",
+                  borderRadius: "4px",
+                  color: "white",
+                }}
+              >
+                <i className="fas fa-undo"></i>
+              </button>
 
-            <CustomLink to="/button-values"
-              className="btn"
-              style={{
-                background: "#1c6b52",
-                border: "1px solid #0d3b2e",
-                borderRadius: "4px",
-                color: "white",
-              }}
-            >
-              <i className="fas fa-cog"></i>
-            </CustomLink>
-          </div>
+              <CustomLink to="/button-values"
+                className="btn"
+                style={{
+                  background: "#1c6b52",
+                  border: "1px solid #0d3b2e",
+                  borderRadius: "4px",
+                  color: "white",
+                }}
+              >
+                <i className="fas fa-cog"></i>
+              </CustomLink>
+            </div>
           </div>
         </div>
 
@@ -372,9 +374,8 @@ const Header = () => {
                       }}
                     >
                       <AutocompleteComponent<IMatch>
-                        className={`search-input-show ${
-                          showAuto ? "show" : ""
-                        }`}
+                        className={`search-input-show ${showAuto ? "show" : ""
+                          }`}
                         label={"Search"}
                         optionKey={"name"}
                         api={suggestion}
@@ -871,16 +872,16 @@ const Header = () => {
                           onClick={() => {
                             window.location.href =
                               exposer.sportId &&
-                              Number.isInteger(+exposer.sportId) &&
-                              exposer.sportId != 5000
+                                Number.isInteger(+exposer.sportId) &&
+                                exposer.sportId != 5000
                                 ? `/odds/${exposer._id}`
                                 : `/casino/${casinoSlug}/${exposer._id}`;
                             setIsOpen(false);
                           }}
                           to={
                             exposer.sportId &&
-                            Number.isInteger(+exposer.sportId) &&
-                            exposer.sportId != 5000
+                              Number.isInteger(+exposer.sportId) &&
+                              exposer.sportId != 5000
                               ? `/odds/${exposer._id}`
                               : `/casino/${casinoSlug}/${exposer._id}`
                           }

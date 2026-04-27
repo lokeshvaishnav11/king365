@@ -163,7 +163,7 @@ React.useEffect(() => {
        
       
       </div>
-   <PlaceBetBoxCasino stake={marketDataList.stake} />
+   <PlaceBetBoxCasino stake={marketDataList?.stake} />
 
     </div>
   )

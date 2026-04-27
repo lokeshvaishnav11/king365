@@ -399,7 +399,7 @@ const TeenPatti20 = (props: any) => {
 
 
 
-     {!clsstatus2 &&  <PlaceBetBoxCasino stake={marketDataList.stake} />}
+     {!clsstatus2 &&  <PlaceBetBoxCasino stake={marketDataList?.stake} />}
 
       <div className={``}>
 
@@ -418,14 +418,15 @@ const TeenPatti20 = (props: any) => {
     color: "rgb(202, 16, 16)",
     opacity: "0.5",
     fontWeight: "700",
-    fontSize: "25px",
+    fontSize: "23px",
     background: "#fff",
     width: "100%",
-    height: "7%",
+    height: "7.8%",
     border: "1.5px solid rgb(202, 16, 16)",
     display: "flex",
     justifyContent: "center", 
-    left:"0px"
+    left:"0px",
+    marginBottom:"1px"
     }}><span className='text-center'>SUSPENDED</span></div>}
             
             <div
