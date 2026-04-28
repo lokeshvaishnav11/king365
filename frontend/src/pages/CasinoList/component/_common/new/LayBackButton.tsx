@@ -18,6 +18,7 @@ const LayButton = (props: any) => {
             const oddsVal = parseFloat(isBack ? item.b1 : item.l1);
             if (oddsVal <= 0) return
             if (!defaultNewData.status || defaultNewData.status == 'dealing') return
+            if (defaultNewData.status == 'result') return
             dispatch(
                 betPopup({
                     isOpen: true,
