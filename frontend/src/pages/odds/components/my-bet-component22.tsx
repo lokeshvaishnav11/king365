@@ -140,7 +140,7 @@ if (rawSelection?.includes("player")) {
 
     setTimeout(() => {
       setShowCelebration(false);
-    }, 4500);
+    }, 3000);
   }
 
 
