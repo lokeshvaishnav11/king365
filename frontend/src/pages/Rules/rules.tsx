@@ -30,7 +30,32 @@ const Rules = (props: any) => {
 
   return (
     <>
-      {mobileSubheader.subheader('Rules')}
+     <div style={{position: "relative", height: "40px",
+     padding:"0 10px",
+        display: "flex",
+        verticalAlign: "middle",
+        background: "linear-gradient(-180deg,#14805e 0, #184438 100%)",
+        color: "black",
+        justifyContent: "space-between",
+        fontWeight: "700",
+        fontSize: "16px",
+        alignItems: "center",}}> <span>Rules List</span> <a
+        className="crossIcon"
+        style={{
+          // position: "absolute",
+          fontSize: "21px",
+          top: "2px",
+          right: "40px",
+          // background: "linear-gradient(-180deg,#14805e 0, #184438 100%)",
+          padding: "4px 8px",
+          color: "black",
+          // borderRadius: "9px",
+          cursor: "pointer",
+        }}
+        href="/casino-games"
+      >
+        <i className="fas fa-times" />
+      </a></div>
       <div
         className={
           !isMobile ? (classData ? 'col-md-12 mt-1' : 'col-md-12 mt-1') : 'col-md-12 padding-custom'

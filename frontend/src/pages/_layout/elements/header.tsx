@@ -176,7 +176,7 @@ const Header = () => {
         style={{ backgroundColor: "#1a1a1a", padding: "0", margin: "0" }}
       >
         <div
-          className="d-flex justify-content-between align-items-center px-3 py-2"
+          className="d-flex justify-content-between align-items-center px-2 py-2"
           style={{
             background: "linear-gradient(-180deg,#14805e 0, #184438 100%)",
             // borderRadius: "10px",
@@ -184,10 +184,10 @@ const Header = () => {
           }}
         >
           {/* Left - Bets */}
-          <CustomLink to="/bethistory"
+        {!(window.location.pathname.includes("/casino") ) ?  <CustomLink to="/bethistory"
             className="d-flex align-items-center px-3 py-2"
             style={{
-              border: "1px solid #0d3b2e",
+              border: "1px solid #0B1933",
               borderRadius: "4px",
               background: "#1c6b52",
               cursor: "pointer",
@@ -197,7 +197,51 @@ const Header = () => {
           >
             <BetHome />
             <span className="fw-bold" style={{ fontSize: "12px", fontWeight: "700" }}>Bets</span>
+          </CustomLink>  :
+<div style={{display:"flex",alignItems:"center",gap:"16px"}}>
+            <CustomLink to="/rules"
+            className="d-flex align-items-center"
+            style={{
+              border: "1px solid #0B1933",
+              borderRadius: "4px",
+              background: "#1c6b52",
+              cursor: "pointer",
+              gap: "8px",
+              color: "white",
+              fontSize:"14px",
+              fontWeight:"700",
+              padding: "2.6vw 1.86667vw",
+              width:"74px",
+              textAlign:"center",
+              alignItems:"center",
+              justifyContent:"center"
+            }}
+          >
+            {/* <BetHome /> */}
+            <span className="fw-bold" style={{ fontSize: "12px", fontWeight: "700" }}>Rules</span>
           </CustomLink>
+
+           <CustomLink to="/casino-games"
+            className="d-flex align-items-center px-1 py-2"
+            style={{
+              border: "1px solid #0B1933",
+              borderRadius: "4px",
+              background: "#1c6b52",
+              cursor: "pointer",
+              gap: "8px",
+              color: "black",
+              textWrap:"wrap",
+              width:"74px",
+              textAlign:"center",
+              wordBreak:"break-word",
+              lineHeight:"12px",
+              letterSpacing:"1px"
+            }}
+          >
+            {/* <BetHome /> */}
+            <span className="fw-bold" style={{ fontSize: "12px", fontWeight: "700" }}>GAMING LOBBY</span>
+          </CustomLink></div>}
+
 
           
 
