@@ -281,7 +281,7 @@ const Header = () => {
                 <i className="fas fa-undo"></i>
               </button>
 
-              <CustomLink to="/button-values"
+             {!window.location.pathname.includes("/casino") ? <CustomLink to="/button-values"
                 className="btn"
                 style={{
                   background: "#1c6b52",
@@ -291,7 +291,18 @@ const Header = () => {
                 }}
               >
                 <i className="fas fa-cog"></i>
-              </CustomLink>
+              </CustomLink> : <CustomLink 
+              to="/bethistory"
+                className="btn"
+                style={{
+                  background: "#1c6b52",
+                  border: "1px solid #0d3b2e",
+                  borderRadius: "4px",
+                  color: "white",
+                }}
+              >
+                <i className="fas fa-history"></i>
+              </CustomLink>  }
             </div>
           </div>
         </div>

@@ -439,7 +439,7 @@ if (rawSelection?.includes("player")) {
         <div className="celebration-overlay">
           {/* <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExb3B5ZWkyYTVnN2VoajZ4bDdvM2JrYWQxdWQ5bDBsMThxbmtob3V2ayZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/9u2VQAwIgpMZKT6qTV/giphy.gif" alt="celebrate" />
           Celebration succsess  */}
-          <Lottie animationData={animationData} loop />
+          <Lottie animationData={animationData} />
         </div>
       )}
     </>
