@@ -75,7 +75,7 @@ const MatchDetail = (props: any) => {
                   <BetLock markets={props.marketDataList.markets} />
                 )}
                 {props.otherTv()}
-                {props.marketDataList.stake && <PlaceBetBox stake={props.marketDataList.stake} />}
+                {/* {props.marketDataList.stake && <PlaceBetBox stake={props.marketDataList.stake} />} */}
                 <div className='card m-b-10 my-bet'>
                   <div className='card-header'>
                     <h6 className='card-title d-inline-block'>My Bet</h6>

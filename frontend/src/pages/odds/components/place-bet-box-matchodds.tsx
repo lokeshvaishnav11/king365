@@ -3,6 +3,7 @@ import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
 import { shallowEqual } from "react-redux";
 import {
   betPopup,
+  resetPlaceBet,
   selectBetCount,
   selectBetPopup,
   selectPlaceBet,
@@ -42,6 +43,7 @@ const PlaceBetBoxMatchOdds = ({ stake }: { stake: IUserBetStake }) => {
       // dispatch(setBookMarketList({}))
       dispatch(betPopup({ isOpen: false, betData: {} as IBet }));
       dispatch(setBetCount(betCount + 1));
+      dispatch(resetPlaceBet());
     }
   }, [getPlaceBet.status]);
 
@@ -216,7 +218,7 @@ const PlaceBetBoxMatchOdds = ({ stake }: { stake: IUserBetStake }) => {
   console.log("place bet re render ");
   return (
     <>
-      {betValues.isOpen && (
+      {betValues?.isOpen && (
         <>
           <div onClick={onBackDrop} className=""></div>
 

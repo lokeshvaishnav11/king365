@@ -47,4 +47,5 @@ export default interface IBet {
   user_id?: string
   oppsiteVol?: number
   oddsType?: string
+   _timestamp?:string
 }

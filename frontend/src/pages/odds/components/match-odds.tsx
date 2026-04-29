@@ -15,6 +15,12 @@ import { setRules } from '../../../redux/actions/common/commonSlice'
 import UserBookPopup from './user-book-popup'
 import PlaceBetBoxMatchodds from './place-bet-box-matchodds'
 import { IUserBetStake } from '../../../models/IUserStake'
+import { Dispatch } from "redux";
+import { getPlaceBetAction } from '../../../redux/actions/bet/bet.action'
+import { store } from "../../../redux/store";
+import IBet from '../../../models/IBet'
+import PlaceBetBox from './place-bet-box'
+
 
 
 interface Props {
@@ -27,6 +33,7 @@ interface Props {
   marketUserBookId?: any
   betPopup: any
   marketDataList?: any
+   getPlaceBetAction ?:any
 }
 
 class MatchOdds extends React.PureComponent<
@@ -40,6 +47,7 @@ class MatchOdds extends React.PureComponent<
     runnersName: Record<string, string>
     cashoutPreview: any
     marketDataList: any
+    getPlaceBetAction ?:any
   }
 > {
   static contextType = SocketContext
@@ -79,7 +87,7 @@ class MatchOdds extends React.PureComponent<
 
   componentDidMount(): void {
     this.socketEvents()
-  console.log(this.props,"currentMatrfrrch")
+    console.log(this.props, "currentMatrfrrch")
 
   }
 
@@ -300,14 +308,14 @@ class MatchOdds extends React.PureComponent<
   //   console.log("✅ CASHOUT SUCCESS");
   // };
 
-  
+
 
 
   handleCashout = (market: any) => {
     const { currentMatch, getMarketBook, betPopup } = this.props;
     const { cashoutPreview } = this.state;
 
-    console.log("🚀 CASHOUT CLICKED" );
+    console.log("🚀 CASHOUT CLICKED");
 
     if (!currentMatch || !getMarketBook || !market?.runners?.length) {
       console.log("❌ Missing data");
@@ -315,23 +323,24 @@ class MatchOdds extends React.PureComponent<
     }
 
     // ✅ If already preview exists → PLACE BET
-    if (cashoutPreview && cashoutPreview.marketId === market.marketId) {
-      console.log("✅ SECOND CLICK → PLACING BET");
+  if (cashoutPreview && cashoutPreview.marketId === market.marketId) {
+  console.log("🔥 DIRECT BET PLACED");
 
-      // 👉 DIRECT BET (NO POPUP)
-      betPopup({
-        isOpen: true, // ❌ popup band
-        betData: {
-          ...cashoutPreview.betData,
-          autoConfirm: true, // 👈 backend me handle kar lena
-        },
-      });
+ 
+this.props.getPlaceBetAction({
+  ...cashoutPreview.betData,
+});
 
-      // reset preview
-      this.setState({ cashoutPreview: null });
+//  this.props.betPopup({
+//     isOpen: false,
+//     betData: {} as IBet,
+//   });
 
-      return;
-    }
+  this.setState({ cashoutPreview: null });
+
+  // this.props.getPlaceBetAction(null);
+  return;
+}
 
     // =========================
     // ✅ FIRST CLICK → CALCULATE
@@ -409,7 +418,7 @@ class MatchOdds extends React.PureComponent<
     const finalLoss =
       finalStack * oppositeOdds - finalStack - originalStake;
 
-    console.log("💀 Final Loss:", finalLoss );
+    console.log("💀 Final Loss:", finalLoss);
 
     // SAVE PREVIEW
     this.setState({
@@ -443,7 +452,7 @@ class MatchOdds extends React.PureComponent<
 
     console.log("🟡 PREVIEW READY → CLICK AGAIN TO CONFIRM");
   };
-  
+
   render(): React.ReactNode {
     const { data, getMarketBook } = this.props
     const { runnersData } = this.state
@@ -467,7 +476,7 @@ class MatchOdds extends React.PureComponent<
                 <div className='market-title mt-1' style={{ background: "none", padding: "8px 0px" }}>
                   <span className='bg-theme px-2 py-1' style={{ borderTopRightRadius: "10px", background: "linear-gradient(-180deg, #2E4B5E 0%, #243A48 82%)", gap: "2px", fontSize: "12px", fontWeight: "700" }}>
                     {market.marketName}
-                  
+
                     <a
                       href='#Bookmaker-market'
                       onClick={(e: MouseEvent<HTMLAnchorElement>) => {
@@ -479,13 +488,13 @@ class MatchOdds extends React.PureComponent<
                       }}
                       className='m-l-5 game-rules-icon'
                     >
-                     
-                        <img width={16} height={16} src="/imgs/matchinfoicon.png" />                  
+
+                      <img width={16} height={16} src="/imgs/matchinfoicon.png" />
                     </a> </span>
                   {/* <span className='float-right m-r-10'>
                     Maximum Bet <span>{this.offplaylimit(market)}</span>
                   </span> */}
-                 {(market.marketName === "Match Odds" || market.marketName === "Bookmaker") && <span
+                  {(market.marketName === "Match Odds" || market.marketName === "Bookmaker") && <span
                     className='text-dark ml-1'
                     style={{ fontSize: "11px", cursor: "pointer" }}
                     onClick={() => this.handleCashout(market)}
@@ -500,8 +509,8 @@ class MatchOdds extends React.PureComponent<
 
                     )}
 
-                  </span> }           </div>                  
-                <div className='table-header' style={{ position: "relative"}}>
+                  </span>}           </div>
+                <div className='table-header' style={{ position: "relative" }}>
                   <div className={`float-left country-name ${classforheadingfirst} min-max`} style={{ borderTop: "1px solid #7e97a7" }}>
                     <div className='text-center py-1' style={{ background: "#bed5d8", borderRadius: "3px" }}><div><span style={{ color: "#315195", fontSize: "10px", fontWeight: "700" }}>Min/Max</span> <span style={{ fontSize: "10px", fontWeight: "700" }}>100-1000</span></div></div>
                   </div>
@@ -535,7 +544,7 @@ class MatchOdds extends React.PureComponent<
                   )}
                 </div>
 
-                     {/* { <div style={{   
+                {/* { <div style={{   
                 position: "absolute",
     textAlign: "center",
     alignItems: "center",
@@ -559,7 +568,7 @@ class MatchOdds extends React.PureComponent<
                 {oddsData &&
                   oddsData?.runners
                     ?.sort((a: any, b: any) => a?.sortPriority - b?.sortPriority)
-                    .map((runner: IRunner, index:any) => {
+                    .map((runner: IRunner, index: any) => {
                       runner = {
                         ...runner,
                         runnerName: this.state.runnersName?.[market.marketId]?.[runner.selectionId],
@@ -577,27 +586,27 @@ class MatchOdds extends React.PureComponent<
                             }
                           >
 
-                           {index == 0 &&
-                            runner?.status === "SUSPENDED" &&
-                            <div style={{   
-                position: "absolute",
-    textAlign: "center",
-    alignItems: "center",
-    // top: "1%",
-   zIndex: "99",
-    color: "rgb(202, 16, 16)",
-    opacity: "0.65",
-    fontWeight: "700",
-    fontSize: "25px",
-    background: "#fff",
-    width: "100%",
-    height:  market.marketName === "Bookmaker" ? "92px" : "85px",
-    // height:"87px",
-    border: "2px solid rgb(202, 16, 16)",
-    display: "flex",
-    justifyContent: "center", 
-    left:"0px"
-    }}><span className='text-center'>SUSPENDED</span></div>}
+                            {index == 0 &&
+                              runner?.status === "SUSPENDED" &&
+                              <div style={{
+                                position: "absolute",
+                                textAlign: "center",
+                                alignItems: "center",
+                                // top: "1%",
+                                zIndex: "99",
+                                color: "rgb(202, 16, 16)",
+                                opacity: "0.65",
+                                fontWeight: "700",
+                                fontSize: "25px",
+                                background: "#fff",
+                                width: "100%",
+                                height: market.marketName === "Bookmaker" ? "92px" : "85px",
+                                // height:"87px",
+                                border: "2px solid rgb(202, 16, 16)",
+                                display: "flex",
+                                justifyContent: "center",
+                                left: "0px"
+                              }}><span className='text-center'>SUSPENDED</span></div>}
                             <div className={` country-name ${classforheadingfirst}`} style={{ borderColor: "#7e97a7" }}>
                               <span className='team-name'>
                                 <span style={{ fontSize: "13px", fontWeight: "700" }}>{runner.runnerName}</span>
@@ -609,7 +618,7 @@ class MatchOdds extends React.PureComponent<
                                       getMarketBook[`${market.marketId}_${runner.selectionId}`] > 0
                                         ? 'green'
                                         : 'red'
-                                    } style ={{fontSize:"12px"}}
+                                    } style={{ fontSize: "12px" }}
                                   >
                                     ( {getMarketBook[
                                       `${market.marketId}_${runner.selectionId}`
@@ -634,15 +643,14 @@ class MatchOdds extends React.PureComponent<
                               runner={runner}
                             />
 
-                            
-                           
+
+
                           </div>
-                    
-                        </div>   
+                        </div>
                       )
-                      
+
                     })}
-                       {this?.state?.marketDataList?.stake && this.props.bet?.betData?.marketId === market.marketId &&  <PlaceBetBoxMatchodds stake={this?.state?.marketDataList?.stake} />}
+                {this?.state?.marketDataList?.stake && this.props.bet?.betData?.marketId == market?.marketId &&<PlaceBetBoxMatchodds  key={this.props.bet?.betData?._timestamp}  stake={this?.state?.marketDataList?.stake} />}
 
 
                 {this.state.remarkMarket[market.marketId] ? (
@@ -653,7 +661,7 @@ class MatchOdds extends React.PureComponent<
                   ''
                 )}
 
-            
+
               </div>
             )
           })}
@@ -675,5 +683,6 @@ const mapStateToProps = (state: any) => ({
 const actionCreators = {
   betPopup,
   setRules,
+   getPlaceBetAction,
 }
 export default connect(mapStateToProps, actionCreators)(MatchOdds)

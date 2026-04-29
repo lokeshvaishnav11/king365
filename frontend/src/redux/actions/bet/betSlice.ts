@@ -16,6 +16,11 @@ export type BetState = {
     status: string
     error: any
   }
+  resetPlaceBet: {
+    bet: IBet
+    status: string
+    error: any
+  }
   betCount: number
   fancyType: string
   userBookMarketList: object
@@ -35,6 +40,12 @@ const initialState: BetState = {
     status: '',
     error: '',
   },
+   resetPlaceBet: {   // ✅ FIXED
+    bet: {} as IBet,
+    status: '',
+    error: '',
+  },
+ 
   betCount: 0,
   fancyType: 'session',
   userBookMarketList: {},
@@ -58,6 +69,13 @@ const betSlice = createSlice({
     },
     setBetCount: (state, action: PayloadAction<number>) => {
       state.betCount = action.payload
+    },
+     resetPlaceBet: (state) => {
+      state.placeBet = {
+        bet: {} as IBet,
+        status: '',
+        error: ''
+      }
     },
     setFancyType: (state, action: PayloadAction<string>) => {
       state.fancyType = action.payload
@@ -96,6 +114,7 @@ export const {
   betPopup,
   setBetCount,
   setFancyType,
+   resetPlaceBet,
   setBookMarketList,
   setBookFancy,
   setMarketBookUser,
