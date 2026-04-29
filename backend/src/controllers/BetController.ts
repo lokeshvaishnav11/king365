@@ -360,9 +360,9 @@ export class BetController extends ApiController {
           return this.fail(res, 'Bet is not acceptable.Please contact upline')
         }
 
-        if ((settings && settings.minBet > stake) || (settings && settings.maxBet < stake)) {
-          return this.fail(res, 'Check Maximum or Minimum Bet Limit')
-        }
+        // if ((settings && settings.minBet > stake) || (settings && settings.maxBet < stake)) {
+        //   return this.fail(res, 'Check Maximum or Minimum Bet Limit')
+        // }
 
         // if (market_name == 'Match Odds') {
         //   await delay((parseInt(settings.delay) - 5) * 1000)
