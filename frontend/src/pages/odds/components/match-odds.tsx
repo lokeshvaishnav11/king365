@@ -33,7 +33,7 @@ interface Props {
   marketUserBookId?: any
   betPopup: any
   marketDataList?: any
-   getPlaceBetAction ?:any
+  getPlaceBetAction?: any
 }
 
 class MatchOdds extends React.PureComponent<
@@ -47,7 +47,7 @@ class MatchOdds extends React.PureComponent<
     runnersName: Record<string, string>
     cashoutPreview: any
     marketDataList: any
-    getPlaceBetAction ?:any
+    getPlaceBetAction?: any
   }
 > {
   static contextType = SocketContext
@@ -323,24 +323,24 @@ class MatchOdds extends React.PureComponent<
     }
 
     // ✅ If already preview exists → PLACE BET
-  if (cashoutPreview && cashoutPreview.marketId === market.marketId) {
-  console.log("🔥 DIRECT BET PLACED");
+    if (cashoutPreview && cashoutPreview.marketId === market.marketId) {
+      console.log("🔥 DIRECT BET PLACED");
 
- 
-this.props.getPlaceBetAction({
-  ...cashoutPreview.betData,
-});
 
-//  this.props.betPopup({
-//     isOpen: false,
-//     betData: {} as IBet,
-//   });
+      this.props.getPlaceBetAction({
+        ...cashoutPreview.betData,
+      });
 
-  this.setState({ cashoutPreview: null });
+      //  this.props.betPopup({
+      //     isOpen: false,
+      //     betData: {} as IBet,
+      //   });
 
-  // this.props.getPlaceBetAction(null);
-  return;
-}
+      this.setState({ cashoutPreview: null });
+
+      // this.props.getPlaceBetAction(null);
+      return;
+    }
 
     // =========================
     // ✅ FIRST CLICK → CALCULATE
@@ -481,10 +481,10 @@ this.props.getPlaceBetAction({
                       href='#Bookmaker-market'
                       onClick={(e: MouseEvent<HTMLAnchorElement>) => {
                         e.preventDefault()
-                        this.props.setRules({
-                          open: true,
-                          type: market.oddsType === OddsType.BM ? 'Bookmaker' : market.oddsType,
-                        })
+                        // this.props.setRules({
+                        //   open: true,
+                        //   type: market.oddsType === OddsType.BM ? 'Bookmaker' : market.oddsType,
+                        // })
                       }}
                       className='m-l-5 game-rules-icon'
                     >
@@ -620,9 +620,12 @@ this.props.getPlaceBetAction({
                                         : 'red'
                                     } style={{ fontSize: "12px" }}
                                   >
-                                    ( {getMarketBook[
+                                    → {getMarketBook[
                                       `${market.marketId}_${runner.selectionId}`
-                                    ].toLocaleString()} )
+                                    ].toLocaleString(undefined, {
+                                      minimumFractionDigits: 2,
+                                      maximumFractionDigits: 2
+                                    })}
                                   </span>
                                 ) : (
                                   <span className=''>
@@ -650,7 +653,7 @@ this.props.getPlaceBetAction({
                       )
 
                     })}
-                {this?.state?.marketDataList?.stake && this.props.bet?.betData?.marketId == market?.marketId &&<PlaceBetBoxMatchodds  key={this.props.bet?.betData?._timestamp}  stake={this?.state?.marketDataList?.stake} />}
+                {this?.state?.marketDataList?.stake && this.props.bet?.betData?.marketId == market?.marketId && <PlaceBetBoxMatchodds key={this.props.bet?.betData?._timestamp} stake={this?.state?.marketDataList?.stake} />}
 
 
                 {this.state.remarkMarket[market.marketId] ? (
@@ -683,6 +686,6 @@ const mapStateToProps = (state: any) => ({
 const actionCreators = {
   betPopup,
   setRules,
-   getPlaceBetAction,
+  getPlaceBetAction,
 }
 export default connect(mapStateToProps, actionCreators)(MatchOdds)
